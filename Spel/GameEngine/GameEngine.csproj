@@ -41,6 +41,8 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Components\Component.cs" />
+    <Compile Include="Source\Components\HealthComponent.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
   </ItemGroup>
   <ItemGroup>
