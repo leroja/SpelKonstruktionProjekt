@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 namespace GameEngine.Source.Components
 {
     // VelocetyComponent
-    class VelocityComponent
+    class VelocityComponent : Component
     {
         // velocity
         public Vector2 velocity { get; set; }

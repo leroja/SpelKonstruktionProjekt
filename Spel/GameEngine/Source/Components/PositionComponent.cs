@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GameEngine.Source.Components
 {
     // Position Component in 2D
-    class PositionComponent
+    class PositionComponent : Component
     {
         // Position X
         int x { get; set; }
