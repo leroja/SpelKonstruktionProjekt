@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace GameEngine.Source.Components
 {
     // Position Component in 2D
     class PositionComponent : Component
     {
-        // Position X
-        int x { get; set; }
-        // Position Y
-        int y { get; set; }
+        // Position
+        Vector2 position;
 
         // Constructor for PositionComponent 
-        public PositionComponent(int posX, int posY)
+        public PositionComponent(Vector2 startPosition)
         {
-            x = posX;
-            y = posY;
+            position = startPosition;
         }
     }
 }

@@ -49,7 +49,7 @@
     <Compile Include="Source\Components\PowerUppComponent.cs" />
     <Compile Include="Source\Components\VelocityComponent.cs" />
     <Compile Include="Source\Enumerator\PowerUppEmunerator.cs" />
-    <Compile Include="Source\Entity\Entity.cs" />
+    <Compile Include="Source\EntityStuff\Entity.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
   </ItemGroup>
   <ItemGroup>
