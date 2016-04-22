@@ -18,7 +18,8 @@ namespace GameEngine.Source.Components
         /// </summary>
         private Timer timer;
         /// <summary>
-        /// The constructor which initalizes the timer with the time the entity should last for.
+        /// The constructor which initalizes the timer with the time the entity should last for. The time for
+        /// this object is in milliseconds.
         /// </summary>
         /// <param name="time"></param>
         TimerComponent(double time)
