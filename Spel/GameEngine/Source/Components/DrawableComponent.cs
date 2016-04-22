@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine.Source.Components
 {
-    // Health Component
-    public class HealthComponent : Component
+    class DrawableComponent
     {
-        // Max health
-        int health;
-        // Damage taken
-        int damage;
+        Texture2D texture;
     }
 }

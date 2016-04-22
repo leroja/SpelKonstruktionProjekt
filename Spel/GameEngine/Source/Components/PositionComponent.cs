@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Components
 {
-    // Health Component
-    public class HealthComponent : Component
+    // Position Component in 2D
+    class PositionComponent
     {
-        // Max health
-        int health;
-        // Damage taken
-        int damage;
+        // Position X
+        int x;
+        // Position Y
+        int y;
     }
 }
