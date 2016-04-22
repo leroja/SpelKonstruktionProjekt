@@ -10,8 +10,15 @@ namespace GameEngine.Source.Components
     class PositionComponent
     {
         // Position X
-        int x;
+        int x { get; set; }
         // Position Y
-        int y;
+        int y { get; set; }
+
+        // Constructor for PositionComponent 
+        public PositionComponent(int posX, int posY)
+        {
+            x = posX;
+            y = posY;
+        }
     }
 }

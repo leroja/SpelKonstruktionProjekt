@@ -7,8 +7,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameEngine.Source.Components
 {
+    // DrawableComponent For Drawing 2D textures
     class DrawableComponent
     {
-        Texture2D texture;
+        // 2D texture For Drawing component
+        Texture2D texture { get; set; }
+
+        // Constructor for DrawableComponent 
+        public DrawableComponent(Texture2D startingTexture)
+        {
+            texture = startingTexture;
+        }
     }
 }
