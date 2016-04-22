@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Source.Entity
+namespace GameEngine.Source.EntityStuff
 {
     /// <summary>
     /// The Entity class is the objects which the components will be applied to. 

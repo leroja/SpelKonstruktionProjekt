@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameEngine.Source.Components;
+using GameEngine.Source.EntityStuff;
 
 namespace GameEngine.Source.Managers
 {
@@ -34,7 +36,7 @@ namespace GameEngine.Source.Managers
         public void AddComponent(Entity entity, Component component)
         {
 
-            Type type = component.Type();
+            Type type = component.GetType();
 
             if (compDic.ContainsKey(type))
             {
@@ -52,7 +54,7 @@ namespace GameEngine.Source.Managers
         public void RemoveComponentFRomEntity(Entity entity, Component component)
         {
 
-            Type type = component.Type();
+            Type type = component.GetType();
 
             if (compDic.ContainsKey(type))
             {
@@ -64,7 +66,7 @@ namespace GameEngine.Source.Managers
         }
 
 
-        public T GetEntityComponent<T>(Entity entity) where T: class, Component
+        public T GetEntityComponent<T>(Entity entity) where T: Component
         {
             Type type = typeof(T);
 
