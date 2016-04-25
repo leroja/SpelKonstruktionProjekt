@@ -42,6 +42,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Components\AIComponent.cs" />
+    <Compile Include="Source\Components\CollisionComponent.cs" />
     <Compile Include="Source\Components\CollisionRectangleComponent.cs" />
     <Compile Include="Source\Components\Component.cs" />
     <Compile Include="Source\Components\DrawableComponent.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Source\Managers\SystemManager.cs" />
     <Compile Include="Source\Systems\IDraw.cs" />
     <Compile Include="Source\Systems\IUpdate.cs" />
+    <Compile Include="Source\Managers\EntityManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
