@@ -11,7 +11,7 @@ namespace GameEngine.Source.Components
     class DrawableComponent : Component
     {
         // 2D texture For Drawing component
-        Texture2D texture { get; set; }
+        public Texture2D texture { get; set; }
 
         // Constructor for DrawableComponent 
         public DrawableComponent(Texture2D startingTexture)

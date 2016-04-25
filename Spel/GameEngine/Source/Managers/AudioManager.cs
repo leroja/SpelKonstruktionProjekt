@@ -111,17 +111,13 @@ namespace GameEngine.Source.Managers
             }
         }
 
-        /// <summary>
-        /// Sets the mediaPlayer to not repeating
-        /// </summary>
+
         public void StopRepeat()
         {
             MediaPlayer.IsRepeating = false;
         }
 
-        /// <summary>
-        /// Sets the mediaPlayer to repeating
-        /// </summary>
+
         public void StartRepeat()
         {
             MediaPlayer.IsRepeating = true;
@@ -176,9 +172,7 @@ namespace GameEngine.Source.Managers
             }
         }
 
-        /// <summary>
-        /// Stops playing the current song
-        /// </summary>
+
         public void StopSong()
         {
             MediaPlayer.Stop();
