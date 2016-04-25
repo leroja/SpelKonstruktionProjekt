@@ -45,13 +45,17 @@
     <Compile Include="Source\Components\CollisionComponent.cs" />
     <Compile Include="Source\Components\Component.cs" />
     <Compile Include="Source\Components\DrawableComponent.cs" />
+    <Compile Include="Source\Components\GravitationComponent.cs" />
     <Compile Include="Source\Components\HealthComponent.cs" />
     <Compile Include="Source\Components\PositionComponent.cs" />
     <Compile Include="Source\Components\PowerUppComponent.cs" />
+    <Compile Include="Source\Components\TimerComponent.cs" />
     <Compile Include="Source\Components\VelocityComponent.cs" />
     <Compile Include="Source\Enumerator\PowerUppEmunerator.cs" />
     <Compile Include="Source\EntityStuff\Entity.cs" />
+    <Compile Include="Source\Managers\AudioManager.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
+    <Compile Include="Source\Managers\EntityManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

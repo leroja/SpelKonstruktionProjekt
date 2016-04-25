@@ -12,13 +12,14 @@ namespace GameEngine.Source.Managers
     {
         private static ComponentManager instance;
 
-        public Dictionary<Type, Dictionary<Entity, Component>> compDic = new Dictionary<Type, Dictionary<Entity, Component>>();
 
+        public Dictionary<Type, Dictionary<Entity, Component>> compDic = new Dictionary<Type, Dictionary<Entity, Component>>();
 
         private ComponentManager()
         {
 
         }
+
 
         public static ComponentManager Instance
         {
@@ -32,10 +33,17 @@ namespace GameEngine.Source.Managers
             }
         }
 
-
-        public void AddComponent(Entity entity, Component component)
+        /// <summary>
+        /// "links" the component to the entity
+        /// </summary>
+        /// <param name="entity">
+        /// 
+        /// </param>
+        /// <param name="component">
+        /// 
+        /// </param>
+        public void AddComponentToEntity(Entity entity, Component component)
         {
-
             Type type = component.GetType();
 
             if (compDic.ContainsKey(type))
@@ -50,8 +58,16 @@ namespace GameEngine.Source.Managers
 
         }
 
-
-        public void RemoveComponentFRomEntity(Entity entity, Component component)
+        /// <summary>
+        /// removes the component from the entity
+        /// </summary>
+        /// <param name="entity">
+        /// the entity that has the component
+        /// </param>
+        /// <param name="component">
+        /// the component to be removed
+        /// </param>
+        public void RemoveComponentFromEntity(Entity entity, Component component)
         {
 
             Type type = component.GetType();
@@ -65,7 +81,19 @@ namespace GameEngine.Source.Managers
             }
         }
 
-
+        /// <summary>
+        /// returns a component if the Entity has one "linked" to it
+        /// </summary>
+        /// <typeparam name="T">
+        /// the type of the requested component
+        /// </typeparam>
+        /// <param name="entity">
+        /// 
+        /// </param>
+        /// <returns>
+        /// a component of the requested type if there is one
+        /// else it returns null
+        /// </returns>
         public T GetEntityComponent<T>(Entity entity) where T: Component
         {
             Type type = typeof(T);
@@ -81,20 +109,29 @@ namespace GameEngine.Source.Managers
             return null;
         }
 
-        public Entity GetEntityOfComponent<T>(Component component) where T : Component
+        /// <summary>
+        /// returns an entity if there is an entity linked to the specific component
+        /// </summary>
+        /// <typeparam name="T">
+        /// the type of compent
+        /// </typeparam>
+        /// <param name="component">
+        /// the specific component
+        /// </param>
+        /// <returns>
+        /// an entity if one is found
+        /// else it returns null
+        /// </returns>
+        public Entity GetEntityByComponent<T>(Component component) where T : Component
         {
             Type type = typeof(T);
 
             if (compDic.ContainsKey(type)){
-
-                if (compDic[type].ContainsValue(component))
+                foreach (KeyValuePair<Entity, Component> stuff in compDic[type])
                 {
-                    foreach (KeyValuePair<Entity, Component> stuff in compDic[type])
+                    if (stuff.Value == component)
                     {
-                        if (stuff.Value == component)
-                        {
-                            return stuff.Key;
-                        }
+                        return stuff.Key;
                     }
                 }
             }
@@ -102,6 +139,16 @@ namespace GameEngine.Source.Managers
             return null;
         }
         
+        /// <summary>
+        /// return a list of all entites that "has" specific component
+        /// or null if the component is not in the dictionary
+        /// </summary>
+        /// <typeparam name="T">
+        /// 
+        /// </typeparam>
+        /// <returns>
+        /// a list of all entities that "has" a specific component
+        /// </returns>
         public List<Entity> GetAllEntitiesWithComponentType<T>() where T : Component
         {
             Type type = typeof(T);
@@ -113,6 +160,12 @@ namespace GameEngine.Source.Managers
             return null;
         }
         
+        /// <summary>
+        /// Removes an Entity from dictionary
+        /// </summary>
+        /// <param name="entity">
+        /// the entity to be removed
+        /// </param>
 
         public void RemoveEntity(Entity entity)
         {
