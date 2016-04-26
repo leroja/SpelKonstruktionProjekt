@@ -14,10 +14,11 @@ namespace GameEngine.Source.Managers
     {
         private GraphicsDeviceManager graphics;
         /// <summary>
-        /// The constructor for the RenderManager takes a grapgicsdevicemanager as parameter, which it then uses to manipulate
+        /// The constructor for the RenderManager takes a grapgicsdevicemanager as parameter, which it then uses to manipulate.
         /// graphical elements in the game window.
         /// </summary>
         /// <param name="graphics"></param>
+        /// The GraphicsDeviceManager that will be used by the RenderManager.
         public RenderManager(GraphicsDeviceManager graphics)
         {
             this.graphics = graphics;
