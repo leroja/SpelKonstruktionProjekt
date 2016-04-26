@@ -6,28 +6,31 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Managers
 {
-    class RenderManager
+    class SceneManager
     {
+        private static SceneManager instance;
 
-        private static RenderManager instance;
 
-
-        private RenderManager()
+        private SceneManager()
         {
 
         }
 
 
-        public static RenderManager Instance
+        public static SceneManager Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new RenderManager();
+                    instance = new SceneManager();
                 }
                 return instance;
             }
         }
+
+
+
+
     }
 }

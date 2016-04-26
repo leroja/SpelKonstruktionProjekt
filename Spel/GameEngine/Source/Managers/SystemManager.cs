@@ -6,28 +6,33 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Managers
 {
-    class RenderManager
+    class SystemManager
     {
+        private static SystemManager instance;
 
-        private static RenderManager instance;
+        // kanske
+        // renderSystem Dictionary
+        // updateSystem Dictionary
 
 
-        private RenderManager()
+        private SystemManager()
         {
 
         }
 
-
-        public static RenderManager Instance
+        public static SystemManager Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new RenderManager();
+                    instance = new SystemManager();
                 }
                 return instance;
             }
         }
+
+
+
     }
 }
