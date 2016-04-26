@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Managers
 {
+    /// <summary>
+    /// EntityManager class, to manage the creation and number of enteties.
+    /// Entitymanager is a singleton.
+    /// </summary>
     public class EntityManager
     {
         private static EntityManager instance;
         private int currEnteties;
-
-        public Dictionary<Type, Dictionary<Entity, Component>> compDic = new Dictionary<Type, Dictionary<Entity, Component>>();
+        
 
         public static EntityManager Instance
         {
@@ -28,6 +31,10 @@ namespace GameEngine.Source.Managers
             }
         }
 
+        /// <summary>
+        /// CreateEntity method handles the creation of the enteties. 
+        /// </summary>
+        /// <returns></returns>
         public Entity CreateEntity()
         {
             currEnteties++;
@@ -35,6 +42,10 @@ namespace GameEngine.Source.Managers
             return newEnity;
         }
 
+        /// <summary>
+        /// getNumberOfEnteties is used to get information regarding the number of enteties currently available.
+        /// </summary>
+        /// <returns>returns an int which corresponds to the number of enteties created.</returns>
         public int getNumberOfEnteties()
         {
             return currEnteties;
