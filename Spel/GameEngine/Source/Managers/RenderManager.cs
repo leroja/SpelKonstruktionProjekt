@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +39,7 @@ namespace GameEngine.Source.Managers
         /// <summary>
         /// This function puts the game into full screen mode.
         /// </summary>
-        public void activateFullScreen()
+        public void applyFullScreen()
         {
             graphics.IsFullScreen = true;
             graphics.ApplyChanges();
@@ -51,6 +53,26 @@ namespace GameEngine.Source.Managers
             graphics.ApplyChanges();
         }
 
+        /// <summary>
+        /// This function loads all files in the content pipeline, and returns a list containing all of these.
+        /// </summary>
+        /// <param name="sprites">
+        /// The content pipeline.
+        /// </param>
+        /// <param name="files">
+        /// The names of the files in the content pipeline.
+        /// </param>
+        /// <returns>
+        /// The list of loaded content.
+        /// </returns>
+        public List<Texture2D> loadContent(ContentManager sprites, List<string> files)
+        {
+            List<Texture2D> list = new List<Texture2D>();
 
+            foreach(string sprite in files){
+                list.Add(sprites.Load<Texture2D>(sprite));
+            }
+            return list;
+        }
     }
 }
