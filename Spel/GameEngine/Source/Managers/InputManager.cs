@@ -21,8 +21,6 @@ namespace GameEngine.Source.Managers
         GamePadState[] currentGamePadState = new GamePadState[4];
         GamePadState[] previousGamePadState = new GamePadState[4];
 
-
-
         private InputManager()
         {
         }
@@ -57,10 +55,14 @@ namespace GameEngine.Source.Managers
 
 
         /// <summary>
-        /// 
+        /// binds an action to a key on the keyboard
         /// </summary>
-        /// <param name="action"></param>
-        /// <param name="key"></param>
+        /// <param name="action">
+        /// name of the action
+        /// </param>
+        /// <param name="key">
+        /// 
+        /// </param>
         public void AddKeyBoardAction(string action, Keys key)
         {
             if (keyBoardActions.ContainsKey(action))
@@ -69,11 +71,13 @@ namespace GameEngine.Source.Managers
             }
             keyBoardActions.Add(action, key);
         }
-        
+
         /// <summary>
-        /// 
+        /// removes the action and the associated key
         /// </summary>
-        /// <param name="action"></param>
+        /// <param name="action">
+        /// Name of the action
+        /// </param>
         public void RemoveKeyBoardAction(string action)
         {
             if (keyBoardActions.ContainsKey(action))
@@ -83,10 +87,15 @@ namespace GameEngine.Source.Managers
         }
 
         /// <summary>
-        /// 
+        /// checks if the key bound to the action has been pressed
         /// </summary>
-        /// <param name="action"></param>
-        /// <returns></returns>
+        /// <param name="action">
+        /// Name of the action
+        /// </param>
+        /// <returns>
+        /// true if the key has been pressed
+        /// fasle if it not has been pressed
+        /// </returns>
         public bool KeyPressed(string action)
         {
             if (keyBoardActions.ContainsKey(action))
@@ -105,11 +114,17 @@ namespace GameEngine.Source.Managers
         ////////////////
 
         /// <summary>
-        /// 
+        /// binds an action to a gamepadbutton for the controller
         /// </summary>
-        /// <param name="playerIndex"></param>
-        /// <param name="action"></param>
-        /// <param name="button"></param>
+        /// <param name="playerIndex">
+        /// which controller
+        /// </param>
+        /// <param name="action">
+        /// name of the action
+        /// </param>
+        /// <param name="button">
+        /// 
+        /// </param>
         public void AddGamePadAction(PlayerIndex playerIndex, string action, Buttons button)
         {
             if (!gamePadActions.ContainsKey(playerIndex))
@@ -128,10 +143,14 @@ namespace GameEngine.Source.Managers
 
 
         /// <summary>
-        /// 
+        /// removes the action and the associated gamepadbutton for the controller
         /// </summary>
-        /// <param name="playerIndex"></param>
-        /// <param name="action"></param>
+        /// <param name="playerIndex">
+        /// which controller
+        /// </param>
+        /// <param name="action">
+        /// name of the action
+        /// </param>
         public void RemoveGamePadAction(PlayerIndex playerIndex, string action)
         {
             if (gamePadActions.ContainsKey(playerIndex))
@@ -145,11 +164,18 @@ namespace GameEngine.Source.Managers
         }
 
         /// <summary>
-        /// 
+        /// checks if the gamepadbutton bound to the action has been pressed
         /// </summary>
-        /// <param name="playerIndex"></param>
-        /// <param name="action"></param>
-        /// <returns></returns>
+        /// <param name="playerIndex">
+        /// which controller
+        /// </param>
+        /// <param name="action">
+        /// name of the action
+        /// </param>
+        /// <returns>
+        /// true if the button has been pressed
+        /// false if the button not has been pressed
+        /// </returns>
         public bool ButtonPressed(PlayerIndex playerIndex, string action)
         {
             if (currentGamePadState[(int)playerIndex].IsConnected)
@@ -169,6 +195,7 @@ namespace GameEngine.Source.Managers
             }
             else
             {
+
             }
             return false;
         }

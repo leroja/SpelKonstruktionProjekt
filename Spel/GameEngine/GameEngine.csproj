@@ -42,12 +42,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Components\AIComponent.cs" />
+    <Compile Include="Source\Components\AnimationComponent.cs" />
     <Compile Include="Source\Components\CollisionComponent.cs" />
     <Compile Include="Source\Components\CollisionRectangleComponent.cs" />
     <Compile Include="Source\Components\Component.cs" />
     <Compile Include="Source\Components\DrawableComponent.cs" />
     <Compile Include="Source\Components\GravitationComponent.cs" />
     <Compile Include="Source\Components\HealthComponent.cs" />
+    <Compile Include="Source\Components\MassComponent.cs" />
     <Compile Include="Source\Components\PositionComponent.cs" />
     <Compile Include="Source\Components\PowerUppComponent.cs" />
     <Compile Include="Source\Components\TimerComponent.cs" />

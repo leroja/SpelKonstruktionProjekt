@@ -11,7 +11,7 @@ namespace GameEngine.Source.Components
     class PositionComponent : Component
     {
         // Position
-        Vector2 position;
+        public Vector2 position;
 
         // Constructor for PositionComponent 
         public PositionComponent(Vector2 startPosition)

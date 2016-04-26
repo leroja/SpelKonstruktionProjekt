@@ -11,8 +11,8 @@ namespace GameEngine.Source.Managers
     class AudioManager
     {
         private static AudioManager instance;
+        private float prevVol = 1.0f;
         //private float MasterVolume = 1.0f;
-        // dictionaries
         Dictionary<string, Song> songDic = new Dictionary<string, Song>();
         Dictionary<string, SoundEffect> soundEffectDic = new Dictionary<string, SoundEffect>();
 
@@ -32,6 +32,20 @@ namespace GameEngine.Source.Managers
                 }
                 return instance;
             }
+        }
+
+
+        public void GlobalMute()
+        {
+            MediaPlayer.IsMuted = true;
+            prevVol = SoundEffect.MasterVolume;
+            SoundEffect.MasterVolume = 0;
+        }
+
+        public void GlobalUnMute()
+        {
+            MediaPlayer.IsMuted = false;
+            SoundEffect.MasterVolume = prevVol;
         }
 
         /// <summary>
@@ -107,6 +121,7 @@ namespace GameEngine.Source.Managers
         {
             if (volume <= 1.0 && volume >= 0.0)
             {
+                prevVol = volume;
                 SoundEffect.MasterVolume = volume;
             }
         }
@@ -169,6 +184,7 @@ namespace GameEngine.Source.Managers
             if (songDic.ContainsKey(name))
             {
                 MediaPlayer.Play(songDic[name]);
+                
             }
         }
 
