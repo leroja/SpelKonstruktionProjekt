@@ -11,6 +11,7 @@ namespace GameEngine.Source.Managers
     public class EntityManager
     {
         private static EntityManager instance;
+        private int currEnteties;
 
         public Dictionary<Type, Dictionary<Entity, Component>> compDic = new Dictionary<Type, Dictionary<Entity, Component>>();
 
@@ -21,6 +22,7 @@ namespace GameEngine.Source.Managers
                 if (instance == null)
                 {
                     instance = new EntityManager();
+                    instance.currEnteties = 0;
                 }
                 return instance;
             }
@@ -28,14 +30,15 @@ namespace GameEngine.Source.Managers
 
         public Entity CreateEntity()
         {
-            Entity newEnity = new Entity();
+            currEnteties++;
+            Entity newEnity = new Entity(currEnteties);
             return newEnity;
         }
 
-        public void addComponenet(Component component)
+        public int getNumberOfEnteties()
         {
-            ComponentManager.Instance.AddComponent(newEntity, component);
+            return currEnteties;
         }
-       
+
     }
 }
