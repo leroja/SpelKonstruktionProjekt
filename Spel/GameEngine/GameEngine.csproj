@@ -48,6 +48,7 @@
     <Compile Include="Source\Components\DrawableComponent.cs" />
     <Compile Include="Source\Components\GravitationComponent.cs" />
     <Compile Include="Source\Components\HealthComponent.cs" />
+    <Compile Include="Source\Components\MassComponent.cs" />
     <Compile Include="Source\Components\PositionComponent.cs" />
     <Compile Include="Source\Components\PowerUppComponent.cs" />
     <Compile Include="Source\Components\TimerComponent.cs" />

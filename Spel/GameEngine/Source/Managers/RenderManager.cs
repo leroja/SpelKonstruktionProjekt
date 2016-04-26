@@ -17,7 +17,6 @@ namespace GameEngine.Source.Managers
 
         }
 
-
         public static RenderManager Instance
         {
             get
@@ -29,5 +28,10 @@ namespace GameEngine.Source.Managers
                 return instance;
             }
         }
+
+
+
+
+
     }
 }

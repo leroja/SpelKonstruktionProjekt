@@ -10,9 +10,9 @@ namespace GameEngine.Source.Components
     public class HealthComponent : Component
     {
         // Max health
-        int health { get; set; }
+        public int health { get; set; }
         // Damage taken
-        int damage { get; set; }
+        public int damage { get; set; }
 
         // Constructor for HealthComponent 
         public HealthComponent(int maxHealth)
