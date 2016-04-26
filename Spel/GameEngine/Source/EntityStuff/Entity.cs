@@ -9,16 +9,14 @@ namespace GameEngine.Source.EntityStuff
     /// <summary>
     /// The Entity class is the objects which the components will be applied to. 
     /// </summary>
-    class Entity
+    public class Entity
     {
-        public bool visable { get; set; }
-        public bool updateable { get; set; }
+        public int entityID { get; set; }
         /// <summary>
         /// Default constructor for the Entity class.
         /// </summary>
-        Entity() {
-            visable = true;
-            updateable = true;
+        public Entity(int id) {
+            entityID = id;
         }
     }
 }
