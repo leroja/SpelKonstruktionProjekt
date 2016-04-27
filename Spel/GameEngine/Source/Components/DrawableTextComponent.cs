@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Components
 {
-    class DrawableTextComponent : Component
+    class DrawableTextComponent : IComponent
     {
         public string text { get; set; }
         public Color textColor { get; set; }
