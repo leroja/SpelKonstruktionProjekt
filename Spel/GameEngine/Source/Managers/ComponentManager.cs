@@ -42,10 +42,8 @@ namespace GameEngine.Source.Managers
         public int CreateID()
         {
             if (entityIDs.Count == 0) {
-                
                 entityIDs.AddRange(Enumerable.Range(curMax + 1, curMax + 10000));
                 curMax += 10000;
-
             }
 
             int id = entityIDs[0];

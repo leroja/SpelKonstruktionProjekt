@@ -63,8 +63,10 @@
     <Compile Include="Source\Managers\RenderManager.cs" />
     <Compile Include="Source\Managers\SceneManager.cs" />
     <Compile Include="Source\Managers\SystemManager.cs" />
+    <Compile Include="Source\Systems\2DSpriteRenderSystem.cs" />
     <Compile Include="Source\Systems\IDraw.cs" />
     <Compile Include="Source\Systems\IUpdate.cs" />
+    <Compile Include="Source\Systems\TextRenderSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
