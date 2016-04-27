@@ -46,6 +46,7 @@
     <Compile Include="Source\Components\CollisionRectangleComponent.cs" />
     <Compile Include="Source\Components\Component.cs" />
     <Compile Include="Source\Components\DrawableComponent.cs" />
+    <Compile Include="Source\Components\DrawableTextComponent.cs" />
     <Compile Include="Source\Components\GravitationComponent.cs" />
     <Compile Include="Source\Components\HealthComponent.cs" />
     <Compile Include="Source\Components\MassComponent.cs" />
@@ -54,7 +55,6 @@
     <Compile Include="Source\Components\TimerComponent.cs" />
     <Compile Include="Source\Components\VelocityComponent.cs" />
     <Compile Include="Source\Enumerator\PowerUppEmunerator.cs" />
-    <Compile Include="Source\EntityStuff\Entity.cs" />
     <Compile Include="Source\Managers\AudioManager.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
     <Compile Include="Source\Managers\InputManager.cs" />
@@ -64,7 +64,6 @@
     <Compile Include="Source\Managers\SystemManager.cs" />
     <Compile Include="Source\Systems\IDraw.cs" />
     <Compile Include="Source\Systems\IUpdate.cs" />
-    <Compile Include="Source\Managers\EntityManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

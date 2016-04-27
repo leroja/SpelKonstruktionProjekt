@@ -1,5 +1,4 @@
 ﻿using GameEngine.Source.Components;
-using GameEngine.Source.EntityStuff;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -60,28 +59,28 @@ namespace GameEngine.Source.Managers
         /// true if bounding rectangle collision occured
         /// and false if no collision or physics is not enabled
         /// </returns>
-        public bool RectangleCollision(Entity entity1, Entity entity2)
-        {
+        //public bool RectangleCollision(Entity entity1, Entity entity2)
+        //{
 
-            if (physicsEnabled)
-            {
-                CollisionRectangleComponent recA = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity1);
-                CollisionRectangleComponent recB = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity2);
-
-
-                Rectangle rectangleA = recA.CollisionRec;
-                Rectangle rectangleB = recB.CollisionRec;
+        //    if (physicsEnabled)
+        //    {
+        //        CollisionRectangleComponent recA = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity1);
+        //        CollisionRectangleComponent recB = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity2);
 
 
-                if (rectangleA.Intersects(rectangleB))
-                {
-                    return true;
-                }
-            }    
+        //        Rectangle rectangleA = recA.CollisionRec;
+        //        Rectangle rectangleB = recB.CollisionRec;
 
 
-            return false;
-        }
+        //        if (rectangleA.Intersects(rectangleB))
+        //        {
+        //            return true;
+        //        }
+        //    }    
+
+
+        //    return false;
+        //}
 
 
         /// <summary>
@@ -98,55 +97,55 @@ namespace GameEngine.Source.Managers
         /// true if pixel perfect collision occurred
         /// and false if no collision or physics is not enabled
         /// </returns>
-        public bool PixelPerfectCollision(Entity entity1, Entity entity2)
-        {
+        //public bool PixelPerfectCollision(Entity entity1, Entity entity2)
+        //{
 
-            if (physicsEnabled)
-            {
-                CollisionRectangleComponent recA = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity1);
-                CollisionRectangleComponent recB = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity2);
+        //    if (physicsEnabled)
+        //    {
+        //        CollisionRectangleComponent recA = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity1);
+        //        CollisionRectangleComponent recB = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity2);
 
-                Rectangle rectangleA = recA.CollisionRec;
-                Rectangle rectangleB = recB.CollisionRec;
+        //        Rectangle rectangleA = recA.CollisionRec;
+        //        Rectangle rectangleB = recB.CollisionRec;
 
-                if (!rectangleA.Intersects(rectangleB))
-                    return false;
+        //        if (!rectangleA.Intersects(rectangleB))
+        //            return false;
 
-                DrawableComponent ent1 = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(entity1);
-                DrawableComponent ent2 = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(entity2);
+        //        DrawableComponent ent1 = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(entity1);
+        //        DrawableComponent ent2 = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(entity2);
 
-                Color[] dataA = new Color[ent1.texture.Width * ent1.texture.Height];
-                ent1.texture.GetData(dataA);
-                Color[] dataB = new Color[ent2.texture.Width * ent2.texture.Height];
-                ent2.texture.GetData(dataB);
+        //        Color[] dataA = new Color[ent1.texture.Width * ent1.texture.Height];
+        //        ent1.texture.GetData(dataA);
+        //        Color[] dataB = new Color[ent2.texture.Width * ent2.texture.Height];
+        //        ent2.texture.GetData(dataB);
 
-                Rectangle its = Rectangle.Intersect(rectangleA, rectangleB);
+        //        Rectangle its = Rectangle.Intersect(rectangleA, rectangleB);
 
 
-                // Check every point within the intersection bounds
-                for (int y = its.Top; y < its.Bottom; y++)
-                {
-                    for (int x = its.Left; x < its.Right; x++)
-                    {
-                        // Get the color of both pixels at this point
-                        Color colorA = dataA[(x - rectangleA.Left) + (y - rectangleA.Top) * rectangleA.Width];
-                        Color colorB = dataB[(x - rectangleB.Left) + (y - rectangleB.Top) * rectangleB.Width];
+        //        // Check every point within the intersection bounds
+        //        for (int y = its.Top; y < its.Bottom; y++)
+        //        {
+        //            for (int x = its.Left; x < its.Right; x++)
+        //            {
+        //                // Get the color of both pixels at this point
+        //                Color colorA = dataA[(x - rectangleA.Left) + (y - rectangleA.Top) * rectangleA.Width];
+        //                Color colorB = dataB[(x - rectangleB.Left) + (y - rectangleB.Top) * rectangleB.Width];
 
-                        // If both pixels are not completely transparent,
-                        if (colorA.A != 0 && colorB.A != 0)
-                        {
-                            // then an intersection has been found
-                            return true;
-                        }
-                    }
-                }
+        //                // If both pixels are not completely transparent,
+        //                if (colorA.A != 0 && colorB.A != 0)
+        //                {
+        //                    // then an intersection has been found
+        //                    return true;
+        //                }
+        //            }
+        //        }
                 
-                return false;
-            }else
-            {
-                return false;
-            }
+        //        return false;
+        //    }else
+        //    {
+        //        return false;
+        //    }
 
-        }
+        //}
     }
 }
