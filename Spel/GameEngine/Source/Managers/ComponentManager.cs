@@ -13,7 +13,7 @@ namespace GameEngine.Source.Managers
         private static ComponentManager instance;
 
 
-        public Dictionary<Type, Dictionary<Entity, Component>> compDic = new Dictionary<Type, Dictionary<Entity, Component>>();
+        public Dictionary<Type, Dictionary<Entity, IComponent>> compDic = new Dictionary<Type, Dictionary<Entity, IComponent>>();
 
         private ComponentManager()
         {
@@ -42,7 +42,7 @@ namespace GameEngine.Source.Managers
         /// <param name="component">
         /// 
         /// </param>
-        public void AddComponentToEntity(Entity entity, Component component)
+        public void AddComponentToEntity(Entity entity, IComponent component)
         {
             Type type = component.GetType();
 
@@ -52,7 +52,7 @@ namespace GameEngine.Source.Managers
             }
             else
             {
-                compDic.Add(type, new Dictionary<Entity, Component>());
+                compDic.Add(type, new Dictionary<Entity, IComponent>());
                 compDic[type].Add(entity, component);
             }
 
@@ -67,7 +67,7 @@ namespace GameEngine.Source.Managers
         /// <param name="component">
         /// the component to be removed
         /// </param>
-        public void RemoveComponentFromEntity(Entity entity, Component component)
+        public void RemoveComponentFromEntity(Entity entity, IComponent component)
         {
 
             Type type = component.GetType();
@@ -94,7 +94,7 @@ namespace GameEngine.Source.Managers
         /// a component of the requested type if there is one
         /// else it returns null
         /// </returns>
-        public T GetEntityComponent<T>(Entity entity) where T: Component
+        public T GetEntityComponent<T>(Entity entity) where T: IComponent
         {
             Type type = typeof(T);
 
@@ -105,8 +105,7 @@ namespace GameEngine.Source.Managers
                     return (T)compDic[type][entity];
                 }
             }
-            
-            return null;
+            return default(T);
         }
 
         /// <summary>
@@ -122,12 +121,12 @@ namespace GameEngine.Source.Managers
         /// an entity if one is found
         /// else it returns null
         /// </returns>
-        public Entity GetEntityByComponent<T>(Component component) where T : Component
+        public Entity GetEntityByComponent<T>(IComponent component) where T : IComponent
         {
             Type type = typeof(T);
 
             if (compDic.ContainsKey(type)){
-                foreach (KeyValuePair<Entity, Component> stuff in compDic[type])
+                foreach (KeyValuePair<Entity, IComponent> stuff in compDic[type])
                 {
                     if (stuff.Value == component)
                     {
@@ -149,7 +148,7 @@ namespace GameEngine.Source.Managers
         /// <returns>
         /// a list of all entities that "has" a specific component
         /// </returns>
-        public List<Entity> GetAllEntitiesWithComponentType<T>() where T : Component
+        public List<Entity> GetAllEntitiesWithComponentType<T>() where T : IComponent
         {
             Type type = typeof(T);
 
@@ -169,7 +168,7 @@ namespace GameEngine.Source.Managers
 
         public void RemoveEntity(Entity entity)
         {
-            foreach (KeyValuePair<Type, Dictionary<Entity, Component>> entry in compDic)
+            foreach (KeyValuePair<Type, Dictionary<Entity, IComponent>> entry in compDic)
             {
                 if (entry.Value.ContainsKey(entity))
                     compDic[entry.Key].Remove(entity);
