@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Components
 {
-    // Abstract superclass for Components
-    public abstract class Component{ }
- }
+    interface IComponent
+    {
+    }
+}
