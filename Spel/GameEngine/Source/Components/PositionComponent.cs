@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 namespace GameEngine.Source.Components
 {
     // Position Component in 2D
-    class PositionComponent : Component
+    class PositionComponent : IComponent
     {
         // Position
         public Vector2 position;

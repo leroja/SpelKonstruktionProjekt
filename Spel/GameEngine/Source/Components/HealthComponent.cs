@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GameEngine.Source.Components
 {
     // Health Component
-    public class HealthComponent : Component
+    public class HealthComponent : IComponent
     {
         // Max health
         public int health { get; set; }

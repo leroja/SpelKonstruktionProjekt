@@ -9,7 +9,7 @@ namespace GameEngine.Source.Components
     /// <summary>
     /// AnimationComponent, is added to entities which contains some kind of animation
     /// </summary>
-    public class AnimationComponent
+    public class AnimationComponent : IComponent
     {
         ///We need to add something more here, when we know what information we need for the animations
         public bool visable { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GameEngine.Source.Components
 {
     //PowerUpComponent
-    class PowerUppComponent : Component
+    class PowerUppComponent : IComponent
     {
 
     }

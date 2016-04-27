@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameEngine.Source.Components
 {
     // DrawableComponent For Drawing 2D textures
-    class DrawableComponent : Component
+    class DrawableComponent : IComponent
     {
         // 2D texture For Drawing component
         public Texture2D texture { get; set; }
