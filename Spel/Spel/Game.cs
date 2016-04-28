@@ -34,8 +34,8 @@ namespace Spel
             SystemManager.Instance.AddSystem(new MovementSystem());
             // TODO: Add your initialization logic here
             DrawableComponent comp = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
-            PositionComponent pos = new PositionComponent(Vector2.Zero);
-            VelocityComponent vel = new VelocityComponent(Vector2.One, 100F);
+            PositionComponent pos = new PositionComponent(new Vector2(50,0));
+            VelocityComponent vel = new VelocityComponent(Vector2.Zero, 50F);
             int id = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(id, vel);
             ComponentManager.Instance.AddComponentToEntity(id, comp);
