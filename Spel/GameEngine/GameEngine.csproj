@@ -38,7 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Game1.cs" />
+    <Compile Include="ECSGameEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Components\AIComponent.cs" />
@@ -47,9 +47,11 @@
     <Compile Include="Source\Components\CollisionRectangleComponent.cs" />
     <Compile Include="Source\Components\DrawableComponent.cs" />
     <Compile Include="Source\Components\DrawableTextComponent.cs" />
+    <Compile Include="Source\Components\GamaPadComponent.cs" />
     <Compile Include="Source\Components\GravitationComponent.cs" />
     <Compile Include="Source\Components\HealthComponent.cs" />
     <Compile Include="Source\Components\IComponent.cs" />
+    <Compile Include="Source\Components\KeyBoardComponent.cs" />
     <Compile Include="Source\Components\MassComponent.cs" />
     <Compile Include="Source\Components\PositionComponent.cs" />
     <Compile Include="Source\Components\PowerUppComponent.cs" />
@@ -64,8 +66,13 @@
     <Compile Include="Source\Managers\SceneManager.cs" />
     <Compile Include="Source\Managers\SystemManager.cs" />
     <Compile Include="Source\Systems\2DSpriteRenderSystem.cs" />
-    <Compile Include="Source\Systems\IDraw.cs" />
-    <Compile Include="Source\Systems\IUpdate.cs" />
+    <Compile Include="Source\Systems\GamePadSystem.cs" />
+    <Compile Include="Source\Systems\Interfaces\IDraw.cs" />
+    <Compile Include="Source\Systems\Interfaces\IInput.cs" />
+    <Compile Include="Source\Systems\Interfaces\ISystem.cs" />
+    <Compile Include="Source\Systems\Interfaces\IUpdate.cs" />
+    <Compile Include="Source\Systems\KeyBoardSystem.cs" />
+    <Compile Include="Source\Systems\MovementSystem.cs" />
     <Compile Include="Source\Systems\TextRenderSystem.cs" />
   </ItemGroup>
   <ItemGroup>

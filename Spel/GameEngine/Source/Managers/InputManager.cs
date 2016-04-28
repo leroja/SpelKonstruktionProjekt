@@ -10,6 +10,9 @@ namespace GameEngine.Source.Managers
 {
     class InputManager
     {
+
+        // Flytta till ett system istället?
+
         private static InputManager instance;
 
         Dictionary<string, Keys> keyBoardActions = new Dictionary<string, Keys>();

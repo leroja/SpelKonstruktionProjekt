@@ -11,6 +11,9 @@ namespace GameEngine.Source.Managers
 {
     class PhysicsManager
     {
+
+        // Flytta till ett system istället?
+
         private static PhysicsManager instance;
         private bool physicsEnabled;
         private float GlobalGravity = 9.82f;
