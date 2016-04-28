@@ -13,10 +13,10 @@ namespace Spel
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game()
+        public Game() : base()
         {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //graphics = new GraphicsDeviceManager(this);
+            //Content.RootDirectory = "Content";
         }
 
         /// <summary>
