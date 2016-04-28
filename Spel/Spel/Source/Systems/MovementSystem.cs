@@ -8,6 +8,7 @@ using GameEngine.Source.Components;
 using GameEngine.Source.Managers;
 using GameEngine.Source.Systems;
 using GameEngine.Source.Systems.Interfaces;
+using GameEngine.Source.Enumerator;
 
 namespace Spel.Source.Systems
 {
@@ -27,21 +28,20 @@ namespace Spel.Source.Systems
                 }
                 if(p != null && v != null && kbc != null)
                 {
-                    string testb = kbc.state["Up"];
-                    if (kbc.state["Up"].Equals("Pressed"))
+                    if (kbc.state["Up"] == ButtonStates.Pressed)
                     {
                         p.position.Y -= v.jumpHeight * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
                     //// just for demo
-                    if (kbc.state["Down"].Equals("Pressed"))
+                    if (kbc.state["Down"] == ButtonStates.Pressed)
                     {
                         p.position.Y += v.jumpHeight * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
-                    if (kbc.state["Left"].Equals("Pressed"))
+                    if (kbc.state["Left"] == ButtonStates.Pressed)
                     {
                         p.position.X -= v.jumpHeight * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
-                    if (kbc.state["Right"].Equals("Pressed"))
+                    if (kbc.state["Right"] == ButtonStates.Pressed)
                     {
                         p.position.X += v.jumpHeight * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }

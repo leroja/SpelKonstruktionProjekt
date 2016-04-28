@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using GameEngine.Source.Managers;
 using Microsoft.Xna.Framework.Input;
 using GameEngine.Source.Components;
+using GameEngine.Source.Enumerator;
 
 namespace GameEngine.Source.Systems
 {
@@ -47,22 +48,22 @@ namespace GameEngine.Source.Systems
 
                 if (newState && !oldState)
                 {
-                    keyboardComp.state[action] = "Pressed";
+                    keyboardComp.state[action] = ButtonStates.Pressed;
                     break;
                 }
                 else if (newState && oldState)
                 {
-                    keyboardComp.state[action] = "Held";
+                    keyboardComp.state[action] = ButtonStates.Hold;
                     break;
                 }
                 else if (!newState && oldState)
                 {
-                    keyboardComp.state[action] = "Released";
+                    keyboardComp.state[action] = ButtonStates.Released;
                     break;
                 }
                 else
                 {
-                    keyboardComp.state[action] = "NotPressed";
+                    keyboardComp.state[action] = ButtonStates.Not_Pressed;
                 }
             }
         }
