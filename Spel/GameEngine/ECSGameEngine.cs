@@ -17,6 +17,12 @@ namespace GameEngine
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+
+            //Do not synch our Draw method with the Vertical Retrace of our monitor
+            graphics.SynchronizeWithVerticalRetrace = false;
+            //Do not Call our Update method at the default rate of 1/60 of a second.
+            IsFixedTimeStep = false;
         }
 
         /// <summary>
@@ -30,8 +36,9 @@ namespace GameEngine
             // TODO: Add your initialization logic here
             SystemManager.Instance.AddSystem(new _2DSpriteSystem());
             SystemManager.Instance.AddSystem(new KeyBoardSystem());
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            SystemManager.Instance.spriteBatch = spriteBatch;
+            SystemManager.Instance.AddSystem(new SoundEffectSystem());
+            SystemManager.Instance.AddSystem(new WindowTitleFPSSystem(this));
+
             base.Initialize();
         }
 
@@ -41,9 +48,11 @@ namespace GameEngine
         /// </summary>
         protected override void LoadContent()
         {
-            
+
+
             // Create a new SpriteBatch, which can be used to draw textures.
-            
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            SystemManager.Instance.spriteBatch = spriteBatch;
 
             // TODO: use this.Content to load your game content here
         }

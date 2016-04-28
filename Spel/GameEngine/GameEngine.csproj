@@ -47,6 +47,7 @@
     <Compile Include="Source\Components\CollisionRectangleComponent.cs" />
     <Compile Include="Source\Components\DrawableComponent.cs" />
     <Compile Include="Source\Components\DrawableTextComponent.cs" />
+    <Compile Include="Source\Components\FPSCounterComponent.cs" />
     <Compile Include="Source\Components\GamePadComponent.cs" />
     <Compile Include="Source\Components\GravitationComponent.cs" />
     <Compile Include="Source\Components\HealthComponent.cs" />
@@ -56,26 +57,28 @@
     <Compile Include="Source\Components\PlayerComponent.cs" />
     <Compile Include="Source\Components\PositionComponent.cs" />
     <Compile Include="Source\Components\PowerUppComponent.cs" />
+    <Compile Include="Source\Components\SoundEffectComponent.cs" />
     <Compile Include="Source\Components\TimerComponent.cs" />
     <Compile Include="Source\Components\VelocityComponent.cs" />
     <Compile Include="Source\Enumerator\ButtonStates.cs" />
     <Compile Include="Source\Enumerator\PowerUppEmunerator.cs" />
     <Compile Include="Source\Managers\AudioManager.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
-    <Compile Include="Source\Managers\InputManager.cs" />
     <Compile Include="Source\Managers\PhysicsManager.cs" />
     <Compile Include="Source\Managers\RenderManager.cs" />
     <Compile Include="Source\Managers\SceneManager.cs" />
     <Compile Include="Source\Managers\SystemManager.cs" />
     <Compile Include="Source\Systems\2DSpriteRenderSystem.cs" />
-    <Compile Include="Source\Systems\CollisionSystem.cs" />
+    <Compile Include="Source\Systems\CollisionDetectionSystem.cs" />
     <Compile Include="Source\Systems\GamePadSystem.cs" />
     <Compile Include="Source\Systems\Interfaces\IDraw.cs" />
     <Compile Include="Source\Systems\Interfaces\IInput.cs" />
     <Compile Include="Source\Systems\Interfaces\ISystem.cs" />
     <Compile Include="Source\Systems\Interfaces\IUpdate.cs" />
     <Compile Include="Source\Systems\KeyBoardSystem.cs" />
+    <Compile Include="Source\Systems\SoundEffectSystem.cs" />
     <Compile Include="Source\Systems\TextRenderSystem.cs" />
+    <Compile Include="Source\Systems\WindowTitleFPSSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

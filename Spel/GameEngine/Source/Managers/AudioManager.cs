@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Managers
 {
-    class AudioManager
+    public class AudioManager
     {
         private static AudioManager instance;
         private float prevVol = 1.0f;

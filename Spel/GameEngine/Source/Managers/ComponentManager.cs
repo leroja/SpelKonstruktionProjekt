@@ -36,9 +36,13 @@ namespace GameEngine.Source.Managers
             }
         }
 
-        
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>
+        /// 
+        /// </returns>
         public int CreateID()
         {
             if (entityIDs.Count == 0) {
@@ -50,9 +54,14 @@ namespace GameEngine.Source.Managers
             entityIDs.Remove(id);
             return id;
         }
-
-        public void ReturnID(int id)
+        
+        /// <summary>
+        /// returns the id to the pool so it can be used again
+        /// </summary>
+        /// <param name="id"></param>
+        public void RecycleID(int id)
         {
+            ComponentManager.Instance.RemoveEntity(id);
             entityIDs.Add(id);
         }
 
