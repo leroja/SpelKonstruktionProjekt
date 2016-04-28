@@ -18,9 +18,8 @@ namespace Spel
 
         public Game() : base()
         {
-            
-          //  graphics = new GraphicsDeviceManager(this);
-          //  Content.RootDirectory = "Content";
+            //graphics = new GraphicsDeviceManager(this);
+            //Content.RootDirectory = "Content";
         }
 
         /// <summary>
