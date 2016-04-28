@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace GameEngine.Source.Components
 {
     // DrawableComponent For Drawing 2D textures
-    class DrawableComponent : IComponent
+    public class DrawableComponent : IComponent
     {
         // 2D texture For Drawing component
         public Texture2D texture { get; set; }
@@ -20,5 +21,6 @@ namespace GameEngine.Source.Components
             texture = startingTexture;
             sprite = SpriteEffects.None;
         }
+
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Systems
 {
-    public interface IDraw
+    public interface IDraw : ISystem
     {
 
         

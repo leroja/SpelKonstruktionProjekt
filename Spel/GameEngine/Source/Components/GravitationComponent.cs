@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GameEngine.Source.Components
 {
     // GravitationComponent for Gravity
-    class GravitationComponent : IComponent
+    public class GravitationComponent : IComponent
     {
         // Flot representing Gravity
         float gravity { get; set; }

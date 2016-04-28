@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Components
 {
-    interface IComponent
+    public interface IComponent
     {
     }
 }

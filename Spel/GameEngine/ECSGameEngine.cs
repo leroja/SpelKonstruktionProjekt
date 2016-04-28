@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using GameEngine.Source.Systems;
+using GameEngine.Source.Managers;
 namespace GameEngine
 {
     /// <summary>
@@ -27,7 +28,9 @@ namespace GameEngine
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            SystemManager.Instance.AddSystem(new _2DSpriteSystem());
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            SystemManager.Instance.spriteBatch = spriteBatch;
             base.Initialize();
         }
 
@@ -37,8 +40,9 @@ namespace GameEngine
         /// </summary>
         protected override void LoadContent()
         {
+            
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            
 
             // TODO: use this.Content to load your game content here
         }
@@ -63,7 +67,8 @@ namespace GameEngine
                 Exit();
 
             // TODO: Add your update logic here
-
+            SystemManager.Instance.GameTime = gameTime;
+            SystemManager.Instance.RunUpdateSystems();
             base.Update(gameTime);
         }
 
@@ -76,7 +81,8 @@ namespace GameEngine
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
+            SystemManager.Instance.GameTime = gameTime;
+            SystemManager.Instance.RunRenderSystems();
             base.Draw(gameTime);
         }
     }

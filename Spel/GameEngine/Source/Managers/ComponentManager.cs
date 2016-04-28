@@ -7,14 +7,14 @@ using GameEngine.Source.Components;
 
 namespace GameEngine.Source.Managers
 {
-    class ComponentManager
+    public class ComponentManager
     {
         private static ComponentManager instance;
 
         private List<int> entityIDs;
         private int curMax;
 
-        public Dictionary<Type, Dictionary<int, IComponent>> compDic = new Dictionary<Type, Dictionary<int, IComponent>>();
+        private Dictionary<Type, Dictionary<int, IComponent>> compDic = new Dictionary<Type, Dictionary<int, IComponent>>();
 
         private ComponentManager()
         {

@@ -10,7 +10,7 @@ namespace GameEngine.Source.Components
     /// <summary>
     /// This class is used to make sure certain events only last for a given amount of time.
     /// </summary>
-    class TimerComponent : IComponent
+   public  class TimerComponent : IComponent
     {
         /// <summary>
         /// A timer to keep track of the elapsed time. The timer creates an event when the given time has 

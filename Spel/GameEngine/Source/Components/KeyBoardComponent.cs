@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Components
 {
-    class KeyBoardComponent : IComponent
+    public class KeyBoardComponent : IComponent
     {
 
         //public List<string> actions { get; set; }
