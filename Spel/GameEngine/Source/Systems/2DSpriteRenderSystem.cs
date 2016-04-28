@@ -10,7 +10,7 @@ using GameEngine.Source.Components;
 
 namespace GameEngine.Source.Systems
 {
-    class _2DSpriteSystem : IDraw
+    public class _2DSpriteSystem : IDraw
     {
 
         public void draw(GameTime gameTime, SpriteBatch spriteBatch)

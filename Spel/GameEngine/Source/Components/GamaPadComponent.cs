@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Components
 {
-    class GamaPadComponent : IComponent
+    public class GamaPadComponent : IComponent
     {
     }
 }

@@ -12,7 +12,7 @@ namespace GameEngine.Source.Components
     /// an entity makes the entity an AI, needs to be set to false if you wish to add
     /// the component to a non-computer-controlled entity.
     /// </summary>
-    class AIComponent: IComponent
+    public class AIComponent: IComponent
     {
         
         bool isAI { get; set; }
