@@ -29,6 +29,7 @@ namespace GameEngine
         {
             // TODO: Add your initialization logic here
             SystemManager.Instance.AddSystem(new _2DSpriteSystem());
+            SystemManager.Instance.AddSystem(new KeyBoardSystem());
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SystemManager.Instance.spriteBatch = spriteBatch;
             base.Initialize();
@@ -67,7 +68,9 @@ namespace GameEngine
                 Exit();
 
             // TODO: Add your update logic here
+            
             SystemManager.Instance.GameTime = gameTime;
+            SystemManager.Instance.RunInputSystems();
             SystemManager.Instance.RunUpdateSystems();
             base.Update(gameTime);
         }

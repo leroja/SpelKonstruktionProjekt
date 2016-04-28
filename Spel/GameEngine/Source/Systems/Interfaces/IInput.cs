@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Systems.Interfaces
 {
-    public interface IInput
+    public interface IInput : ISystem
     {
         void update(GameTime gameTime);
     }

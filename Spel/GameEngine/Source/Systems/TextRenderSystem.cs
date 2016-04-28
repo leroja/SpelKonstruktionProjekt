@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine.Source.Managers;
 using GameEngine.Source.Components;
+using GameEngine.Source.Systems.Interfaces;
 
 namespace GameEngine.Source.Systems
 {

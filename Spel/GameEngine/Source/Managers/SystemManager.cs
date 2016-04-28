@@ -1,4 +1,5 @@
 ﻿using GameEngine.Source.Systems;
+using GameEngine.Source.Systems.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -18,6 +19,7 @@ namespace GameEngine.Source.Managers
 
         List<IDraw> renderSystems = new List<IDraw>();
         List<IUpdate> updateSystems = new List<IUpdate>();
+        List<IInput> inputSystems = new List<IInput>();
 
         private SystemManager()
         {
@@ -46,6 +48,9 @@ namespace GameEngine.Source.Managers
             else if (system is IUpdate)
             {
                 AddSystemToList<IUpdate>(updateSystems, system);
+            }else if (system is IInput)
+            {
+                AddSystemToList<IInput>(inputSystems, system);
             }
         }
 
@@ -60,6 +65,10 @@ namespace GameEngine.Source.Managers
             {
                 RemoveSystemFromList<IUpdate>(updateSystems, system);
             }
+            else if (system is IInput)
+            {
+                AddSystemToList<IInput>(inputSystems, system);
+            }
 
         }
 
@@ -68,6 +77,18 @@ namespace GameEngine.Source.Managers
             if (updateSystems.Count > 0)
             {
                 foreach (IUpdate system in updateSystems)
+                {
+                    system.update(GameTime);
+                }
+            }
+        }
+
+
+        public void RunInputSystems()
+        {
+            if (updateSystems.Count > 0)
+            {
+                foreach (IInput system in inputSystems)
                 {
                     system.update(GameTime);
                 }

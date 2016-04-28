@@ -34,11 +34,18 @@ namespace Spel
             // TODO: Add your initialization logic here
             DrawableComponent comp = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
             PositionComponent pos = new PositionComponent(Vector2.Zero);
-            VelocityComponent vel = new VelocityComponent(Vector2.One, 100F);
+            VelocityComponent vel = new VelocityComponent(Vector2.One, 50F, 1000F);
+            KeyBoardComponent kbc = new KeyBoardComponent();
+            kbc.keyBoardActions.Add("Up", Keys.Up);
+            kbc.keyBoardActions.Add("Down", Keys.Down);
+            kbc.keyBoardActions.Add("Left", Keys.Left);
+            kbc.keyBoardActions.Add("Right", Keys.Right);
+
             int id = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(id, vel);
             ComponentManager.Instance.AddComponentToEntity(id, comp);
             ComponentManager.Instance.AddComponentToEntity(id, pos);
+            ComponentManager.Instance.AddComponentToEntity(id, kbc);
             base.Initialize();
 
         }

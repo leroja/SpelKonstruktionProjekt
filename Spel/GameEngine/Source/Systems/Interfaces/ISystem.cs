@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Source.Systems
+namespace GameEngine.Source.Systems.Interfaces
 {
     public interface ISystem
     {

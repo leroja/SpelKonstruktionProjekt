@@ -11,7 +11,7 @@ using GameEngine.Source.Components;
 
 namespace GameEngine.Source.Systems
 {
-    class KeyBoardSystem : IInput
+    public class KeyBoardSystem : IInput
     {
         public KeyboardState prevState { get; set; }
         public KeyboardState curState { get; set; }
