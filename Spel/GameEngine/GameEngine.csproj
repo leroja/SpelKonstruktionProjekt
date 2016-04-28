@@ -53,6 +53,7 @@
     <Compile Include="Source\Components\IComponent.cs" />
     <Compile Include="Source\Components\KeyBoardComponent.cs" />
     <Compile Include="Source\Components\MassComponent.cs" />
+    <Compile Include="Source\Components\PlayerComponent.cs" />
     <Compile Include="Source\Components\PositionComponent.cs" />
     <Compile Include="Source\Components\PowerUppComponent.cs" />
     <Compile Include="Source\Components\TimerComponent.cs" />
