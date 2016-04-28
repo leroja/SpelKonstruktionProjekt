@@ -13,13 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Amon Amarth Cry Of The Black Birds.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Amon Amarth Cry Of The Black Birds.mp3
-
-#begin MålGraf.png
+#begin Pic/Kanin.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -29,5 +23,29 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:MålGraf.png
+/build:Pic/Kanin.png
+
+#begin Sound/Amon Amarth Cry Of The Black Birds.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound/Amon Amarth Cry Of The Black Birds.mp3
+
+#begin Sound/Bouncy_Bounce-Bugs_Bunny-1735935456.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound/Bouncy_Bounce-Bugs_Bunny-1735935456.mp3
+
+#begin Background/base-bg.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Background/base-bg.jpg
 

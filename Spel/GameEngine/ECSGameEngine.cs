@@ -67,7 +67,8 @@ namespace GameEngine
                 Exit();
 
             // TODO: Add your update logic here
-
+            SystemManager.Instance.GameTime = gameTime;
+            SystemManager.Instance.RunUpdateSystems();
             base.Update(gameTime);
         }
 

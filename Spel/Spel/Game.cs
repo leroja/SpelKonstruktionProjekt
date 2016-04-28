@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using GameEngine.Source.Components;
 using GameEngine.Source.Managers;
 using GameEngine;
+using Spel.Source.Systems;
 
 namespace Spel
 {
@@ -30,10 +31,13 @@ namespace Spel
         /// </summary>
         protected override void Initialize()
         {
+            SystemManager.Instance.AddSystem(new MovementSystem());
             // TODO: Add your initialization logic here
             DrawableComponent comp = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
             PositionComponent pos = new PositionComponent(Vector2.Zero);
+            VelocityComponent vel = new VelocityComponent(Vector2.One, 100F);
             int id = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(id, vel);
             ComponentManager.Instance.AddComponentToEntity(id, comp);
             ComponentManager.Instance.AddComponentToEntity(id, pos);
             base.Initialize();

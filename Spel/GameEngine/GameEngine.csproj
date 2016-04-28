@@ -66,13 +66,13 @@
     <Compile Include="Source\Managers\SceneManager.cs" />
     <Compile Include="Source\Managers\SystemManager.cs" />
     <Compile Include="Source\Systems\2DSpriteRenderSystem.cs" />
+    <Compile Include="Source\Systems\CollisionSystem.cs" />
     <Compile Include="Source\Systems\GamePadSystem.cs" />
     <Compile Include="Source\Systems\Interfaces\IDraw.cs" />
     <Compile Include="Source\Systems\Interfaces\IInput.cs" />
     <Compile Include="Source\Systems\Interfaces\ISystem.cs" />
     <Compile Include="Source\Systems\Interfaces\IUpdate.cs" />
     <Compile Include="Source\Systems\KeyBoardSystem.cs" />
-    <Compile Include="Source\Systems\MovementSystem.cs" />
     <Compile Include="Source\Systems\TextRenderSystem.cs" />
   </ItemGroup>
   <ItemGroup>
