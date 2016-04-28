@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Managers
 {
-    class SystemManager
+    public class SystemManager
     {
         private static SystemManager instance;
 

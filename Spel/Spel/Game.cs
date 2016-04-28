@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using GameEngine.Source.Components;
+using GameEngine.Source.Managers;
 using GameEngine;
 
 namespace Spel
@@ -13,10 +15,11 @@ namespace Spel
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game()
+        public Game() : base()
         {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            
+          //  graphics = new GraphicsDeviceManager(this);
+          //  Content.RootDirectory = "Content";
         }
 
         /// <summary>
@@ -28,8 +31,13 @@ namespace Spel
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            DrawableComponent comp = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
+            PositionComponent pos = new PositionComponent(Vector2.Zero);
+            int id = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(id, comp);
+            ComponentManager.Instance.AddComponentToEntity(id, pos);
             base.Initialize();
+
         }
 
         /// <summary>

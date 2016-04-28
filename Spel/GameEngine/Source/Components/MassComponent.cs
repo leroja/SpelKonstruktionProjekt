@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Components
 {
-    class MassComponent : IComponent
+    public class MassComponent : IComponent
     {
         public float mass { get; set; }
 

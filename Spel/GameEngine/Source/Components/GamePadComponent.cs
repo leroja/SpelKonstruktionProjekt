@@ -15,7 +15,7 @@ namespace GameEngine.Source.Components
 
         public List<string> gamepadActions { get; set; }
         public GamePadComponent(List<string> action)
-        {
+    {
             this.gamepadActions = action; 
         }
     }

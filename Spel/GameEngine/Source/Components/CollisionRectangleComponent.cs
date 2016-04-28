@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Components
 {
-    class CollisionRectangleComponent : IComponent
+    public class CollisionRectangleComponent : IComponent
     {
         public Rectangle CollisionRec { get; set; }
 
