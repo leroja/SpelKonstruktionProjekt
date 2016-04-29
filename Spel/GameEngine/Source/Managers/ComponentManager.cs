@@ -50,18 +50,20 @@ namespace GameEngine.Source.Managers
                 curMax += 10000;
             }
 
-            int id = entityIDs[0];
+            //int id = entityIDs[0]; 
+            int id = entityIDs[entityIDs.Count - 1];
+
             entityIDs.Remove(id);
             return id;
         }
         
         /// <summary>
         /// returns the id to the pool so it can be used again
+        /// As a Game developer u also have to remove the the entity from the ComponentManager
         /// </summary>
         /// <param name="id"></param>
         public void RecycleID(int id)
         {
-            ComponentManager.Instance.RemoveEntity(id);
             entityIDs.Add(id);
         }
 

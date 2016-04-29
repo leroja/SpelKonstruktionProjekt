@@ -60,6 +60,7 @@
     <Compile Include="Source\Components\SoundEffectComponent.cs" />
     <Compile Include="Source\Components\TimerComponent.cs" />
     <Compile Include="Source\Components\VelocityComponent.cs" />
+    <Compile Include="Source\Enumerator\ActionsEnum.cs" />
     <Compile Include="Source\Enumerator\ButtonStates.cs" />
     <Compile Include="Source\Enumerator\PowerUppEmunerator.cs" />
     <Compile Include="Source\Managers\AudioManager.cs" />

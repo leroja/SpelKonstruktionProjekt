@@ -11,7 +11,5 @@ namespace GameEngine.Source.Components
         public float framecount { get; set; }
 
         public float frameCounter { get; set; }
-
-        //public float  { get; set; }
     }
 }
