@@ -49,3 +49,9 @@
 /processorParam:TextureFormat=Color
 /build:Background/base-bg.jpg
 
+#begin Fonts/TestFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts/TestFont.spritefont
+

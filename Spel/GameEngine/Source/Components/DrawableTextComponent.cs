@@ -14,5 +14,13 @@ namespace GameEngine.Source.Components
         public Color textColor { get; set; }
         public SpriteFont font { get; set; }
 
+
+
+        public DrawableTextComponent(string text, Color color, SpriteFont font)
+        {
+            this.text = text;
+            this.textColor = color;
+            this.font = font;
+        }
     }
 }

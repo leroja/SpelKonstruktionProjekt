@@ -16,18 +16,21 @@ namespace GameEngine.Source.Systems
         public void draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<DrawableTextComponent>();
-            spriteBatch.Begin();
-            foreach (var a in dra)
+            if (dra != null)
             {
-                PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
-                DrawableTextComponent d = ComponentManager.Instance.GetEntityComponent<DrawableTextComponent>(a);
-
-                if (p != null && d != null)
+                spriteBatch.Begin();
+                foreach (var a in dra)
                 {
-                    spriteBatch.DrawString(d.font, d.text, p.position, d.textColor);
+                    PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
+                    DrawableTextComponent d = ComponentManager.Instance.GetEntityComponent<DrawableTextComponent>(a);
+
+                    if (p != null && d != null)
+                    {
+                        spriteBatch.DrawString(d.font, d.text, p.position, d.textColor);
+                    }
                 }
+                spriteBatch.End();
             }
-            spriteBatch.End();
         }
     }
 }

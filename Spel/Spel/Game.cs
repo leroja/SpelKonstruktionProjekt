@@ -15,13 +15,9 @@ namespace Spel
     /// </summary>
     public class Game : ECSGameEngine
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
         public Game() : base()
         {
-            //graphics = new GraphicsDeviceManager(this);
-            //Content.RootDirectory = "Content";
+
         }
 
         /// <summary>
@@ -35,7 +31,6 @@ namespace Spel
 
             SystemManager.Instance.AddSystem(new MovementSystem());
             FPSCounterComponent fps = new FPSCounterComponent();
-            // TODO: Add your initialization logic here
             DrawableComponent comp = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
             PositionComponent pos = new PositionComponent(Vector2.Zero);
             VelocityComponent vel = new VelocityComponent(Vector2.One, 50F, 1000F);
@@ -48,13 +43,12 @@ namespace Spel
 
             int id = ComponentManager.Instance.CreateID();
             int ids = ComponentManager.Instance.CreateID();
-            ComponentManager.Instance.AddComponentToEntity(id, vel);
-            ComponentManager.Instance.AddComponentToEntity(id, comp);
-            ComponentManager.Instance.AddComponentToEntity(id, pos);
-            ComponentManager.Instance.AddComponentToEntity(id, kbc);
+            //ComponentManager.Instance.AddComponentToEntity(id, vel);
+            //ComponentManager.Instance.AddComponentToEntity(id, comp);
+            //ComponentManager.Instance.AddComponentToEntity(id, pos);
+            //ComponentManager.Instance.AddComponentToEntity(id, kbc);
             //ComponentManager.Instance.AddComponentToEntity(id, sfc);
             ComponentManager.Instance.AddComponentToEntity(ids, fps);
-
 
             DrawableComponent comp2 = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
             PositionComponent pos2 = new PositionComponent(Vector2.Zero);
@@ -65,12 +59,14 @@ namespace Spel
             kbc2.keyBoardActions.Add(ActionsEnum.Down, Keys.S);
             kbc2.keyBoardActions.Add(ActionsEnum.Left, Keys.A);
             kbc2.keyBoardActions.Add(ActionsEnum.Right, Keys.D);
+            DrawableTextComponent dtc = new DrawableTextComponent("test Test test", Color.Brown, Content.Load<SpriteFont>("Fonts/TestFont"));
 
             int id2 = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(id2, vel2);
-            ComponentManager.Instance.AddComponentToEntity(id2, comp2);
+            //ComponentManager.Instance.AddComponentToEntity(id2, comp2);
             ComponentManager.Instance.AddComponentToEntity(id2, pos2);
             ComponentManager.Instance.AddComponentToEntity(id2, kbc2);
+            ComponentManager.Instance.AddComponentToEntity(id2, dtc);
 
 
             base.Initialize();
@@ -86,11 +82,8 @@ namespace Spel
             SoundEffect se = Content.Load<SoundEffect>("Sound/Bouncy_Bounce-Bugs_Bunny-1735935456");
 
             AudioManager.Instance.AddSoundEffect("Bouncy", se);
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
             
             base.LoadContent();
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -102,32 +95,14 @@ namespace Spel
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        //protected override void Update(GameTime gameTime)
-        //{
-        //    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-        //        Exit();
 
-        //    // TODO: Add your update logic here
-
-        //    base.Update(gameTime);
+        //public static T get_content<T>(string asset) {
+        //    return test<T>(asset);
         //}
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        //protected override void Draw(GameTime gameTime)
+        //private T test<T>(string asset)
         //{
-        //    GraphicsDevice.Clear(Color.CornflowerBlue);
-
-        //    // TODO: Add your drawing code here
-
-        //    base.Draw(gameTime);
+        //    return (Content.Load<T>(asset));
         //}
     }
 }
