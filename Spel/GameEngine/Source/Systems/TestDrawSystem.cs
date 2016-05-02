@@ -37,10 +37,10 @@ namespace GameEngine.Source.Systems
             spriteBatch.Begin();
 
             // Create any rectangle you want. Here we'll use the TitleSafeArea for fun.
-            Rectangle titleSafeRectangle = GameBase.GraphicsDevice.Viewport.TitleSafeArea;
+            //Rectangle titleSafeRectangle = GameBase.GraphicsDevice.Viewport.TitleSafeArea;
 
             // Call our method (also defined in this blog-post)
-            DrawBorder(titleSafeRectangle, 5, Color.Red, spriteBatch);
+            //DrawBorder(titleSafeRectangle, 5, Color.Red, spriteBatch);
 
             if(ents != null)
             {

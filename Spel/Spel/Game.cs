@@ -81,13 +81,37 @@ namespace Spel
             ComponentManager.Instance.AddComponentToEntity(id2, dtc);
             ComponentManager.Instance.AddComponentToEntity(id2, mo);
 
-            PositionComponent pos3 = new PositionComponent(Vector2.Zero); 
+            PositionComponent pos3 = new PositionComponent(Vector2.Zero);
             CollisionRectangleComponent CRC3 = new CollisionRectangleComponent(new Rectangle((int)pos3.position.X, (int)pos3.position.Y, GraphicsDevice.Viewport.Width, 0));
             CollisionComponent CC3 = new CollisionComponent(false);
             int idtopwall3 = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(idtopwall3, pos3);
             ComponentManager.Instance.AddComponentToEntity(idtopwall3, CRC3);
             ComponentManager.Instance.AddComponentToEntity(idtopwall3, CC3);
+
+            PositionComponent pos4 = new PositionComponent(Vector2.Zero);
+            CollisionRectangleComponent CRC4 = new CollisionRectangleComponent(new Rectangle((int)pos4.position.X, (int)pos4.position.Y, 0, GraphicsDevice.Viewport.Height));
+            CollisionComponent CC4 = new CollisionComponent(false);
+            int idtopwall4 = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(idtopwall4, pos4);
+            ComponentManager.Instance.AddComponentToEntity(idtopwall4, CRC4);
+            ComponentManager.Instance.AddComponentToEntity(idtopwall4, CC4);
+
+            PositionComponent pos5 = new PositionComponent(new Vector2(0, GraphicsDevice.Viewport.Height));
+            CollisionRectangleComponent CRC5 = new CollisionRectangleComponent(new Rectangle((int)pos5.position.X, (int)pos5.position.Y, GraphicsDevice.Viewport.Width, 0));
+            CollisionComponent CC5 = new CollisionComponent(false);
+            int idtopwall5 = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(idtopwall5, pos5);
+            ComponentManager.Instance.AddComponentToEntity(idtopwall5, CRC5);
+            ComponentManager.Instance.AddComponentToEntity(idtopwall5, CC5);
+
+            PositionComponent pos6 = new PositionComponent(new Vector2(GraphicsDevice.Viewport.Width, 0));
+            CollisionRectangleComponent CRC6 = new CollisionRectangleComponent(new Rectangle((int)pos6.position.X, (int)pos6.position.Y, 0, GraphicsDevice.Viewport.Height));
+            CollisionComponent CC6 = new CollisionComponent(false);
+            int idtopwall6 = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(idtopwall6, pos6);
+            ComponentManager.Instance.AddComponentToEntity(idtopwall6, CRC6);
+            ComponentManager.Instance.AddComponentToEntity(idtopwall6, CC6);
 
             base.Initialize();
 

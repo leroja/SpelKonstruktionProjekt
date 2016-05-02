@@ -104,7 +104,7 @@ namespace GameEngine
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Gainsboro);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
             SystemManager.Instance.GameTime = gameTime;

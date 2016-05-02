@@ -37,7 +37,8 @@ namespace GameEngine.Source.Systems
                             }
                             if(!comp.isPixelPerfectCompat || !comp2.isPixelPerfectCompat)
                             {
-                                Console.Out.WriteLine("BAM1!!between" + item + " " + jitem);
+                                //test
+                                //Console.Out.WriteLine("BAM1!!between" + item + " " + jitem);
                             }
                         }
                     }
@@ -59,7 +60,7 @@ namespace GameEngine.Source.Systems
                 }
                 else
                 {
-                    rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, 0, 0);
+                    rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, rec.CollisionRec.Width, rec.CollisionRec.Height);
                 }
 
             }
