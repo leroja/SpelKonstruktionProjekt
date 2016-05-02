@@ -43,6 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Components\AIComponent.cs" />
     <Compile Include="Source\Components\AnimationComponent.cs" />
+    <Compile Include="Source\Components\MouseComponent.cs" />
     <Compile Include="Source\Components\CollisionComponent.cs" />
     <Compile Include="Source\Components\CollisionRectangleComponent.cs" />
     <Compile Include="Source\Components\DrawableComponent.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Source\Components\VelocityComponent.cs" />
     <Compile Include="Source\Enumerator\ActionsEnum.cs" />
     <Compile Include="Source\Enumerator\ButtonStates.cs" />
+    <Compile Include="Source\Enumerator\Click.cs" />
     <Compile Include="Source\Enumerator\PowerUppEmunerator.cs" />
     <Compile Include="Source\Managers\AudioManager.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Source\Systems\Interfaces\IUpdate.cs" />
     <Compile Include="Source\Systems\KeyBoardSystem.cs" />
     <Compile Include="Source\Systems\SoundEffectSystem.cs" />
+    <Compile Include="Source\Systems\MouseSystem.cs" />
     <Compile Include="Source\Systems\TextRenderSystem.cs" />
     <Compile Include="Source\Systems\WindowTitleFPSSystem.cs" />
   </ItemGroup>
