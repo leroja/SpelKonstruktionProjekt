@@ -24,26 +24,26 @@ namespace Spel.Source.Systems
                 KeyBoardComponent kbc = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(a);
                 if (p != null && v != null)
                 {
-                    p.position.X += v.speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    //p.position.X += v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
                 if(p != null && v != null && kbc != null)
                 {
-                    if (kbc.state[ActionsEnum.Up] == ButtonStates.Pressed)
+                    if (kbc.state[ActionsEnum.Up] == ButtonStates.Hold)
                     {
-                        p.position.Y -= v.jumpHeight * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        p.position.Y -= v.velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
                     //// just for demo
-                    if (kbc.state[ActionsEnum.Down] == ButtonStates.Pressed)
+                    if (kbc.state[ActionsEnum.Down] == ButtonStates.Hold)
                     {
-                        p.position.Y += v.jumpHeight * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        p.position.Y += v.velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
-                    if (kbc.state[ActionsEnum.Left] == ButtonStates.Pressed)
+                    if (kbc.state[ActionsEnum.Left] == ButtonStates.Hold)
                     {
-                        p.position.X -= v.jumpHeight * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        p.position.X -= v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
-                    if (kbc.state[ActionsEnum.Right] == ButtonStates.Pressed)
+                    if (kbc.state[ActionsEnum.Right] == ButtonStates.Hold)
                     {
-                        p.position.X += v.jumpHeight * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        p.position.X += v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
                 }
 

@@ -47,6 +47,7 @@ namespace GameEngine
 
             // @TODO make it better
             SystemManager.Instance.AddSystem(new WindowTitleFPSSystem(this));
+            SystemManager.Instance.AddSystem(new CollisionDetectionSystem());
 
 
             // Test
