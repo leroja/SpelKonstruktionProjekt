@@ -28,7 +28,8 @@ namespace Spel
         /// </summary>
         protected override void Initialize()
         {
-
+            
+            
             SystemManager.Instance.AddSystem(new MovementSystem());
             FPSCounterComponent fps = new FPSCounterComponent();
             DrawableComponent comp = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
@@ -43,11 +44,11 @@ namespace Spel
 
             int id = ComponentManager.Instance.CreateID();
             int ids = ComponentManager.Instance.CreateID();
-            //ComponentManager.Instance.AddComponentToEntity(id, vel);
-            //ComponentManager.Instance.AddComponentToEntity(id, comp);
-            //ComponentManager.Instance.AddComponentToEntity(id, pos);
-            //ComponentManager.Instance.AddComponentToEntity(id, kbc);
-            //ComponentManager.Instance.AddComponentToEntity(id, sfc);
+            ComponentManager.Instance.AddComponentToEntity(id, vel);
+            ComponentManager.Instance.AddComponentToEntity(id, comp);
+            ComponentManager.Instance.AddComponentToEntity(id, pos);
+            ComponentManager.Instance.AddComponentToEntity(id, kbc);
+            ComponentManager.Instance.AddComponentToEntity(id, sfc);
             ComponentManager.Instance.AddComponentToEntity(ids, fps);
 
             DrawableComponent comp2 = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
@@ -60,13 +61,15 @@ namespace Spel
             kbc2.keyBoardActions.Add(ActionsEnum.Left, Keys.A);
             kbc2.keyBoardActions.Add(ActionsEnum.Right, Keys.D);
             DrawableTextComponent dtc = new DrawableTextComponent("test Test test", Color.Brown, Content.Load<SpriteFont>("Fonts/TestFont"));
+            MouseComponent mo = new MouseComponent();
 
             int id2 = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(id2, vel2);
-            //ComponentManager.Instance.AddComponentToEntity(id2, comp2);
+            ComponentManager.Instance.AddComponentToEntity(id2, comp2);
             ComponentManager.Instance.AddComponentToEntity(id2, pos2);
             ComponentManager.Instance.AddComponentToEntity(id2, kbc2);
             ComponentManager.Instance.AddComponentToEntity(id2, dtc);
+            ComponentManager.Instance.AddComponentToEntity(id2, mo);
 
 
             base.Initialize();

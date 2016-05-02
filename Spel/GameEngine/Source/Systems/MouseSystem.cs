@@ -23,9 +23,13 @@ namespace GameEngine.Source.Systems
 
             List<int> entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<MouseComponent>();
 
-            foreach (var item in entities)
+            if (entities != null)
             {
-
+                foreach (var item in entities)
+                {
+                    MouseComponent mouse = ComponentManager.Instance.GetEntityComponent<MouseComponent>(item);
+                    UpdateActionStates(mouse);
+                }
             }
         }
         private void UpdateStates()
@@ -36,10 +40,30 @@ namespace GameEngine.Source.Systems
 
         public void UpdateActionStates(MouseComponent mouseComponent)
         {
-            foreach (string action in mouseComponent.mouseActionState.Keys)
+
+            updateBtn(mouseComponent, curState.RightButton, prevState.RightButton, "RightButton");
+            updateBtn(mouseComponent, curState.LeftButton, prevState.RightButton, "LeftButton");
+            updateBtn(mouseComponent, curState.MiddleButton, prevState.RightButton, "MiddleButton");
+        }
+
+        private void updateBtn(MouseComponent mouse, ButtonState curState, ButtonState prevState, string button)
+        {
+            if (curState == ButtonState.Pressed && prevState != ButtonState.Pressed)
             {
-                Click button = mouseComponent.mouseAction[action]
-                bool newState = curState.
+                mouse.mouseActionState[button] = ButtonStates.Pressed;
+            }
+            else if (curState == ButtonState.Pressed && prevState == ButtonState.Pressed)
+            {
+                mouse.mouseActionState[button] = ButtonStates.Hold;
+            }
+            else if (curState != ButtonState.Pressed && prevState == ButtonState.Pressed)
+            {
+                mouse.mouseActionState[button] = ButtonStates.Released;
+            }
+            else
+            {
+                mouse.mouseActionState[button] = ButtonStates.Not_Pressed;
+            }
         }
     }
 }

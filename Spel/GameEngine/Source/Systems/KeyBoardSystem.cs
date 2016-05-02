@@ -23,10 +23,13 @@ namespace GameEngine.Source.Systems
 
             List<int> entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<KeyBoardComponent>();
 
-            foreach (var item in entities)
+            if (entities != null)
             {
-                KeyBoardComponent kbc = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(item);
-                UpdateActionStates(kbc);
+                foreach (var item in entities)
+                {
+                    KeyBoardComponent kbc = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(item);
+                    UpdateActionStates(kbc);
+                }
             }
         }
 

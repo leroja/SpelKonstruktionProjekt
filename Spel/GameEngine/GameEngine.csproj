@@ -63,7 +63,6 @@
     <Compile Include="Source\Components\VelocityComponent.cs" />
     <Compile Include="Source\Enumerator\ActionsEnum.cs" />
     <Compile Include="Source\Enumerator\ButtonStates.cs" />
-    <Compile Include="Source\Enumerator\Click.cs" />
     <Compile Include="Source\Enumerator\PowerUppEmunerator.cs" />
     <Compile Include="Source\Managers\AudioManager.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
@@ -81,6 +80,7 @@
     <Compile Include="Source\Systems\KeyBoardSystem.cs" />
     <Compile Include="Source\Systems\SoundEffectSystem.cs" />
     <Compile Include="Source\Systems\MouseSystem.cs" />
+    <Compile Include="Source\Systems\TestDrawSystem.cs" />
     <Compile Include="Source\Systems\TextRenderSystem.cs" />
     <Compile Include="Source\Systems\WindowTitleFPSSystem.cs" />
   </ItemGroup>
@@ -97,7 +97,6 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

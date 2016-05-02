@@ -22,8 +22,8 @@ namespace GameEngine.Source.Systems
 
         public GamePadSystem()
         {
-            GamePadState [] prevState = new GamePadState[4];
-            GamePadState [] curState = new GamePadState[4];
+            prevState = new GamePadState[4];
+            curState = new GamePadState[4];
         }
 
         /// <summary>
@@ -35,11 +35,13 @@ namespace GameEngine.Source.Systems
             updateStates();
 
             List<int> entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<GamePadComponent>();
-
-            foreach (var item in entities)
+            if (entities != null)
             {
-                GamePadComponent gamepadComponent = ComponentManager.Instance.GetEntityComponent<GamePadComponent>(item);
-                UpdateActionStates(gamepadComponent);
+                foreach (var item in entities)
+                {
+                    GamePadComponent gamepadComponent = ComponentManager.Instance.GetEntityComponent<GamePadComponent>(item);
+                    UpdateActionStates(gamepadComponent);
+                }
             }
         }
 
