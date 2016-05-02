@@ -9,6 +9,9 @@ using GameEngine.Source.Enumerator;
 
 namespace GameEngine.Source.Components
 {
+    /// <summary>
+    /// GamePadComponent stores data for playerIndex, possible actions, gamepadStates.
+    /// </summary>
     public class GamePadComponent : IComponent
     {
         public PlayerIndex playerIndex;
