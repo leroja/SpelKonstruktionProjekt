@@ -5,13 +5,15 @@ using GameEngine.Source.Components;
 using GameEngine.Source.Managers;
 using GameEngine;
 using Spel.Source.Systems;
+using Microsoft.Xna.Framework.Audio;
+using GameEngine.Source.Enumerator;
 
 namespace Spel
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game : ECSGameEngine// Microsoft.Xna.Framework.Game
+    public class Game : ECSGameEngine
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -30,22 +32,47 @@ namespace Spel
         /// </summary>
         protected override void Initialize()
         {
+
             SystemManager.Instance.AddSystem(new MovementSystem());
+            FPSCounterComponent fps = new FPSCounterComponent();
             // TODO: Add your initialization logic here
             DrawableComponent comp = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
             PositionComponent pos = new PositionComponent(Vector2.Zero);
             VelocityComponent vel = new VelocityComponent(Vector2.One, 50F, 1000F);
             KeyBoardComponent kbc = new KeyBoardComponent();
-            kbc.keyBoardActions.Add("Up", Keys.Up);
-            kbc.keyBoardActions.Add("Down", Keys.Down);
-            kbc.keyBoardActions.Add("Left", Keys.Left);
-            kbc.keyBoardActions.Add("Right", Keys.Right);
+            SoundEffectComponent sfc = new SoundEffectComponent("Bouncy");
+            kbc.keyBoardActions.Add(ActionsEnum.Up, Keys.Up);
+            kbc.keyBoardActions.Add(ActionsEnum.Down, Keys.Down);
+            kbc.keyBoardActions.Add(ActionsEnum.Left, Keys.Left);
+            kbc.keyBoardActions.Add(ActionsEnum.Right, Keys.Right);
 
             int id = ComponentManager.Instance.CreateID();
+            int ids = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(id, vel);
             ComponentManager.Instance.AddComponentToEntity(id, comp);
             ComponentManager.Instance.AddComponentToEntity(id, pos);
             ComponentManager.Instance.AddComponentToEntity(id, kbc);
+            //ComponentManager.Instance.AddComponentToEntity(id, sfc);
+            ComponentManager.Instance.AddComponentToEntity(ids, fps);
+
+
+            DrawableComponent comp2 = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
+            PositionComponent pos2 = new PositionComponent(Vector2.Zero);
+            VelocityComponent vel2 = new VelocityComponent(Vector2.One, 50F, 1000F);
+            KeyBoardComponent kbc2 = new KeyBoardComponent();
+            SoundEffectComponent sfc2 = new SoundEffectComponent("Bouncy");
+            kbc2.keyBoardActions.Add(ActionsEnum.Up, Keys.W);
+            kbc2.keyBoardActions.Add(ActionsEnum.Down, Keys.S);
+            kbc2.keyBoardActions.Add(ActionsEnum.Left, Keys.A);
+            kbc2.keyBoardActions.Add(ActionsEnum.Right, Keys.D);
+
+            int id2 = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(id2, vel2);
+            ComponentManager.Instance.AddComponentToEntity(id2, comp2);
+            ComponentManager.Instance.AddComponentToEntity(id2, pos2);
+            ComponentManager.Instance.AddComponentToEntity(id2, kbc2);
+
+
             base.Initialize();
 
         }
@@ -56,9 +83,13 @@ namespace Spel
         /// </summary>
         protected override void LoadContent()
         {
+            SoundEffect se = Content.Load<SoundEffect>("Sound/Bouncy_Bounce-Bugs_Bunny-1735935456");
+
+            AudioManager.Instance.AddSoundEffect("Bouncy", se);
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            
+            base.LoadContent();
             // TODO: use this.Content to load your game content here
         }
 

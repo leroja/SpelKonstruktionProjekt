@@ -40,7 +40,7 @@ namespace GameEngine.Source.Systems
         public void UpdateActionStates(KeyBoardComponent keyboardComp)
         {
 
-            foreach (string action in keyboardComp.keyBoardActions.Keys)
+            foreach (ActionsEnum action in keyboardComp.keyBoardActions.Keys)
             {
                 Keys key = keyboardComp.keyBoardActions[action];
                 bool newState = curState.IsKeyDown(key);
@@ -49,17 +49,14 @@ namespace GameEngine.Source.Systems
                 if (newState && !oldState)
                 {
                     keyboardComp.state[action] = ButtonStates.Pressed;
-                    break;
                 }
                 else if (newState && oldState)
                 {
                     keyboardComp.state[action] = ButtonStates.Hold;
-                    break;
                 }
                 else if (!newState && oldState)
                 {
                     keyboardComp.state[action] = ButtonStates.Released;
-                    break;
                 }
                 else
                 {

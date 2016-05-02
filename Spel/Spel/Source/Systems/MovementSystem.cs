@@ -28,20 +28,20 @@ namespace Spel.Source.Systems
                 }
                 if(p != null && v != null && kbc != null)
                 {
-                    if (kbc.state["Up"] == ButtonStates.Pressed)
+                    if (kbc.state[ActionsEnum.Up] == ButtonStates.Pressed)
                     {
                         p.position.Y -= v.jumpHeight * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
                     //// just for demo
-                    if (kbc.state["Down"] == ButtonStates.Pressed)
+                    if (kbc.state[ActionsEnum.Down] == ButtonStates.Pressed)
                     {
                         p.position.Y += v.jumpHeight * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
-                    if (kbc.state["Left"] == ButtonStates.Pressed)
+                    if (kbc.state[ActionsEnum.Left] == ButtonStates.Pressed)
                     {
                         p.position.X -= v.jumpHeight * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
-                    if (kbc.state["Right"] == ButtonStates.Pressed)
+                    if (kbc.state[ActionsEnum.Right] == ButtonStates.Pressed)
                     {
                         p.position.X += v.jumpHeight * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
