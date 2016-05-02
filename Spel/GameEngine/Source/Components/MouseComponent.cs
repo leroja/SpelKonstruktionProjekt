@@ -10,14 +10,14 @@ namespace GameEngine.Source.Components
 {
     public class MouseComponent : IComponent
     {
-        public Dictionary<string, Click> mouseAction { get; set; }
-        public Dictionary<string, ButtonStates> mouseActionState { get; set; }
+        //public Dictionary<string, Click> mouseAction { get; set; }
+        //public Dictionary<string, ButtonStates> mouseActionState { get; set; }
 
-        public MouseComponent()
-        {
-            mouseAction = new Dictionary<string, Click>();
-            mouseActionState = new Dictionary<string, ButtonStates>();
+        //public MouseComponent()
+        //{
+        //    mouseAction = new Dictionary<string, Click>();
+        //    mouseActionState = new Dictionary<string, ButtonStates>();
            
-        }
+        //}
     }
 }
