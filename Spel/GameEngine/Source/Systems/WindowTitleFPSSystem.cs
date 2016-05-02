@@ -16,6 +16,12 @@ namespace GameEngine.Source.Systems
         private Game game;
         private float timeSinceLastUpdate = 0.0f;
 
+        // @TODO 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public void draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             List<int> ents = ComponentManager.Instance.GetAllEntitiesWithComponentType<FPSCounterComponent>();
@@ -43,6 +49,12 @@ namespace GameEngine.Source.Systems
                 }
             }
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="g"></param>
         public WindowTitleFPSSystem(Game g)
         {
             game = g;

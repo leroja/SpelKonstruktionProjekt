@@ -13,16 +13,20 @@ namespace GameEngine
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        // @TODO make it easy to set max fps or turn of of max fps
+        /// <summary>
+        /// 
+        /// </summary>
         public ECSGameEngine()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
             
+
             //Do not synch our Draw method with the Vertical Retrace of our monitor
-           graphics.SynchronizeWithVerticalRetrace = false;
+            graphics.SynchronizeWithVerticalRetrace = false;
             //Do not Call our Update method at the default rate of 1/60 of a second.
-           IsFixedTimeStep = false;
+            IsFixedTimeStep = false;
         }
 
         /// <summary>
@@ -35,8 +39,11 @@ namespace GameEngine
         {
             // TODO: Add your initialization logic here
             SystemManager.Instance.AddSystem(new _2DSpriteSystem());
+            SystemManager.Instance.AddSystem(new TextRenderSystem());
             SystemManager.Instance.AddSystem(new KeyBoardSystem());
             SystemManager.Instance.AddSystem(new SoundEffectSystem());
+
+            // @TODO make it better
             SystemManager.Instance.AddSystem(new WindowTitleFPSSystem(this));
             SystemManager.Instance.AddSystem(new CollisionDetectionSystem());
 

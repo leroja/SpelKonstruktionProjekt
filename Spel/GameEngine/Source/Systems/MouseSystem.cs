@@ -12,27 +12,27 @@ using GameEngine.Source.Enumerator;
 
 namespace GameEngine.Source.Systems
 {
-    public class MouseSystem : IInput
+    public class MouseSystem 
     {
-        public MouseState prevState { get; set; }
+        //public MouseState prevState { get; set; }
 
-        public MouseState curState { get; set; }
-        public void update(GameTime gameTime)
-        {
-            UpdateStates();
+        //public MouseState curState { get; set; }
+        //public void update(GameTime gameTime)
+        //{
+        //    UpdateStates();
 
-            List<int> entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<MouseComponent>();
+        //    List<int> entities = ComponentManager.Instance.GetAllEntitiesWithComponentType<MouseComponent>();
 
-            foreach (var item in entities)
-            {
+        //    foreach (var item in entities)
+        //    {
 
-            }
-        }
-        private void UpdateStates()
-        {
-            prevState = curState;
-            curState = Mouse.GetState();
-        }
+        //    }
+        //}
+        //private void UpdateStates()
+        //{
+        //    prevState = curState;
+        //    curState = Mouse.GetState();
+        //}
 
         public void UpdateActionStates(MouseComponent mouseComponent)
         {

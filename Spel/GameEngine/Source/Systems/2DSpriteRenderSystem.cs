@@ -21,18 +21,21 @@ namespace GameEngine.Source.Systems
 
 
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<DrawableComponent>();
-            spriteBatch.Begin();
-            foreach (var a in dra)
+            if (dra != null)
             {
-                PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
-                DrawableComponent d = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(a);
-
-                if(p != null && d != null)
+                spriteBatch.Begin();
+                foreach (var a in dra)
                 {
-                    spriteBatch.Draw(d.texture, p.position, Color.White);
+                    PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
+                    DrawableComponent d = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(a);
+
+                    if (p != null && d != null)
+                    {
+                        spriteBatch.Draw(d.texture, p.position, Color.White);
+                    }
                 }
+                spriteBatch.End();
             }
-            spriteBatch.End();
         }
     }
 }

@@ -6,16 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace Spel.Source.Systems
-{
-    class CollisionSystem : IUpdate
-    {
-        public void update(GameTime gameTime)
-        {
+//namespace Spel.Source.Systems
+//{
+//    class CollisionSystem : IUpdate
+//    {
+//        public void update(GameTime gameTime)
+//        {
 
 
 
 
-        }
-    }
-}
+//        }
+//    }
+//}

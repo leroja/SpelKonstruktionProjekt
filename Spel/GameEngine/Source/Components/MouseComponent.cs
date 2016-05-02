@@ -18,6 +18,6 @@ namespace GameEngine.Source.Components
             mouseAction = new Dictionary<string, Buttons>();
             mouseActionState = new Dictionary<string, ButtonStates>();
            
-        }
+        //}
     }
 }
