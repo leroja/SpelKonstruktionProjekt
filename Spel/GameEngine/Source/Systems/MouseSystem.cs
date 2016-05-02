@@ -38,8 +38,7 @@ namespace GameEngine.Source.Systems
         {
             foreach (string action in mouseComponent.mouseActionState.Keys)
             {
-                Click button = mouseComponent.mouseAction[action]
-                bool newState = curState.
+            }
         }
     }
 }

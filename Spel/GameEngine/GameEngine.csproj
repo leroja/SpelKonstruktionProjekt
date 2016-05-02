@@ -63,7 +63,6 @@
     <Compile Include="Source\Components\VelocityComponent.cs" />
     <Compile Include="Source\Enumerator\ActionsEnum.cs" />
     <Compile Include="Source\Enumerator\ButtonStates.cs" />
-    <Compile Include="Source\Enumerator\Click.cs" />
     <Compile Include="Source\Enumerator\PowerUppEmunerator.cs" />
     <Compile Include="Source\Managers\AudioManager.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />

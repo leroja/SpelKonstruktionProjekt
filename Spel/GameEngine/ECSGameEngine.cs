@@ -38,6 +38,7 @@ namespace GameEngine
             SystemManager.Instance.AddSystem(new KeyBoardSystem());
             SystemManager.Instance.AddSystem(new SoundEffectSystem());
             SystemManager.Instance.AddSystem(new WindowTitleFPSSystem(this));
+            SystemManager.Instance.AddSystem(new CollisionDetectionSystem());
 
             base.Initialize();
         }

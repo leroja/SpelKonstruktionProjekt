@@ -38,8 +38,10 @@ namespace Spel
             // TODO: Add your initialization logic here
             DrawableComponent comp = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
             PositionComponent pos = new PositionComponent(Vector2.Zero);
-            VelocityComponent vel = new VelocityComponent(Vector2.One, 50F, 1000F);
+            VelocityComponent vel = new VelocityComponent(new Vector2(200F,200F), 50F, 1000F);
             KeyBoardComponent kbc = new KeyBoardComponent();
+            CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.position.X, (int)pos.position.Y, comp.texture.Width, comp.texture.Height));
+            CollisionComponent CC = new CollisionComponent(true);
             SoundEffectComponent sfc = new SoundEffectComponent("Bouncy");
             kbc.keyBoardActions.Add(ActionsEnum.Up, Keys.Up);
             kbc.keyBoardActions.Add(ActionsEnum.Down, Keys.Down);
@@ -52,14 +54,20 @@ namespace Spel
             ComponentManager.Instance.AddComponentToEntity(id, comp);
             ComponentManager.Instance.AddComponentToEntity(id, pos);
             ComponentManager.Instance.AddComponentToEntity(id, kbc);
+            ComponentManager.Instance.AddComponentToEntity(id, CRC);
+            ComponentManager.Instance.AddComponentToEntity(id, CC);
+
             //ComponentManager.Instance.AddComponentToEntity(id, sfc);
             ComponentManager.Instance.AddComponentToEntity(ids, fps);
 
 
             DrawableComponent comp2 = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
             PositionComponent pos2 = new PositionComponent(Vector2.Zero);
-            VelocityComponent vel2 = new VelocityComponent(Vector2.One, 50F, 1000F);
+            VelocityComponent vel2 = new VelocityComponent(new Vector2(200F, 200F), 50F, 1000F);
             KeyBoardComponent kbc2 = new KeyBoardComponent();
+            CollisionComponent CC2 = new CollisionComponent(true);
+            CollisionRectangleComponent CRC2 = new CollisionRectangleComponent(new Rectangle((int)pos2.position.X, (int)pos2.position.Y, comp2.texture.Width, comp2.texture.Height));
+
             SoundEffectComponent sfc2 = new SoundEffectComponent("Bouncy");
             kbc2.keyBoardActions.Add(ActionsEnum.Up, Keys.W);
             kbc2.keyBoardActions.Add(ActionsEnum.Down, Keys.S);
@@ -71,7 +79,16 @@ namespace Spel
             ComponentManager.Instance.AddComponentToEntity(id2, comp2);
             ComponentManager.Instance.AddComponentToEntity(id2, pos2);
             ComponentManager.Instance.AddComponentToEntity(id2, kbc2);
+            ComponentManager.Instance.AddComponentToEntity(id2, CRC2);
+            ComponentManager.Instance.AddComponentToEntity(id2, CC2);
 
+            PositionComponent pos3 = new PositionComponent(Vector2.Zero); 
+            CollisionRectangleComponent CRC3 = new CollisionRectangleComponent(new Rectangle((int)pos3.position.X, (int)pos3.position.Y, GraphicsDevice.Viewport.Width, 0));
+            CollisionComponent CC3 = new CollisionComponent(false);
+            int idtopwall3 = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(idtopwall3, pos3);
+            ComponentManager.Instance.AddComponentToEntity(idtopwall3, CRC3);
+            ComponentManager.Instance.AddComponentToEntity(idtopwall3, CC3);
 
             base.Initialize();
 
