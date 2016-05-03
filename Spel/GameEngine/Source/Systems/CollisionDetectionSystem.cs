@@ -25,17 +25,15 @@ namespace GameEngine.Source.Systems
                     if (item != jitem)
                     {
                         if(PhysicsManager.Instance.RectangleCollision(item, jitem))
-                        {   
-
+                        {
                             if (comp.isPixelPerfectCompat && comp2.isPixelPerfectCompat)
                             {
-                                
                                 if (PhysicsManager.Instance.PixelPerfectCollision(item, jitem))
                                 {
                                     //Console.Out.WriteLine("BAM2!!between" + item + " " + jitem);
                                 }
                             }
-                            if(!comp.isPixelPerfectCompat || !comp2.isPixelPerfectCompat)
+                            else
                             {
                                 //test
                                 //Console.Out.WriteLine("BAM1!!between" + item + " " + jitem);
@@ -45,6 +43,10 @@ namespace GameEngine.Source.Systems
                 }
             }
         }
+
+        /// <summary>
+        /// Updates the collision rectangles of all collision components
+        /// </summary>
         private void updatecolRec()
         {
             List<int> CollisionComp = ComponentManager.Instance.GetAllEntitiesWithComponentType<CollisionComponent>();
@@ -62,7 +64,6 @@ namespace GameEngine.Source.Systems
                 {
                     rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, rec.CollisionRec.Width, rec.CollisionRec.Height);
                 }
-
             }
         }
     }

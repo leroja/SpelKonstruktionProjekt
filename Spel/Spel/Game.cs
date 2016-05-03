@@ -7,6 +7,7 @@ using GameEngine;
 using Spel.Source.Systems;
 using Microsoft.Xna.Framework.Audio;
 using GameEngine.Source.Enumerator;
+using Spel.Source;
 
 namespace Spel
 {
@@ -15,9 +16,12 @@ namespace Spel
     /// </summary>
     public class Game : ECSGameEngine
     {
+
+        private static Game instance;
+
         public Game() : base()
         {
-
+            instance = this;
         }
 
         /// <summary>
@@ -32,86 +36,16 @@ namespace Spel
             
             SystemManager.Instance.AddSystem(new MovementSystem());
             FPSCounterComponent fps = new FPSCounterComponent();
-            DrawableComponent comp = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
-            PositionComponent pos = new PositionComponent(Vector2.Zero);
-            VelocityComponent vel = new VelocityComponent(new Vector2(200F,200F), 50F, 1000F);
-            KeyBoardComponent kbc = new KeyBoardComponent();
-            CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.position.X, (int)pos.position.Y, comp.texture.Width, comp.texture.Height));
-            CollisionComponent CC = new CollisionComponent(true);
-            SoundEffectComponent sfc = new SoundEffectComponent("Bouncy");
-            kbc.keyBoardActions.Add(ActionsEnum.Up, Keys.Up);
-            kbc.keyBoardActions.Add(ActionsEnum.Down, Keys.Down);
-            kbc.keyBoardActions.Add(ActionsEnum.Left, Keys.Left);
-            kbc.keyBoardActions.Add(ActionsEnum.Right, Keys.Right);
-
-            int id = ComponentManager.Instance.CreateID();
             int ids = ComponentManager.Instance.CreateID();
-            ComponentManager.Instance.AddComponentToEntity(id, vel);
-            ComponentManager.Instance.AddComponentToEntity(id, comp);
-            ComponentManager.Instance.AddComponentToEntity(id, pos);
-            ComponentManager.Instance.AddComponentToEntity(id, kbc);
-            ComponentManager.Instance.AddComponentToEntity(id, CRC);
-            ComponentManager.Instance.AddComponentToEntity(id, CC);
-
-            //ComponentManager.Instance.AddComponentToEntity(id, sfc);
             ComponentManager.Instance.AddComponentToEntity(ids, fps);
 
-            DrawableComponent comp2 = new DrawableComponent(Content.Load<Texture2D>("Pic/Kanin"));
-            PositionComponent pos2 = new PositionComponent(Vector2.Zero);
-            VelocityComponent vel2 = new VelocityComponent(new Vector2(200F, 200F), 50F, 1000F);
-            KeyBoardComponent kbc2 = new KeyBoardComponent();
-            CollisionComponent CC2 = new CollisionComponent(true);
-            CollisionRectangleComponent CRC2 = new CollisionRectangleComponent(new Rectangle((int)pos2.position.X, (int)pos2.position.Y, comp2.texture.Width, comp2.texture.Height));
+            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, Keys.Left, Keys.Down, Keys.Right);
+            GameEntityFactory.Instance.CreateTestKanin(true, Keys.W, Keys.A, Keys.S, Keys.D);
 
-            SoundEffectComponent sfc2 = new SoundEffectComponent("Bouncy");
-            kbc2.keyBoardActions.Add(ActionsEnum.Up, Keys.W);
-            kbc2.keyBoardActions.Add(ActionsEnum.Down, Keys.S);
-            kbc2.keyBoardActions.Add(ActionsEnum.Left, Keys.A);
-            kbc2.keyBoardActions.Add(ActionsEnum.Right, Keys.D);
-            DrawableTextComponent dtc = new DrawableTextComponent("test Test test", Color.Brown, Content.Load<SpriteFont>("Fonts/TestFont"));
-            MouseComponent mo = new MouseComponent();
-
-            int id2 = ComponentManager.Instance.CreateID();
-            ComponentManager.Instance.AddComponentToEntity(id2, vel2);
-            ComponentManager.Instance.AddComponentToEntity(id2, comp2);
-            ComponentManager.Instance.AddComponentToEntity(id2, pos2);
-            ComponentManager.Instance.AddComponentToEntity(id2, kbc2);
-            ComponentManager.Instance.AddComponentToEntity(id2, CRC2);
-            ComponentManager.Instance.AddComponentToEntity(id2, CC2);
-            ComponentManager.Instance.AddComponentToEntity(id2, dtc);
-            ComponentManager.Instance.AddComponentToEntity(id2, mo);
-
-            PositionComponent pos3 = new PositionComponent(Vector2.Zero);
-            CollisionRectangleComponent CRC3 = new CollisionRectangleComponent(new Rectangle((int)pos3.position.X, (int)pos3.position.Y, GraphicsDevice.Viewport.Width, 0));
-            CollisionComponent CC3 = new CollisionComponent(false);
-            int idtopwall3 = ComponentManager.Instance.CreateID();
-            ComponentManager.Instance.AddComponentToEntity(idtopwall3, pos3);
-            ComponentManager.Instance.AddComponentToEntity(idtopwall3, CRC3);
-            ComponentManager.Instance.AddComponentToEntity(idtopwall3, CC3);
-
-            PositionComponent pos4 = new PositionComponent(Vector2.Zero);
-            CollisionRectangleComponent CRC4 = new CollisionRectangleComponent(new Rectangle((int)pos4.position.X, (int)pos4.position.Y, 0, GraphicsDevice.Viewport.Height));
-            CollisionComponent CC4 = new CollisionComponent(false);
-            int idtopwall4 = ComponentManager.Instance.CreateID();
-            ComponentManager.Instance.AddComponentToEntity(idtopwall4, pos4);
-            ComponentManager.Instance.AddComponentToEntity(idtopwall4, CRC4);
-            ComponentManager.Instance.AddComponentToEntity(idtopwall4, CC4);
-
-            PositionComponent pos5 = new PositionComponent(new Vector2(0, GraphicsDevice.Viewport.Height));
-            CollisionRectangleComponent CRC5 = new CollisionRectangleComponent(new Rectangle((int)pos5.position.X, (int)pos5.position.Y, GraphicsDevice.Viewport.Width, 0));
-            CollisionComponent CC5 = new CollisionComponent(false);
-            int idtopwall5 = ComponentManager.Instance.CreateID();
-            ComponentManager.Instance.AddComponentToEntity(idtopwall5, pos5);
-            ComponentManager.Instance.AddComponentToEntity(idtopwall5, CRC5);
-            ComponentManager.Instance.AddComponentToEntity(idtopwall5, CC5);
-
-            PositionComponent pos6 = new PositionComponent(new Vector2(GraphicsDevice.Viewport.Width, 0));
-            CollisionRectangleComponent CRC6 = new CollisionRectangleComponent(new Rectangle((int)pos6.position.X, (int)pos6.position.Y, 0, GraphicsDevice.Viewport.Height));
-            CollisionComponent CC6 = new CollisionComponent(false);
-            int idtopwall6 = ComponentManager.Instance.CreateID();
-            ComponentManager.Instance.AddComponentToEntity(idtopwall6, pos6);
-            ComponentManager.Instance.AddComponentToEntity(idtopwall6, CRC6);
-            ComponentManager.Instance.AddComponentToEntity(idtopwall6, CC6);
+            GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, GraphicsDevice.Viewport.Width, 0);
+            GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, GraphicsDevice.Viewport.Height);
+            GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0);
+            GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height);
 
             base.Initialize();
 
@@ -140,13 +74,16 @@ namespace Spel
         }
 
 
-        //public static T get_content<T>(string asset) {
-        //    return test<T>(asset);
-        //}
 
-        //private T test<T>(string asset)
-        //{
-        //    return (Content.Load<T>(asset));
-        //}
+        public static Game Inst()
+        {
+            return instance;
+        }
+
+        public T GetContent<T>(string asset)
+        {
+            return (Content.Load<T>(asset));
+
+        }
     }
 }

@@ -11,36 +11,35 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Systems
 {
+    /// <summary>
+    /// A system that draws the collsion rectangles of all collision rectangle components
+    /// </summary>
     public class TestDrawSystem : IDraw
     {
-        // At the top of your class:
         Texture2D pixel;
         GraphicsDeviceManager GameBase;
 
         public TestDrawSystem(GraphicsDeviceManager afu)
         {
             GameBase = afu;
+
+            pixel = new Texture2D(GameBase.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+            pixel.SetData(new[] { Color.White }); // so that we can draw whatever color we want on top of it
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public void draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            // Somewhere in your LoadContent() method:
-            pixel = new Texture2D(GameBase.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
-            pixel.SetData(new[] { Color.White }); // so that we can draw whatever color we want on top of it
-
-
             List<int> ents = ComponentManager.Instance.GetAllEntitiesWithComponentType<CollisionRectangleComponent>();
 
-
-
+            
             spriteBatch.Begin();
-
-            // Create any rectangle you want. Here we'll use the TitleSafeArea for fun.
-            //Rectangle titleSafeRectangle = GameBase.GraphicsDevice.Viewport.TitleSafeArea;
-
-            // Call our method (also defined in this blog-post)
-            //DrawBorder(titleSafeRectangle, 5, Color.Red, spriteBatch);
+            
 
             if(ents != null)
             {

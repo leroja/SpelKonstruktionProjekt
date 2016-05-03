@@ -12,11 +12,19 @@ using GameEngine.Source.Enumerator;
 
 namespace GameEngine.Source.Systems
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MouseSystem : IInput
     {
         public MouseState prevState { get; set; }
-
         public MouseState curState { get; set; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void update(GameTime gameTime)
         {
             UpdateStates();
@@ -32,12 +40,19 @@ namespace GameEngine.Source.Systems
                 }
             }
         }
+        /// <summary>
+        /// updates the previous & current State of the Mouse
+        /// </summary>
         private void UpdateStates()
         {
             prevState = curState;
             curState = Mouse.GetState();
         }
 
+        /// <summary>
+        /// updates the state of left, right & middle click
+        /// </summary>
+        /// <param name="mouseComponent"></param>
         public void UpdateActionStates(MouseComponent mouseComponent)
         {
 
@@ -46,6 +61,13 @@ namespace GameEngine.Source.Systems
             updateBtn(mouseComponent, curState.MiddleButton, prevState.RightButton, "MiddleButton");
         }
 
+        /// <summary>
+        /// updates state of a specific mousebutton
+        /// </summary>
+        /// <param name="mouse"></param>
+        /// <param name="curState"></param>
+        /// <param name="prevState"></param>
+        /// <param name="button"></param>
         private void updateBtn(MouseComponent mouse, ButtonState curState, ButtonState prevState, string button)
         {
             if (curState == ButtonState.Pressed && prevState != ButtonState.Pressed)

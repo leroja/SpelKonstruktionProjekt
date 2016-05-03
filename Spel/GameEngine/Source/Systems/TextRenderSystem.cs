@@ -11,8 +11,16 @@ using GameEngine.Source.Systems.Interfaces;
 
 namespace GameEngine.Source.Systems
 {
+    /// <summary>
+    /// a system that draws text
+    /// </summary>
     class TextRenderSystem : IDraw
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public void draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<DrawableTextComponent>();

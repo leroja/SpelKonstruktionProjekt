@@ -10,6 +10,9 @@ using GameEngine.Source.Components;
 
 namespace GameEngine.Source.Systems
 {
+    /// <summary>
+    /// 
+    /// </summary>
     class SoundEffectSystem : IUpdate
     {
         public void update(GameTime gameTime)

@@ -16,6 +16,7 @@ namespace Spel.Source.Systems
     {
         public void update(GameTime gameTime)
         {
+
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<VelocityComponent>();
             foreach (var a in dra)
             {

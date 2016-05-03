@@ -11,12 +11,15 @@ using GameEngine.Source.Components;
 
 namespace GameEngine.Source.Systems
 {
+    /// <summary>
+    /// a system the updates the fps counter and display the fps in the game window title
+    /// </summary>
     public class WindowTitleFPSSystem : IDraw
     {
         private Game game;
         private float timeSinceLastUpdate = 0.0f;
 
-        // @TODO 
+        // @TODO see if this can be improved or changed
         /// <summary>
         /// 
         /// </summary>

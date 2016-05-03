@@ -11,15 +11,19 @@ using GameEngine.Source.Systems.Interfaces;
 
 namespace GameEngine.Source.Systems
 {
+    /// <summary>
+    /// A system that draws 2D sprites
+    /// </summary>
     public class _2DSpriteSystem : IDraw
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public void draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-
-
-
-
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<DrawableComponent>();
             if (dra != null)
             {

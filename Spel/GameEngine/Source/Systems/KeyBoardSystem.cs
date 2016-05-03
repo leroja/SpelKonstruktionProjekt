@@ -12,11 +12,18 @@ using GameEngine.Source.Enumerator;
 
 namespace GameEngine.Source.Systems
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class KeyBoardSystem : IInput
     {
         public KeyboardState prevState { get; set; }
         public KeyboardState curState { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void update(GameTime gameTime)
         {
             updateStates();
@@ -33,13 +40,19 @@ namespace GameEngine.Source.Systems
             }
         }
 
+        /// <summary>
+        /// updates the previous & current State of the keyboard
+        /// </summary>
         private void updateStates()
         {
             prevState = curState;
             curState = Keyboard.GetState();
         }
 
-
+        /// <summary>
+        /// updates the states of all the Keyboard actions in a keyboard Component
+        /// </summary>
+        /// <param name="keyboardComp"></param>
         public void UpdateActionStates(KeyBoardComponent keyboardComp)
         {
 
@@ -67,9 +80,5 @@ namespace GameEngine.Source.Systems
                 }
             }
         }
-
-           
-
-
-        }
+    }
 }
