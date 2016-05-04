@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Audio;
 using GameEngine.Source.Enumerator;
 using Spel.Source;
 using Spel.Source.Enum;
+using Spel.Source.Gamestates;
 
 namespace Spel
 {
@@ -35,22 +36,34 @@ namespace Spel
         {
             SystemManager.Instance.AddSystem(new CollisionSystem());
             SystemManager.Instance.AddSystem(new MovementSystem());
+            SystemManager.Instance.AddSystem(new BallOfSpikesSystem());
+            SystemManager.Instance.AddSystem(new SpawnPowerUpSystem(10));
             FPSCounterComponent fps = new FPSCounterComponent();
             int ids = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(ids, fps);
 
-            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, Keys.Left, Keys.Down, Keys.Right, Vector2.One, "Kanin 1");
-            GameEntityFactory.Instance.CreateTestKanin(true, Keys.W, Keys.A, Keys.S, Keys.D, new Vector2(GraphicsDevice.Viewport.Width/2, 10), "Kanin 2");
+            //GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, Keys.Left, Keys.Down, Keys.Right, Vector2.One, "Kanin 1");
+            //GameEntityFactory.Instance.CreateTestKanin(true, Keys.W, Keys.A, Keys.S, Keys.D, new Vector2(GraphicsDevice.Viewport.Width/2, 10), "Kanin 2");
 
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, GraphicsDevice.Viewport.Height, Wall.LeftWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height, Wall.RightWall);
 
-            GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(100,400));
+            Texture2D text = Game.Inst().GetContent<Texture2D>("Pic/professor");
+            DrawableComponent comp2 = new DrawableComponent(text);
+            PositionComponent pos2 = new PositionComponent(new Vector2(1, 1));
+            AnimationComponent ani = new AnimationComponent(64, 64, text.Width, text.Height, 0.1);
+            int id2 = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(id2, comp2);
+            ComponentManager.Instance.AddComponentToEntity(id2, pos2);
+            ComponentManager.Instance.AddComponentToEntity(id2, ani);
+
+            SetUpPlayerState state = new SetUpPlayerState();
+            state.initializeState();
+            //GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(100,400));
             
             base.Initialize();
-
         }
 
         /// <summary>

@@ -32,10 +32,18 @@ namespace GameEngine.Source.Systems
                 {
                     PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
                     DrawableComponent d = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(a);
+                    AnimationComponent anim = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(a);
 
                     if (p != null && d != null)
                     {
-                        spriteBatch.Draw(d.texture, p.position, Color.White);
+                        if (anim != null)
+                        {
+                            d.drawRectangle = new Rectangle((int)p.position.X, (int)p.position.Y, anim.sourceRectangle.Width, anim.sourceRectangle.Height);
+                            spriteBatch.Draw(d.texture, d.drawRectangle, anim.sourceRectangle, Color.White);
+                        }
+                        else
+                            spriteBatch.Draw(d.texture, p.position, Color.White);
+                        
                     }
                 }
                 spriteBatch.End();

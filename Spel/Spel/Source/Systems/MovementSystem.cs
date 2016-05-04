@@ -18,39 +18,43 @@ namespace Spel.Source.Systems
         {
 
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<VelocityComponent>();
-            foreach (var a in dra)
+            if(dra != null)
             {
-                PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
-                VelocityComponent v = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(a);
-                KeyBoardComponent kbc = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(a);
-                if (p != null && v != null)
+                foreach (var a in dra)
                 {
-                    //p.position.X += v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
-                if(p != null && v != null && kbc != null)
-                {
-                    p.prevPosition = p.position;
-                    if (kbc.state[ActionsEnum.Up] == ButtonStates.Hold)
+                    PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
+                    VelocityComponent v = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(a);
+                    KeyBoardComponent kbc = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(a);
+                    if (p != null && v != null)
                     {
-                        p.position.Y -= v.velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        //p.position.X += v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
-                    //// just for demo
-                    if (kbc.state[ActionsEnum.Down] == ButtonStates.Hold)
+                    if (p != null && v != null && kbc != null)
                     {
-                        p.position.Y += v.velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    }
-                    if (kbc.state[ActionsEnum.Left] == ButtonStates.Hold)
-                    {
-                        p.position.X -= v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    }
-                    if (kbc.state[ActionsEnum.Right] == ButtonStates.Hold)
-                    {
-                        p.position.X += v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    }
-                    
-                }
+                        p.prevPosition = p.position;
+                        if (kbc.state[ActionsEnum.Up] == ButtonStates.Hold)
+                        {
+                            p.position.Y -= v.velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        }
+                        //// just for demo
+                        if (kbc.state[ActionsEnum.Down] == ButtonStates.Hold)
+                        {
+                            p.position.Y += v.velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        }
+                        if (kbc.state[ActionsEnum.Left] == ButtonStates.Hold)
+                        {
+                            p.position.X -= v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        }
+                        if (kbc.state[ActionsEnum.Right] == ButtonStates.Hold)
+                        {
+                            p.position.X += v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        }
 
+                    }
+
+                }
             }
+            
 
         }
         }
