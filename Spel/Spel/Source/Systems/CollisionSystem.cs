@@ -97,29 +97,6 @@ namespace Spel.Source.Systems
                                     }
                                 }
 
-                            } else if (type == CollisionTypes.PlayerVsPowerup)
-                            {
-
-                            }
-                            //PositionComponent pos3 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent1);
-                            //PositionComponent pos4 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent2);
-                            //pos3.position = pos3.prevPosition;
-                            //pos4.position = pos4.prevPosition;
-                        }
-                    }
-                    ComponentManager.Instance.RecycleID(ent);
-                    ComponentManager.Instance.RemoveEntity(ent);
-                }
-            }
-        }
-                            else if (type == CollisionTypes.PlayerVsWall)
-                            {
-                                PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent1);
-                                pos.position = pos.prevPosition;
-
-                                PositionComponent pos1 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent2);
-                                pos1.position = pos1.prevPosition;
-
                             }
                             else if (type == CollisionTypes.PlayerVsPowerup)
                             {
@@ -149,14 +126,18 @@ namespace Spel.Source.Systems
                                 }
                                 rec(ent1, ent2);
                             }
-                            
-                            ComponentManager.Instance.RecycleID(ent);
-                            ComponentManager.Instance.RemoveEntity(ent);
+                            //PositionComponent pos3 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent1);
+                            //PositionComponent pos4 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent2);
+                            //pos3.position = pos3.prevPosition;
+                            //pos4.position = pos4.prevPosition;
                         }
                     }
+                    ComponentManager.Instance.RecycleID(ent);
+                    ComponentManager.Instance.RemoveEntity(ent);
                 }
             }
         }
+                           
 
 
         private CollisionTypes CheckTypeOfCollision(int ent1, int ent2)

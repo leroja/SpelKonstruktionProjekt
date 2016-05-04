@@ -91,9 +91,3 @@
 /processorParam:TextureFormat=Color
 /build:Pic/professor.png
 
-#begin Fonts/MenuFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:TextureFormat=Compressed
-/build:Fonts/MenuFont.spritefont
-
