@@ -39,7 +39,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game.cs" />
+    <Compile Include="Menus\GameScene.cs" />
     <Compile Include="Menus\MainMenu.cs" />
+    <Compile Include="Menus\MenuComponent.cs" />
     <Compile Include="Menus\MenuHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -50,6 +52,7 @@
     <Compile Include="Source\Components\PowerUppComponent.cs" />
     <Compile Include="Source\GameEntityFactory.cs" />
     <Compile Include="Source\Systems\BallOfSpikesSystem.cs" />
+    <Compile Include="Source\Gamestates\EndingState.cs" />
     <Compile Include="Source\Gamestates\PauseState.cs" />
     <Compile Include="Source\Gamestates\PlayingState.cs" />
     <Compile Include="Source\Gamestates\SetUpPlayerState.cs" />

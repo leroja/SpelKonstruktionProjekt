@@ -50,6 +50,7 @@ namespace Spel.Source
         public int CreateTestKanin(bool pixlePer, Keys up, Keys left, Keys down, Keys right, Vector2 position, string name)
         {
 
+
             DrawableComponent comp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/Kanin"));
             PositionComponent pos = new PositionComponent(position);
             VelocityComponent vel = new VelocityComponent(new Vector2(200F, 200F), 50F, 1000F);
