@@ -8,6 +8,7 @@ using Spel.Source.Systems;
 using Microsoft.Xna.Framework.Audio;
 using GameEngine.Source.Enumerator;
 using Spel.Source;
+using Spel.Source.Enum;
 
 namespace Spel
 {
@@ -32,8 +33,8 @@ namespace Spel
         /// </summary>
         protected override void Initialize()
         {
-            
-            
+
+            gameState = State.MainMenu;
             SystemManager.Instance.AddSystem(new MovementSystem());
             FPSCounterComponent fps = new FPSCounterComponent();
             int ids = ComponentManager.Instance.CreateID();
