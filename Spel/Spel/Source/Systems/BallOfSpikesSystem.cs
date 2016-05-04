@@ -23,7 +23,7 @@ namespace Spel.Source.Systems
         public void OnPowerUpPicup(int id)
         {
             ComponentManager test = ComponentManager.Instance; 
-            BallOfSpikesPowerUpComponent ball = new BallOfSpikesPowerUpComponent(Game.Inst().GetContent<Texture2D>("Pic/Giant_spike_ball"),time);
+            BallOfSpikesPowerUpComponent ball = new BallOfSpikesPowerUpComponent(10);
             DrawableComponent newDraw = test.GetEntityComponent<DrawableComponent>(id);
             ball.prevTexture = newDraw.texture;
             newDraw.texture = ball.SpikeTexture;
@@ -43,9 +43,12 @@ namespace Spel.Source.Systems
                 foreach (var ball in balls)
                 {
                     BallOfSpikesPowerUpComponent b = ComponentManager.Instance.GetEntityComponent<BallOfSpikesPowerUpComponent>(ball);
-                   double test = timer.TotalGameTime.TotalSeconds - b.Pickuptime.TotalGameTime.TotalSeconds;
-                    if (test > 30)
+                    double test = b.Pickuptime - timer.TotalGameTime.TotalSeconds;
+                    if (test <= 0)
                     {
+                      
+                        DrawableComponent newDraw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(ball);
+                        newDraw.texture = b.prevTexture;
                         ComponentManager.Instance.RemoveComponentFromEntity(ball, b);
                     }
                 }
