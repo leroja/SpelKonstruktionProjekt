@@ -66,7 +66,11 @@ namespace Spel.Source.Systems
                                
                             }else if(type == CollisionTypes.PlayerVsPowerup)
                             {
+                                PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent1);
+                                pos.position = pos.prevPosition;
 
+                                PositionComponent pos1 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent2);
+                                pos1.position = pos1.prevPosition;
                             }
                             
                             
@@ -93,7 +97,10 @@ namespace Spel.Source.Systems
             {
                 return CollisionTypes.PlayerVsWall;
             }
-
+            else if (list1.OfType<PlayerComponent>().Any()  && list2.OfType<PowerUppComponent>().Any()|| list2.OfType<PlayerComponent>().Any() && list1.OfType<PowerUppComponent>().Any())
+            {
+                return CollisionTypes.PlayerVsPowerup;
+            }
             return CollisionTypes.NotDefined;
         }
     }
