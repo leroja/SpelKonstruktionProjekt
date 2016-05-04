@@ -7,18 +7,22 @@ using GameEngine.Source.Components;
 
 namespace GameEngine.Source.Managers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ComponentManager
     {
         private static ComponentManager instance;
 
         private List<int> entityIDs;
         private int curMax;
+        private const int step = 10000;
 
         private Dictionary<Type, Dictionary<int, IComponent>> compDic = new Dictionary<Type, Dictionary<int, IComponent>>();
 
         private ComponentManager()
         {
-            curMax = 10000;
+            curMax = step;
             entityIDs = new List<int>();
             entityIDs.AddRange(Enumerable.Range(1, curMax));
         }
@@ -46,8 +50,8 @@ namespace GameEngine.Source.Managers
         public int CreateID()
         {
             if (entityIDs.Count == 0) {
-                entityIDs.AddRange(Enumerable.Range(curMax + 1, curMax + 10000));
-                curMax += 10000;
+                entityIDs.AddRange(Enumerable.Range(curMax + 1, curMax + step));
+                curMax += step;
             }
 
             //int id = entityIDs[0]; 
@@ -103,7 +107,6 @@ namespace GameEngine.Source.Managers
         /// </param>
         public void RemoveComponentFromEntity(int entityID, IComponent component)
         {
-
             Type type = component.GetType();
 
             if (compDic.ContainsKey(type))
@@ -114,6 +117,9 @@ namespace GameEngine.Source.Managers
                 }
             }
         }
+
+
+        // @TODO kanske ändra så att man retunerar både id och komponent
 
         /// <summary>
         /// returns a component if the Entity has one "linked" to it

@@ -32,21 +32,21 @@ namespace Spel
         /// </summary>
         protected override void Initialize()
         {
-            
-            
+            SystemManager.Instance.AddSystem(new CollisionSystem());
             SystemManager.Instance.AddSystem(new MovementSystem());
             FPSCounterComponent fps = new FPSCounterComponent();
             int ids = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(ids, fps);
 
-            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, Keys.Left, Keys.Down, Keys.Right);
-            GameEntityFactory.Instance.CreateTestKanin(true, Keys.W, Keys.A, Keys.S, Keys.D);
+            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, Keys.Left, Keys.Down, Keys.Right, Vector2.One);
+            GameEntityFactory.Instance.CreateTestKanin(true, Keys.W, Keys.A, Keys.S, Keys.D, new Vector2(GraphicsDevice.Viewport.Width/2, 10));
 
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, GraphicsDevice.Viewport.Width, 0);
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, GraphicsDevice.Viewport.Height);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height);
 
+            
             base.Initialize();
 
         }

@@ -13,7 +13,7 @@ using GameEngine.Source.Enumerator;
 namespace GameEngine.Source.Systems
 {
     /// <summary>
-    /// 
+    /// a System that updates the state of the mouse and then updates the mouse components
     /// </summary>
     public class MouseSystem : IInput
     {

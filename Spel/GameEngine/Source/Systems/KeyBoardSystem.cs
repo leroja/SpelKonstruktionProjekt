@@ -13,7 +13,7 @@ using GameEngine.Source.Enumerator;
 namespace GameEngine.Source.Systems
 {
     /// <summary>
-    /// 
+    /// a system that updates the state of the keyboard and the updates the states of the keyboard components
     /// </summary>
     public class KeyBoardSystem : IInput
     {
