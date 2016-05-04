@@ -46,6 +46,7 @@ namespace Spel
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height);
 
+            GameEntityFactory.Instance.CreateTestPowerUp(Vector2.One);
             
             base.Initialize();
 

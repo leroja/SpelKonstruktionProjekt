@@ -53,12 +53,11 @@
     <Compile Include="Source\Components\GamePadComponent.cs" />
     <Compile Include="Source\Components\GravitationComponent.cs" />
     <Compile Include="Source\Components\HealthComponent.cs" />
-    <Compile Include="Source\Components\IComponent.cs" />
+    <Compile Include="Source\Components\Interfaces\IComponent.cs" />
     <Compile Include="Source\Components\KeyBoardComponent.cs" />
     <Compile Include="Source\Components\MassComponent.cs" />
     <Compile Include="Source\Components\PlayerComponent.cs" />
     <Compile Include="Source\Components\PositionComponent.cs" />
-    <Compile Include="Source\Components\PowerUppComponent.cs" />
     <Compile Include="Source\Components\SoundEffectComponent.cs" />
     <Compile Include="Source\Components\TimerComponent.cs" />
     <Compile Include="Source\Components\VelocityComponent.cs" />
@@ -77,6 +76,7 @@
     <Compile Include="Source\Systems\GamePadSystem.cs" />
     <Compile Include="Source\Systems\Interfaces\IDraw.cs" />
     <Compile Include="Source\Systems\Interfaces\IInput.cs" />
+    <Compile Include="Source\Systems\Interfaces\IPowerupSystem.cs" />
     <Compile Include="Source\Systems\Interfaces\ISystem.cs" />
     <Compile Include="Source\Systems\Interfaces\IUpdate.cs" />
     <Compile Include="Source\Systems\KeyBoardSystem.cs" />

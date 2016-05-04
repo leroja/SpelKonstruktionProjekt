@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Spel.Source.Components;
 
 namespace Spel.Source
 {
@@ -87,6 +88,17 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, CRC);
             ComponentManager.Instance.AddComponentToEntity(id, CC);
 
+            return id;
+        }
+        public int CreateTestPowerUp(Vector2 position)
+        {
+            PositionComponent Pc = new PositionComponent(position);
+            PowerUppComponent power = new PowerUppComponent(1);
+            DrawableComponent powerupp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/PowerUp"));
+            int id = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(id, Pc);
+            ComponentManager.Instance.AddComponentToEntity(id, power);
+            ComponentManager.Instance.AddComponentToEntity(id, powerupp);
             return id;
         }
 
