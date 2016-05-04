@@ -28,6 +28,7 @@ namespace GameEngine.Source.Components
         ///currentFrame/animationNumColumns can be used to calculate which row we are suposed to be drawing.
         public int numFramesInRow { get; set; }
         public int numFramesInColumn { get; set; }
+        public int numberOfFrames { get; set; }
 
         public Rectangle sourceRectangle = new Rectangle();
 
@@ -47,6 +48,28 @@ namespace GameEngine.Source.Components
             sourceRectangle.Width = animationSizeWidth;
             sourceRectangle.Height = animationSizeHeight;
             this.currentFrame = 0;
+            numberOfFrames = numFramesInColumn * numFramesInRow;
+        }
+
+        /// <summary>
+        /// AnimationComponent constructor, an alternative if the texture does not contain a full set of frames in the last row.
+        /// Then you can create the animation by defining how many frames the texture contains.
+        /// </summary>
+        /// <param name="animationSizeWidth">is an int which is the desired width of one frame in the animation</param>
+        /// <param name="animationSizeHeight">is an int which is the desired height of one frame in the animation</param>
+        /// <param name="textureWidth">is an int which is the total with of the 2D texture</param>
+        /// <param name="textureHeight">is an int which is the total height of the 2D texture</param>
+        /// <param name="timePerFrame">is a double which is the time that should be passed before changing the frame.</param>
+        /// <param name="numberOfFrames">is an int whicch is the amount of frames in the texture</param>
+        public AnimationComponent(int animationSizeWidth, int animationSizeHeight, int textureWidth, int textureHeight, double timePerFrame, int numberOfFrames)
+        {
+            this.timePerFrame = timePerFrame;
+            numFramesInColumn = textureWidth / animationSizeWidth;
+            numFramesInRow = textureHeight / animationSizeHeight;
+            sourceRectangle.Width = animationSizeWidth;
+            sourceRectangle.Height = animationSizeHeight;
+            this.currentFrame = 0;
+            this.numberOfFrames = numberOfFrames;
         }
 
         /// <summary>
@@ -67,7 +90,7 @@ namespace GameEngine.Source.Components
         /// <returns>returns an int which is the number of frames in the animation.</returns>
         public int getAnimationLength()
         {
-            return numFramesInColumn * numFramesInRow;
+            return numberOfFrames;
         }
 
        
