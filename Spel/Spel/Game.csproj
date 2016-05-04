@@ -43,6 +43,7 @@
     <Compile Include="Menus\MenuHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\CollisionComparer.cs" />
     <Compile Include="Source\Components\WallComponent.cs" />
     <Compile Include="Source\Enum\CollisionTypes.cs" />
     <Compile Include="Source\Enum\Wall.cs" />
@@ -70,9 +71,7 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Source\Enum\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\GameEngine\GameEngine.csproj">
       <Project>{98a23050-5bd5-441b-bde7-3179b88248b0}</Project>
