@@ -21,7 +21,8 @@ namespace GameEngine
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
+            graphics.PreferredBackBufferWidth = 1190;
+            graphics.PreferredBackBufferHeight = 780;
 
             //Do not synch our Draw method with the Vertical Retrace of our monitor
             graphics.SynchronizeWithVerticalRetrace = false;
