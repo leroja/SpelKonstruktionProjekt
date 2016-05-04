@@ -79,18 +79,6 @@
 /processorParam:TextureFormat=Color
 /build:Pic/PowerUp.png
 
-#begin Pic/gubbe.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Pic/gubbe.jpg
-
 #begin Pic/professor.png
 /importer:TextureImporter
 /processor:TextureProcessor
