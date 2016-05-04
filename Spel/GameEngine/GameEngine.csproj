@@ -73,6 +73,7 @@
     <Compile Include="Source\Managers\SystemManager.cs" />
     <Compile Include="Source\RandomStuff\Collision.cs" />
     <Compile Include="Source\Systems\2DSpriteRenderSystem.cs" />
+    <Compile Include="Source\Systems\AnimationSystem.cs" />
     <Compile Include="Source\Systems\CollisionDetectionSystem.cs" />
     <Compile Include="Source\Systems\GamePadSystem.cs" />
     <Compile Include="Source\Systems\Interfaces\IDraw.cs" />

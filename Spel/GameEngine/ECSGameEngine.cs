@@ -44,6 +44,7 @@ namespace GameEngine
             SystemManager.Instance.AddSystem(new TextRenderSystem());
             SystemManager.Instance.AddSystem(new KeyBoardSystem());
             SystemManager.Instance.AddSystem(new SoundEffectSystem());
+            SystemManager.Instance.AddSystem(new AnimationSystem());
 
             // @TODO make it better
             SystemManager.Instance.AddSystem(new WindowTitleFPSSystem(this));
