@@ -75,6 +75,7 @@
     <Compile Include="Source\Systems\CollisionDetectionSystem.cs" />
     <Compile Include="Source\Systems\GamePadSystem.cs" />
     <Compile Include="Source\Systems\Interfaces\IDraw.cs" />
+    <Compile Include="Source\Systems\Interfaces\IGamestate.cs" />
     <Compile Include="Source\Systems\Interfaces\IInput.cs" />
     <Compile Include="Source\Systems\Interfaces\IPowerupSystem.cs" />
     <Compile Include="Source\Systems\Interfaces\ISystem.cs" />
