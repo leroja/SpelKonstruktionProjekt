@@ -12,7 +12,7 @@ namespace Spel.Menus
     /// <summary>
     /// This class is used to store the content of a menu, that will be used within the game menus.
     /// </summary>
-    class MenuComponent : Microsoft.Xna.Framework.DrawableGameComponent
+    public class MenuComponent : Microsoft.Xna.Framework.DrawableGameComponent
     {
         string[] menuItems;
         int selectedItem;

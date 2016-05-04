@@ -14,13 +14,13 @@ namespace Spel.Menus
     /// </summary>
     public abstract class GameScene : Microsoft.Xna.Framework.DrawableGameComponent
     {
-        List<IComponent> components = new List<IComponent>();
+        List<MenuComponent> components = new List<MenuComponent>();
         protected Game game;
         protected SpriteBatch spriteBatch;
         /// <summary>
         /// This method returns the components that is contained within the menu.
         /// </summary>
-        public List<IComponent> getComponents
+        public List<MenuComponent> Components
         {
             get { return components; }
         }

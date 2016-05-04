@@ -16,11 +16,26 @@ namespace Spel.Menus
     {
         MenuComponent menuComp;
         Texture2D pic;
-        Rectangle rec;
+        Rectangle picRec;
 
-        public MainMenu()
+        public MainMenu(Game game, SpriteBatch spritebatch, SpriteFont font, Texture2D pic) : base(game, spritebatch)
         {
-            
+            string[] menuItems = { "Start Game", "Options", "End Game" };
+            MenuComponent comp = new MenuComponent(game, spriteBatch, font, menuItems);
+            Components.Add(comp);
+            this.pic = pic;
+            picRec = new Rectangle(0, 0, Game.Window.ClientBounds.Width, Game.Window.ClientBounds.Height);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            spriteBatch.Draw(pic, picRec, Color.WhiteSmoke);
+            base.Draw(gameTime);
         }
     }
 }
