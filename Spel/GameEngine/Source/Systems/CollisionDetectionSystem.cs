@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using GameEngine.Source.Components;
 using GameEngine.Source.Managers;
 using GameEngine.Source.Systems.Interfaces;
+using GameEngine.Source.RandomStuff;
 
 namespace GameEngine.Source.Systems
 {
@@ -14,6 +15,7 @@ namespace GameEngine.Source.Systems
     {
         public void update(GameTime gameTime)
         {
+            List<Collision> collisions = new List<Collision>();
             updatecolRec();
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<CollisionComponent>();
             foreach (var item in dra)
@@ -30,17 +32,24 @@ namespace GameEngine.Source.Systems
                             {
                                 if (PhysicsManager.Instance.PixelPerfectCollision(item, jitem))
                                 {
-                                    //Console.Out.WriteLine("BAM2!!between" + item + " " + jitem);
+                                    collisions.Add(new Collision(item, jitem));
                                 }
                             }
                             else
                             {
-                                //test
-                                //Console.Out.WriteLine("BAM1!!between" + item + " " + jitem);
+                                collisions.Add(new Collision(item, jitem));
                             }
                         }
                     }
                 }
+            }
+
+            if(collisions.Count > 0)
+            {
+                CollisionHappenedComponent cpc = new CollisionHappenedComponent();
+                cpc.collisions = collisions;
+                int id =  ComponentManager.Instance.CreateID();
+                ComponentManager.Instance.AddComponentToEntity(id, cpc);
             }
         }
 

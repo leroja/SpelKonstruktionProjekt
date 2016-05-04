@@ -12,11 +12,13 @@ namespace GameEngine.Source.Components
     {
         // Position
         public Vector2 position;
+        public Vector2 prevPosition { get; set; }
 
         // Constructor for PositionComponent 
         public PositionComponent(Vector2 startPosition)
         {
             position = startPosition;
+            prevPosition = position;
         }
     }
 }

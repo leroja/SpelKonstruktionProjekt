@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Managers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class SystemManager
     {
         private static SystemManager instance;
@@ -38,6 +41,12 @@ namespace GameEngine.Source.Managers
             }
         }
 
+        /// <summary>
+        /// adds a system
+        /// </summary>
+        /// <param name="system">
+        /// the system that is going to be added 
+        /// </param>
         public void AddSystem(ISystem system)
         {
             Type type = system.GetType();
@@ -45,15 +54,22 @@ namespace GameEngine.Source.Managers
             {
                 AddSystemToList<IDraw>(renderSystems, system);
             }
-            else if (system is IUpdate)
+            if (system is IUpdate)
             {
                 AddSystemToList<IUpdate>(updateSystems, system);
-            }else if (system is IInput)
+            }
+            if (system is IInput)
             {
                 AddSystemToList<IInput>(inputSystems, system);
             }
         }
 
+        /// <summary>
+        /// removes a system 
+        /// </summary>
+        /// <param name="system">
+        /// the system that is to be removed
+        /// </param>
         public void RemoveSystem(ISystem system)
         {
             Type type = system.GetType();
@@ -72,6 +88,9 @@ namespace GameEngine.Source.Managers
 
         }
 
+        /// <summary>
+        /// runs all updateable systems
+        /// </summary>
         public void RunUpdateSystems()
         {
             if (updateSystems.Count > 0)
@@ -83,7 +102,9 @@ namespace GameEngine.Source.Managers
             }
         }
 
-
+        /// <summary>
+        /// runs all input systems
+        /// </summary>
         public void RunInputSystems()
         {
             if (updateSystems.Count > 0)
@@ -95,6 +116,9 @@ namespace GameEngine.Source.Managers
             }
         }
 
+        /// <summary>
+        /// runs all rendering systems
+        /// </summary>
         public void RunRenderSystems()
         {
             if (renderSystems.Count > 0)
@@ -107,6 +131,12 @@ namespace GameEngine.Source.Managers
         }
 
 
+        /// <summary>
+        /// a private method that adds the system to the correct list
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="system"></param>
         private void AddSystemToList<T>(List<T> list, ISystem system)
         {
             if (!list.Contains((T)system))
@@ -115,6 +145,12 @@ namespace GameEngine.Source.Managers
             }
         }
 
+        /// <summary>
+        /// removes the system from the correct list
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="system"></param>
         private void RemoveSystemFromList<T>(List<T> list, ISystem system)
         {
             if (list != null)

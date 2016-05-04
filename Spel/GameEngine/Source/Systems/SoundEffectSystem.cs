@@ -25,6 +25,7 @@ namespace GameEngine.Source.Systems
                     SoundEffectComponent sec = ComponentManager.Instance.GetEntityComponent<SoundEffectComponent>(ent);
                     AudioManager.Instance.PlaySoundEffect(sec.soundEffectName);
                     ComponentManager.Instance.RemoveComponentFromEntity(ent, sec);
+                    ComponentManager.Instance.RecycleID(ent);
                 }
             }
         }

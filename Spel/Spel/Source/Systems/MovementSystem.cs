@@ -29,6 +29,7 @@ namespace Spel.Source.Systems
                 }
                 if(p != null && v != null && kbc != null)
                 {
+                    p.prevPosition = p.position;
                     if (kbc.state[ActionsEnum.Up] == ButtonStates.Hold)
                     {
                         p.position.Y -= v.velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -46,6 +47,7 @@ namespace Spel.Source.Systems
                     {
                         p.position.X += v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
+                    
                 }
 
             }

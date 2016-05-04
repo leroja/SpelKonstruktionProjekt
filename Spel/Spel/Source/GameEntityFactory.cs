@@ -44,11 +44,11 @@ namespace Spel.Source
         /// <param name="down"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public int CreateTestKanin(bool pixlePer, Keys up, Keys left, Keys down, Keys right)
+        public int CreateTestKanin(bool pixlePer, Keys up, Keys left, Keys down, Keys right, Vector2 position)
         {
 
             DrawableComponent comp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/Kanin"));
-            PositionComponent pos = new PositionComponent(Vector2.Zero);
+            PositionComponent pos = new PositionComponent(position);
             VelocityComponent vel = new VelocityComponent(new Vector2(200F, 200F), 50F, 1000F);
             KeyBoardComponent kbc = new KeyBoardComponent();
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.position.X, (int)pos.position.Y, comp.texture.Width, comp.texture.Height));

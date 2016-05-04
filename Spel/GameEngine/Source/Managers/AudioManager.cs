@@ -10,6 +10,10 @@ namespace GameEngine.Source.Managers
 {
     public class AudioManager
     {
+
+        // @TODO
+        // Ska den vara kvar eller ska funktionaliten ligga i något system
+
         private static AudioManager instance;
         private float prevVol = 1.0f;
         //private float MasterVolume = 1.0f;
@@ -183,6 +187,7 @@ namespace GameEngine.Source.Managers
         {
             if (songDic.ContainsKey(name))
             {
+                StopSong();
                 MediaPlayer.Play(songDic[name]);
                 
             }
