@@ -95,7 +95,11 @@ namespace Spel.Source
             PositionComponent Pc = new PositionComponent(position);
             PowerUppComponent power = new PowerUppComponent(1);
             DrawableComponent powerupp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/PowerUp"));
+            CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)position.X, (int)position.Y, powerupp.texture.Width, powerupp.texture.Height));
+            CollisionComponent CC = new CollisionComponent(true);
             int id = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(id, CRC);
+            ComponentManager.Instance.AddComponentToEntity(id, CC);
             ComponentManager.Instance.AddComponentToEntity(id, Pc);
             ComponentManager.Instance.AddComponentToEntity(id, power);
             ComponentManager.Instance.AddComponentToEntity(id, powerupp);
