@@ -215,5 +215,58 @@ namespace GameEngine.Source.Managers
             }
         }
 
+        /// <summary>
+        /// Returns a list of all components that belong to an entity
+        /// </summary>
+        /// <param name="Id">
+        /// the Id of the entity
+        /// </param>
+        /// <returns>
+        /// a list of the entity's all components
+        /// </returns>
+        public List<IComponent> GetAllEntityComponents(int Id)
+        {
+            List<IComponent> compList = new List<IComponent>();
+
+            foreach (KeyValuePair<Type, Dictionary<int, IComponent>> entry in compDic)
+            {
+                if (entry.Value.ContainsKey(Id))
+                {
+                    compList.Add(entry.Value[Id]);
+                }
+            }
+            return compList;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public Dictionary<int, IComponent> GetAllEntitiesAndComponentsWithComponentType<T>() where T : IComponent
+        {
+            Type type = typeof(T);
+
+            if (compDic.ContainsKey(type))
+            {
+                return compDic[type]; ;
+            }
+            return null;
+        }
+
+        public bool CheckIfEntityHasComponent<T>(int ent) where T : IComponent
+        {
+            Type type = typeof(T);
+
+            if (compDic.ContainsKey(type))
+            {
+                if (compDic[type].ContainsKey(ent))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }
