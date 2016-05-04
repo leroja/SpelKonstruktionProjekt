@@ -10,7 +10,7 @@ namespace GameEngine.Source.Components
     /// PlayerComponent class is added to the enteties which is representations
     /// of acctuall human players.
     /// </summary>
-    class PlayerComponent
+    public class PlayerComponent : IComponent
     {
         private string playerName;
 

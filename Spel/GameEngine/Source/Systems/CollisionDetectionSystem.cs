@@ -8,6 +8,7 @@ using GameEngine.Source.Components;
 using GameEngine.Source.Managers;
 using GameEngine.Source.Systems.Interfaces;
 using GameEngine.Source.RandomStuff;
+using GameEngine.Source.Enumerator;
 
 namespace GameEngine.Source.Systems
 {
@@ -52,6 +53,7 @@ namespace GameEngine.Source.Systems
                 ComponentManager.Instance.AddComponentToEntity(id, cpc);
             }
         }
+        
 
         /// <summary>
         /// Updates the collision rectangles of all collision components
@@ -59,6 +61,7 @@ namespace GameEngine.Source.Systems
         private void updatecolRec()
         {
             List<int> CollisionComp = ComponentManager.Instance.GetAllEntitiesWithComponentType<CollisionComponent>();
+
 
             foreach(var item in CollisionComp)
             {
