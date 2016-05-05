@@ -11,8 +11,8 @@ with.
     <!--
     Modify this string to change the font that will be imported.
     -->
-    <FontName>Copperplate Gothic Bold</FontName>
-
+    <!--<FontName>Copperplate Gothic Bold</FontName>-->
+    <FontName>ARDARLING</FontName>
     <!--
     Size is a float value, measured in points. Modify this value to change
     the size of the font.

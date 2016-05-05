@@ -26,7 +26,6 @@ namespace GameEngine.Source.Managers
 
         private SystemManager()
         {
-
         }
 
         public static SystemManager Instance
@@ -101,6 +100,18 @@ namespace GameEngine.Source.Managers
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T RetrieveSystem<T>() where T : ISystem
+        {
+            throw new NotImplementedException();
+
+        }
+
 
         /// <summary>
         /// runs all input systems

@@ -10,6 +10,7 @@ using GameEngine.Source.Enumerator;
 using Spel.Source;
 using Spel.Source.Enum;
 using Spel.Source.Gamestates;
+using GameEngine.Source.Systems;
 
 namespace Spel
 {
@@ -34,7 +35,12 @@ namespace Spel
         /// </summary>
         protected override void Initialize()
         {
-            SystemManager.Instance.AddSystem(new CollisionSystem());
+            CollisionDetectionSystem det = new CollisionDetectionSystem();
+            CollisionSystem col = new CollisionSystem();
+            det.Subscribe(col);
+            
+
+            SystemManager.Instance.AddSystem(det);
             SystemManager.Instance.AddSystem(new MovementSystem());
             SystemManager.Instance.AddSystem(new BallOfSpikesSystem());
             SystemManager.Instance.AddSystem(new SpawnPowerUpSystem(10));

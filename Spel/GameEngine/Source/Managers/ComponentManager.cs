@@ -119,7 +119,6 @@ namespace GameEngine.Source.Managers
         }
 
 
-        // @TODO kanske ändra så att man retunerar både id och komponent
 
         /// <summary>
         /// returns a component if the Entity has one "linked" to it
@@ -254,6 +253,12 @@ namespace GameEngine.Source.Managers
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ent"></param>
+        /// <returns></returns>
         public bool CheckIfEntityHasComponent<T>(int ent) where T : IComponent
         {
             Type type = typeof(T);

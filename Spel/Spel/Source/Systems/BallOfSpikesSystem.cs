@@ -28,6 +28,12 @@ namespace Spel.Source.Systems
             ball.prevTexture = newDraw.texture;
             newDraw.texture = ball.SpikeTexture;
             test.AddComponentToEntity(id, ball);
+
+
+            CollisionRectangleComponent rec = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(id);
+            PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(id);
+            rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, newDraw.texture.Width, newDraw.texture.Height);
+
         }
 
         public void update(GameTime gameTime)
