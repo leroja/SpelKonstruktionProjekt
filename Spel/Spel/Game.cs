@@ -50,6 +50,12 @@ namespace Spel
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height, Wall.RightWall);
 
+
+            StartUpScreenState state = new StartUpScreenState();
+            state.initializeState();
+            GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(100,400));
+
+            //test to se if it works, timer could be used to signal when we want to move to the next gamestate?
             Texture2D text = Game.Inst().GetContent<Texture2D>("Pic/professor");
             DrawableComponent comp2 = new DrawableComponent(text);
             PositionComponent pos2 = new PositionComponent(new Vector2(1, 1));
@@ -58,11 +64,8 @@ namespace Spel
             ComponentManager.Instance.AddComponentToEntity(id2, comp2);
             ComponentManager.Instance.AddComponentToEntity(id2, pos2);
             ComponentManager.Instance.AddComponentToEntity(id2, ani);
-
-            SetUpPlayerState state = new SetUpPlayerState();
-            state.initializeState();
-            GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(100,400));
             
+
             base.Initialize();
         }
 
