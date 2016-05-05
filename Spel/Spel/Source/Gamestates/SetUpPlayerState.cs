@@ -29,18 +29,18 @@ namespace Spel.Source.Gamestates
         /// </summary>
         public void initializeState()
         {
-            //add the enteties which should be displayed on the screen when the players choose their caracters. Player enteties is to be created after leaving this state therefore the 
-            //add entetiestolist-function needs to be called before entering the playing-state
+            //add the enteties which should be displayed on the screen when the players choose their caracters. Player enteties is to be created after leaving this state therefore the
+            //add entetiestolist - function needs to be called before entering the playing-state
 
-            //DrawableTextComponent dtx = new DrawableTextComponent("Flappy Ass, version 1.0 By: PT2", Color.WhiteSmoke, Game.Inst().GetContent<SpriteFont>("Fonts/MenuFont"));
-            //PositionComponent pc = new PositionComponent(new Vector2(20, 100));
+            DrawableTextComponent dtx = new DrawableTextComponent("Flappy Ass, version 1.0 By: PT2", Color.WhiteSmoke, Game.Inst().GetContent<SpriteFont>("Fonts/MenuFont"));
+            PositionComponent pc = new PositionComponent(new Vector2(20, 100));
 
-            //int id = ComponentManager.Instance.CreateID();
+            int id = ComponentManager.Instance.CreateID();
 
-            //ComponentManager.Instance.AddComponentToEntity(id, dtx);
-            //ComponentManager.Instance.AddComponentToEntity(id, pc);
+            ComponentManager.Instance.AddComponentToEntity(id, dtx);
+            ComponentManager.Instance.AddComponentToEntity(id, pc);
 
-            //entetiesInState.Add(id);
+            entetiesInState.Add(id);
         }
     }
 }
