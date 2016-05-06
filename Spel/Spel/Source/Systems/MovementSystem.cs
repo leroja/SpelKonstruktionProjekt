@@ -35,8 +35,9 @@ namespace Spel.Source.Systems
                         if (kbc.state[ActionsEnum.Up] == ButtonStates.Hold)
                         {
                             p.position.Y -= v.velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                            ComponentManager.Instance.AddComponentToEntity(a, new SoundEffectComponent("Bouncy")); // @temp
                         }
-                        //// just for demo
+                        //// just for demo @temp
                         if (kbc.state[ActionsEnum.Down] == ButtonStates.Hold)
                         {
                             p.position.Y += v.velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -49,13 +50,9 @@ namespace Spel.Source.Systems
                         {
                             p.position.X += v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         }
-
                     }
-
                 }
             }
-            
-
         }
-        }
+    }
 }

@@ -59,6 +59,7 @@ namespace Spel.Source.Systems
             }
             else if (collType == CollisionTypes.PlayerVsWall)
             {
+                /// dela upp i en funktion
                 if (ComponentManager.Instance.CheckIfEntityHasComponent<WallComponent>(ent1))
                 {
                     CollisionRectangleComponent crc1 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent1);

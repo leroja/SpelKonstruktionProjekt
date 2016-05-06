@@ -18,7 +18,8 @@ namespace GameEngine.Source.Managers
         private float prevVol = 1.0f;
         //private float MasterVolume = 1.0f;
         Dictionary<string, Song> songDic = new Dictionary<string, Song>();
-        Dictionary<string, SoundEffect> soundEffectDic = new Dictionary<string, SoundEffect>();
+        Dictionary<string, SoundEffect> soundEffectDic = new Dictionary<string, SoundEffect>(); // vet inte om denna behövs @todo
+        Dictionary<string, SoundEffectInstance> soundEffInstDic = new Dictionary<string, SoundEffectInstance>();
 
 
         private AudioManager()
@@ -83,6 +84,12 @@ namespace GameEngine.Source.Managers
                 {
                     soundEffectDic.Add(effectName, effect);
                 }
+                SoundEffectInstance inst = effect.CreateInstance();
+
+                if (!soundEffInstDic.ContainsKey(effectName))
+                {
+                    soundEffInstDic.Add(effectName, inst);
+                }
             }
         }
 
@@ -99,6 +106,11 @@ namespace GameEngine.Source.Managers
             {
                 soundEffectDic.Remove(effectName);
             }
+
+            if (soundEffInstDic.ContainsKey(effectName))
+            {
+                soundEffInstDic.Remove(effectName);
+            }
         }
 
         /// <summary>
@@ -109,9 +121,17 @@ namespace GameEngine.Source.Managers
         /// </param>
         public void PlaySoundEffect(string SoundEffect)
         {
-            if (soundEffectDic.ContainsKey(SoundEffect))
+            //if (soundEffectDic.ContainsKey(SoundEffect))
+            //{
+            //    soundEffectDic[SoundEffect].Play();
+            //}
+
+            if (soundEffInstDic.ContainsKey(SoundEffect))
             {
-                soundEffectDic[SoundEffect].Play();
+                if (soundEffInstDic[SoundEffect].State != SoundState.Playing)
+                {
+                    soundEffInstDic[SoundEffect].Play();
+                }
             }
         }
 
