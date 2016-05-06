@@ -58,7 +58,9 @@
     <Compile Include="Source\Gamestates\SetUpPlayerState.cs" />
     <Compile Include="Source\Gamestates\StartUpScreenState.cs" />
     <Compile Include="Source\Systems\CollisionSystem.cs" />
+    <Compile Include="Source\Systems\IPowerupSystem.cs" />
     <Compile Include="Source\Systems\MovementSystem.cs" />
+    <Compile Include="Source\Systems\SpawnPowerUpSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -73,9 +75,7 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Source\Enum\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\GameEngine\GameEngine.csproj">
       <Project>{98a23050-5bd5-441b-bde7-3179b88248b0}</Project>

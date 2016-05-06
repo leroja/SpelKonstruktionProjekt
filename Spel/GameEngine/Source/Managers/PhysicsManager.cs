@@ -75,6 +75,10 @@ namespace GameEngine.Source.Managers
                 CollisionRectangleComponent recA = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity1);
                 CollisionRectangleComponent recB = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity2);
 
+                if(recA == null || recB == null)
+                {
+                    return false;
+                }
 
                 Rectangle rectangleA = recA.CollisionRec;
                 Rectangle rectangleB = recB.CollisionRec;
@@ -85,8 +89,6 @@ namespace GameEngine.Source.Managers
                     return true;
                 }
             }
-
-
             return false;
         }
 

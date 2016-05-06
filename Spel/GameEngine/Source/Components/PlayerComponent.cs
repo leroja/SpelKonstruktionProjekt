@@ -12,7 +12,7 @@ namespace GameEngine.Source.Components
     /// </summary>
     public class PlayerComponent : IComponent
     {
-        private string playerName;
+        public string playerName { get; set; }
 
         /// <summary>
         /// PlayerComponent constructor

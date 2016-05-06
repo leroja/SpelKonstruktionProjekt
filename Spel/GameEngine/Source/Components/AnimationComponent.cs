@@ -35,7 +35,7 @@ namespace GameEngine.Source.Components
         /// <summary>
         /// AnimationComponent constructor
         /// </summary>
-        /// <param name="animationSizeWidth">is an int which is the desired width of one frame in the animation</param>
+        /// <param name="animationSizeWidth">is an int which is the, desired width of one frame in the animation</param>
         /// <param name="animationSizeHeight">is an int which is the desired height of one frame in the animation</param>
         /// <param name="textureWidth">is an int which is the total with of the 2D texture</param>
         /// <param name="textureHeight">is an int which is the total height of the 2D texture</param>
@@ -48,7 +48,7 @@ namespace GameEngine.Source.Components
             sourceRectangle.Width = animationSizeWidth;
             sourceRectangle.Height = animationSizeHeight;
             this.currentFrame = 0;
-            numberOfFrames = numFramesInColumn * numFramesInRow;
+            numberOfFrames = numFramesInColumn * numFramesInRow - 1;
         }
 
         /// <summary>

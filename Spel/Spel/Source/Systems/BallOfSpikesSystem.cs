@@ -23,11 +23,17 @@ namespace Spel.Source.Systems
         public void OnPowerUpPicup(int id)
         {
             ComponentManager test = ComponentManager.Instance; 
-            BallOfSpikesPowerUpComponent ball = new BallOfSpikesPowerUpComponent(Game.Inst().GetContent<Texture2D>("Pic/Giant_spike_ball"),time);
+            BallOfSpikesPowerUpComponent ball = new BallOfSpikesPowerUpComponent(10);
             DrawableComponent newDraw = test.GetEntityComponent<DrawableComponent>(id);
             ball.prevTexture = newDraw.texture;
             newDraw.texture = ball.SpikeTexture;
             test.AddComponentToEntity(id, ball);
+
+
+            CollisionRectangleComponent rec = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(id);
+            PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(id);
+            rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, newDraw.texture.Width, newDraw.texture.Height);
+
         }
 
         public void update(GameTime gameTime)
@@ -43,9 +49,12 @@ namespace Spel.Source.Systems
                 foreach (var ball in balls)
                 {
                     BallOfSpikesPowerUpComponent b = ComponentManager.Instance.GetEntityComponent<BallOfSpikesPowerUpComponent>(ball);
-                   double test = timer.TotalGameTime.TotalSeconds - b.Pickuptime.TotalGameTime.TotalSeconds;
-                    if (test > 30)
+                    double test = b.Pickuptime - timer.TotalGameTime.TotalSeconds;
+                    if (test <= 0)
                     {
+                      
+                        DrawableComponent newDraw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(ball);
+                        newDraw.texture = b.prevTexture;
                         ComponentManager.Instance.RemoveComponentFromEntity(ball, b);
                     }
                 }

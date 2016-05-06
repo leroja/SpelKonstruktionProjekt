@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Audio;
 using GameEngine.Source.Enumerator;
 using Spel.Source;
 using Spel.Source.Enum;
+using Spel.Source.Gamestates;
+using GameEngine.Source.Systems;
 
 namespace Spel
 {
@@ -33,8 +35,15 @@ namespace Spel
         /// </summary>
         protected override void Initialize()
         {
-            SystemManager.Instance.AddSystem(new CollisionSystem());
+            CollisionDetectionSystem det = new CollisionDetectionSystem();
+            CollisionSystem col = new CollisionSystem();
+            det.Subscribe(col);
+            
+
+            SystemManager.Instance.AddSystem(det);
             SystemManager.Instance.AddSystem(new MovementSystem());
+            SystemManager.Instance.AddSystem(new BallOfSpikesSystem());
+            SystemManager.Instance.AddSystem(new SpawnPowerUpSystem(10));
             FPSCounterComponent fps = new FPSCounterComponent();
             int ids = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(ids, fps);
@@ -46,19 +55,23 @@ namespace Spel
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height, Wall.RightWall);
 
+
+            StartUpScreenState state = new StartUpScreenState();
+            state.initializeState();
+            GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(100,400));
+
+            //test to se if it works, timer could be used to signal when we want to move to the next gamestate?
             Texture2D text = Game.Inst().GetContent<Texture2D>("Pic/professor");
             DrawableComponent comp2 = new DrawableComponent(text);
             PositionComponent pos2 = new PositionComponent(new Vector2(1, 1));
-            AnimationComponent ani = new AnimationComponent(64, 64, text.Width, text.Height, 0.5);
+            AnimationComponent ani = new AnimationComponent(64, 64, text.Width, text.Height, 0.1);
             int id2 = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(id2, comp2);
             ComponentManager.Instance.AddComponentToEntity(id2, pos2);
             ComponentManager.Instance.AddComponentToEntity(id2, ani);
-
-
             
-            base.Initialize();
 
+            base.Initialize();
         }
 
         /// <summary>

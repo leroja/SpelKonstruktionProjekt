@@ -115,3 +115,9 @@
 /processorParam:TextureFormat=Color
 /build:Pic/ken-sprite-sheet.png
 
+#begin Fonts/MenuFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts/MenuFont.spritefont
+
