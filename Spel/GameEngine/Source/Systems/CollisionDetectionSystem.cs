@@ -12,13 +12,45 @@ using GameEngine.Source.Enumerator;
 
 namespace GameEngine.Source.Systems
 {
-    public class CollisionDetectionSystem : IUpdate
+    public class CollisionDetectionSystem : IUpdate, IObservable
     {
+
+        private List<IObserver> observers;
+
+        public CollisionDetectionSystem()
+        {
+            observers = new List<IObserver>();
+        }
+        public void Notify(IEvent ev)
+        {
+            foreach (var item in observers)
+            {
+                item.uppdate(ev);
+            }
+        }
+
+        public void Subscribe(IObserver observer)
+        {
+            if (!observers.Contains(observer))
+            {
+                observers.Add(observer);
+            }
+        }
+
+        public void Unsubscribe(IObserver observer)
+        {
+            if (observers.Contains(observer))
+            {
+                observers.Remove(observer);
+            }
+        }
+
         public void update(GameTime gameTime)
         {
-            List<Collision> collisions = new List<Collision>();
             updatecolRec();
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<CollisionComponent>();
+
+            List<int> done = new List<int>();
             foreach (var item in dra)
             {
                 CollisionComponent comp = ComponentManager.Instance.GetEntityComponent<CollisionComponent>(item);
@@ -27,33 +59,26 @@ namespace GameEngine.Source.Systems
                     CollisionComponent comp2 = ComponentManager.Instance.GetEntityComponent<CollisionComponent>(jitem);
                     if (item != jitem)
                     {
-                        if(PhysicsManager.Instance.RectangleCollision(item, jitem))
+                        if (PhysicsManager.Instance.RectangleCollision(item, jitem) && !done.Contains(jitem))
                         {
                             if (comp.isPixelPerfectCompat && comp2.isPixelPerfectCompat)
                             {
                                 if (PhysicsManager.Instance.PixelPerfectCollision(item, jitem))
                                 {
-                                    collisions.Add(new Collision(item, jitem));
+                                    Notify(new CollisionEvent(item, jitem));
                                 }
                             }
                             else
                             {
-                                collisions.Add(new Collision(item, jitem));
+                                Notify(new CollisionEvent(item, jitem));
                             }
                         }
                     }
                 }
-            }
-
-            if(collisions.Count > 0)
-            {
-                CollisionHappenedComponent cpc = new CollisionHappenedComponent();
-                cpc.collisions = collisions;
-                int id =  ComponentManager.Instance.CreateID();
-                ComponentManager.Instance.AddComponentToEntity(id, cpc);
+                done.Add(item);
             }
         }
-        
+
 
         /// <summary>
         /// Updates the collision rectangles of all collision components
@@ -61,9 +86,7 @@ namespace GameEngine.Source.Systems
         private void updatecolRec()
         {
             List<int> CollisionComp = ComponentManager.Instance.GetAllEntitiesWithComponentType<CollisionComponent>();
-
-
-            foreach(var item in CollisionComp)
+            foreach (var item in CollisionComp)
             {
                 CollisionRectangleComponent rec = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(item);
                 PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(item);
