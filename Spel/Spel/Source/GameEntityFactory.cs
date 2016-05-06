@@ -50,9 +50,9 @@ namespace Spel.Source
         {
 
 
-            DrawableComponent comp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/Kanin"));
+            DrawableComponent comp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/Kanin1"));
             PositionComponent pos = new PositionComponent(position);
-            VelocityComponent vel = new VelocityComponent(new Vector2(200F, 200F), 50F, 1000F);
+            VelocityComponent vel = new VelocityComponent(new Vector2(200F, 200F), 50F, 500F);
             KeyBoardComponent kbc = new KeyBoardComponent();
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.position.X, (int)pos.position.Y, comp.texture.Width, comp.texture.Height));
             CollisionComponent CC = new CollisionComponent(pixlePer);
@@ -113,6 +113,5 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, powerupp);
             return id;
         }
-
     }
 }

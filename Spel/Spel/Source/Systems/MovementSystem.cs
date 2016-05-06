@@ -18,40 +18,45 @@ namespace Spel.Source.Systems
         {
 
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<VelocityComponent>();
-            if(dra != null)
+            if (dra != null)
             {
                 foreach (var a in dra)
                 {
                     PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
                     VelocityComponent v = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(a);
                     KeyBoardComponent kbc = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(a);
+                    p.prevPosition = p.position;
+                    float gravity = 0.5f;
                     if (p != null && v != null)
                     {
-                        //p.position.X += v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                         v.velocity.X += 0.001f;
                     }
                     if (p != null && v != null && kbc != null)
                     {
-                        p.prevPosition = p.position;
-                        if (kbc.state[ActionsEnum.Up] == ButtonStates.Hold)
+                        if (kbc.state[ActionsEnum.Up] == ButtonStates.Pressed)
                         {
-                            p.position.Y -= v.velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                            ComponentManager.Instance.AddComponentToEntity(a, new SoundEffectComponent("Bouncy")); // @temp
+                            v.velocity.Y = -v.jumpHeight;
                         }
-                        //// just for demo @temp
-                        if (kbc.state[ActionsEnum.Down] == ButtonStates.Hold)
+                        //// just for demo
+                        if (kbc.state[ActionsEnum.Down] == ButtonStates.Pressed)
                         {
-                            p.position.Y += v.velocity.Y * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                            v.velocity.Y += v.speed + 1000f;
                         }
-                        if (kbc.state[ActionsEnum.Left] == ButtonStates.Hold)
+                        if (kbc.state[ActionsEnum.Left] == ButtonStates.Pressed)
                         {
-                            p.position.X -= v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                            v.velocity.X -= v.speed;
                         }
-                        if (kbc.state[ActionsEnum.Right] == ButtonStates.Hold)
+                        if (kbc.state[ActionsEnum.Right] == ButtonStates.Pressed)
                         {
-                            p.position.X += v.velocity.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                            v.velocity.X += v.speed;
                         }
+                        v.velocity.Y += gravity;
+                        p.position += v.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
                     }
                 }
+
+
             }
         }
     }

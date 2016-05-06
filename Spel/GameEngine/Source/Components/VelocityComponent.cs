@@ -11,7 +11,7 @@ namespace GameEngine.Source.Components
     public class VelocityComponent : IComponent
     {
         // velocity
-        public Vector2 velocity { get; set; }
+        public Vector2 velocity;
         // Speed of velocity
         public float speed { get; set; }
         // Direction of velocity.
