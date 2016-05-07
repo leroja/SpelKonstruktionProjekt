@@ -39,6 +39,7 @@ namespace GameEngine
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
             SystemManager.Instance.AddSystem(new MouseSystem());
             SystemManager.Instance.AddSystem(new GamePadSystem());
             SystemManager.Instance.AddSystem(new _2DSpriteSystem());
@@ -46,6 +47,7 @@ namespace GameEngine
             SystemManager.Instance.AddSystem(new KeyBoardSystem());
             SystemManager.Instance.AddSystem(new SoundEffectSystem());
             SystemManager.Instance.AddSystem(new AnimationSystem());
+            SystemManager.Instance.AddSystem(SceneManager.Instance);
 
             // @TODO make it better
             SystemManager.Instance.AddSystem(new WindowTitleFPSSystem(this));

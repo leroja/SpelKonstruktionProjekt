@@ -15,9 +15,13 @@ namespace Spel.Source.Gamestates
     class StartUpScreenState : IGamestate
     {
 
-        public List<int> entetiesInState { get; set; }
+        public List<int> entetiesInState
+        {
+            get; set;
+        }
         public Timer timer;
         public bool timeOut;
+        public bool professor;
 
         /// <summary>
         /// StartUpState constructor, is responsible for setting the scene for the startup state of the gameplay
@@ -38,6 +42,7 @@ namespace Spel.Source.Gamestates
         /// <param name="time">takes a double which would represent the time which we want to remain in this state.</param>
         public StartUpScreenState(double time)
         {
+            professor = false;
             entetiesInState = new List<int>();
             timer = new Timer(time);
             timer.Elapsed += timeElapsed;
@@ -49,7 +54,7 @@ namespace Spel.Source.Gamestates
         /// <summary>
         /// InitializeState method is used for initializing the enteties/object which is needed in the startupscreen.
         /// </summary>
-        public void initializeState()
+        public void onSceneCreated()
         {
             //add the enteties which should be displayed on the screen when the players choose their caracters. Player enteties is to be created after leaving this state therefore the
             //add entetiestolist - function needs to be called before entering the playing-state
@@ -63,6 +68,17 @@ namespace Spel.Source.Gamestates
             ComponentManager.Instance.AddComponentToEntity(id, pc);
 
             entetiesInState.Add(id);
+        }
+        public void onSceneUpdate()
+        {
+            if(timeOut == true)
+            {
+                //This is used for changin the currentState 
+                SetUpPlayerState stateTwo = new SetUpPlayerState();
+                
+                SceneManager.Instance.setCurrentScene(stateTwo);
+                
+            }
         }
         /// <summary>
         /// timeElapsed function changes the timeOut variable to true enable to check if the enitial time has run out.

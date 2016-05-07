@@ -19,5 +19,13 @@ namespace Spel.Source.Gamestates
         {
             /// some background, text and some presentation of the winner of the game.
         }
+        public void onSceneCreated()
+        {
+
+        }
+        public void onSceneUpdate()
+        {
+
+        }
     }
 }
