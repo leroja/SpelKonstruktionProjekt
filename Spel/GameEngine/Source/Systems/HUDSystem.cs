@@ -13,8 +13,6 @@ namespace GameEngine.Source.Systems
 {
     class HUDSystem : IDraw
     {
-  
-
         public void draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             List<int> entitys = ComponentManager.Instance.GetAllEntitiesWithComponentType<HUDComponent>();
@@ -25,13 +23,15 @@ namespace GameEngine.Source.Systems
                 {
                     PositionComponent pc = ComponentManager.Instance.GetEntityComponent<PositionComponent>(entity);
                     HUDComponent hudc  = ComponentManager.Instance.GetEntityComponent<HUDComponent>(entity);
+                    DrawableComponent dc = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(entity);
                     HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(entity);
 
                     if (pc != null && hudc != null && hc != null)
                     {
                         int width = hudc.texture.Width;
                         Vector2 newposition = pc.position;
-                        for( int i = 0; i < hc.health; i++)
+                        newposition.Y = pc.position.Y - hudc.texture.Height;
+                        for ( int i = 0; i < hc.health; i++)
                         {
                             spriteBatch.Draw(hudc.texture, newposition, Color.White);
                             newposition.X += width;
