@@ -67,6 +67,8 @@ namespace Spel.Source.Systems
                     PositionComponent pc = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent2);
                     PositionComponent pcwall = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent1);
                     WallComponent wall = ComponentManager.Instance.GetEntityComponent<WallComponent>(ent1);
+                    //test
+                    HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
                     if (wall.wall == Wall.LeftWall)
                     {
                         if (crc2.CollisionRec.X + crc2.CollisionRec.Width * 0.5 < crc1.CollisionRec.X)

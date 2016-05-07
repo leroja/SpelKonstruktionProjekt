@@ -58,6 +58,9 @@ namespace Spel.Source
             CollisionComponent CC = new CollisionComponent(pixlePer);
             PlayerComponent pc = new PlayerComponent(name);
             DrawableTextComponent dtc = new DrawableTextComponent(name, Color.BurlyWood, Game.Inst().GetContent<SpriteFont>("Fonts/TestFont"));
+            HUDComponent hudc = new HUDComponent(Game.Inst().GetContent<Texture2D>("Pic/PowerUp"));
+            HealthComponent hc = new HealthComponent(3);
+            hc.health = 3;
             kbc.keyBoardActions.Add(ActionsEnum.Up, up);
             kbc.keyBoardActions.Add(ActionsEnum.Down, down);
             kbc.keyBoardActions.Add(ActionsEnum.Left, left);
@@ -72,7 +75,9 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, CC);
             ComponentManager.Instance.AddComponentToEntity(id, pc);
             ComponentManager.Instance.AddComponentToEntity(id, dtc);
-           
+            ComponentManager.Instance.AddComponentToEntity(id, hudc);
+            ComponentManager.Instance.AddComponentToEntity(id, hc);
+
             return id;
         }
 
