@@ -29,13 +29,13 @@ namespace GameEngine.Source.Systems
                     if (pc != null && hudc != null && hc != null)
                     {
                         int width = hudc.texture.Width;
-                        Vector2 newposition = pc.position;
-                        newposition.Y = pc.position.Y - hudc.texture.Height;
+                        hudc.position.X = pc.position.X + dc.texture.Width / 2 - hudc.texture.Width * hc.health /2;
+                        hudc.position.Y = pc.position.Y - hudc.texture.Height;
                         for ( int i = 0; i < hc.health; i++)
                         {
-                            spriteBatch.Draw(hudc.texture, newposition, Color.White);
-                            newposition.X += width;
-                        }   
+                            spriteBatch.Draw(hudc.texture, hudc.position, Color.White);
+                            hudc.position.X += width;
+                        } 
                     }
                 }
                 spriteBatch.End();

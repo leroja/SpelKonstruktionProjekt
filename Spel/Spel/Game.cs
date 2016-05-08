@@ -82,10 +82,9 @@ namespace Spel
         /// </summary>
         protected override void LoadContent()
         {
-            SoundEffect se = Content.Load<SoundEffect>("Sound/Bouncy_Bounce-Bugs_Bunny-1735935456");
 
-            AudioManager.Instance.AddSoundEffect("Bouncy", se);
-            
+            AudioManager.Instance.AddSoundEffect("bouncy", Content.Load<SoundEffect>("Sound/Bouncy_Bounce-Bugs_Bunny-1735935456"));
+            AudioManager.Instance.AddSoundEffect("jump", Content.Load<SoundEffect>("Sound/Jump"));
             base.LoadContent();
         }
 

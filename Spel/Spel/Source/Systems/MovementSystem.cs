@@ -36,6 +36,7 @@ namespace Spel.Source.Systems
                         if (kbc.state[ActionsEnum.Up] == ButtonStates.Pressed)
                         {
                             v.velocity.Y = -v.jumpHeight;
+                            ComponentManager.Instance.AddComponentToEntity(a, new SoundEffectComponent("jump"));
                         }
                         //// just for demo
                         if (kbc.state[ActionsEnum.Down] == ButtonStates.Pressed)
