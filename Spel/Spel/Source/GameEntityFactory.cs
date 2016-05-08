@@ -50,7 +50,7 @@ namespace Spel.Source
         {
 
 
-            DrawableComponent comp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/Kanin1"));
+            DrawableComponent comp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/Helmut"));
             PositionComponent pos = new PositionComponent(position);
             VelocityComponent vel = new VelocityComponent(new Vector2(200F, 200F), 50F, 600F);
             KeyBoardComponent kbc = new KeyBoardComponent();

@@ -28,7 +28,7 @@ namespace Spel.Source.Gamestates
 
         public void onSceneCreated()
         {
-            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, Keys.Left, Keys.Down, Keys.Right, Vector2.One, "Kanin 1");
+            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, Keys.Left, Keys.Down, Keys.Right, Vector2.One, "Helmut");
         }
         public void onSceneUpdate()
         {
