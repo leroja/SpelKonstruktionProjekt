@@ -50,7 +50,7 @@ namespace Spel.Source
         {
 
 
-            DrawableComponent comp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/Helmut"));
+            DrawableComponent comp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/Helmutani"));
             PositionComponent pos = new PositionComponent(position);
             VelocityComponent vel = new VelocityComponent(new Vector2(200F, 200F), 50F, 600F);
             KeyBoardComponent kbc = new KeyBoardComponent();
@@ -61,6 +61,7 @@ namespace Spel.Source
             HUDComponent hudc = new HUDComponent(Game.Inst().GetContent<Texture2D>("Pic/PowerUp"), new Vector2(pos.position.X, pos.position.Y));
             HUDComponent hudc2 = new HUDComponent(Game.Inst().GetContent<Texture2D>("Pic/PowerUp"), Vector2.One);
             HealthComponent hc = new HealthComponent(3);
+            AnimationComponent ani = new AnimationComponent(100, 114, comp.texture.Width, comp.texture.Height, 0.1);
             kbc.keyBoardActions.Add(ActionsEnum.Up, up);
             kbc.keyBoardActions.Add(ActionsEnum.Down, down);
             kbc.keyBoardActions.Add(ActionsEnum.Left, left);
@@ -77,7 +78,7 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, dtc);
             ComponentManager.Instance.AddComponentToEntity(id, hudc);
             ComponentManager.Instance.AddComponentToEntity(id, hc);
-
+            ComponentManager.Instance.AddComponentToEntity(id, ani);
             return id;
         }
 
