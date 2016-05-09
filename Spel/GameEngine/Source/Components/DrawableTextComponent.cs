@@ -13,6 +13,7 @@ namespace GameEngine.Source.Components
         public string text { get; set; }
         public Color textColor { get; set; }
         public SpriteFont font { get; set; }
+        public bool visable { get; set; }
 
 
 
@@ -21,6 +22,7 @@ namespace GameEngine.Source.Components
             this.text = text;
             this.textColor = color;
             this.font = font;
+            visable = true;
         }
     }
 }

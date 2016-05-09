@@ -15,7 +15,7 @@ namespace GameEngine.Source.Managers
     public class SceneManager:IUpdate
     {
         private static SceneManager instance;
-        private IGamestate activeScene;
+        private IGamescene activeScene;
 
         /// <summary>
         /// SceneManager default constructor
@@ -45,7 +45,7 @@ namespace GameEngine.Source.Managers
         /// keep track of it durring the gameplay
         /// </summary>
         /// <param name="currentState">this variable is a IGamestate object which should be the parentobject of all state objects.</param>
-        public void setCurrentScene(IGamestate currentState)
+        public void setCurrentScene(IGamescene currentState)
         {
             activeScene = currentState;
             activeScene.onSceneCreated();

@@ -57,7 +57,7 @@ namespace Spel
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height, Wall.RightWall);
 
-            StartUpScreenState stateOne = new StartUpScreenState(1000);
+            StartUpScreenScene stateOne = new StartUpScreenScene(1000);
             SceneManager.Instance.setCurrentScene(stateOne);
 
 
@@ -66,15 +66,7 @@ namespace Spel
 
             GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 200), "platform", 150, 20);
 
-            //test to se if it works, timer could be used to signal when we want to move to the next gamestate?
-            //Texture2D text = Game.Inst().GetContent<Texture2D>("Pic/professor");
-            //DrawableComponent comp2 = new DrawableComponent(text);
-            //PositionComponent pos2 = new PositionComponent(new Vector2(1, 1));
-            //AnimationComponent ani = new AnimationComponent(64, 64, text.Width, text.Height, 0.1);
-            //int id2 = ComponentManager.Instance.CreateID();
-            //ComponentManager.Instance.AddComponentToEntity(id2, comp2);
-            //ComponentManager.Instance.AddComponentToEntity(id2, pos2);
-            //ComponentManager.Instance.AddComponentToEntity(id2, ani);
+            
             
 
             base.Initialize();

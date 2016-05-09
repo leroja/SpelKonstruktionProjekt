@@ -32,7 +32,7 @@ namespace GameEngine.Source.Systems
                     PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
                     DrawableTextComponent d = ComponentManager.Instance.GetEntityComponent<DrawableTextComponent>(a);
 
-                    if (p != null && d != null)
+                    if (p != null && d != null && d.visable == true)
                     {
                         spriteBatch.DrawString(d.font, d.text, p.position, d.textColor);
                     }

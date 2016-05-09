@@ -34,7 +34,7 @@ namespace GameEngine.Source.Systems
                     DrawableComponent d = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(a);
                     AnimationComponent anim = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(a);
 
-                    if (p != null && d != null)
+                    if (p != null && d != null && d.visable == true)
                     {
                         if (anim != null)
                         {

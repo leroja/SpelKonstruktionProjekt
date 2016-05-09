@@ -54,11 +54,11 @@
     <Compile Include="Source\Components\PowerUppComponent.cs" />
     <Compile Include="Source\GameEntityFactory.cs" />
     <Compile Include="Source\Systems\BallOfSpikesSystem.cs" />
-    <Compile Include="Source\Gamestates\EndingState.cs" />
-    <Compile Include="Source\Gamestates\PauseState.cs" />
-    <Compile Include="Source\Gamestates\PlayingState.cs" />
-    <Compile Include="Source\Gamestates\SetUpPlayerState.cs" />
-    <Compile Include="Source\Gamestates\StartUpScreenState.cs" />
+    <Compile Include="Source\Gamesceenes\EndingSceene.cs" />
+    <Compile Include="Source\Gamesceenes\PauseSceene.cs" />
+    <Compile Include="Source\Gamesceenes\PlayingSceene.cs" />
+    <Compile Include="Source\Gamesceenes\SetUpPlayerScene.cs" />
+    <Compile Include="Source\Gamesceenes\StartUpScreenScene.cs" />
     <Compile Include="Source\Systems\CollisionSystem.cs" />
     <Compile Include="Source\Systems\HealthSystem.cs" />
     <Compile Include="Source\Systems\HUDSystem.cs" />

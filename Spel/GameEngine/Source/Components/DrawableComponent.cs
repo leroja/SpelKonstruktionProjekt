@@ -15,6 +15,7 @@ namespace GameEngine.Source.Components
         public Texture2D texture { get; set; }
         public SpriteEffects sprite { get; set; }
         public Rectangle drawRectangle { get; set; }
+        public bool visable { get; set; }
 
         // Constructor for DrawableComponent 
         public DrawableComponent(Texture2D startingTexture)
@@ -22,6 +23,7 @@ namespace GameEngine.Source.Components
             texture = startingTexture;
             sprite = SpriteEffects.None;
             drawRectangle = new Rectangle(0, 0, startingTexture.Width, startingTexture.Height);
+            visable = true;
         }
 
     }
