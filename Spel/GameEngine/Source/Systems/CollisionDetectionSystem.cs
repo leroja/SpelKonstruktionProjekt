@@ -91,7 +91,12 @@ namespace GameEngine.Source.Systems
                 CollisionRectangleComponent rec = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(item);
                 PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(item);
                 DrawableComponent draw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(item);
-                if (draw != null)
+                AnimationComponent ani = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(item);
+                if(ani != null && draw != null)
+                {
+                    rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, ani.sourceRectangle.Width, ani.sourceRectangle.Height);
+                }
+                if (draw != null && ani == null)
                 {
                     rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, draw.texture.Width, draw.texture.Height);
                 }

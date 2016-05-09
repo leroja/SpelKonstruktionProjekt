@@ -59,7 +59,7 @@ namespace Spel.Source.Gamestates
             //add the enteties which should be displayed on the screen when the players choose their caracters. Player enteties is to be created after leaving this state therefore the
             //add entetiestolist - function needs to be called before entering the playing-state
 
-            DrawableTextComponent dtx = new DrawableTextComponent("Flappy Ass, version 1.0 By: PT2", Color.WhiteSmoke, Game.Inst().GetContent<SpriteFont>("Fonts/MenuFont"));
+            DrawableTextComponent dtx = new DrawableTextComponent("Flappy Ass, version 1.0 By: PT2", Color.Tomato, Game.Inst().GetContent<SpriteFont>("Fonts/MenuFont"));
             PositionComponent pc = new PositionComponent(new Vector2(20, 100));
 
             int id = ComponentManager.Instance.CreateID();

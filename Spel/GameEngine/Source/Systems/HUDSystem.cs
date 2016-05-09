@@ -25,11 +25,13 @@ namespace GameEngine.Source.Systems
                     HUDComponent hudc  = ComponentManager.Instance.GetEntityComponent<HUDComponent>(entity);
                     DrawableComponent dc = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(entity);
                     HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(entity);
+                    AnimationComponent ani = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(entity);
 
-                    if (pc != null && hudc != null && hc != null)
+
+                    if (pc != null && hudc != null && hc != null && ani != null)
                     {
                         int width = hudc.texture.Width;
-                        hudc.position.X = pc.position.X + dc.texture.Width / 2 - hudc.texture.Width * hc.health /2;
+                        hudc.position.X = pc.position.X + ani.sourceRectangle.Width / 2 - hudc.texture.Width * hc.health /2;
                         hudc.position.Y = pc.position.Y - hudc.texture.Height;
                         for ( int i = 0; i < hc.health; i++)
                         {
