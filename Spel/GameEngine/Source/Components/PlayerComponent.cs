@@ -13,6 +13,7 @@ namespace GameEngine.Source.Components
     public class PlayerComponent : IComponent
     {
         public string playerName { get; set; }
+        public int killCount { get; set; }
 
         /// <summary>
         /// PlayerComponent constructor

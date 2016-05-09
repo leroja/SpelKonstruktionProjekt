@@ -20,5 +20,13 @@ namespace Spel.Source.Gamestates
             //This constructor should add the enteties which is special for the pause state of the gameplay, maybe some text and/or 
             //different background. (Control for unpausing (?)) 
         }
+        public void onSceneCreated()
+        {
+
+        }
+        public void onSceneUpdate()
+        {
+
+        }
     }
 }

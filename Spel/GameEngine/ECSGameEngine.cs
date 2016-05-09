@@ -39,6 +39,7 @@ namespace GameEngine
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
             SystemManager.Instance.AddSystem(new MouseSystem());
             SystemManager.Instance.AddSystem(new GamePadSystem());
             SystemManager.Instance.AddSystem(new _2DSpriteSystem());
@@ -46,6 +47,8 @@ namespace GameEngine
             SystemManager.Instance.AddSystem(new KeyBoardSystem());
             SystemManager.Instance.AddSystem(new SoundEffectSystem());
             SystemManager.Instance.AddSystem(new AnimationSystem());
+            SystemManager.Instance.AddSystem(new HUDSystem());
+            SystemManager.Instance.AddSystem(SceneManager.Instance);
 
             // @TODO make it better
             SystemManager.Instance.AddSystem(new WindowTitleFPSSystem(this));
@@ -105,7 +108,7 @@ namespace GameEngine
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
             SystemManager.Instance.GameTime = gameTime;

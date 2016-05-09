@@ -1,22 +1,33 @@
-﻿using System;
+﻿using GameEngine.Source.Systems.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace GameEngine.Source.Managers
 {
-    class SceneManager
+    /// <summary>
+    /// SceneManager class is responsible for handling the different scenes(states) that's available in the game.
+    /// This is a singleton
+    /// </summary>
+    public class SceneManager:IUpdate
     {
         private static SceneManager instance;
+        private IGamestate activeScene;
 
-
+        /// <summary>
+        /// SceneManager default constructor
+        /// </summary>
         private SceneManager()
         {
 
         }
 
-
+        /// <summary>
+        /// SceneManager constructor which makes it a singleton 
+        /// </summary>
         public static SceneManager Instance
         {
             get
@@ -29,8 +40,24 @@ namespace GameEngine.Source.Managers
             }
         }
 
+        /// <summary>
+        /// setCurrentScene method is used for changing the variable of the current state enable to 
+        /// keep track of it durring the gameplay
+        /// </summary>
+        /// <param name="currentState">this variable is a IGamestate object which should be the parentobject of all state objects.</param>
+        public void setCurrentScene(IGamestate currentState)
+        {
+            activeScene = currentState;
+            activeScene.onSceneCreated();
+        }
 
 
-
+        public void update(GameTime gameTime)
+        {
+            if(activeScene!= null)
+            {
+                activeScene.onSceneUpdate();
+            }        
+        }
     }
 }
