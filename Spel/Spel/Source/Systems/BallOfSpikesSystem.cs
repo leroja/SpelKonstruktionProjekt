@@ -32,8 +32,12 @@ namespace Spel.Source.Systems
 
             CollisionRectangleComponent rec = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(id);
             PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(id);
-            rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, newDraw.texture.Width, newDraw.texture.Height);
+            //rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, newDraw.texture.Width, newDraw.texture.Height);
+            rec.CollisionRec.X = (int)pos.position.X;
+            rec.CollisionRec.Y = (int)pos.position.Y;
 
+            rec.CollisionRec.Width = newDraw.texture.Width;
+            rec.CollisionRec.Height = newDraw.texture.Height;
         }
 
         public void update(GameTime gameTime)

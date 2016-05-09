@@ -40,17 +40,28 @@ namespace Spel.Source.Systems
 
                     // @Temp
                     Console.WriteLine("Entity 1 is above entity 2");
+
+                    HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
+                    hc.health -= 1; // något annat kanske
                 }
                 else if (pos2.position.Y + crc2.CollisionRec.Height * 0.5f < pos1.position.Y)
                 { // entity 2 is above entity 1, entity 1 shall die or loose life
 
                     // @Temp
                     Console.WriteLine("Entity 2 is above entity 1");
+
+                    HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
+                    hc.health -= 1; // något annat kanske
                 }
                 else // both are on the same "level", both shall die or loose life 
                 {
                     // @Temp
                     Console.WriteLine("Both on same level");
+
+                    HealthComponent hc1 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
+                    HealthComponent hc2 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
+                    hc1.health -= 1; // något annat kanske
+                    hc2.health -= 1;
                 }
 
                 pos1.position = pos1.prevPosition;
@@ -59,70 +70,13 @@ namespace Spel.Source.Systems
             }
             else if (collType == CollisionTypes.PlayerVsWall)
             {
-                /// dela upp i en funktion
                 if (ComponentManager.Instance.CheckIfEntityHasComponent<WallComponent>(ent1))
                 {
-                    CollisionRectangleComponent crc1 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent1);
-                    CollisionRectangleComponent crc2 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent2);
-                    PositionComponent pc = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent2);
-                    PositionComponent pcwall = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent1);
-                    WallComponent wall = ComponentManager.Instance.GetEntityComponent<WallComponent>(ent1);
-                    //test
-                    HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
-                    if (wall.wall == Wall.LeftWall)
-                    {
-                        if (crc2.CollisionRec.X + crc2.CollisionRec.Width * 0.5 < crc1.CollisionRec.X)
-                            pc.position.X = Game.Inst().GraphicsDevice.Viewport.Width - 1 - crc2.CollisionRec.Width * 0.5f;
-                    }
-                    else if (wall.wall == Wall.RightWall)
-                    {
-                        if (crc2.CollisionRec.X + crc2.CollisionRec.Width * 0.5 > crc1.CollisionRec.X)
-                            pc.position.X = 1 - crc2.CollisionRec.Width * 0.5f;
-                    }
-                    else if (wall.wall == Wall.TopWall)
-                    { // the playerEntity shall die or loose a life & possibly fall to the ground 
-
-                        // @Temp
-                        pc.position = pc.prevPosition;
-
-                    }
-                    else if (wall.wall == Wall.BottomWall)
-                    { // the playerEntity shall die or loose a life
-
-                        // @Temp
-                        pc.position = pc.prevPosition;
-                    }
+                    PlayerVsWallColl(ent2, ent1);
                 }
                 if (ComponentManager.Instance.CheckIfEntityHasComponent<WallComponent>(ent2))
                 {
-                    CollisionRectangleComponent crc1 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent2);
-                    CollisionRectangleComponent crc2 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent1);
-                    PositionComponent pc = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent1);
-                    PositionComponent pcwall = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent2);
-                    WallComponent wall = ComponentManager.Instance.GetEntityComponent<WallComponent>(ent2);
-                    if (wall.wall == Wall.LeftWall)
-                    {
-                        if (crc2.CollisionRec.X + crc2.CollisionRec.Width * 0.5 < crc1.CollisionRec.X)
-                            pc.position.X = Game.Inst().GraphicsDevice.Viewport.Width - 1 - crc2.CollisionRec.Width * 0.5f;
-                    }
-                    else if (wall.wall == Wall.RightWall)
-                    {
-                        if (crc2.CollisionRec.X + crc2.CollisionRec.Width * 0.5 > crc1.CollisionRec.X)
-                            pc.position.X = 1 - crc2.CollisionRec.Width * 0.5f;
-                    }
-                    else if (wall.wall == Wall.TopWall)
-                    { // the playerEntity shall die or loose a life & possibly fall to the ground 
-
-                        // @Temp
-                        pc.position = pc.prevPosition;
-
-                    }
-                    else if (wall.wall == Wall.BottomWall)
-                    { // the playerEntity shall die or loose a life
-
-                        // @Temp
-                        pc.position = pc.prevPosition;
-                    }
+                    PlayerVsWallColl(ent1, ent2);
                 }
             }
             else if (collType == CollisionTypes.PlayerVsPowerup)
@@ -152,8 +106,100 @@ namespace Spel.Source.Systems
                         break;
                 }
                 rec(ent1, ent2);
+            }else if(collType == CollisionTypes.PlayerVsPlatform)
+            {
+                if (ComponentManager.Instance.CheckIfEntityHasComponent<PlatformComponent>(ent1))
+                {
+                    PlayerVsPlatformColl(ent2, ent1);
+                }
+                if (ComponentManager.Instance.CheckIfEntityHasComponent<PlatformComponent>(ent2))
+                {
+                    PlayerVsPlatformColl(ent1, ent2);
+                }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Player"></param>
+        /// <param name="WallEnt"></param>
+        private void PlayerVsWallColl(int Player, int WallEnt)
+        {
+            CollisionRectangleComponent crc1 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(WallEnt);
+            CollisionRectangleComponent crc2 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(Player);
+            PositionComponent pc = ComponentManager.Instance.GetEntityComponent<PositionComponent>(Player);
+            PositionComponent pcwall = ComponentManager.Instance.GetEntityComponent<PositionComponent>(WallEnt);
+            WallComponent wall = ComponentManager.Instance.GetEntityComponent<WallComponent>(WallEnt);
+            if (wall.wall == Wall.LeftWall)
+            {
+                if (crc2.CollisionRec.X + crc2.CollisionRec.Width * 0.5 < crc1.CollisionRec.X)
+                    pc.position.X = Game.Inst().GraphicsDevice.Viewport.Width - 1 - crc2.CollisionRec.Width * 0.5f;
+            }
+            else if (wall.wall == Wall.RightWall)
+            {
+                if (crc2.CollisionRec.X + crc2.CollisionRec.Width * 0.5 > crc1.CollisionRec.X)
+                    pc.position.X = 1 - crc2.CollisionRec.Width * 0.5f;
+            }
+            else if (wall.wall == Wall.TopWall)
+            { // the playerEntity shall die or loose a life & possibly fall to the ground 
+
+                // @Temp
+                pc.position = pc.prevPosition;
+
+
+                HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
+                hc.health -= 1; // något annat kanske?
+                // mer saker?
+            }
+            else if (wall.wall == Wall.BottomWall)
+            { // the playerEntity shall die or loose a life
+
+                // @Temp
+                pc.position = pc.prevPosition;
+
+                HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
+                hc.health -= 1; // något annat kanske?
+                // mer saker?
+            }
+        }
+
+        private void PlayerVsPlatformColl(int Player, int Platform)
+        {
+            PositionComponent ppc = ComponentManager.Instance.GetEntityComponent<PositionComponent>(Player);
+            PositionComponent pfpc = ComponentManager.Instance.GetEntityComponent<PositionComponent>(Platform);
+            CollisionRectangleComponent pcrc = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(Player);
+            CollisionRectangleComponent pfcrc = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(Platform);
+            PlatformComponent pc = ComponentManager.Instance.GetEntityComponent<PlatformComponent>(Platform);
+
+            if (pcrc.CollisionRec.Intersects(pc.TopRec))// kolla om spelarn landar på plattformen
+            {
+                Console.WriteLine("test");
+                ppc.position = ppc.prevPosition;
+                // spelarn ska kunna stanna och sedan hoppa iväg åt motsatt håll
+                // vad som krävs;
+                // kraften åt sidan måste motverkas
+                // samma sak med gravitationen 
+            }
+            else // om man inte landar ovan på plattformen så ska samma sak ske,,, om jag har tänkt rätt
+            {
+                ppc.position = ppc.prevPosition;
+            }
+
+
+
+            //else if ()// kolla om spelarn hoppar in i plattformen underifrån
+            //{
+            //    // spelarn ska förlora liv 
+
+            //    // + några mer saker
+            //}
+
+            // kolla om spelarn hoppar in i höger sidan
+
+            // kolla om spelarn hoppar in i vänstersidan
+        }
+
 
         private CollisionTypes CheckTypeOfCollision(int ent1, int ent2)
         {
@@ -172,6 +218,10 @@ namespace Spel.Source.Systems
             else if (list1.OfType<PlayerComponent>().Any() && list2.OfType<PowerUppComponent>().Any() || list2.OfType<PlayerComponent>().Any() && list1.OfType<PowerUppComponent>().Any())
             {
                 return CollisionTypes.PlayerVsPowerup;
+            }
+            else if (list1.OfType<PlayerComponent>().Any() && list2.OfType<PlatformComponent>().Any() || list2.OfType<PlayerComponent>().Any() && list1.OfType<PlatformComponent>().Any())
+            {
+                return CollisionTypes.PlayerVsPlatform;
             }
             return CollisionTypes.NotDefined;
         }

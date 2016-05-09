@@ -1,10 +1,11 @@
-﻿using System;
+﻿using GameEngine.Source.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Source.Components
+namespace Spel.Source.Components
 {
     // Health Component
     public class HealthComponent : IComponent
