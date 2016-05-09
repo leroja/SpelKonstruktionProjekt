@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine.Source.Components;
+using Spel.Source.Components;
 
-namespace GameEngine.Source.Systems
+namespace Spel.Source.Systems
 {
     class HUDSystem : IDraw
     {
