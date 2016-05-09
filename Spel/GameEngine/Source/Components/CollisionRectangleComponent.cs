@@ -9,7 +9,7 @@ namespace GameEngine.Source.Components
 {
     public class CollisionRectangleComponent : IComponent
     {
-        public Rectangle CollisionRec { get; set; }
+        public Rectangle CollisionRec;
 
         public CollisionRectangleComponent(Rectangle rec)
         {

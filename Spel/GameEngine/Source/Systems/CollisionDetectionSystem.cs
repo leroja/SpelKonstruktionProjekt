@@ -48,8 +48,9 @@ namespace GameEngine.Source.Systems
         public void update(GameTime gameTime)
         {
             updatecolRec();
-            List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<CollisionComponent>();
 
+
+            List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<CollisionComponent>();
             List<int> done = new List<int>();
             foreach (var item in dra)
             {
@@ -93,11 +94,18 @@ namespace GameEngine.Source.Systems
                 DrawableComponent draw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(item);
                 if (draw != null)
                 {
-                    rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, draw.texture.Width, draw.texture.Height);
+                    rec.CollisionRec.X = (int)pos.position.X;
+                    rec.CollisionRec.Y = (int)pos.position.Y;
+
+                    rec.CollisionRec.Width = draw.texture.Width;
+                    rec.CollisionRec.Height = draw.texture.Height;
+                    //rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, draw.texture.Width, draw.texture.Height);
                 }
                 else
                 {
-                    rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, rec.CollisionRec.Width, rec.CollisionRec.Height);
+                    rec.CollisionRec.X = (int)pos.position.X;
+                    rec.CollisionRec.Y = (int)pos.position.Y;
+                    //rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, rec.CollisionRec.Width, rec.CollisionRec.Height);
                 }
             }
         }

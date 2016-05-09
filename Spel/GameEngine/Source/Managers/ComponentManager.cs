@@ -240,10 +240,15 @@ namespace GameEngine.Source.Managers
         }
 
         /// <summary>
-        /// 
+        /// return a dictionary with all entites that "has" specific type of component & 
+        /// and the components of that type
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">
+        /// the type of component
+        /// </typeparam>
+        /// <returns>
+        /// a dictionary containing id's and components of the specified type
+        /// </returns>
         public Dictionary<int, IComponent> GetAllEntitiesAndComponentsWithComponentType<T>() where T : IComponent
         {
             Type type = typeof(T);
@@ -256,11 +261,17 @@ namespace GameEngine.Source.Managers
         }
 
         /// <summary>
-        /// 
+        /// checks whether an entity has a particular type of component
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="ent"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">
+        /// the type of component
+        /// </typeparam>
+        /// <param name="ent">
+        /// the id of the enetity
+        /// </param>
+        /// <returns>
+        /// true if the entity has a component of that type else false
+        /// </returns>
         public bool CheckIfEntityHasComponent<T>(int ent) where T : IComponent
         {
             Type type = typeof(T);

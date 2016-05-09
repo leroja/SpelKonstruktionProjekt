@@ -62,6 +62,7 @@ namespace Spel.Source
             kbc.keyBoardActions.Add(ActionsEnum.Down, down);
             kbc.keyBoardActions.Add(ActionsEnum.Left, left);
             kbc.keyBoardActions.Add(ActionsEnum.Right, right);
+            HealthComponent hc = new HealthComponent(3);
 
             int id = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(id, vel);
@@ -72,6 +73,7 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, CC);
             ComponentManager.Instance.AddComponentToEntity(id, pc);
             ComponentManager.Instance.AddComponentToEntity(id, dtc);
+            ComponentManager.Instance.AddComponentToEntity(id, hc);
            
             return id;
         }
@@ -111,6 +113,25 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, Pc);
             ComponentManager.Instance.AddComponentToEntity(id, power);
             ComponentManager.Instance.AddComponentToEntity(id, powerupp);
+            return id;
+        }
+
+        public int CreatePlatform(Vector2 pos, string texture, int width, int height)
+        {
+            PositionComponent Pc = new PositionComponent(pos);
+            //DrawableComponent DC = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/"+texture));
+            CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.X, (int)pos.Y, width, height));
+            CollisionComponent CC = new CollisionComponent(false);
+            PlatformComponent Plc = new PlatformComponent(pos, width, height);
+
+            int id = ComponentManager.Instance.CreateID();
+
+
+            ComponentManager.Instance.AddComponentToEntity(id, CRC);
+            ComponentManager.Instance.AddComponentToEntity(id, CC);
+            ComponentManager.Instance.AddComponentToEntity(id, Pc);
+       //     ComponentManager.Instance.AddComponentToEntity(id, DC);
+            ComponentManager.Instance.AddComponentToEntity(id, Plc);
             return id;
         }
     }
