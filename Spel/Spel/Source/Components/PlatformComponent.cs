@@ -10,7 +10,6 @@ namespace Spel.Source.Components
 {
     class PlatformComponent : IComponent
     {
-
         public Rectangle TopRec;
         public Rectangle LeftRec;
         public Rectangle BottomRec;

@@ -142,7 +142,7 @@ namespace Spel.Source.Systems
                     pc.position.X = 1 - crc2.CollisionRec.Width * 0.5f;
             }
             else if (wall.wall == Wall.TopWall)
-            { // the playerEntity shall die or loose a life & possibly fall to the ground 
+            { // the playerEntity shall loose ONE life & possibly fall to the ground 
 
                 // @Temp
                 pc.position = pc.prevPosition;
@@ -153,7 +153,7 @@ namespace Spel.Source.Systems
                 // mer saker?
             }
             else if (wall.wall == Wall.BottomWall)
-            { // the playerEntity shall die or loose a life
+            { // the playerEntity shall loose ONE life
 
                 // @Temp
                 pc.position = pc.prevPosition;

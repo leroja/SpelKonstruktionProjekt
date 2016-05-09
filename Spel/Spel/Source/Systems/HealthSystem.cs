@@ -18,47 +18,52 @@ namespace Spel.Source.Systems
 
             Dictionary<int, IComponent> dic = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<HealthComponent>();
 
-            foreach (var item in dic)
+            if (dic != null)
             {
-                HealthComponent hc = (HealthComponent)item.Value;
-
-
-                if(hc.health > hc.maxhealth){
-                    hc.health = hc.maxhealth;
-                }
-
-                if(hc.health <= 0)
+                foreach (var item in dic)
                 {
-                    //Console.WriteLine("death");
-                    // death?
-                }else if(hc.health == 1)
-                {
-                    // update hud
-                    // update sprite?
+                    HealthComponent hc = (HealthComponent)item.Value;
 
-                }
-                else if (hc.health == 2)
-                {
-                    // update hud
-                    // update sprite?
 
-                }
-                else if (hc.health == 3)
-                {
-                    // update hud
-                    // update sprite?
+                    if (hc.health > hc.maxhealth)
+                    {
+                        hc.health = hc.maxhealth;
+                    }
 
-                }
-                else if (hc.health == 4)
-                {
-                    // update hud
-                    // update sprite?
+                    if (hc.health <= 0)
+                    {
+                        //Console.WriteLine("death");
+                        // death?
+                    }
+                    else if (hc.health == 1)
+                    {
+                        // update hud
+                        // update sprite?
 
-                }
-                else
-                {
-                    // update hud
-                    // update sprite?
+                    }
+                    else if (hc.health == 2)
+                    {
+                        // update hud
+                        // update sprite?
+
+                    }
+                    else if (hc.health == 3)
+                    {
+                        // update hud
+                        // update sprite?
+
+                    }
+                    else if (hc.health == 4)
+                    {
+                        // update hud
+                        // update sprite?
+
+                    }
+                    else
+                    {
+                        // update hud
+                        // update sprite?
+                    }
                 }
             }
         }
