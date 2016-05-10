@@ -10,21 +10,22 @@ using Spel.Menus;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using GameEngine.Source.Systems.Interfaces;
+using GameEngine.Source.Components;
 
 namespace Spel.Menus
 {
     public class MainMenu : IGamescene
     {
-        MenuComponent menuComp;
+        DrawableTextComponent menuComp;
         Texture2D pic;
         Rectangle picRec;
         //@TODO: Fixa funktionalitet för entitiesInState;
         List<int> entitiesInState;
 
-        public MainMenu(Game game, SpriteBatch spriteBatch, SpriteFont font, Texture2D pic)
+        public MainMenu(SpriteBatch spriteBatch, SpriteFont font, Texture2D pic)
         {
             string[] menuItems = { "Start Game", "Options", "End Game" };
-            MenuComponent comp = new MenuComponent(game, spriteBatch, font, menuItems);
+            DrawableTextComponent comp = new DrawableTextComponent(menuItems, font);
             menuComp = comp;
             this.pic = pic;
             //@TODO: Fixa så att storleken på skärmen hämtas här.
@@ -43,7 +44,14 @@ namespace Spel.Menus
                 throw new NotImplementedException();
             }
         }
+        public void show()
+        {
 
+        }
+        public void hide()
+        {
+
+        }
         //@TODO: Fixa dessa funktioner för att hantera menyns funktionalitet.
         public void onSceneCreated()
         {

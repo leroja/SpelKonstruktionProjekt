@@ -15,9 +15,7 @@ namespace GameEngine.Source.Components
         public Color textColor { get; set; }
         public SpriteFont font { get; set; }
         public bool visable { get; set; }
-        public int menuWidth { get; set; }
-        public int menuHeight { get; set; }
-        public Vector2 menuSize { get; set; }
+
 
 
 
@@ -28,11 +26,9 @@ namespace GameEngine.Source.Components
             this.font = font;
             visable = true;
         }
-        public DrawableTextComponent(string text, Color color, SpriteFont font, string []items)
+        public DrawableTextComponent(string []items, SpriteFont font)
         {
-            this.text = text;
             menuItems = items;
-            this.textColor = color;
             this.font = font;
             visable = true;
         }
