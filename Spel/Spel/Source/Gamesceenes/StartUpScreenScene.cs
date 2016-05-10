@@ -9,6 +9,7 @@ using GameEngine.Source.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine.Source.Managers;
+using Spel.Menus;
 
 namespace Spel.Source.Gamestates
 {
@@ -82,9 +83,12 @@ namespace Spel.Source.Gamestates
             {
                 List<IComponent> complist;
                 //This is used for changin the currentState 
-                SetUpPlayerScene stateTwo = new SetUpPlayerScene();
-                
-                SceneManager.Instance.setCurrentScene(stateTwo);
+                //SetUpPlayerScene stateTwo = new SetUpPlayerScene();
+
+                //SceneSystem.Instance.setCurrentScene(stateTwo);
+
+                MainMenu menu = new MainMenu();
+                SceneSystem.Instance.setCurrentScene(menu);
 
                 foreach(int comp in entetiesInState)
                 {

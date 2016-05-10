@@ -15,6 +15,7 @@ namespace GameEngine.Source.Components
         public Color textColor { get; set; }
         public SpriteFont font { get; set; }
         public bool visable { get; set; }
+        private Dictionary<Vector2,String> menu;
 
 
 
@@ -38,12 +39,26 @@ namespace GameEngine.Source.Components
         /// <param name="color">
         /// The color to be used for the textcomponent
         /// </param>
-        public DrawableTextComponent(string []items, SpriteFont font, Color color)
+        public DrawableTextComponent(Dictionary<Vector2,string> menuList, SpriteFont font, Color color)
         {
             textColor = color;
-            menuItems = items;
+            //menuItems = items;
             this.font = font;
             visable = true;
+            menu = menuList;
+        }
+
+        public Dictionary<Vector2,string> getMenuList()
+        {
+            return menu;
+        }
+        public void addMenuItem(Vector2 position, string menuName)
+        {
+            menu.Add(position, menuName);
+        }
+        public void removeMentuItem(Vector2 position)
+        {
+            menu.Remove(position);
         }
         /// <summary>
         /// This Method returns the selected index of a menu.
