@@ -51,7 +51,7 @@ namespace Spel.Menus
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            foreach (IComponent comp in components)
+            foreach (MenuComponent comp in components)
             {
                 //if (comp.Enabled == true)
                 //    comp.Update(GameTime);
