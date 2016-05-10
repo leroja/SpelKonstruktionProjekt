@@ -22,10 +22,10 @@ namespace Spel.Menus
         //@TODO: Fixa funktionalitet för entitiesInState;
         List<int> entitiesInState;
 
-        public MainMenu(SpriteBatch spriteBatch, SpriteFont font, Texture2D pic)
+        public MainMenu(SpriteFont font, Texture2D pic, Color color)
         {
             string[] menuItems = { "Start Game", "Options", "End Game" };
-            DrawableTextComponent comp = new DrawableTextComponent(menuItems, font);
+            DrawableTextComponent comp = new DrawableTextComponent(menuItems, font, color);
             menuComp = comp;
             this.pic = pic;
             //@TODO: Fixa så att storleken på skärmen hämtas här.

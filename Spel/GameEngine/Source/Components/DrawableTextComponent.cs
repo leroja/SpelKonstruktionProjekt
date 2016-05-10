@@ -26,14 +26,27 @@ namespace GameEngine.Source.Components
             this.font = font;
             visable = true;
         }
-        public DrawableTextComponent(string []items, SpriteFont font)
+        /// <summary>
+        /// Secondary constructor that takes several text strings as an argument.
+        /// </summary>
+        /// <param name="items">
+        /// The array that hold the text strings
+        /// </param>
+        /// <param name="font">
+        /// To font to be used for the textcompoenent
+        /// </param>
+        /// <param name="color">
+        /// The color to be used for the textcomponent
+        /// </param>
+        public DrawableTextComponent(string []items, SpriteFont font, Color color)
         {
+            textColor = color;
             menuItems = items;
             this.font = font;
             visable = true;
         }
         /// <summary>
-        /// This Method returns the selected index of the menu.
+        /// This Method returns the selected index of a menu.
         /// </summary>
         public int selectedIndex
         {
