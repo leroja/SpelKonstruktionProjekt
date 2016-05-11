@@ -82,7 +82,7 @@
     <Compile Include="Source\Managers\ComponentManager.cs" />
     <Compile Include="Source\Managers\PhysicsManager.cs" />
     <Compile Include="Source\Managers\RenderManager.cs" />
-    <Compile Include="Source\Managers\SceneManager.cs" />
+    <Compile Include="Source\Managers\SceneSystem.cs" />
     <Compile Include="Source\Managers\SystemManager.cs" />
     <Compile Include="Source\RandomStuff\CollisionEvent.cs" />
     <Compile Include="Source\RandomStuff\IEvent.cs" />
@@ -93,7 +93,7 @@
     <Compile Include="Source\Systems\CollisionDetectionSystem.cs" />
     <Compile Include="Source\Systems\GamePadSystem.cs" />
     <Compile Include="Source\Systems\Interfaces\IDraw.cs" />
-    <Compile Include="Source\Systems\Interfaces\IGamestate.cs" />
+    <Compile Include="Source\Systems\Interfaces\IGamescene.cs" />
     <Compile Include="Source\Systems\Interfaces\IInput.cs" />
     <Compile Include="Source\Systems\Interfaces\ISystem.cs" />
     <Compile Include="Source\Systems\Interfaces\IUpdate.cs" />

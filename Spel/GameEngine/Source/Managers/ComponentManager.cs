@@ -85,7 +85,6 @@ namespace GameEngine.Source.Managers
         public void AddComponentToEntity(int entityID, IComponent component)
         {
             Type type = component.GetType();
-
             if (compDic.ContainsKey(type))
             {
                 compDic[type].Add(entityID, component);

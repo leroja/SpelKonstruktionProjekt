@@ -9,10 +9,15 @@ using GameEngine.Source.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameEngine.Source.Managers;
+using Spel.Menus;
 
 namespace Spel.Source.Gamestates
 {
-    class StartUpScreenState : IGamestate
+    /// <summary>
+    /// StartUpScreenScene is the class responsible for the startup state of the gameplay, 
+    /// i.e the slashscreen.
+    /// </summary>
+    class StartUpScreenScene : IGamescene
     {
 
         public List<int> entetiesInState
@@ -21,12 +26,11 @@ namespace Spel.Source.Gamestates
         }
         public Timer timer;
         public bool timeOut;
-        public bool professor;
 
         /// <summary>
-        /// StartUpState constructor, is responsible for setting the scene for the startup state of the gameplay
+        /// StartUpScene constructor, is responsible for setting the scene for the startup state of the gameplay
         /// </summary>
-        public StartUpScreenState()
+        public StartUpScreenScene()
         {
             //This function should create the needed enteties for the start up screen exemple add background, texture component, maybe add some text on the startup screen 
             //Create some help function if that is needed 
@@ -40,19 +44,19 @@ namespace Spel.Source.Gamestates
         /// StartUpScreenState alternate constructor. Can be used when we want to define a exact time which we would remain in this state.
         /// </summary>
         /// <param name="time">takes a double which would represent the time which we want to remain in this state.</param>
-        public StartUpScreenState(double time)
+        public StartUpScreenScene(double time)
         {
-            professor = false;
             entetiesInState = new List<int>();
             timer = new Timer(time);
             timer.Elapsed += timeElapsed;
             timer.Start();
             timeOut = false;
         }
-       
+
 
         /// <summary>
-        /// InitializeState method is used for initializing the enteties/object which is needed in the startupscreen.
+        /// onSceneCreated this function handles the logic for the state which should be run durring the update partion of the game.
+        /// For example this could be to check for conditions to continue to the next state of the gameplay.
         /// </summary>
         public void onSceneCreated()
         {
@@ -69,14 +73,43 @@ namespace Spel.Source.Gamestates
 
             entetiesInState.Add(id);
         }
+        /// <summary>
+        /// onSceneUpdate this function is called whenever the current gamestate is changed. This function should contain logic that 
+        /// needs to be processed before the state is shown for the player. This could be enteties that's not able to be created pre-runtime.
+        /// </summary>
         public void onSceneUpdate()
         {
             if(timeOut == true)
             {
+                List<IComponent> complist;
                 //This is used for changin the currentState 
-                SetUpPlayerState stateTwo = new SetUpPlayerState();
-                
-                SceneManager.Instance.setCurrentScene(stateTwo);
+                //SetUpPlayerScene stateTwo = new SetUpPlayerScene();
+
+                //SceneSystem.Instance.setCurrentScene(stateTwo);
+
+                MainMenu menu = new MainMenu();
+                SceneSystem.Instance.setCurrentScene(menu);
+
+                foreach(int comp in entetiesInState)
+                {
+                    complist = ComponentManager.Instance.GetAllEntityComponents(comp);
+                    foreach (IComponent a in complist)
+                    {
+                        if(a.GetType() == typeof(DrawableComponent))
+                        {
+                            DrawableComponent hej = (DrawableComponent)a;
+                            hej.visable = false;
+
+                        }
+                        if(a.GetType() == typeof(DrawableTextComponent))
+                        {
+                            DrawableTextComponent hej = (DrawableTextComponent)a;
+                            hej.visable = false;
+
+                        }
+                    }
+
+                }
                 
             }
         }

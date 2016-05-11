@@ -126,7 +126,7 @@ namespace Spel.Source
         public int CreatePlatform(Vector2 pos, string texture, int width, int height)
         {
             PositionComponent Pc = new PositionComponent(pos);
-            //DrawableComponent DC = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/"+texture));
+            DrawableComponent DC = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/"+texture));
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.X, (int)pos.Y, width, height));
             CollisionComponent CC = new CollisionComponent(false);
             PlatformComponent Plc = new PlatformComponent(pos, width, height);
@@ -137,7 +137,7 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, CRC);
             ComponentManager.Instance.AddComponentToEntity(id, CC);
             ComponentManager.Instance.AddComponentToEntity(id, Pc);
-       //     ComponentManager.Instance.AddComponentToEntity(id, DC);
+            ComponentManager.Instance.AddComponentToEntity(id, DC);
             ComponentManager.Instance.AddComponentToEntity(id, Plc);
             return id;
         }

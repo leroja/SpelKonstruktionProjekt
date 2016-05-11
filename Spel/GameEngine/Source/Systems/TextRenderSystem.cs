@@ -29,13 +29,28 @@ namespace GameEngine.Source.Systems
                 spriteBatch.Begin();
                 foreach (var a in dra)
                 {
-                    PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
+                    
                     DrawableTextComponent d = ComponentManager.Instance.GetEntityComponent<DrawableTextComponent>(a);
 
-                    if (p != null && d != null)
+                    Dictionary<Vector2, string> list = d.getMenuList();
+                    if(list != null)
                     {
-                        spriteBatch.DrawString(d.font, d.text, p.position, d.textColor);
+                        
+                        foreach(var item in list)
+                        {
+                            spriteBatch.DrawString(d.font, item.Value, item.Key, d.textColor);
+                        }
+                        
                     }
+                    else
+                    {
+                        PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
+                        if (p != null && d != null && d.visable == true)
+                        {
+                            spriteBatch.DrawString(d.font, d.text, p.position, d.textColor);
+                        }
+                    }
+                    
                 }
                 spriteBatch.End();
             }

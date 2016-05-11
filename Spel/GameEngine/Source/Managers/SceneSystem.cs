@@ -12,15 +12,15 @@ namespace GameEngine.Source.Managers
     /// SceneManager class is responsible for handling the different scenes(states) that's available in the game.
     /// This is a singleton
     /// </summary>
-    public class SceneManager:IUpdate
+    public class SceneSystem:IUpdate
     {
-        private static SceneManager instance;
-        private IGamestate activeScene;
+        private static SceneSystem instance;
+        private IGamescene activeScene;
 
         /// <summary>
         /// SceneManager default constructor
         /// </summary>
-        private SceneManager()
+        private SceneSystem()
         {
 
         }
@@ -28,13 +28,13 @@ namespace GameEngine.Source.Managers
         /// <summary>
         /// SceneManager constructor which makes it a singleton 
         /// </summary>
-        public static SceneManager Instance
+        public static SceneSystem Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new SceneManager();
+                    instance = new SceneSystem();
                 }
                 return instance;
             }
@@ -45,7 +45,7 @@ namespace GameEngine.Source.Managers
         /// keep track of it durring the gameplay
         /// </summary>
         /// <param name="currentState">this variable is a IGamestate object which should be the parentobject of all state objects.</param>
-        public void setCurrentScene(IGamestate currentState)
+        public void setCurrentScene(IGamescene currentState)
         {
             activeScene = currentState;
             activeScene.onSceneCreated();

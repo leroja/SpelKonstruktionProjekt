@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Systems.Interfaces
 {
-    public interface IGamestate
+    public interface IGamescene
     {
         List<int> entetiesInState { get; set; }
         void onSceneCreated();

@@ -10,8 +10,16 @@ using GameEngine.Source.Components;
 
 namespace GameEngine.Source.Systems
 {
+    /// <summary>
+    /// AnimationSystem class this class is responsible for handling the updates for the 
+    /// animation components.
+    /// </summary>
     class AnimationSystem : IUpdate
     {
+        /// <summary>
+        /// update function, is used for handling the update process for the animations.
+        /// </summary>
+        /// <param name="gameTime">takes a GameTime object as a parameter inorder to check if it should change the current frame</param>
         public void update(GameTime gameTime)
         {
             List<int> enteties = ComponentManager.Instance.GetAllEntitiesWithComponentType<AnimationComponent>();
