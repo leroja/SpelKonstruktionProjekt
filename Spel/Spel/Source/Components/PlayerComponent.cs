@@ -1,14 +1,15 @@
-﻿using System;
+﻿using GameEngine.Source.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Source.Components
+namespace Spel.Source.Components
 {
     /// <summary>
     /// PlayerComponent class is added to the enteties which is representations
-    /// of acctuall human players.
+    /// of actual human players.
     /// </summary>
     public class PlayerComponent : IComponent
     {

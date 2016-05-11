@@ -64,7 +64,7 @@ namespace Spel
             
             //GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(100,400));
 
-            GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 200), "platform", 150, 20);
+            GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 300), "platform", 150, 20);
 
             //test to se if it works, timer could be used to signal when we want to move to the next gamestate?
             //Texture2D text = Game.Inst().GetContent<Texture2D>("Pic/professor");

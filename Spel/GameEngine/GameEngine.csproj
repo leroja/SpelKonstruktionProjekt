@@ -59,6 +59,7 @@
     <Compile Include="Source\Components\AIComponent.cs" />
     <Compile Include="Source\Components\AnimationComponent.cs" />
     <Compile Include="Source\Components\HUDComponent.cs" />
+    <Compile Include="Source\Components\JumpComponent.cs" />
     <Compile Include="Source\Components\MouseComponent.cs" />
     <Compile Include="Source\Components\CollisionComponent.cs" />
     <Compile Include="Source\Components\CollisionRectangleComponent.cs" />
@@ -70,7 +71,6 @@
     <Compile Include="Source\Components\Interfaces\IComponent.cs" />
     <Compile Include="Source\Components\KeyBoardComponent.cs" />
     <Compile Include="Source\Components\MassComponent.cs" />
-    <Compile Include="Source\Components\PlayerComponent.cs" />
     <Compile Include="Source\Components\PositionComponent.cs" />
     <Compile Include="Source\Components\SoundEffectComponent.cs" />
     <Compile Include="Source\Components\TimerComponent.cs" />

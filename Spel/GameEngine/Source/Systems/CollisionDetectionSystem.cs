@@ -25,7 +25,7 @@ namespace GameEngine.Source.Systems
         {
             foreach (var item in observers)
             {
-                item.uppdate(ev);
+                item.update(ev);
             }
         }
 
@@ -66,12 +66,12 @@ namespace GameEngine.Source.Systems
                             {
                                 if (PhysicsManager.Instance.PixelPerfectCollision(item, jitem))
                                 {
-                                    Notify(new CollisionEvent(item, jitem));
+                                    Notify(new CollisionEvent(item, jitem, gameTime));
                                 }
                             }
                             else
                             {
-                                Notify(new CollisionEvent(item, jitem));
+                                Notify(new CollisionEvent(item, jitem, gameTime));
                             }
                         }
                     }

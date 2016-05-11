@@ -14,13 +14,6 @@ namespace GameEngine.Source.Components
     /// </summary>
     public class AIComponent: IComponent
     {
-        
-        bool isAI { get; set; }
-        /// <summary>
-        /// Default constructor for the AI component which is set to true when applying this component to a entity.
-        /// </summary>
-        public AIComponent(){
-            isAI = true;
-        }
+
     }
 }

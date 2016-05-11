@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Source.RandomStuff
+namespace Spel.Source.Enum
 {
-    public interface IObserver
+    public enum Direction
     {
-        void update(IEvent t);
+        Right = 1, 
+        Left = -1,
+        Still = 0
     }
 }
