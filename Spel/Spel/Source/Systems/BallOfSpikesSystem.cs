@@ -32,7 +32,7 @@ namespace Spel.Source.Systems
 
             CollisionRectangleComponent rec = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(id);
             PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(id);
-            //rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, newDraw.texture.Width, newDraw.texture.Height);
+            rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, newDraw.texture.Width, newDraw.texture.Height);
             rec.CollisionRec.X = (int)pos.position.X;
             rec.CollisionRec.Y = (int)pos.position.Y;
 
@@ -53,14 +53,17 @@ namespace Spel.Source.Systems
                 foreach (var ball in balls)
                 {
                     BallOfSpikesPowerUpComponent b = ComponentManager.Instance.GetEntityComponent<BallOfSpikesPowerUpComponent>(ball);
-                    double test = b.Pickuptime - timer.TotalGameTime.TotalSeconds;
+                    double test = b.time - timer.ElapsedGameTime.TotalSeconds;
                     if (test <= 0)
                     {
                       
                         DrawableComponent newDraw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(ball);
+                        BallOfSpikesPowerUpComponent pow = ComponentManager.Instance.GetEntityComponent<BallOfSpikesPowerUpComponent>(ball);
                         newDraw.texture = b.prevTexture;
                         ComponentManager.Instance.RemoveComponentFromEntity(ball, b);
+                       
                     }
+                    b.time = test;
                 }
             }
         }

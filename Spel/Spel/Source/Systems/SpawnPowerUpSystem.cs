@@ -43,7 +43,7 @@ namespace Spel.Source.Systems
                 int x = temp.Next(0, Game.Inst().GraphicsDevice.Viewport.Width);
                 int y = temp.Next(0, Game.Inst().GraphicsDevice.Viewport.Height);
                 Vector2 pos = new Vector2(x, y);
-                GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(x,y));
+                GameEntityFactory.Instance.CreateTestPowerUp(pos);
                 time = start;
 
             }
