@@ -11,6 +11,7 @@ using Spel.Source;
 using Spel.Source.Enum;
 using Spel.Source.Gamestates;
 using GameEngine.Source.Systems;
+using GameEngine.Source.Systems.Interfaces;
 
 namespace Spel
 {
@@ -21,6 +22,7 @@ namespace Spel
     {
 
         private static Game instance;
+        public IGamescene state;
 
         public Game() : base()
         {
