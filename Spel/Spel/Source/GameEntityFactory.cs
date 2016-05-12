@@ -53,7 +53,7 @@ namespace Spel.Source
             DrawableComponent comp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/Helmutani"));
             PositionComponent pos = new PositionComponent(position);
             VelocityComponent vel = new VelocityComponent(new Vector2(200F, 0), 50F);
-            JumpComponent jump = new JumpComponent(400F, 100F);
+            JumpComponent jump = new JumpComponent(300F, 100F);
             KeyBoardComponent kbc = new KeyBoardComponent();
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.position.X, (int)pos.position.Y, comp.texture.Width, comp.texture.Height));
             CollisionComponent CC = new CollisionComponent(pixlePer);
@@ -85,20 +85,23 @@ namespace Spel.Source
             return id;
         }
 
-        // @Todo Not finished yet
+
         /// <summary>
-        /// 
+        /// creates a border rectangle
         /// </summary>
         /// <param name="pos"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
+        /// <param name="side">
+        /// 
+        /// </param>
         /// <returns></returns>
-        public int CreateBorderRecs(Vector2 pos, int width, int height, Wall wall)
+        public int CreateBorderRecs(Vector2 pos, int width, int height, Wall side)
         {
             PositionComponent PC = new PositionComponent(pos);
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.X, (int)pos.Y, width, height));
             CollisionComponent CC = new CollisionComponent(false);
-            WallComponent wc = new WallComponent(wall);
+            WallComponent wc = new WallComponent(side);
             int id = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(id, PC);
             ComponentManager.Instance.AddComponentToEntity(id, CRC);
@@ -126,7 +129,7 @@ namespace Spel.Source
         public int CreatePlatform(Vector2 pos, string texture, int width, int height)
         {
             PositionComponent Pc = new PositionComponent(pos);
-            DrawableComponent DC = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/"+texture));
+            //DrawableComponent DC = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/"+texture));
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.X, (int)pos.Y, width, height));
             CollisionComponent CC = new CollisionComponent(false);
             PlatformComponent Plc = new PlatformComponent(pos, width, height);
@@ -137,7 +140,7 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, CRC);
             ComponentManager.Instance.AddComponentToEntity(id, CC);
             ComponentManager.Instance.AddComponentToEntity(id, Pc);
-            ComponentManager.Instance.AddComponentToEntity(id, DC);
+           // ComponentManager.Instance.AddComponentToEntity(id, DC);
             ComponentManager.Instance.AddComponentToEntity(id, Plc);
             return id;
         }

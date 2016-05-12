@@ -50,8 +50,8 @@ namespace Spel
             int ids = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(ids, fps);
 
-            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, Keys.Left, Keys.Down, Keys.Right, Vector2.One, "Kanin 1");
-            GameEntityFactory.Instance.CreateTestKanin(true, Keys.W, Keys.A, Keys.S, Keys.D, new Vector2(GraphicsDevice.Viewport.Width/2, 10), "Kanin 2");
+            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, Keys.Left, Keys.Down, Keys.Right, new Vector2(GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1");
+            GameEntityFactory.Instance.CreateTestKanin(true, Keys.W, Keys.A, Keys.S, Keys.D, Vector2.One, "Kanin 2");
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, GraphicsDevice.Viewport.Height, Wall.LeftWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
@@ -64,8 +64,8 @@ namespace Spel
             
             //GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(100,400));
 
-            //GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 250), "suddis", 150, 20);
-            //GameEntityFactory.Instance.CreatePlatform(new Vector2(800, 500), "suddis", 150, 20);
+            GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 250), "suddis", 150, 20);
+            GameEntityFactory.Instance.CreatePlatform(new Vector2(800, 500), "suddis", 150, 20);
 
 
 

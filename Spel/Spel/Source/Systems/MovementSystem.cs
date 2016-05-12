@@ -14,17 +14,22 @@ using Spel.Source.Enum;
 
 namespace Spel.Source.Systems
 {
+    /// <summary>
+    /// a system for handling movement of players
+    /// gravition is also handled in this system
+    /// </summary>
     public class MovementSystem : IUpdate
     {
         public void update(GameTime gameTime)
         {
 
-            List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<VelocityComponent>();
+            List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
             if (dra != null)
             {
                 foreach (var a in dra)
                 {
                     PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
+                    PlayerComponent pc = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(a);
                     VelocityComponent v = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(a);
                     KeyBoardComponent kbc = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(a);
                     DirectionComponent dc = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(a);
@@ -37,7 +42,7 @@ namespace Spel.Source.Systems
                     }
                     if (p != null && v != null && kbc != null)
                     {
-                        if (kbc.state[ActionsEnum.Up] == ButtonStates.Pressed)
+                        if (kbc.state[ActionsEnum.Up] == ButtonStates.Pressed && !pc.isFalling)
                         {
                             if(dc.directio == Direction.Still)
                             {

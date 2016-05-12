@@ -11,6 +11,9 @@ using Spel.Source.Components;
 
 namespace Spel.Source.Systems
 {
+    /// <summary>
+    /// a system for managing the health of players/
+    /// </summary>
     public class HealthSystem : IUpdate
     {
         public void update(GameTime gameTime)
@@ -37,32 +40,16 @@ namespace Spel.Source.Systems
                     }
                     else if (hc.health == 1)
                     {
-                        // update hud
-                        // update sprite?
-
                     }
                     else if (hc.health == 2)
                     {
-                        // update hud
-                        // update sprite?
-
                     }
                     else if (hc.health == 3)
                     {
-                        // update hud
-                        // update sprite?
 
-                    }
-                    else if (hc.health == 4)
+                    }else
                     {
-                        // update hud
-                        // update sprite?
 
-                    }
-                    else
-                    {
-                        // update hud
-                        // update sprite?
                     }
                 }
             }
