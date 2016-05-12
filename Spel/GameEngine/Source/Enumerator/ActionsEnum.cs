@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.Enumerator
 {
-
+    // @Todo
     // flytta till spelet istället?
+
+    /// <summary>
+    /// an eneum for defining the diferent types of actions in the game
+    /// </summary>
     public enum ActionsEnum
     {
-        Jump, Up, Down, Left, Right
+        Jump
     }
 }

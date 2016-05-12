@@ -13,7 +13,10 @@ using GameEngine.Source.RandomStuff;
 
 namespace Spel.Source.Systems
 {
-    class CollisionSystem : IObserver
+    /// <summary>
+    /// A system for handling collisions when they have occurred
+    /// </summary>
+    class CollisionSystem : IObserver, IObserving
     {
         public void update(IEvent t)
         {
@@ -206,7 +209,10 @@ namespace Spel.Source.Systems
             {
                 //@TODO 
                 // only loose life when the player jump on the floor, not when the player falls to the ground
+                // and have some kind of timer unti you can jump away
 
+                //@temp
+                // some of the stuff here is temporary
                 playerComp.isFalling = false;
 
 
@@ -218,7 +224,6 @@ namespace Spel.Source.Systems
                 pvc.velocity.Y = 0;
                 pvc.velocity.Y -= 500F * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                
                 HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
                 hc.health -= 1;
             }
@@ -246,6 +251,8 @@ namespace Spel.Source.Systems
             {
                 if (pcrc.CollisionRec.Intersects(pc.TopRec)) // @TODO tänk om gällande pixlePerfect, kanske
                 {
+                    //@todo maybe add some timer so that players can't stay there forever
+
                     changeDir(dc);
                     if (dc.directio != Direction.Still)
                     {
@@ -257,7 +264,6 @@ namespace Spel.Source.Systems
                 }
                 else
                 {
-
                     if (dc.directio != Direction.Still)
                     {
                         dc.preDir = dc.directio;
@@ -321,7 +327,8 @@ namespace Spel.Source.Systems
             {
                 dc.preDir = dc.directio;
                 dc.directio = Direction.Right;
-            }else if(dc.directio == Direction.Right)
+            }
+            else if(dc.directio == Direction.Right)
             {
                 dc.preDir = dc.directio;
                 dc.directio = Direction.Left;

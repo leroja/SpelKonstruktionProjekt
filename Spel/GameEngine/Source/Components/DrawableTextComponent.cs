@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,9 @@ namespace GameEngine.Source.Components
         public SpriteFont font { get; set; }
         public bool visable { get; set; }
         private Dictionary<Vector2,String> menu;
+        KeyboardState prevState;
+        KeyboardState currentState;
+
 
 
 
@@ -108,8 +112,11 @@ namespace GameEngine.Source.Components
                 if (selectedIndex >= menuItems.Length)
                     selectedIndex = menuItems.Length - 1;
             }
-            //Vi kanske behöver ha en metod här i som returnerar storleken på menyn, 
-            //så att vi vet hur den skall placeras.
+        }
+
+        public bool controlKeys(Keys key)
+        {
+            return currentState.IsKeyUp(key) && prevState.IsKeyDown(key);
         }
     }
 }

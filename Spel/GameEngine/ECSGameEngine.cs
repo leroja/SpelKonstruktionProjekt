@@ -49,7 +49,7 @@ namespace GameEngine
             SystemManager.Instance.AddSystem(new AnimationSystem());
             SystemManager.Instance.AddSystem(SceneSystem.Instance);
 
-            // @TODO make it better
+            // @TODO make this system better
             SystemManager.Instance.AddSystem(new WindowTitleFPSSystem(this));
 
 

@@ -12,6 +12,9 @@ using Spel.Source.Components;
 
 namespace Spel.Source.Systems
 {
+    /// <summary>
+    /// a system for drawing the hud of the player
+    /// </summary>
     class HUDSystem : IDraw
     {
         public void draw(GameTime gameTime, SpriteBatch spriteBatch)

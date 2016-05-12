@@ -12,6 +12,8 @@ using Microsoft.Xna.Framework;
 using GameEngine.Source.Systems.Interfaces;
 using GameEngine.Source.Components;
 using GameEngine.Source.Managers;
+using Spel.Source.Gamestates;
+using Spel.Source.Gamesceenes;
 
 namespace Spel.Menus
 {
@@ -27,6 +29,7 @@ namespace Spel.Menus
         private float x;
         private float y;
         private string [] menuItems;
+        private DrawableTextComponent textcomp;
         /// <summary>
         /// MenuScene constructor is responsible for creating the entities for the menu. The default position
         /// for the entities in the menu will be somewhere in the middle of the screen.
@@ -73,7 +76,7 @@ namespace Spel.Menus
                 yvar += 30;
                 i++;
             }
-            DrawableTextComponent textcomp = new DrawableTextComponent(menuList, Game.Inst().GetContent<SpriteFont>("Fonts/MenuFont"), Color.Black);
+            textcomp = new DrawableTextComponent(menuList, Game.Inst().GetContent<SpriteFont>("Fonts/MenuFont"), Color.Black);
             int id = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(id, textcomp);
             entitiesInState.Add(id);
@@ -99,6 +102,13 @@ namespace Spel.Menus
         /// </summary>
         public void onSceneUpdate()
         {
+            Game game = Game.Inst();
+            if (textcomp.selectedIndex == 0 && textcomp.controlKeys(Keys.Enter))
+                game.state = new PlayingScene();
+            else if (textcomp.selectedIndex == 1 && textcomp.controlKeys(Keys.Enter))
+                game.state = new OptionsScene();
+            else if (textcomp.selectedIndex == 2 && textcomp.controlKeys(Keys.Enter))
+                game.Exit();
             return;
         }
     }
