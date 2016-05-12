@@ -22,7 +22,8 @@ namespace Spel.Source.Systems
         {
             // @Todo
             // Maybe check that t really is a CollionEvent
-            CollisionEvent coll = (CollisionEvent)t;   
+            CollisionEvent coll = (CollisionEvent)t;
+
             int ent1 = coll.entity1;
             int ent2 = coll.entity2;
             GameTime gt = coll.gt;
@@ -48,6 +49,7 @@ namespace Spel.Source.Systems
                     {
                         if (dcp2.directio != Direction.Still)
                         {
+                            changeDir(dcp2);
                             dcp2.preDir = dcp2.directio;
                             dcp2.directio = Direction.Still;
                         }
@@ -65,6 +67,7 @@ namespace Spel.Source.Systems
                     {
                         if (dcp1.directio != Direction.Still)
                         {
+                            changeDir(dcp1);
                             dcp1.preDir = dcp1.directio;
                             dcp1.directio = Direction.Still;
                         }
@@ -82,12 +85,14 @@ namespace Spel.Source.Systems
                     {
                         if (dcp1.directio != Direction.Still)
                         {
+                            changeDir(dcp1);
                             dcp1.preDir = dcp1.directio;
                             dcp1.directio = Direction.Still;
                         }
                         vcp1.velocity.Y = 0;
                         if (dcp2.directio != Direction.Still)
                         {
+                            changeDir(dcp2);
                             dcp2.preDir = dcp2.directio;
                             dcp2.directio = Direction.Still;
                         }
@@ -112,6 +117,17 @@ namespace Spel.Source.Systems
                 if (ComponentManager.Instance.CheckIfEntityHasComponent<WallComponent>(ent2))
                 {
                     PlayerVsWallColl(ent1, ent2, gt);
+                }
+            }
+            else if(collType == CollisionTypes.PlayerVsCube)
+            {
+                if (ComponentManager.Instance.CheckIfEntityHasComponent<PlayerComponent>(ent1))
+                {
+                    PlayerVsCubeColl(ent1, ent2);
+                }
+                else if (ComponentManager.Instance.CheckIfEntityHasComponent<PlayerComponent>(ent2))
+                {
+                    PlayerVsCubeColl(ent2, ent1);
                 }
             }
             else if (collType == CollisionTypes.PlayerVsPowerup)
@@ -183,7 +199,7 @@ namespace Spel.Source.Systems
             if (wall.wall == Wall.LeftWall)
             {
                 if (crc2.CollisionRec.X + crc2.CollisionRec.Width * 0.5 < crc1.CollisionRec.X)
-                    pc.position.X = Game.Inst().GraphicsDevice.Viewport.Width - 1 - crc2.CollisionRec.Width * 0.5f;
+                    pc.position.X = Game.Instance.GraphicsDevice.Viewport.Width - 1 - crc2.CollisionRec.Width * 0.5f;
             }
             else if (wall.wall == Wall.RightWall)
             {
@@ -194,6 +210,7 @@ namespace Spel.Source.Systems
             {
                 if (pdc.directio != Direction.Still)
                 {
+                    changeDir(pdc);
                     pdc.preDir = pdc.directio;
                     pdc.directio = Direction.Still;
                 }
@@ -218,6 +235,7 @@ namespace Spel.Source.Systems
 
                 if (pdc.directio != Direction.Still)
                 {
+                    changeDir(pdc);
                     pdc.preDir = pdc.directio;
                     pdc.directio = Direction.Still;
                 }
@@ -266,6 +284,7 @@ namespace Spel.Source.Systems
                 {
                     if (dc.directio != Direction.Still)
                     {
+                        changeDir(dc);
                         dc.preDir = dc.directio;
                         dc.directio = Direction.Still;
                     }
@@ -313,6 +332,10 @@ namespace Spel.Source.Systems
             {
                 return CollisionTypes.PlayerVsPlatform;
             }
+            else if (list1.OfType<PlayerComponent>().Any() && list2.OfType<ChangeCubeComponent>().Any() || list2.OfType<PlayerComponent>().Any() && list1.OfType<ChangeCubeComponent>().Any())
+            {
+                return CollisionTypes.PlayerVsCube;
+            }
             return CollisionTypes.NotDefined;
         }
 
@@ -350,6 +373,23 @@ namespace Spel.Source.Systems
             //@Todo 
         }
 
+        /// <summary>
+        /// handles player versus changeDirectionCube collision
+        /// </summary>
+        /// <param name="Player"> id of the player entity </param>
+        /// <param name="Cube"> id of the Cube entity </param>
+        private void PlayerVsCubeColl(int Player, int Cube)
+        {
+            PlayerComponent plaCom = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(Player);
+            if (!plaCom.isFalling)
+            {
+                DirectionComponent dir = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(Player);
+                changeDir(dir);
+
+                ChangeCubeComponent change = ComponentManager.Instance.GetEntityComponent<ChangeCubeComponent>(Cube);
+                change.isTaken = true;
+            }
+        }
 
         /// <summary>
         /// Removes Powerup from component manager

@@ -11,6 +11,6 @@ namespace Spel.Source.Enum
     /// </summary>
     public enum CollisionTypes
     {
-        PlayerVsPlayer, PlayerVsWall, PlayerVsPlatform, PlayerVsPowerup, NotDefined
+        PlayerVsPlayer, PlayerVsWall, PlayerVsPlatform, PlayerVsPowerup, PlayerVsCube, NotDefined
     }
 }

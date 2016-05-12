@@ -50,7 +50,7 @@ namespace Spel.Source.Gamestates
             if(professor == false)
             {
 
-                Texture2D text = Game.Inst().GetContent<Texture2D>("Pic/professor");
+                Texture2D text = Game.Instance.GetContent<Texture2D>("Pic/professor");
                 DrawableComponent comp2 = new DrawableComponent(text);
                 PositionComponent pos2 = new PositionComponent(new Vector2(1, 1));
                 AnimationComponent ani = new AnimationComponent(64, 64, text.Width, text.Height, 0.1);

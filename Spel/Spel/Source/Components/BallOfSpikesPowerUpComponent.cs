@@ -17,7 +17,7 @@ namespace Spel.Source.Components
         public double lifeTime;
         public BallOfSpikesPowerUpComponent(double time)
         {
-            SpikeTexture = Game.Inst().GetContent<Texture2D>("pic/Giant_spike_ball");
+            SpikeTexture = Game.Instance.GetContent<Texture2D>("pic/Giant_spike_ball");
             this.lifeTime = time;
         }
     }

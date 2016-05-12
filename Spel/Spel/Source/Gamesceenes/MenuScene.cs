@@ -76,12 +76,12 @@ namespace Spel.Menus
                 yvar += 30;
                 i++;
             }
-            textcomp = new DrawableTextComponent(menuList, Game.Inst().GetContent<SpriteFont>("Fonts/MenuFont"), Color.Black);
+            textcomp = new DrawableTextComponent(menuList, Game.Instance.GetContent<SpriteFont>("Fonts/MenuFont"), Color.Black);
             int id = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(id, textcomp);
             entitiesInState.Add(id);
 
-            Texture2D arrowPix = Game.Inst().GetContent<Texture2D>("pic/arrow");
+            Texture2D arrowPix = Game.Instance.GetContent<Texture2D>("pic/arrow");
             DrawableComponent arrow = new DrawableComponent(arrowPix);
             PositionComponent arrowPos = new PositionComponent(new Vector2(this.x - 35, this.y));
             int arrowId = ComponentManager.Instance.CreateID();
@@ -102,7 +102,7 @@ namespace Spel.Menus
         /// </summary>
         public void onSceneUpdate()
         {
-            Game game = Game.Inst();
+            Game game = Game.Instance;
             if (textcomp.selectedIndex == 0 && textcomp.controlKeys(Keys.Enter))
                 game.state = new PlayingScene();
             else if (textcomp.selectedIndex == 1 && textcomp.controlKeys(Keys.Enter))

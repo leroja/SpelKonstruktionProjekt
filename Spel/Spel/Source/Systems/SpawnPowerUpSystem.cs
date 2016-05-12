@@ -47,10 +47,11 @@ namespace Spel.Source.Systems
                     }
                 }
                 Random temp = new Random();
-                int x = temp.Next(0, Game.Inst().GraphicsDevice.Viewport.Width);
-                int y = temp.Next(0, Game.Inst().GraphicsDevice.Viewport.Height);
+                int x = temp.Next(0, Game.Instance.GraphicsDevice.Viewport.Width);
+                int y = temp.Next(0, Game.Instance.GraphicsDevice.Viewport.Height);
                 Vector2 pos = new Vector2(x, y);
                 GameEntityFactory.Instance.CreateTestPowerUp(pos);
+                GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(temp.Next(0,Game.Instance.GraphicsDevice.Viewport.Width),temp.Next(0,Game.Instance.GraphicsDevice.Viewport.Height)));
                 time = start;
 
             }

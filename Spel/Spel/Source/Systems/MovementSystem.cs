@@ -49,6 +49,7 @@ namespace Spel.Source.Systems
                             if(dc.directio == Direction.Still)
                             {
                                 dc.directio = dc.preDir;
+                                //changeDir(dc);
                             }
                             if (v.velocity.Y > -jump.maxJumpHeight)
                             {
@@ -60,6 +61,24 @@ namespace Spel.Source.Systems
                         p.position += v.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
                 }
+            }
+        }
+        /// <summary>
+        /// Changes the direction of the component
+        /// and sets the previous direction to the current direction
+        /// </summary>
+        /// <param name="dc"></param>
+        private void changeDir(DirectionComponent dc)
+        {
+            if (dc.directio == Direction.Left)
+            {
+                dc.preDir = dc.directio;
+                dc.directio = Direction.Right;
+            }
+            else if (dc.directio == Direction.Right)
+            {
+                dc.preDir = dc.directio;
+                dc.directio = Direction.Left;
             }
         }
     }

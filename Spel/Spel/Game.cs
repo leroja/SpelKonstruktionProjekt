@@ -41,6 +41,7 @@ namespace Spel
             CollisionSystem col = new CollisionSystem();
             det.Subscribe(col);
 
+            SystemManager.Instance.AddSystem(new ChangeCubesSystem());
             SystemManager.Instance.AddSystem(col);
             SystemManager.Instance.AddSystem(new HUDSystem());
             SystemManager.Instance.AddSystem(new HealthSystem());
@@ -97,15 +98,17 @@ namespace Spel
 
 
 
-        public static Game Inst()
+        public static Game Instance
         {
-            return instance;
+            get
+            {
+                return instance;
+            }
         }
 
         public T GetContent<T>(string asset)
         {
             return (Content.Load<T>(asset));
-
         }
     }
 }

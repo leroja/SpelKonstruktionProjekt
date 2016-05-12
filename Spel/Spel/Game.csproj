@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game.cs" />
+    <Compile Include="Source\Components\ChangeCubeComponent.cs" />
     <Compile Include="Source\Gamesceenes\MenuScene.cs" />
     <Compile Include="Menus\MenuComponent.cs" />
     <Compile Include="Program.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Source\Gamesceenes\PlayingScene.cs" />
     <Compile Include="Source\Gamesceenes\SetUpPlayerScene.cs" />
     <Compile Include="Source\Gamesceenes\StartUpScreenScene.cs" />
+    <Compile Include="Source\Systems\ChangeCubesSystem.cs" />
     <Compile Include="Source\Systems\CollisionSystem.cs" />
     <Compile Include="Source\Systems\HealthSystem.cs" />
     <Compile Include="Source\Systems\HUDSystem.cs" />
