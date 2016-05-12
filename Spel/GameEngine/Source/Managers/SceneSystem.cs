@@ -26,7 +26,7 @@ namespace GameEngine.Source.Managers
         }
 
         /// <summary>
-        /// SceneManager constructor which makes it a singleton 
+        /// SceneManager singleton 
         /// </summary>
         public static SceneSystem Instance
         {
@@ -51,7 +51,11 @@ namespace GameEngine.Source.Managers
             activeScene.onSceneCreated();
         }
 
-
+        /// <summary>
+        /// update function for the scenesystem, runs the update function for the current active scene(state). 
+        /// this makes the scene able to check for conditions whenever we need to change the scene(state).
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void update(GameTime gameTime)
         {
             if(activeScene!= null)

@@ -134,6 +134,10 @@ namespace Spel.Source.Systems
                         BallOfSpikesSystem temp = new BallOfSpikesSystem();
                         temp.OnPowerUpPicup(player);
                         break;
+                    case 2:
+                        HealthComponent hp = ComponentManager.Instance.GetEntityComponent<HealthComponent>(player);
+                        hp.health = hp.maxhealth;
+                        break;
                     default:
                         break;
                 }

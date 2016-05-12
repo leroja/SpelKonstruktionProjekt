@@ -20,7 +20,7 @@ namespace Spel.Source.Gamestates
     class StartUpScreenScene : IGamescene
     {
 
-        public List<int> entetiesInState
+        public List<int> entitiesInState
         {
             get; set;
         }
@@ -35,7 +35,7 @@ namespace Spel.Source.Gamestates
             //This function should create the needed enteties for the start up screen exemple add background, texture component, maybe add some text on the startup screen 
             //Create some help function if that is needed 
 
-            entetiesInState = new List<int>();
+            entitiesInState = new List<int>();
             timeOut = true;
         }
 
@@ -46,7 +46,7 @@ namespace Spel.Source.Gamestates
         /// <param name="time">takes a double which would represent the time which we want to remain in this state.</param>
         public StartUpScreenScene(double time)
         {
-            entetiesInState = new List<int>();
+            entitiesInState = new List<int>();
             timer = new Timer(time);
             timer.Elapsed += timeElapsed;
             timer.Start();
@@ -55,8 +55,8 @@ namespace Spel.Source.Gamestates
 
 
         /// <summary>
-        /// onSceneCreated this function handles the logic for the state which should be run durring the update partion of the game.
-        /// For example this could be to check for conditions to continue to the next state of the gameplay.
+        /// onSceneCreated this function is called whenever the current gamestate is changed. This function should contain logic that 
+        /// needs to be processed before the state is shown for the player. This could be enteties that's not able to be created pre-runtime.
         /// </summary>
         public void onSceneCreated()
         {
@@ -71,11 +71,12 @@ namespace Spel.Source.Gamestates
             ComponentManager.Instance.AddComponentToEntity(id, dtx);
             ComponentManager.Instance.AddComponentToEntity(id, pc);
 
-            entetiesInState.Add(id);
+            entitiesInState.Add(id);
         }
+
         /// <summary>
-        /// onSceneUpdate this function is called whenever the current gamestate is changed. This function should contain logic that 
-        /// needs to be processed before the state is shown for the player. This could be enteties that's not able to be created pre-runtime.
+        /// onSceneUpdate this function handles the logic for the state which should be run durring the update partion of the game.
+        /// For example this could be to check for conditions to continue to the next state of the gameplay. 
         /// </summary>
         public void onSceneUpdate()
         {
@@ -87,10 +88,12 @@ namespace Spel.Source.Gamestates
 
                 //SceneSystem.Instance.setCurrentScene(stateTwo);
 
-                MainMenu menu = new MainMenu();
+                string[] menuItems = { "Start Game", "Options", "End Game" };
+
+                MenuScene menu = new MenuScene(menuItems);
                 SceneSystem.Instance.setCurrentScene(menu);
 
-                foreach(int comp in entetiesInState)
+                foreach(int comp in entitiesInState)
                 {
                     complist = ComponentManager.Instance.GetAllEntityComponents(comp);
                     foreach (IComponent a in complist)

@@ -18,7 +18,7 @@ namespace Spel.Source.Gamestates
     /// </summary>
     class SetUpPlayerScene : IGamescene
     {
-        public List<int> entetiesInState { get; set; }
+        public List<int> entitiesInState { get; set; }
         private bool professor;
         
         /// <summary>
@@ -27,13 +27,13 @@ namespace Spel.Source.Gamestates
         /// </summary>
         public SetUpPlayerScene()
         {
-            entetiesInState = new List<int>();
+            entitiesInState = new List<int>();
             professor = false;
         }
 
         /// <summary>
-        /// onSceneCreated this function handles the logic for the state which should be run durring the update partion of the game.
-        /// For example this could be to check for conditions to continue to the next state of the gameplay.
+        /// onSceneCreated this function is called whenever the current gamestate is changed. This function should contain logic that 
+        /// needs to be processed before the state is shown for the player. This could be enteties that's not able to be created pre-runtime.
         /// </summary>
         public void onSceneCreated()
         {
@@ -42,8 +42,8 @@ namespace Spel.Source.Gamestates
         }
 
         /// <summary>
-        /// onSceneUpdate this function is called whenever the current gamestate is changed. This function should contain logic that 
-        /// needs to be processed before the state is shown for the player. This could be enteties that's not able to be created pre-runtime.
+        /// onSceneUpdate this function handles the logic for the state which should be run durring the update partion of the game.
+        /// For example this could be to check for conditions to continue to the next state of the gameplay. 
         /// </summary>
         public void onSceneUpdate()
         {

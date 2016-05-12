@@ -14,11 +14,11 @@ namespace Spel.Source.Components
     {
         public Texture2D SpikeTexture;
         public Texture2D prevTexture;
-        public double time;
+        public double lifeTime;
         public BallOfSpikesPowerUpComponent(double time)
         {
             SpikeTexture = Game.Inst().GetContent<Texture2D>("pic/Giant_spike_ball");
-            this.time = time;
+            this.lifeTime = time;
         }
     }
 }

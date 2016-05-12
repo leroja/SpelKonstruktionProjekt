@@ -10,7 +10,7 @@ namespace Spel.Source.Gamestates
 {
     class PlayingScene : IGamescene
     {
-        public List<int> entetiesInState { get; set; }
+        public List<int> entitiesInState { get; set; }
 
         /// <summary>
         /// PlayingScene constructor, is responsible for containg the enteties which is in the playing state of the gameplay.
@@ -28,7 +28,7 @@ namespace Spel.Source.Gamestates
         /// <param name="index">an int which represent the index of the entity of the player which needs to be added</param>
         public void addEntity(int index)
         {
-            entetiesInState.Add(index);
+            entitiesInState.Add(index);
         }
         /// <summary>
         /// removeEntity function is used for removing a entity durring the playing part of the game, for example when a player dies the entity for the player should
@@ -37,7 +37,7 @@ namespace Spel.Source.Gamestates
         /// <param name="index"></param>
         public void removeEntity(int index)
         {
-            entetiesInState.Remove(index);
+            entitiesInState.Remove(index);
         }
         /// <summary>
         /// initializeMap function is used to create the entities for the layout of the map which should be used durring the gameplay.
@@ -49,11 +49,19 @@ namespace Spel.Source.Gamestates
             //This should create the enteties which is needed durring the gameplay. Read all pictures of the map and depending on colour create enteties and so forth.
         }
 
+        /// <summary>
+        /// onSceneCreated this function is called whenever the current gamestate is changed. This function should contain logic that 
+        /// needs to be processed before the state is shown for the player. This could be enteties that's not able to be created pre-runtime.
+        /// </summary>
         public void onSceneCreated()
         {
 
         }
 
+        /// <summary>
+        /// onSceneUpdate this function handles the logic for the state which should be run durring the update partion of the game.
+        /// For example this could be to check for conditions to continue to the next state of the gameplay. 
+        /// </summary>
         public void onSceneUpdate()
         {
 

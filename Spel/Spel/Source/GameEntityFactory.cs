@@ -50,7 +50,7 @@ namespace Spel.Source
         {
 
             DirectionComponent dc = new DirectionComponent(Direction.Right);
-            DrawableComponent comp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/Helmutani"));
+            DrawableComponent comp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/Helmutspritesheet"));
             PositionComponent pos = new PositionComponent(position);
             VelocityComponent vel = new VelocityComponent(new Vector2(200F, 0), 50F);
             JumpComponent jump = new JumpComponent(300F, 100F);
@@ -62,7 +62,7 @@ namespace Spel.Source
             HUDComponent hudc = new HUDComponent(Game.Inst().GetContent<Texture2D>("Pic/PowerUp"), new Vector2(pos.position.X, pos.position.Y));
             HUDComponent hudc2 = new HUDComponent(Game.Inst().GetContent<Texture2D>("Pic/PowerUp"), Vector2.One);
             HealthComponent hc = new HealthComponent(3);
-            AnimationComponent ani = new AnimationComponent(100, 114, comp.texture.Width, comp.texture.Height, 0.3);
+            AnimationComponent ani = new AnimationComponent(166, 167, comp.texture.Width, comp.texture.Height, 0.2);
             kbc.keyBoardActions.Add(ActionsEnum.Up, up);
             kbc.keyBoardActions.Add(ActionsEnum.Down, down);
             kbc.keyBoardActions.Add(ActionsEnum.Left, left);
@@ -110,10 +110,16 @@ namespace Spel.Source
 
             return id;
         }
+        /// <summary>
+        /// Creates an new PowerUpp
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public int CreateTestPowerUp(Vector2 position)
         {
+            Random rand = new Random();
             PositionComponent Pc = new PositionComponent(position);
-            PowerUppComponent power = new PowerUppComponent(1);
+            PowerUppComponent power = new PowerUppComponent(rand.Next(2,3));
             DrawableComponent powerupp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/PowerUp"));
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)position.X, (int)position.Y, powerupp.texture.Width, powerupp.texture.Height));
             CollisionComponent CC = new CollisionComponent(true);

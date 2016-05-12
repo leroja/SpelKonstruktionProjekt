@@ -57,11 +57,11 @@ namespace Spel
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height, Wall.RightWall);
 
-           // StartUpScreenScene stateOne = new StartUpScreenScene(1000);
-           // SceneSystem.Instance.setCurrentScene(stateOne);
+            StartUpScreenScene stateOne = new StartUpScreenScene(1000);
+            SceneSystem.Instance.setCurrentScene(stateOne);
 
 
-            
+
             //GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(100,400));
 
             GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 250), "suddis", 150, 20);
