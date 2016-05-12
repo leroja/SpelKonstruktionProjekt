@@ -9,6 +9,8 @@ namespace GameEngine.Source.Components
     public class CollisionComponent : IComponent
     {
         public bool isPixelPerfectCompat { get; set; }
+        //@temp, @TODO
+        public bool Stuff { get; set; }
 
         public CollisionComponent(bool active)
         {

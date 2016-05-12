@@ -45,8 +45,17 @@ namespace GameEngine.Source.Systems
             {
                 foreach (var ent in ents)
                 {
+                    
                     CollisionRectangleComponent rec =  ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent);
                     DrawBorder(rec.CollisionRec, 2, Color.DarkRed, spriteBatch);
+
+                    DrawableComponent dc = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(ent);
+                    if (dc != null)
+                    {
+                        Rectangle rc = new Rectangle(rec.CollisionRec.X, rec.CollisionRec.Y, dc.texture.Width, dc.texture.Height);
+
+                        DrawBorder(rc, 2, Color.YellowGreen, spriteBatch);
+                    }
                 }
             }
 

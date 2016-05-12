@@ -49,10 +49,11 @@ namespace Spel.Source
         public int CreateTestKanin(bool pixlePer, Keys up, Keys left, Keys down, Keys right, Vector2 position, string name)
         {
 
-
-            DrawableComponent comp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/Helmutani"));
+            DirectionComponent dc = new DirectionComponent(Direction.Right);
+            DrawableComponent comp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/Helmutspritesheet"));
             PositionComponent pos = new PositionComponent(position);
-            VelocityComponent vel = new VelocityComponent(new Vector2(200F, 200F), 50F, 600F);
+            VelocityComponent vel = new VelocityComponent(new Vector2(200F, 0), 50F);
+            JumpComponent jump = new JumpComponent(400F, 100F);
             KeyBoardComponent kbc = new KeyBoardComponent();
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.position.X, (int)pos.position.Y, comp.texture.Width, comp.texture.Height));
             CollisionComponent CC = new CollisionComponent(pixlePer);
@@ -61,7 +62,7 @@ namespace Spel.Source
             HUDComponent hudc = new HUDComponent(Game.Inst().GetContent<Texture2D>("Pic/PowerUp"), new Vector2(pos.position.X, pos.position.Y));
             HUDComponent hudc2 = new HUDComponent(Game.Inst().GetContent<Texture2D>("Pic/PowerUp"), Vector2.One);
             HealthComponent hc = new HealthComponent(3);
-            AnimationComponent ani = new AnimationComponent(100, 114, comp.texture.Width, comp.texture.Height, 0.3);
+            AnimationComponent ani = new AnimationComponent(166, 167, comp.texture.Width, comp.texture.Height, 0.2);
             kbc.keyBoardActions.Add(ActionsEnum.Up, up);
             kbc.keyBoardActions.Add(ActionsEnum.Down, down);
             kbc.keyBoardActions.Add(ActionsEnum.Left, left);
@@ -79,6 +80,8 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, hudc);
             ComponentManager.Instance.AddComponentToEntity(id, hc);
             ComponentManager.Instance.AddComponentToEntity(id, ani);
+            ComponentManager.Instance.AddComponentToEntity(id, dc);
+            ComponentManager.Instance.AddComponentToEntity(id, jump);
             return id;
         }
 

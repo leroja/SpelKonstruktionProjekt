@@ -14,16 +14,12 @@ namespace GameEngine.Source.Components
         public Vector2 velocity;
         // Speed of velocity
         public float speed { get; set; }
-        // Direction of velocity.
-        public int direction { get; set; }
-        public float jumpHeight { get; set; }
 
         // Contstructor for velocityComponent
-        public VelocityComponent(Vector2 velocity, float speed, float jh)
+        public VelocityComponent(Vector2 velocity, float speed)
         {
             this.velocity = velocity;
             this.speed = speed;
-            this.jumpHeight = jh;
         }
     }
 }
