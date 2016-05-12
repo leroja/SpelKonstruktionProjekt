@@ -12,15 +12,15 @@ using GameEngine.Source.Systems.Interfaces;
 namespace GameEngine.Source.Systems
 {
     /// <summary>
-    /// a system that draws text
+    /// TextRenderSystem the class responsible for handling the drawing of text sprites
     /// </summary>
     class TextRenderSystem : IDraw
     {
         /// <summary>
-        /// 
+        /// draw is the function which handles the actuall drawing of the text in each loop in the game.
         /// </summary>
-        /// <param name="gameTime"></param>
-        /// <param name="spriteBatch"></param>
+        /// <param name="gameTime">Takes a GameTime object which should represent the time since the last time this function was called</param>
+        /// <param name="spriteBatch">Takes a SpriteBatch object which is used to draw the textures directly to the screen</param>
         public void draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<DrawableTextComponent>();
@@ -33,15 +33,18 @@ namespace GameEngine.Source.Systems
                     DrawableTextComponent d = ComponentManager.Instance.GetEntityComponent<DrawableTextComponent>(a);
 
                     Dictionary<Vector2, string> list = d.getMenuList();
+                    //If there is a menulist then there's multiple lines of text that should be written to the screen. 
                     if(list != null)
                     {
-                        
+                        //For each of the strings in the list write them to the screen, the value key in the dictionary is the
+                        //position where the line should be written.
                         foreach(var item in list)
                         {
                             spriteBatch.DrawString(d.font, item.Value, item.Key, d.textColor);
                         }
                         
                     }
+                    //There is just one line of text, then just draw it to the screen.
                     else
                     {
                         PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);

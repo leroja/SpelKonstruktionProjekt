@@ -12,7 +12,7 @@ namespace Spel.Source.Gamestates
     /// </summary>
     class PauseScene : IGamescene
     {
-        public List<int> entetiesInState { get; set; }
+        public List<int> entitiesInState { get; set; }
 
         /// <summary>
         /// PauseScene constructor, is responisble for containing the enteties which are active and displayed in
@@ -24,16 +24,16 @@ namespace Spel.Source.Gamestates
             //different background. (Control for unpausing (?)) 
         }
         /// <summary>
-        /// onSceneCreated this function handles the logic for the state which should be run durring the update partion of the game.
-        /// For example this could be to check for conditions to continue to the next state of the gameplay.
+        /// onSceneCreated this function is called whenever the current gamestate is changed. This function should contain logic that 
+        /// needs to be processed before the state is shown for the player. This could be enteties that's not able to be created pre-runtime.
         /// </summary>
         public void onSceneCreated()
         {
 
         }
         /// <summary>
-        /// onSceneUpdate this function is called whenever the current gamestate is changed. This function should contain logic that 
-        /// needs to be processed before the state is shown for the player. This could be enteties that's not able to be created pre-runtime.
+        /// onSceneUpdate this function handles the logic for the state which should be run durring the update partion of the game.
+        /// For example this could be to check for conditions to continue to the next state of the gameplay. 
         /// </summary>
         public void onSceneUpdate()
         {

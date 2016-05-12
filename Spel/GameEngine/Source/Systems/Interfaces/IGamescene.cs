@@ -8,7 +8,7 @@ namespace GameEngine.Source.Systems.Interfaces
 {
     public interface IGamescene
     {
-        List<int> entetiesInState { get; set; }
+        List<int> entitiesInState { get; set; }
         void onSceneCreated();
         void onSceneUpdate();
     }
