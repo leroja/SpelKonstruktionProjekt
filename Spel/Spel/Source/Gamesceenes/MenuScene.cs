@@ -66,15 +66,30 @@ namespace Spel.Menus
             Dictionary<Vector2, String> menuList = new Dictionary<Vector2, string>();
             
             int i = 0;
+            float yvar = this.y;
             foreach (string a in menuItems)
             {
-                menuList.Add(new Vector2(this.x, this.y), menuItems[i]);
-                this.y += 30;
+                menuList.Add(new Vector2(this.x, yvar), menuItems[i]);
+                yvar += 30;
                 i++;
             }
             DrawableTextComponent textcomp = new DrawableTextComponent(menuList, Game.Inst().GetContent<SpriteFont>("Fonts/MenuFont"), Color.Black);
             int id = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(id, textcomp);
+            entitiesInState.Add(id);
+
+            Texture2D arrowPix = Game.Inst().GetContent<Texture2D>("pic/arrow");
+            DrawableComponent arrow = new DrawableComponent(arrowPix);
+            PositionComponent arrowPos = new PositionComponent(new Vector2(this.x - 35, this.y));
+            int arrowId = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(arrowId, arrow);
+            ComponentManager.Instance.AddComponentToEntity(arrowId, arrowPos);
+            KeyBoardComponent kbcArrow = new KeyBoardComponent();
+            
+
+            ComponentManager.Instance.AddComponentToEntity(arrowId, kbcArrow);
+
+        
             entitiesInState.Add(id);
         }
 
