@@ -20,6 +20,9 @@ namespace Spel.Source.Systems
     /// </summary>
     public class MovementSystem : IUpdate
     {
+
+        private const float gravity = 500F;
+        private const float sideMovement = 200F;
         public void update(GameTime gameTime)
         {
 
@@ -35,46 +38,28 @@ namespace Spel.Source.Systems
                     DirectionComponent dc = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(a);
                     JumpComponent jump = ComponentManager.Instance.GetEntityComponent<JumpComponent>(a);
                     p.prevPosition = p.position;
-                    float gravity = 500;
                     if (dc != null && v != null)
                     {
-                        v.velocity.X = 200f * (int)dc.directio;
+                        v.velocity.X = sideMovement * (int)dc.directio;
                     }
                     if (p != null && v != null && kbc != null)
                     {
-                        if (kbc.state[ActionsEnum.Up] == ButtonStates.Pressed && !pc.isFalling)
+                        if (kbc.state[ActionsEnum.Jump] == ButtonStates.Pressed && !pc.isFalling)
                         {
                             if(dc.directio == Direction.Still)
                             {
                                 dc.directio = dc.preDir;
                             }
-
                             if (v.velocity.Y > -jump.maxJumpHeight)
                             {
                                 v.velocity.Y -= jump.jumpHeight;
                                 ComponentManager.Instance.AddComponentToEntity(a, new SoundEffectComponent("jump"));
                             }
                         }
-                        //// just for demo
-                        //if (kbc.state[ActionsEnum.Down] == ButtonStates.Pressed)
-                        //{
-                        //    v.velocity.Y += (v.speed + 1000f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        //}
-                        //if (kbc.state[ActionsEnum.Left] == ButtonStates.Pressed)
-                        //{
-                        //    v.velocity.X -= v.speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        //}
-                        //if (kbc.state[ActionsEnum.Right] == ButtonStates.Pressed)
-                        //{
-                        //    v.velocity.X += v.speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        //}
                         v.velocity.Y += gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         p.position += v.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
                     }
                 }
-
-
             }
         }
     }
