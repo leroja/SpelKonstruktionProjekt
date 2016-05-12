@@ -107,11 +107,16 @@ namespace Spel.Source
 
             return id;
         }
+        /// <summary>
+        /// Creates an new PowerUpp
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public int CreateTestPowerUp(Vector2 position)
         {
             Random rand = new Random();
             PositionComponent Pc = new PositionComponent(position);
-            PowerUppComponent power = new PowerUppComponent(rand.Next(0,3));
+            PowerUppComponent power = new PowerUppComponent(rand.Next(2,3));
             DrawableComponent powerupp = new DrawableComponent(Game.Inst().GetContent<Texture2D>("Pic/PowerUp"));
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)position.X, (int)position.Y, powerupp.texture.Width, powerupp.texture.Height));
             CollisionComponent CC = new CollisionComponent(true);

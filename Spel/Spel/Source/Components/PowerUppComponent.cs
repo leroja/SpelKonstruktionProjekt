@@ -10,7 +10,7 @@ namespace Spel.Source.Components
     //PowerUpComponent
     public class PowerUppComponent : IComponent
     {
-        // för test
+        // Type
         public int type { get; set; }
 
         public PowerUppComponent(int type)

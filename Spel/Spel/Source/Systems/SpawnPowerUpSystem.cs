@@ -11,6 +11,9 @@ using Spel.Source.Components;
 
 namespace Spel.Source.Systems
 {
+    /// <summary>
+    /// System for Spawning new PowerUpps
+    /// </summary>
     class SpawnPowerUpSystem : IUpdate
     {
         private double time;
@@ -20,6 +23,10 @@ namespace Spel.Source.Systems
             time = times;
             start = times;
         }
+        /// <summary>
+        /// checks if the lifetime on an powerupp is up. then removes old powerup and spawns a new one.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void update(GameTime gameTime)
         {
 

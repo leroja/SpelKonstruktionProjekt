@@ -12,6 +12,9 @@ using Microsoft.Xna.Framework;
 
 namespace Spel.Source.Systems
 {
+    /// <summary>
+    /// System for Controlling the BallOfSpikesPowerUp
+    /// </summary>
     class BallOfSpikesSystem : IPowerupSystem
     {
         GameTime time;
@@ -19,7 +22,10 @@ namespace Spel.Source.Systems
         {
             throw new NotImplementedException();
         }
-
+        /// <summary>
+        /// Creates Power Upp component and adds it to an entity
+        /// </summary>
+        /// <param name="id"></param>
         public void OnPowerUpPicup(int id)
         {
             ComponentManager test = ComponentManager.Instance; 
@@ -39,7 +45,11 @@ namespace Spel.Source.Systems
             rec.CollisionRec.Width = newDraw.texture.Width;
             rec.CollisionRec.Height = newDraw.texture.Height;
         }
-
+        /// <summary>
+        /// checks if any SpikBall component on an entity is out of time.
+        /// if out of time then removes the component
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void update(GameTime gameTime)
         {
             time = gameTime;
@@ -53,7 +63,7 @@ namespace Spel.Source.Systems
                 foreach (var ball in balls)
                 {
                     BallOfSpikesPowerUpComponent b = ComponentManager.Instance.GetEntityComponent<BallOfSpikesPowerUpComponent>(ball);
-                    double test = b.time - timer.ElapsedGameTime.TotalSeconds;
+                    double test = b.lifeTime - timer.ElapsedGameTime.TotalSeconds;
                     if (test <= 0)
                     {
                       
@@ -63,7 +73,7 @@ namespace Spel.Source.Systems
                         ComponentManager.Instance.RemoveComponentFromEntity(ball, b);
                        
                     }
-                    b.time = test;
+                    b.lifeTime = test;
                 }
             }
         }
