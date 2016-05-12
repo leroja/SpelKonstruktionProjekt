@@ -12,12 +12,13 @@ using Spel.Source.Components;
 namespace Spel.Source.Systems
 {
     /// <summary>
-    /// a system for managing the health of players/
+    /// a system for managing the health of entities
     /// </summary>
     public class HealthSystem : IUpdate
     {
         public void update(GameTime gameTime)
         {
+            //@Todo this system is not done yeti
 
             Dictionary<int, IComponent> dic = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<HealthComponent>();
 
@@ -26,7 +27,6 @@ namespace Spel.Source.Systems
                 foreach (var item in dic)
                 {
                     HealthComponent hc = (HealthComponent)item.Value;
-
 
                     if (hc.health > hc.maxhealth)
                     {
@@ -46,7 +46,6 @@ namespace Spel.Source.Systems
                     }
                     else if (hc.health == 3)
                     {
-
                     }else
                     {
 

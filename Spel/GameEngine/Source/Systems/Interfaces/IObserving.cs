@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Source.Enumerator
+namespace GameEngine.Source.Systems.Interfaces
 {
-    class PowerUppEmunerator
+    public interface IObserving :ISystem
     {
     }
 }

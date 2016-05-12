@@ -20,6 +20,7 @@ namespace GameEngine.Source.Managers
         public GameTime GameTime { get; set; }
         public SpriteBatch spriteBatch { get; set; }
 
+        List<IObserving> observingSystems = new List<IObserving>();
         List<IDraw> renderSystems = new List<IDraw>();
         List<IUpdate> updateSystems = new List<IUpdate>();
         List<IInput> inputSystems = new List<IInput>();
@@ -61,6 +62,10 @@ namespace GameEngine.Source.Managers
             {
                 AddSystemToList<IInput>(inputSystems, system);
             }
+            if(system is IObserving)
+            {
+                AddSystemToList<IObserving>(observingSystems, system);
+            }
         }
 
         /// <summary>
@@ -76,13 +81,17 @@ namespace GameEngine.Source.Managers
             {
                 RemoveSystemFromList<IDraw>(renderSystems, system);
             }
-            else if (system is IUpdate)
+            if (system is IUpdate)
             {
                 RemoveSystemFromList<IUpdate>(updateSystems, system);
             }
-            else if (system is IInput)
+            if (system is IInput)
             {
-                AddSystemToList<IInput>(inputSystems, system);
+                RemoveSystemFromList<IInput>(inputSystems, system);
+            }
+            if (system is IObserving)
+            {
+                RemoveSystemFromList<IObserving>(observingSystems, system);
             }
 
         }
@@ -166,14 +175,10 @@ namespace GameEngine.Source.Managers
         /// <param name="system"></param>
         private void RemoveSystemFromList<T>(List<T> list, ISystem system)
         {
-            if (list != null)
+            if (list.Contains((T)system))
             {
-                if (list.Contains((T)system))
-                {
-                    list.Remove((T)system);
-                }
+                list.Remove((T)system);
             }
         }
-
     }
 }

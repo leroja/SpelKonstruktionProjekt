@@ -12,6 +12,9 @@ using GameEngine.Source.Enumerator;
 
 namespace GameEngine.Source.Systems
 {
+    /// <summary>
+    /// a system for detecting collsion between entities
+    /// </summary>
     public class CollisionDetectionSystem : IUpdate, IObservable
     {
 
@@ -21,6 +24,7 @@ namespace GameEngine.Source.Systems
         {
             observers = new List<IObserver>();
         }
+
         public void Notify(IEvent ev)
         {
             foreach (var item in observers)
@@ -48,7 +52,6 @@ namespace GameEngine.Source.Systems
         public void update(GameTime gameTime)
         {
             updatecolRec();
-
 
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<CollisionComponent>();
             List<int> done = new List<int>();

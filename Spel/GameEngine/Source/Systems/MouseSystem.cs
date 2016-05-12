@@ -50,7 +50,7 @@ namespace GameEngine.Source.Systems
         }
 
         /// <summary>
-        /// updates the state of left, right & middle click
+        /// updates the states of left, right & middle click
         /// </summary>
         /// <param name="mouseComponent"></param>
         public void UpdateActionStates(MouseComponent mouseComponent)

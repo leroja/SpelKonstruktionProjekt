@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace GameEngine.Source.Managers
 {
     /// <summary>
-    /// The RenderManager class is used to manage the size of the game window, and to render/draw objects onto the screen.
+    /// The RenderManager class is used to manage the size of the game window
     /// </summary>
     class RenderManager
     {

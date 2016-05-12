@@ -41,7 +41,7 @@ namespace Spel
             CollisionSystem col = new CollisionSystem();
             det.Subscribe(col);
 
-
+            SystemManager.Instance.AddSystem(col);
             SystemManager.Instance.AddSystem(new HUDSystem());
             SystemManager.Instance.AddSystem(new HealthSystem());
             SystemManager.Instance.AddSystem(det);
@@ -52,15 +52,18 @@ namespace Spel
             int ids = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(ids, fps);
 
-            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, Keys.Left, Keys.Down, Keys.Right, new Vector2(GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1");
-            GameEntityFactory.Instance.CreateTestKanin(true, Keys.W, Keys.A, Keys.S, Keys.D, Vector2.One, "Kanin 2");
+            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, new Vector2(GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1");
+            GameEntityFactory.Instance.CreateTestKanin(true, Keys.W, Vector2.One, "Kanin 2");
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, GraphicsDevice.Viewport.Height, Wall.LeftWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height, Wall.RightWall);
 
-            StartUpScreenScene stateOne = new StartUpScreenScene(1000);
-            SceneSystem.Instance.setCurrentScene(stateOne);
+            
+
+
+            //StartUpScreenScene stateOne = new StartUpScreenScene(1000);
+            //SceneSystem.Instance.setCurrentScene(stateOne);
 
 
 

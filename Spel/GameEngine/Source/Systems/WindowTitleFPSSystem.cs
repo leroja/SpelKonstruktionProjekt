@@ -19,7 +19,8 @@ namespace GameEngine.Source.Systems
         private Game game;
         private float timeSinceLastUpdate = 0.0f;
 
-        // @TODO see if this can be improved or changed
+        // @TODO see if this system can be improved or changed
+
         /// <summary>
         /// 
         /// </summary>

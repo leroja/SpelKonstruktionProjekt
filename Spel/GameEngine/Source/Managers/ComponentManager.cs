@@ -8,7 +8,8 @@ using GameEngine.Source.Components;
 namespace GameEngine.Source.Managers
 {
     /// <summary>
-    /// 
+    /// handles storage of entities and their components
+    /// also handles the creation of new entites and removal of them
     /// </summary>
     public class ComponentManager
     {
@@ -53,8 +54,6 @@ namespace GameEngine.Source.Managers
                 entityIDs.AddRange(Enumerable.Range(curMax + 1, curMax + step));
                 curMax += step;
             }
-
-            //int id = entityIDs[0]; 
             int id = entityIDs[entityIDs.Count - 1];
 
             entityIDs.Remove(id);
@@ -201,11 +200,11 @@ namespace GameEngine.Source.Managers
         
         /// <summary>
         /// Removes an Entity from dictionary
+        /// as a game Dev you also have to recycle the id
         /// </summary>
         /// <param name="entity">
         /// the entity to be removed
         /// </param>
-
         public void RemoveEntity(int entityID)
         {
             foreach (KeyValuePair<Type, Dictionary<int, IComponent>> entry in compDic)

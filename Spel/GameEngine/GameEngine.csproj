@@ -77,7 +77,6 @@
     <Compile Include="Source\Components\VelocityComponent.cs" />
     <Compile Include="Source\Enumerator\ActionsEnum.cs" />
     <Compile Include="Source\Enumerator\ButtonStates.cs" />
-    <Compile Include="Source\Enumerator\PowerUppEmunerator.cs" />
     <Compile Include="Source\Managers\AudioManager.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
     <Compile Include="Source\Managers\PhysicsManager.cs" />
@@ -95,6 +94,7 @@
     <Compile Include="Source\Systems\Interfaces\IDraw.cs" />
     <Compile Include="Source\Systems\Interfaces\IGamescene.cs" />
     <Compile Include="Source\Systems\Interfaces\IInput.cs" />
+    <Compile Include="Source\Systems\Interfaces\IObserving.cs" />
     <Compile Include="Source\Systems\Interfaces\ISystem.cs" />
     <Compile Include="Source\Systems\Interfaces\IUpdate.cs" />
     <Compile Include="Source\Systems\KeyBoardSystem.cs" />
