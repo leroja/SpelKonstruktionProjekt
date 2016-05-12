@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Spel.Source.Enum
 {
+    /// <summary>
+    /// An enum for movement direction on the X-axis
+    /// </summary>
     public enum Direction
     {
         Right = 1, 

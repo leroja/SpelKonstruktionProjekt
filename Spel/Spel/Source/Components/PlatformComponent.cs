@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Spel.Source.Components
 {
+    /// <summary>
+    /// A component for platforms
+    /// </summary>
     class PlatformComponent : IComponent
     {
         public Rectangle TopRec;
@@ -17,10 +20,11 @@ namespace Spel.Source.Components
 
         public PlatformComponent(Vector2 pos, int width, int height)
         {
-            TopRec = new Rectangle((int)pos.X, (int)pos.Y, width, 5);
-            LeftRec = new Rectangle((int)pos.X, (int)pos.Y + 5, 5, height - 10);
-            BottomRec = new Rectangle((int)pos.X, height - 5, width, 5);
-            RightRec = new Rectangle(width - 5, (int)pos.Y + 5, 5, height - 10);
+            // @TODO kolla så att rektanglarna stämmer
+            TopRec = new Rectangle((int)pos.X +5, (int)pos.Y, width-10, 5);
+            LeftRec = new Rectangle((int)pos.X, (int)pos.Y, 5, height - 5);
+            BottomRec = new Rectangle((int)pos.X+5, height - 5, width-10, 5);
+            RightRec = new Rectangle(width - 5, (int)pos.Y, 5, height - 5);
         }
     }
 }
