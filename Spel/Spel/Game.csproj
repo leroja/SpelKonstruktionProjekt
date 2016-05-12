@@ -43,6 +43,7 @@
     <Compile Include="Menus\MenuComponent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Components\FullHealthPowerUpComponent.cs" />
     <Compile Include="Source\Components\HealthComponent.cs" />
     <Compile Include="Source\Components\PlatformComponent.cs" />
     <Compile Include="Source\Components\WallComponent.cs" />

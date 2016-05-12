@@ -13,8 +13,6 @@ namespace Spel.Source.Components
         public int maxhealth { get; set; }
         // Health
         public int health { get; set; }
-        // Damage taken
-        public int damage { get; set; }
 
         // Constructor for HealthComponent 
         public HealthComponent(int maxHealth)
