@@ -27,7 +27,7 @@ namespace Spel.Source.Systems
             width = Game.Instance.GraphicsDevice.Viewport.Width;
             height = Game.Instance.GraphicsDevice.Viewport.Height;
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 3; i++)
             {
                 int x = rand.Next(0, width);
                 int y = rand.Next(0, height);

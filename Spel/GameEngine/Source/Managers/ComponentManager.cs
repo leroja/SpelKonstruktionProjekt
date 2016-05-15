@@ -67,9 +67,8 @@ namespace GameEngine.Source.Managers
         /// <param name="id"></param>
         public void RecycleID(int id)
         {
-            // @Todo fel kontroll
-
-            entityIDs.Add(id);
+            if(!entityIDs.Contains(id))
+                entityIDs.Add(id);
         }
 
         /// <summary>

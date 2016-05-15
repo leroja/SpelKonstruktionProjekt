@@ -24,7 +24,6 @@ namespace GameEngine.Source.Managers
 
         private AudioManager()
         {
-
         }
         
         public static AudioManager Instance
@@ -151,15 +150,9 @@ namespace GameEngine.Source.Managers
         }
 
 
-        public void StopRepeat()
+        public void ChangeRepeat(bool repeat)
         {
-            MediaPlayer.IsRepeating = false;
-        }
-
-
-        public void StartRepeat()
-        {
-            MediaPlayer.IsRepeating = true;
+            MediaPlayer.IsRepeating = repeat;
         }
 
         /// <summary>
@@ -209,7 +202,6 @@ namespace GameEngine.Source.Managers
             {
                 StopSong();
                 MediaPlayer.Play(songDic[name]);
-                
             }
         }
 
@@ -218,6 +210,5 @@ namespace GameEngine.Source.Managers
         {
             MediaPlayer.Stop();
         }
-
     }
 }

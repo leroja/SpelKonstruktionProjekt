@@ -20,172 +20,172 @@ namespace Spel.Source.Systems
     {
         public void update(IEvent t)
         {
-            // @Todo
-            // Maybe check that t really is a CollionEvent
-            CollisionEvent coll = (CollisionEvent)t;
-
-            int ent1 = coll.entity1;
-            int ent2 = coll.entity2;
-            GameTime gt = coll.gt;
-
-            CollisionTypes collType = CheckTypeOfCollision(ent1, ent2);
-
-            if (collType == CollisionTypes.PlayerVsPlayer)
+            if (t.GetType() == typeof(CollisionEvent))
             {
-                PlayerComponent pcp1 = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(ent1);
-                PlayerComponent pcp2 = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(ent2);
-                PositionComponent pos1 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent1);
-                PositionComponent pos2 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent2);
-                CollisionRectangleComponent crc1 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent1);
-                CollisionRectangleComponent crc2 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent2);
-                DirectionComponent dcp1 = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(ent1);
-                DirectionComponent dcp2 = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(ent2);
-                VelocityComponent vcp1 = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(ent1);
-                VelocityComponent vcp2 = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(ent2);
 
-                if (pos1.position.Y + crc1.CollisionRec.Height * 0.5f < pos2.position.Y)
-                { // entity 1 is above entity 2
-                    if (!pcp1.isFalling && !pcp2.isFalling)
-                    {
-                        if (dcp2.directio != Direction.Still)
+                CollisionEvent coll = (CollisionEvent)t;
+
+                int ent1 = coll.entity1;
+                int ent2 = coll.entity2;
+                GameTime gt = coll.gt;
+
+                CollisionTypes collType = CheckTypeOfCollision(ent1, ent2);
+
+                if (collType == CollisionTypes.PlayerVsPlayer)
+                {
+                    PlayerComponent pcp1 = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(ent1);
+                    PlayerComponent pcp2 = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(ent2);
+                    PositionComponent pos1 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent1);
+                    PositionComponent pos2 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent2);
+                    CollisionRectangleComponent crc1 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent1);
+                    CollisionRectangleComponent crc2 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent2);
+                    DirectionComponent dcp1 = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(ent1);
+                    DirectionComponent dcp2 = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(ent2);
+                    VelocityComponent vcp1 = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(ent1);
+                    VelocityComponent vcp2 = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(ent2);
+
+                    if (pos1.position.Y + crc1.CollisionRec.Height * 0.5f < pos2.position.Y)
+                    { // entity 1 is above entity 2
+                        if (!pcp1.isFalling && !pcp2.isFalling)
                         {
-                            changeDir(dcp2);
-                            dcp2.preDir = dcp2.directio;
-                            dcp2.directio = Direction.Still;
+                            if (dcp2.directio != Direction.Still)
+                            {
+                                changeDir(dcp2);
+                                dcp2.preDir = dcp2.directio;
+                                dcp2.directio = Direction.Still;
+                            }
+                            vcp2.velocity.Y = 0;
+
+                            HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
+                            hc.health -= 1;
+
+                            pcp2.isFalling = true;
                         }
-                        vcp2.velocity.Y = 0;
+                    }
+                    else if (pos2.position.Y + crc2.CollisionRec.Height * 0.5f < pos1.position.Y)
+                    {   // entity 2 is above entity 1
+                        if (!pcp1.isFalling && !pcp2.isFalling)
+                        {
+                            if (dcp1.directio != Direction.Still)
+                            {
+                                changeDir(dcp1);
+                                dcp1.preDir = dcp1.directio;
+                                dcp1.directio = Direction.Still;
+                            }
+                            vcp1.velocity.Y = 0;
 
-                        HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
-                        hc.health -= 1;
 
-                        pcp2.isFalling = true;
+                            HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
+                            hc.health -= 1;
+                            pcp1.isFalling = true;
+                        }
+                    }
+                    else // both are on the same "level" 
+                    {
+                        if (!pcp2.isFalling && !pcp2.isFalling)
+                        {
+                            if (dcp1.directio != Direction.Still)
+                            {
+                                changeDir(dcp1);
+                                dcp1.preDir = dcp1.directio;
+                                dcp1.directio = Direction.Still;
+                            }
+                            vcp1.velocity.Y = 0;
+                            if (dcp2.directio != Direction.Still)
+                            {
+                                changeDir(dcp2);
+                                dcp2.preDir = dcp2.directio;
+                                dcp2.directio = Direction.Still;
+                            }
+                            vcp2.velocity.Y = 0;
+
+                            HealthComponent hc1 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
+                            HealthComponent hc2 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
+                            hc1.health -= 1;
+                            hc2.health -= 1;
+                            pcp1.isFalling = true;
+                            pcp2.isFalling = true;
+                            pushAway(ent1, ent2, gt);
+                        }
                     }
                 }
-                else if (pos2.position.Y + crc2.CollisionRec.Height * 0.5f < pos1.position.Y)
-                {   // entity 2 is above entity 1
-                    if (!pcp1.isFalling && !pcp2.isFalling)
+                else if (collType == CollisionTypes.PlayerVsWall)
+                {
+                    if (ComponentManager.Instance.CheckIfEntityHasComponent<WallComponent>(ent1))
                     {
-                        if (dcp1.directio != Direction.Still)
-                        {
-                            changeDir(dcp1);
-                            dcp1.preDir = dcp1.directio;
-                            dcp1.directio = Direction.Still;
-                        }
-                        vcp1.velocity.Y = 0;
-
-
-                        HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
-                        hc.health -= 1;
-                        pcp1.isFalling = true;
+                        PlayerVsWallColl(ent2, ent1, gt);
+                    }
+                    if (ComponentManager.Instance.CheckIfEntityHasComponent<WallComponent>(ent2))
+                    {
+                        PlayerVsWallColl(ent1, ent2, gt);
                     }
                 }
-                else // both are on the same "level" 
+                else if (collType == CollisionTypes.PlayerVsCube)
                 {
-                    if (!pcp2.isFalling && !pcp2.isFalling)
+                    if (ComponentManager.Instance.CheckIfEntityHasComponent<PlayerComponent>(ent1))
                     {
-                        if (dcp1.directio != Direction.Still)
-                        {
-                            changeDir(dcp1);
-                            dcp1.preDir = dcp1.directio;
-                            dcp1.directio = Direction.Still;
-                        }
-                        vcp1.velocity.Y = 0;
-                        if (dcp2.directio != Direction.Still)
-                        {
-                            changeDir(dcp2);
-                            dcp2.preDir = dcp2.directio;
-                            dcp2.directio = Direction.Still;
-                        }
-                        vcp2.velocity.Y = 0;
-
-                        HealthComponent hc1 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
-                        HealthComponent hc2 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
-                        hc1.health -= 1;
-                        hc2.health -= 1;
-                        pcp1.isFalling = true;
-                        pcp2.isFalling = true;
-                        pushAway(ent1, ent2);
+                        PlayerVsCubeColl(ent1, ent2);
+                    }
+                    else if (ComponentManager.Instance.CheckIfEntityHasComponent<PlayerComponent>(ent2))
+                    {
+                        PlayerVsCubeColl(ent2, ent1);
                     }
                 }
-            }
-            else if (collType == CollisionTypes.PlayerVsWall)
-            {
-                if (ComponentManager.Instance.CheckIfEntityHasComponent<WallComponent>(ent1))
+                else if (collType == CollisionTypes.PlayerVsPowerup)
                 {
-                    PlayerVsWallColl(ent2, ent1, gt);
+                    int player;
+                    int power;
+                    List<IComponent> list1 = ComponentManager.Instance.GetAllEntityComponents(ent1);
+                    List<IComponent> list2 = ComponentManager.Instance.GetAllEntityComponents(ent2);
+                    if (list1.OfType<PlayerComponent>().Any())
+                    {
+                        player = ent1;
+                        power = ent2;
+                    }
+                    else
+                    {
+                        player = ent2;
+                        power = ent1;
+                    }
+                    PowerUppComponent tes = ComponentManager.Instance.GetEntityComponent<PowerUppComponent>(power);
+                    switch (tes.type)
+                    {
+                        case 1:
+                            BallOfSpikesSystem temp = new BallOfSpikesSystem();
+                            temp.OnPowerUpPicup(player);
+                            break;
+                        case 2:
+                            HealthComponent hp = ComponentManager.Instance.GetEntityComponent<HealthComponent>(player);
+                            hp.health = hp.maxhealth;
+                            break;
+                        default:
+                            break;
+                    }
+                    rec(ent1, ent2);
                 }
-                if (ComponentManager.Instance.CheckIfEntityHasComponent<WallComponent>(ent2))
+                else if (collType == CollisionTypes.PlayerVsPlatform)
                 {
-                    PlayerVsWallColl(ent1, ent2, gt);
+                    if (ComponentManager.Instance.CheckIfEntityHasComponent<PlatformComponent>(ent1))
+                    {
+                        PlayerVsPlatformColl(ent2, ent1, gt);
+                    }
+                    if (ComponentManager.Instance.CheckIfEntityHasComponent<PlatformComponent>(ent2))
+                    {
+                        PlayerVsPlatformColl(ent1, ent2, gt);
+                    }
                 }
-            }
-            else if(collType == CollisionTypes.PlayerVsCube)
-            {
-                if (ComponentManager.Instance.CheckIfEntityHasComponent<PlayerComponent>(ent1))
+                else if (collType == CollisionTypes.NotDefined)
                 {
-                    PlayerVsCubeColl(ent1, ent2);
+                    //@Todo maybe do something here or throw some kind of exception
                 }
-                else if (ComponentManager.Instance.CheckIfEntityHasComponent<PlayerComponent>(ent2))
-                {
-                    PlayerVsCubeColl(ent2, ent1);
-                }
-            }
-            else if (collType == CollisionTypes.PlayerVsPowerup)
-            {
-                int player;
-                int power;
-                List<IComponent> list1 = ComponentManager.Instance.GetAllEntityComponents(ent1);
-                List<IComponent> list2 = ComponentManager.Instance.GetAllEntityComponents(ent2);
-                if (list1.OfType<PlayerComponent>().Any())
-                {
-                    player = ent1;
-                    power = ent2;
-                }
-                else
-                {
-                    player = ent2;
-                    power = ent1;
-                }
-                PowerUppComponent tes = ComponentManager.Instance.GetEntityComponent<PowerUppComponent>(power);
-                switch (tes.type)
-                {
-                    case 1:
-                        BallOfSpikesSystem temp = new BallOfSpikesSystem();
-                        temp.OnPowerUpPicup(player);
-                        break;
-                    case 2:
-                        HealthComponent hp = ComponentManager.Instance.GetEntityComponent<HealthComponent>(player);
-                        hp.health = hp.maxhealth;
-                        break;
-                    default:
-                        break;
-                }
-                rec(ent1, ent2);
-            }else if(collType == CollisionTypes.PlayerVsPlatform)
-            {
-                if (ComponentManager.Instance.CheckIfEntityHasComponent<PlatformComponent>(ent1))
-                {
-                    PlayerVsPlatformColl(ent2, ent1, gt);
-                }
-                if (ComponentManager.Instance.CheckIfEntityHasComponent<PlatformComponent>(ent2))
-                {
-                    PlayerVsPlatformColl(ent1, ent2, gt);
-                }
-            }else if(collType == CollisionTypes.NotDefined)
-            {
-
             }
         }
 
         /// <summary>
         /// Handles Player versus Wall collision
         /// </summary>
-        /// <param name="Player">
-        /// id of the player entity
-        /// </param>
-        /// <param name="WallEnt">
-        /// id of the wall entity
-        /// </param>
+        /// <param name="Player"> Id of the player entity </param>
+        /// <param name="WallEnt"> Id of the wall entity </param>
         private void PlayerVsWallColl(int Player, int WallEnt, GameTime gameTime)
         {
             PlayerComponent playerComp = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(Player);
@@ -228,8 +228,7 @@ namespace Spel.Source.Systems
                 // only loose life when the player jump on the floor, not when the player falls to the ground
                 // and have some kind of timer unti you can jump away
 
-                //@temp
-                // some of the stuff here is temporary
+
                 playerComp.isFalling = false;
 
 
@@ -248,14 +247,10 @@ namespace Spel.Source.Systems
         }
 
         /// <summary>
-        /// handles player versus platform collision
+        /// Handles player versus platform collision
         /// </summary>
-        /// <param name="Player">
-        /// id of the player entity
-        /// </param>
-        /// <param name="Platform">
-        /// id of the platform entity
-        /// </param>
+        /// <param name="Player"> Id of the player entity </param>
+        /// <param name="Platform"> Id of the platform entity </param>
         private void PlayerVsPlatformColl(int Player, int Platform, GameTime gameTime)
         {
             PlayerComponent playComp = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(Player);
@@ -269,7 +264,7 @@ namespace Spel.Source.Systems
             {
                 if (pcrc.CollisionRec.Intersects(pc.TopRec)) // @TODO tänk om gällande pixlePerfect, kanske
                 {
-                    //@todo maybe add some timer so that players can't stay there forever
+                    //@todo maybe add some timer so that players can't stay on the platform forever
 
                     changeDir(dc);
                     if (dc.directio != Direction.Still)
@@ -302,15 +297,9 @@ namespace Spel.Source.Systems
         /// <summary>
         /// determinates what kind of collision has occured based on the two entities
         /// </summary>
-        /// <param name="ent1">
-        /// Id of entity 1
-        /// </param>
-        /// <param name="ent2">
-        /// id of entity 2
-        /// </param>
-        /// <returns>
-        /// Collision type
-        /// </returns>
+        /// <param name="ent1"> Id of entity 1 </param>
+        /// <param name="ent2"> Id of entity 2 </param>
+        /// <returns> Type of the collision </returns>
         private CollisionTypes CheckTypeOfCollision(int ent1, int ent2)
         {
             List<IComponent> list1 = ComponentManager.Instance.GetAllEntityComponents(ent1);
@@ -360,17 +349,27 @@ namespace Spel.Source.Systems
 
         /// <summary>
         /// pushes the two players away from each other
-        /// so that they don't collide when they are on the floor
+        /// so that they don't are inside each other when they are on the floor
         /// </summary>
-        /// <param name="player1">
-        /// id of player 1
-        /// </param>
-        /// <param name="player2">
-        /// id of player 2
-        /// </param>
-        private void pushAway(int player1, int player2)
+        /// <param name="player1"> id of player 1 </param>
+        /// <param name="player2"> id of player 2 </param>
+        private void pushAway(int player1, int player2, GameTime gameTime)
         {
-            //@Todo 
+            //@Todo maybe make it smoother
+            PositionComponent pos1 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(player1);
+            PositionComponent pos2 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(player2);
+            float push = 100* (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (pos1.position.X > pos2.position.X)
+            {
+                pos1.position.X += push;
+                pos2.position.X -= push;
+            }
+            else
+            {
+                pos1.position.X -= push;
+                pos2.position.X += push;
+            }
         }
 
         /// <summary>
@@ -396,9 +395,9 @@ namespace Spel.Source.Systems
         /// </summary>
         /// <param name="tmep1"></param>
         /// <param name="temp2"></param>
-        private void rec(int tmep1,int temp2)
+        private void rec(int temp1, int temp2)
         {
-            List<IComponent> list1 = ComponentManager.Instance.GetAllEntityComponents(tmep1);
+            List<IComponent> list1 = ComponentManager.Instance.GetAllEntityComponents(temp1);
             List<IComponent> list2 = ComponentManager.Instance.GetAllEntityComponents(temp2);
             if (list1.OfType<PlayerComponent>().Any())
             {
@@ -407,8 +406,8 @@ namespace Spel.Source.Systems
             }
             else
             {
-                ComponentManager.Instance.RecycleID(tmep1);
-                ComponentManager.Instance.RemoveEntity(tmep1);
+                ComponentManager.Instance.RecycleID(temp1);
+                ComponentManager.Instance.RemoveEntity(temp1);
             }
         }
     }

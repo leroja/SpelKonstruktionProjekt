@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace GameEngine.Source.Managers
 {
     /// <summary>
-    /// 
+    /// A manager that stores the different systems in gameEngine and game
     /// </summary>
     public class SystemManager
     {
@@ -42,11 +42,9 @@ namespace GameEngine.Source.Managers
         }
 
         /// <summary>
-        /// adds a system
+        /// Adds a system
         /// </summary>
-        /// <param name="system">
-        /// the system that is going to be added 
-        /// </param>
+        /// <param name="system"> The system that is going to be added </param>
         public void AddSystem(ISystem system)
         {
             Type type = system.GetType();
@@ -69,11 +67,9 @@ namespace GameEngine.Source.Managers
         }
 
         /// <summary>
-        /// removes a system 
+        /// Removes a system 
         /// </summary>
-        /// <param name="system">
-        /// the system that is to be removed
-        /// </param>
+        /// <param name="system"> The system that is to be removed </param>
         public void RemoveSystem(ISystem system)
         {
             Type type = system.GetType();
@@ -93,24 +89,8 @@ namespace GameEngine.Source.Managers
             {
                 RemoveSystemFromList<IObserving>(observingSystems, system);
             }
-
         }
 
-        /// <summary>
-        /// runs all updateable systems
-        /// </summary>
-        public void RunUpdateSystems()
-        {
-            if (updateSystems.Count > 0)
-            {
-                foreach (IUpdate system in updateSystems)
-                {
-                    system.update(GameTime);
-                }
-            }
-        }
-
-        
         // @todo
         /// <summary>
         /// 
@@ -123,9 +103,22 @@ namespace GameEngine.Source.Managers
 
         }
 
-
         /// <summary>
-        /// runs all input systems
+        /// Runs all updateable systems
+        /// </summary>
+        public void RunUpdateSystems()
+        {
+            if (updateSystems.Count > 0)
+            {
+                foreach (IUpdate system in updateSystems)
+                {
+                    system.update(GameTime);
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Runs all input systems
         /// </summary>
         public void RunInputSystems()
         {
@@ -139,7 +132,7 @@ namespace GameEngine.Source.Managers
         }
 
         /// <summary>
-        /// runs all rendering systems
+        /// Runs all rendering systems
         /// </summary>
         public void RunRenderSystems()
         {
