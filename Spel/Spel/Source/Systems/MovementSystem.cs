@@ -15,17 +15,15 @@ using Spel.Source.Enum;
 namespace Spel.Source.Systems
 {
     /// <summary>
-    /// a system for handling movement of players
+    /// A system for handling movement of players
     /// gravition is also handled in this system
     /// </summary>
     public class MovementSystem : IUpdate
     {
-
         private const float gravity = 500F;
         private const float sideMovement = 200F;
         public void update(GameTime gameTime)
         {
-
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
             if (dra != null)
             {
@@ -42,14 +40,13 @@ namespace Spel.Source.Systems
                     {
                         v.velocity.X = sideMovement * (int)dc.directio;
                     }
-                    if (p != null && v != null && kbc != null)
+                    if (p != null && v != null && kbc != null && jump != null && dc != null)
                     {
                         if (kbc.state[ActionsEnum.Jump] == ButtonStates.Pressed && !pc.isFalling)
                         {
                             if(dc.directio == Direction.Still)
                             {
                                 dc.directio = dc.preDir;
-                                //changeDir(dc);
                             }
                             if (v.velocity.Y > -jump.maxJumpHeight)
                             {
@@ -61,24 +58,6 @@ namespace Spel.Source.Systems
                         p.position += v.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
                 }
-            }
-        }
-        /// <summary>
-        /// Changes the direction of the component
-        /// and sets the previous direction to the current direction
-        /// </summary>
-        /// <param name="dc"></param>
-        private void changeDir(DirectionComponent dc)
-        {
-            if (dc.directio == Direction.Left)
-            {
-                dc.preDir = dc.directio;
-                dc.directio = Direction.Right;
-            }
-            else if (dc.directio == Direction.Right)
-            {
-                dc.preDir = dc.directio;
-                dc.directio = Direction.Left;
             }
         }
     }

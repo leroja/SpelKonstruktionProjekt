@@ -19,9 +19,5 @@ namespace GameEngine.Source.Components
             keyBoardActions = new Dictionary<ActionsEnum, Keys>();
             state = new Dictionary<ActionsEnum, ButtonStates>();
         }
-
-        //@todo maybe add accessor function for geting & seting  keyBoardActions & states
-        // and maybe something for removal of a keyboard action
-
     }
 }

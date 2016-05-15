@@ -11,9 +11,11 @@ using Spel.Source.Components;
 
 namespace Spel.Source.Systems
 {
+    /// <summary>
+    /// a system that handles the spawning of Change direction cubes and their positioning
+    /// </summary>
     public class ChangeCubesSystem : IUpdate
     {
-
         private List<int> entities;
         private Random rand;
         private int width;
@@ -36,7 +38,11 @@ namespace Spel.Source.Systems
                 GameEntityFactory.Instance.CreateChangeCube(pos, "pic/changedir", 30, 30);
             }
         }
-
+        /// <summary>
+        /// Uppdates the position of the Change direction Cubes if they have been taken 
+        /// or if their timer has run out
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void update(GameTime gameTime)
         {
             width = Game.Instance.GraphicsDevice.Viewport.Width;

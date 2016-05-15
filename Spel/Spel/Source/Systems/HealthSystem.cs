@@ -11,11 +11,13 @@ using Spel.Source.Components;
 
 namespace Spel.Source.Systems
 {
+    /// <summary>
+    /// A system for handling the health of entities
+    /// </summary>
     public class HealthSystem : IUpdate
     {
         public void update(GameTime gameTime)
         {
-
             Dictionary<int, IComponent> dic = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<HealthComponent>();
 
             if (dic != null)
@@ -23,7 +25,6 @@ namespace Spel.Source.Systems
                 foreach (var item in dic)
                 {
                     HealthComponent hc = (HealthComponent)item.Value;
-
 
                     if (hc.health > hc.maxhealth)
                     {
@@ -45,19 +46,16 @@ namespace Spel.Source.Systems
                     {
                         // update hud
                         // update sprite?
-
                     }
                     else if (hc.health == 3)
                     {
                         // update hud
                         // update sprite?
-
                     }
                     else if (hc.health == 4)
                     {
                         // update hud
                         // update sprite?
-
                     }
                     else
                     {

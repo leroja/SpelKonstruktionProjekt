@@ -10,7 +10,7 @@ namespace GameEngine.Source.Enumerator
     // flytta till spelet istället?
 
     /// <summary>
-    /// an eneum for defining the diferent types of actions in the game
+    /// An eneum for defining the diferent types of actions in the game
     /// </summary>
     public enum ActionsEnum
     {

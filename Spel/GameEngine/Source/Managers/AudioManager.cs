@@ -67,14 +67,10 @@ namespace GameEngine.Source.Managers
         }
 
         /// <summary>
-        /// adds the soundEffect to the soundeffect "pool"
+        /// Adds the soundEffect to the soundeffect "pool"
         /// </summary>
-        /// <param name="effectName">
-        /// name of the soundEffect 
-        /// </param>
-        /// <param name="effect">
-        /// the soundEffect
-        /// </param>
+        /// <param name="effectName"> Name of the soundEffect </param>
+        /// <param name="effect"> The soundEffect </param>
         public void AddSoundEffect(string effectName, SoundEffect effect)
         {
             if (effect != null)

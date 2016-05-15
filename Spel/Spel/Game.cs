@@ -53,8 +53,8 @@ namespace Spel
             int ids = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(ids, fps);
 
-            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, new Vector2(GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1");
-            GameEntityFactory.Instance.CreateTestKanin(true, Keys.W, Vector2.One, "Kanin 2");
+            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, new Vector2(GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1", Direction.Left);
+            GameEntityFactory.Instance.CreateTestKanin(true, Keys.W, Vector2.One, "Kanin 2", Direction.Right);
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, GraphicsDevice.Viewport.Height, Wall.LeftWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
@@ -71,7 +71,6 @@ namespace Spel
             GameEntityFactory.Instance.CreatePlatform(new Vector2(800, 500), "suddis", 150, 20);
 
 
-
             base.Initialize();
         }
 
@@ -81,7 +80,6 @@ namespace Spel
         /// </summary>
         protected override void LoadContent()
         {
-
             AudioManager.Instance.AddSoundEffect("bouncy", Content.Load<SoundEffect>("Sound/Bouncy_Bounce-Bugs_Bunny-1735935456"));
             AudioManager.Instance.AddSoundEffect("jump", Content.Load<SoundEffect>("Sound/Jump"));
             base.LoadContent();
@@ -95,9 +93,7 @@ namespace Spel
         {
             // TODO: Unload any non ContentManager content here
         }
-
-
-
+        
         public static Game Instance
         {
             get

@@ -74,12 +74,8 @@ namespace GameEngine.Source.Managers
         /// <summary>
         /// "links" the component to the entity
         /// </summary>
-        /// <param name="entity">
-        /// 
-        /// </param>
-        /// <param name="component">
-        /// 
-        /// </param>
+        /// <param name="entity"></param>
+        /// <param name="component"></param>
         public void AddComponentToEntity(int entityID, IComponent component)
         {
             Type type = component.GetType();
@@ -98,12 +94,8 @@ namespace GameEngine.Source.Managers
         /// <summary>
         /// removes the component from the entity
         /// </summary>
-        /// <param name="entity">
-        /// the entity that has the component
-        /// </param>
-        /// <param name="component">
-        /// the component to be removed
-        /// </param>
+        /// <param name="entity"> The entity that has the component </param>
+        /// <param name="component"> The component to be removed </param>
         public void RemoveComponentFromEntity(int entityID, IComponent component)
         {
             Type type = component.GetType();
@@ -123,11 +115,9 @@ namespace GameEngine.Source.Managers
         /// returns a component if the Entity has one "linked" to it
         /// </summary>
         /// <typeparam name="T">
-        /// the type of the requested component
+        /// The type of the requested component
         /// </typeparam>
-        /// <param name="entity">
-        /// 
-        /// </param>
+        /// <param name="entity"></param>
         /// <returns>
         /// a component of the requested type if there is one
         /// else it returns null
@@ -149,12 +139,8 @@ namespace GameEngine.Source.Managers
         /// <summary>
         /// returns an entity if there is an entity linked to the specific component
         /// </summary>
-        /// <typeparam name="T">
-        /// the type of compent
-        /// </typeparam>
-        /// <param name="component">
-        /// the specific component
-        /// </param>
+        /// <typeparam name="T"> The type of compent </typeparam>
+        /// <param name="component"> The specific component </param>
         /// <returns>
         /// an entity if one is found
         /// else it returns null
@@ -180,11 +166,9 @@ namespace GameEngine.Source.Managers
         /// return a list of all entites that "has" specific component
         /// or null if the component is not in the dictionary
         /// </summary>
-        /// <typeparam name="T">
-        /// 
-        /// </typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <returns>
-        /// a list of all entities that "has" a specific component
+        /// A list of all entities that "has" a specific component
         /// </returns>
         public List<int> GetAllEntitiesWithComponentType<T>() where T : IComponent
         {
@@ -201,9 +185,7 @@ namespace GameEngine.Source.Managers
         /// Removes an Entity from dictionary
         /// as a game Dev you also have to recycle the id
         /// </summary>
-        /// <param name="entity">
-        /// the entity to be removed
-        /// </param>
+        /// <param name="entity"> The entity to be removed </param>
         public void RemoveEntity(int entityID)
         {
             foreach (KeyValuePair<Type, Dictionary<int, IComponent>> entry in compDic)
@@ -216,11 +198,9 @@ namespace GameEngine.Source.Managers
         /// <summary>
         /// Returns a list of all components that belong to an entity
         /// </summary>
-        /// <param name="Id">
-        /// the Id of the entity
-        /// </param>
+        /// <param name="Id"> The Id of the entity  </param>
         /// <returns>
-        /// a list of the entity's all components
+        /// A list of the entity's all components
         /// </returns>
         public List<IComponent> GetAllEntityComponents(int Id)
         {
@@ -240,11 +220,9 @@ namespace GameEngine.Source.Managers
         /// return a dictionary with all entites that "has" specific type of component & 
         /// and the components of that type
         /// </summary>
-        /// <typeparam name="T">
-        /// the type of component
-        /// </typeparam>
+        /// <typeparam name="T"> The type of component </typeparam>
         /// <returns>
-        /// a dictionary containing id's and components of the specified type
+        /// A dictionary containing id's and components of the specified type
         /// </returns>
         public Dictionary<int, IComponent> GetAllEntitiesAndComponentsWithComponentType<T>() where T : IComponent
         {
@@ -258,14 +236,10 @@ namespace GameEngine.Source.Managers
         }
 
         /// <summary>
-        /// checks whether an entity has a particular type of component
+        /// Checks whether an entity has a particular type of component
         /// </summary>
-        /// <typeparam name="T">
-        /// the type of component
-        /// </typeparam>
-        /// <param name="ent">
-        /// the id of the enetity
-        /// </param>
+        /// <typeparam name="T"> The type of component </typeparam>
+        /// <param name="ent"> The id of the enetity </param>
         /// <returns>
         /// true if the entity has a component of that type else false
         /// </returns>
@@ -282,6 +256,5 @@ namespace GameEngine.Source.Managers
             }
             return false;
         }
-
     }
 }

@@ -13,6 +13,7 @@ using GameEngine.Source.RandomStuff;
 
 namespace Spel.Source.Systems
 {
+    // @todo add soundeffects when a collision has occurred
     /// <summary>
     /// A system for handling collisions when they have occurred
     /// </summary>
@@ -82,7 +83,7 @@ namespace Spel.Source.Systems
                     }
                     else // both are on the same "level" 
                     {
-                        if (!pcp2.isFalling && !pcp2.isFalling)
+                        if (!pcp2.isFalling && !pcp1.isFalling)
                         {
                             if (dcp1.directio != Direction.Still)
                             {
@@ -355,10 +356,9 @@ namespace Spel.Source.Systems
         /// <param name="player2"> id of player 2 </param>
         private void pushAway(int player1, int player2, GameTime gameTime)
         {
-            //@Todo maybe make it smoother
             PositionComponent pos1 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(player1);
             PositionComponent pos2 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(player2);
-            float push = 100* (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float push = 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (pos1.position.X > pos2.position.X)
             {
@@ -375,17 +375,17 @@ namespace Spel.Source.Systems
         /// <summary>
         /// handles player versus changeDirectionCube collision
         /// </summary>
-        /// <param name="Player"> id of the player entity </param>
-        /// <param name="Cube"> id of the Cube entity </param>
+        /// <param name="Player"> Id of the player entity </param>
+        /// <param name="Cube"> Id of the Cube entity </param>
         private void PlayerVsCubeColl(int Player, int Cube)
         {
             PlayerComponent plaCom = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(Player);
-            if (!plaCom.isFalling)
+            ChangeCubeComponent change = ComponentManager.Instance.GetEntityComponent<ChangeCubeComponent>(Cube);
+            if (!plaCom.isFalling && change.time > 0.5F)
             {
                 DirectionComponent dir = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(Player);
                 changeDir(dir);
 
-                ChangeCubeComponent change = ComponentManager.Instance.GetEntityComponent<ChangeCubeComponent>(Cube);
                 change.isTaken = true;
             }
         }

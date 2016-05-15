@@ -38,18 +38,17 @@ namespace Spel.Source
         }
 
         /// <summary>
-        /// Creates the rabit that is/was used for initial testing
+        /// A method for creating a test player entity
         /// </summary>
         /// <param name="pixlePer"></param>
-        /// <param name="up"></param>
-        /// <param name="left"></param>
-        /// <param name="down"></param>
-        /// <param name="right"></param>
+        /// <param name="Jump"></param>
+        /// <param name="position"></param>
+        /// <param name="name"></param>
+        /// <param name="dir"></param>
         /// <returns></returns>
-        public int CreateTestKanin(bool pixlePer, Keys Jump, Vector2 position, string name)
+       public int CreateTestKanin(bool pixlePer, Keys Jump, Vector2 position, string name, Direction dir)
         {
-
-            DirectionComponent dc = new DirectionComponent(Direction.Right);
+            DirectionComponent dc = new DirectionComponent(dir);
             DrawableComponent comp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/Helmutani"));
             PositionComponent pos = new PositionComponent(position);
             VelocityComponent vel = new VelocityComponent(new Vector2(200F, 0), 50F);
@@ -84,14 +83,12 @@ namespace Spel.Source
 
 
         /// <summary>
-        /// creates a border rectangle
+        /// Creates a border rectangle
         /// </summary>
         /// <param name="pos"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        /// <param name="side">
-        /// 
-        /// </param>
+        /// <param name="side"></param>
         /// <returns></returns>
         public int CreateBorderRecs(Vector2 pos, int width, int height, Wall side)
         {
@@ -170,7 +167,6 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, col);
             ComponentManager.Instance.AddComponentToEntity(id, colRec);
             ComponentManager.Instance.AddComponentToEntity(id, draw);
-
 
             return id;
         }

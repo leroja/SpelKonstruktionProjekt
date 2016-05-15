@@ -4,6 +4,7 @@ using GameEngine.Source.Systems.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Spel.Source.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,8 +38,8 @@ namespace Spel.Source.Gamestates
         /// </summary>
         public void onSceneCreated()
         {
-            GameEntityFactory.Instance.CreateTestKanin(true, Keys.W, Vector2.One, "Alexander");
-            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, new Vector2(300, 400), "Helmut");
+            GameEntityFactory.Instance.CreateTestKanin(true, Keys.W, Vector2.One, "Alexander", Direction.Left);
+            GameEntityFactory.Instance.CreateTestKanin(true, Keys.Up, new Vector2(300, 400), "Helmut", Direction.Right);
         }
 
         /// <summary>

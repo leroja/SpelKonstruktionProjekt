@@ -11,7 +11,6 @@ namespace Spel.Source.Components
     public class ChangeCubeComponent : IComponent
     {
         public bool isTaken { get; set; }
-
         public float time { get; set; }
 
         public ChangeCubeComponent()
