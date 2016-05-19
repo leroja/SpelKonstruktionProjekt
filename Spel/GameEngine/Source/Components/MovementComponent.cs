@@ -11,5 +11,10 @@ namespace GameEngine.Source.Components
     public class MovementComponent : IComponent
     {
         public Vector2 movement { get; set; }
+
+        public MovementComponent(Vector2 movement)
+        {
+            this.movement = movement;
+        }
     }
 }

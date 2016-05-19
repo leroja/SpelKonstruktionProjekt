@@ -84,9 +84,11 @@ namespace Spel.Menus
             Texture2D arrowPix = Game.Instance.GetContent<Texture2D>("pic/arrow");
             DrawableComponent arrow = new DrawableComponent(arrowPix);
             PositionComponent arrowPos = new PositionComponent(new Vector2(this.x - 35, this.y));
+            MovementComponent arrowMovement = new MovementComponent(new Vector2(x, y));
             int arrowId = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(arrowId, arrow);
             ComponentManager.Instance.AddComponentToEntity(arrowId, arrowPos);
+            ComponentManager.Instance.AddComponentToEntity(arrowId, arrowMovement);
             KeyBoardComponent kbcArrow = new KeyBoardComponent();
             
 
