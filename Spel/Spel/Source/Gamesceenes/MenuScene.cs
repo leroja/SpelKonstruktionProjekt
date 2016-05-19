@@ -103,6 +103,12 @@ namespace Spel.Menus
         public void onSceneUpdate()
         {
             Game game = Game.Instance;
+
+            if (textcomp.controlKeys(Keys.Down))
+                textcomp.selectedIndex--;
+            else if (textcomp.controlKeys(Keys.Up))
+                textcomp.selectedIndex++;
+
             if (textcomp.selectedIndex == 0 && textcomp.controlKeys(Keys.Enter))
                 game.state = new PlayingScene();
             else if (textcomp.selectedIndex == 1 && textcomp.controlKeys(Keys.Enter))
