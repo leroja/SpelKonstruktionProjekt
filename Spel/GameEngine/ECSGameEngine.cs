@@ -108,10 +108,11 @@ namespace GameEngine
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-
+            spriteBatch.Begin();
             // TODO: Add your drawing code here
             SystemManager.Instance.GameTime = gameTime;
             SystemManager.Instance.RunRenderSystems();
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }

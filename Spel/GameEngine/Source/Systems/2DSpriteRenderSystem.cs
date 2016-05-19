@@ -27,7 +27,7 @@ namespace GameEngine.Source.Systems
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<DrawableComponent>();
             if (dra != null)
             {
-                spriteBatch.Begin();
+                //spriteBatch.Begin();
                 foreach (var a in dra)
                 {
                     PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
@@ -46,7 +46,7 @@ namespace GameEngine.Source.Systems
                         
                     }
                 }
-                spriteBatch.End();
+                //spriteBatch.End();
             }
         }
     }

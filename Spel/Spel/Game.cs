@@ -41,6 +41,7 @@ namespace Spel
             CollisionSystem col = new CollisionSystem();
             det.Subscribe(col);
 
+            
             SystemManager.Instance.AddSystem(new ChangeCubesSystem());
             SystemManager.Instance.AddSystem(col);
             SystemManager.Instance.AddSystem(new HUDSystem());
@@ -49,6 +50,8 @@ namespace Spel
             SystemManager.Instance.AddSystem(new MovementSystem());
             SystemManager.Instance.AddSystem(new BallOfSpikesSystem());
             SystemManager.Instance.AddSystem(new SpawnPowerUpSystem(10));
+            SystemManager.Instance.AddSystem(new AISystem());
+
             FPSCounterComponent fps = new FPSCounterComponent();
             int ids = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(ids, fps);
@@ -59,6 +62,7 @@ namespace Spel
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, GraphicsDevice.Viewport.Height, Wall.LeftWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height, Wall.RightWall);
+            GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one");
 
             //StartUpScreenScene stateOne = new StartUpScreenScene(1000);
             //SceneSystem.Instance.setCurrentScene(stateOne);

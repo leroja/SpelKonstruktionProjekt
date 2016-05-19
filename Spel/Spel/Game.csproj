@@ -57,6 +57,7 @@
     <Compile Include="Source\Components\PowerUppComponent.cs" />
     <Compile Include="Source\GameEntityFactory.cs" />
     <Compile Include="Source\Gamesceenes\OptionsScene.cs" />
+    <Compile Include="Source\Systems\AISystem.cs" />
     <Compile Include="Source\Systems\BallOfSpikesSystem.cs" />
     <Compile Include="Source\Gamesceenes\EndingScene.cs" />
     <Compile Include="Source\Gamesceenes\PauseScene.cs" />

@@ -151,10 +151,11 @@ namespace Spel.Source
         public int CreatePlatform(Vector2 pos, string texture, int width, int height)
         {
             PositionComponent Pc = new PositionComponent(pos);
-            //DrawableComponent DC = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/"+texture));
+            DrawableComponent DC = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/"+texture));
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.X, (int)pos.Y, width, height));
             CollisionComponent CC = new CollisionComponent(false);
             PlatformComponent Plc = new PlatformComponent(pos, width, height);
+            Plc.RedoRecs(pos, DC.texture.Width, DC.texture.Height);
 
             int id = ComponentManager.Instance.CreateID();
 
@@ -162,7 +163,7 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, CRC);
             ComponentManager.Instance.AddComponentToEntity(id, CC);
             ComponentManager.Instance.AddComponentToEntity(id, Pc);
-           // ComponentManager.Instance.AddComponentToEntity(id, DC);
+            ComponentManager.Instance.AddComponentToEntity(id, DC);
             ComponentManager.Instance.AddComponentToEntity(id, Plc);
             return id;
         }
@@ -184,5 +185,41 @@ namespace Spel.Source
 
             return id;
         }
+
+
+        public int CreateAIPlayer(Direction dir, Vector2 position, bool pixlePer, string name)
+        {
+            DirectionComponent dc = new DirectionComponent(dir);
+            DrawableComponent comp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/Helmutani"));
+            PositionComponent pos = new PositionComponent(position);
+            VelocityComponent vel = new VelocityComponent(new Vector2(200F, 0), 50F);
+            JumpComponent jump = new JumpComponent(300F, 50F);
+            CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.position.X, (int)pos.position.Y, comp.texture.Width, comp.texture.Height));
+            CollisionComponent CC = new CollisionComponent(pixlePer);
+            DrawableTextComponent dtc = new DrawableTextComponent(name, Color.BurlyWood, Game.Instance.GetContent<SpriteFont>("Fonts/TestFont"));
+            HUDComponent hudc = new HUDComponent(Game.Instance.GetContent<Texture2D>("Pic/PowerUp"), new Vector2(pos.position.X, pos.position.Y));
+            HUDComponent hudc2 = new HUDComponent(Game.Instance.GetContent<Texture2D>("Pic/PowerUp"), Vector2.One);
+            HealthComponent hc = new HealthComponent(3);
+            AnimationComponent ani = new AnimationComponent(100, 114, comp.texture.Width, comp.texture.Height, 0.2);
+            AIComponent ai = new AIComponent();
+            PlayerComponent play = new PlayerComponent(name);
+
+            int id = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(id, vel);
+            ComponentManager.Instance.AddComponentToEntity(id, comp);
+            ComponentManager.Instance.AddComponentToEntity(id, pos);
+            ComponentManager.Instance.AddComponentToEntity(id, CRC);
+            ComponentManager.Instance.AddComponentToEntity(id, CC);
+            ComponentManager.Instance.AddComponentToEntity(id, dtc);
+            ComponentManager.Instance.AddComponentToEntity(id, hudc);
+            ComponentManager.Instance.AddComponentToEntity(id, hc);
+            ComponentManager.Instance.AddComponentToEntity(id, ani);
+            ComponentManager.Instance.AddComponentToEntity(id, dc);
+            ComponentManager.Instance.AddComponentToEntity(id, jump);
+            ComponentManager.Instance.AddComponentToEntity(id, play);
+            ComponentManager.Instance.AddComponentToEntity(id, ai);
+            return id;
+        }
+
     }
 }
