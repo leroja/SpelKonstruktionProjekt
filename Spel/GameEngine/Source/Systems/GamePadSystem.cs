@@ -63,17 +63,17 @@ namespace GameEngine.Source.Systems
         /// <param name="gamepadComponent"></param>
         public void UpdateActionStates(GamePadComponent gamepadComponent)
         {
-            foreach (string action in gamepadComponent.gamepadActions.Keys)
+            foreach (ActionsEnum action in gamepadComponent.gamepadActions.Keys)
             {
                 Buttons button = gamepadComponent.gamepadActions[action];
                 bool presentState = curState[(int)gamepadComponent.playerIndex].IsButtonDown(button);
                 bool oldState = curState[(int)gamepadComponent.playerIndex].IsButtonDown(button);
 
-                if(presentState && !oldState)
+                if(presentState && oldState)
                 {
                     gamepadComponent.gamepadStates[action] = ButtonStates.Pressed;
                 }
-                else if (presentState && oldState)
+                else if (presentState && !oldState)
                 {
                     gamepadComponent.gamepadStates[action] = ButtonStates.Hold;
                 }

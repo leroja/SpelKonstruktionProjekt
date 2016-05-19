@@ -28,22 +28,33 @@ namespace Spel.Source.Systems
         /// <param name="id"></param>
         public void OnPowerUpPicup(int id)
         {
-            ComponentManager test = ComponentManager.Instance; 
-            BallOfSpikesPowerUpComponent ball = new BallOfSpikesPowerUpComponent(10);
-            DrawableComponent newDraw = test.GetEntityComponent<DrawableComponent>(id);
-            ball.prevTexture = newDraw.texture;
-            newDraw.texture = ball.SpikeTexture;
-            test.AddComponentToEntity(id, ball);
+            BallOfSpikesPowerUpComponent temp = ComponentManager.Instance.GetEntityComponent<BallOfSpikesPowerUpComponent>(id);
+            if (temp == null)
+            {
+                ComponentManager test = ComponentManager.Instance;
+                BallOfSpikesPowerUpComponent ball = new BallOfSpikesPowerUpComponent(10);
+                DrawableComponent newDraw = test.GetEntityComponent<DrawableComponent>(id);
+                AnimationComponent anima = test.GetEntityComponent<AnimationComponent>(id);
+                ball.prevTexture = newDraw.texture;
+                newDraw.texture = ball.SpikeTexture;
+                ball.anime = anima;
+                ComponentManager.Instance.RemoveComponentFromEntity(id, anima);
+                test.AddComponentToEntity(id, ball);
 
 
-            CollisionRectangleComponent rec = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(id);
-            PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(id);
-            rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, newDraw.texture.Width, newDraw.texture.Height);
-            rec.CollisionRec.X = (int)pos.position.X;
-            rec.CollisionRec.Y = (int)pos.position.Y;
+                CollisionRectangleComponent rec = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(id);
+                PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(id);
+                rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, newDraw.texture.Width, newDraw.texture.Height);
+                rec.CollisionRec.X = (int)pos.position.X;
+                rec.CollisionRec.Y = (int)pos.position.Y;
 
-            rec.CollisionRec.Width = newDraw.texture.Width;
-            rec.CollisionRec.Height = newDraw.texture.Height;
+                rec.CollisionRec.Width = newDraw.texture.Width;
+                rec.CollisionRec.Height = newDraw.texture.Height;
+            }
+            else
+            {
+                temp.lifeTime += 10;
+            }
         }
         /// <summary>
         /// checks if any SpikBall component on an entity is out of time.
@@ -70,6 +81,7 @@ namespace Spel.Source.Systems
                         DrawableComponent newDraw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(ball);
                         BallOfSpikesPowerUpComponent pow = ComponentManager.Instance.GetEntityComponent<BallOfSpikesPowerUpComponent>(ball);
                         newDraw.texture = b.prevTexture;
+                        ComponentManager.Instance.AddComponentToEntity(ball, b.anime);
                         ComponentManager.Instance.RemoveComponentFromEntity(ball, b);
                        
                     }

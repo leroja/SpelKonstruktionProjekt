@@ -15,13 +15,13 @@ namespace GameEngine.Source.Components
     public class GamePadComponent : IComponent
     {
         public PlayerIndex playerIndex;
-        public Dictionary<string, Buttons> gamepadActions { get; set; }
-        public Dictionary<string, ButtonStates> gamepadStates{get; set;}
+        public Dictionary<ActionsEnum, Buttons> gamepadActions { get; set; }
+        public Dictionary<ActionsEnum, ButtonStates> gamepadStates{get; set;}
         public GamePadComponent(PlayerIndex playerIndex)
         {
             this.playerIndex = playerIndex;
-            gamepadActions = new Dictionary<string, Buttons>();
-            gamepadStates = new Dictionary<string, ButtonStates>();
+            gamepadActions = new Dictionary<ActionsEnum, Buttons>();
+            gamepadStates = new Dictionary<ActionsEnum, ButtonStates>();
         }
     }
 }
