@@ -16,6 +16,7 @@ namespace Spel.Source.Systems
 {
     /// <summary>
     /// A system for handling movement of players
+    /// and other entities that require movement
     /// gravition is also handled in this system
     /// </summary>
     public class MovementSystem : IUpdate
