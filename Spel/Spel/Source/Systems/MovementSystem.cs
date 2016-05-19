@@ -25,6 +25,20 @@ namespace Spel.Source.Systems
         public void update(GameTime gameTime)
         {
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
+            List<int> nonPlayerEntities = ComponentManager.Instance.GetAllEntitiesWithComponentType<MovementComponent>();
+
+            if (nonPlayerEntities != null)
+            {
+                foreach (var entity in nonPlayerEntities)
+                {
+                    PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(entity);
+                    MovementComponent move = ComponentManager.Instance.GetEntityComponent<MovementComponent>(entity);
+                    pos.prevPosition = pos.position;
+
+                    pos.position += move.movement;
+                }
+            }
+
             if (dra != null)
             {
                 foreach (var a in dra)
