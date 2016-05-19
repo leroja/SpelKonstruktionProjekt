@@ -18,7 +18,14 @@ namespace Spel.Source.Components
 
         public DirectionComponent(Direction dir)
         {
-            directio = dir;
+            if (dir == Direction.Still)
+            {
+                directio = Direction.Right;
+            }
+            else
+            {
+                directio = dir;
+            }
         }
     }
 }

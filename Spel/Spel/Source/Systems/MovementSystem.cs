@@ -35,7 +35,7 @@ namespace Spel.Source.Systems
                     KeyBoardComponent kbc = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(a);
                     DirectionComponent dc = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(a);
                     JumpComponent jump = ComponentManager.Instance.GetEntityComponent<JumpComponent>(a);
-                    p.prevPosition = p.position;
+                    AnimationComponent ani = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(a);
                     if (dc != null && v != null)
                     {
                         v.velocity.X = sideMovement * (int)dc.directio;
@@ -44,7 +44,7 @@ namespace Spel.Source.Systems
                     {
                         if (kbc.state[ActionsEnum.Jump] == ButtonStates.Pressed && !pc.isFalling)
                         {
-                            if(dc.directio == Direction.Still)
+                            if (dc.directio == Direction.Still)
                             {
                                 dc.directio = dc.preDir;
                             }
@@ -53,7 +53,19 @@ namespace Spel.Source.Systems
                                 v.velocity.Y -= jump.jumpHeight;
                                 ComponentManager.Instance.AddComponentToEntity(a, new SoundEffectComponent("jump"));
                             }
+                            //if(ani != null)
+                            //{
+                            //    ani.currentFrame = 2;
+                            //}
                         }
+                        else
+                        {
+                            //if (ani != null)
+                            //{
+                            //    ani.currentFrame = 1;
+                            //}
+                        }
+
                         v.velocity.Y += gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         p.position += v.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }

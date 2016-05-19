@@ -148,21 +148,25 @@ namespace Spel.Source.Systems
                         player = ent2;
                         power = ent1;
                     }
-                    PowerUppComponent tes = ComponentManager.Instance.GetEntityComponent<PowerUppComponent>(power);
-                    switch (tes.type)
+                    PlayerComponent playerComp = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(player);
+                    if (!playerComp.isFalling)
                     {
-                        case 1:
-                            BallOfSpikesSystem temp = new BallOfSpikesSystem();
-                            temp.OnPowerUpPicup(player);
-                            break;
-                        case 2:
-                            HealthComponent hp = ComponentManager.Instance.GetEntityComponent<HealthComponent>(player);
-                            hp.health = hp.maxhealth;
-                            break;
-                        default:
-                            break;
+                        PowerUppComponent tes = ComponentManager.Instance.GetEntityComponent<PowerUppComponent>(power);
+                        switch (tes.type)
+                        {
+                            case 1:
+                                BallOfSpikesSystem temp = new BallOfSpikesSystem();
+                                temp.OnPowerUpPicup(player);
+                                break;
+                            case 2:
+                                HealthComponent hp = ComponentManager.Instance.GetEntityComponent<HealthComponent>(player);
+                                hp.health = hp.maxhealth;
+                                break;
+                            default:
+                                break;
+                        }
+                        rec(ent1, ent2);
                     }
-                    rec(ent1, ent2);
                 }
                 else if (collType == CollisionTypes.PlayerVsPlatform)
                 {
@@ -175,6 +179,7 @@ namespace Spel.Source.Systems
                         PlayerVsPlatformColl(ent1, ent2, gt);
                     }
                 }
+
                 else if (collType == CollisionTypes.NotDefined)
                 {
                     //@Todo maybe do something here or throw some kind of exception
@@ -235,10 +240,15 @@ namespace Spel.Source.Systems
 
                 if (pdc.directio != Direction.Still)
                 {
+                    pvc.velocity.Y = 0;
                     changeDir(pdc);
                     pdc.preDir = pdc.directio;
                     pdc.directio = Direction.Still;
                 }
+                //else if(pdc.directio == Direction.Still)
+                //{
+                //    pvc.velocity.Y = 0;
+                //}
                 pvc.velocity.Y = 0;
                 pvc.velocity.Y -= 500F * (float)gameTime.ElapsedGameTime.TotalSeconds;
 

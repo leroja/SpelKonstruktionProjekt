@@ -15,7 +15,7 @@ namespace Spel.Source.Components
     {
         public string playerName { get; set; }
         public int killCount { get; set; }
-        public bool isFalling { get; set; }// maybe implement state pattern instead?
+        public bool isFalling { get; set; }// maybe implement state pattern instead? //@todo
 
         /// <summary>
         /// PlayerComponent constructor

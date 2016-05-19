@@ -26,7 +26,7 @@ namespace GameEngine.Source.Systems
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<DrawableTextComponent>();
             if (dra != null)
             {
-                spriteBatch.Begin();
+                //spriteBatch.Begin();
                 foreach (var a in dra)
                 {
                     
@@ -55,7 +55,7 @@ namespace GameEngine.Source.Systems
                     }
                     
                 }
-                spriteBatch.End();
+                //spriteBatch.End();
             }
         }
     }
