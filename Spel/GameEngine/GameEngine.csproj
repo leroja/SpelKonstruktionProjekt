@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Components\AIComponent.cs" />
     <Compile Include="Source\Components\AnimationComponent.cs" />
+    <Compile Include="Source\Components\FadeComponent.cs" />
     <Compile Include="Source\Components\HUDComponent.cs" />
     <Compile Include="Source\Components\JumpComponent.cs" />
     <Compile Include="Source\Components\MouseComponent.cs" />

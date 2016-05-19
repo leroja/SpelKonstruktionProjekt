@@ -31,6 +31,9 @@ namespace GameEngine.Source.Systems
                 {
                     
                     DrawableTextComponent d = ComponentManager.Instance.GetEntityComponent<DrawableTextComponent>(a);
+                    FadeComponent f = ComponentManager.Instance.GetEntityComponent<FadeComponent>(a);
+                    if(f != null)
+                        f.fadeDelay -= gameTime.ElapsedGameTime.TotalSeconds;
 
                     Dictionary<Vector2, string> list = d.getMenuList();
                     //If there is a menulist then there's multiple lines of text that should be written to the screen. 
@@ -40,6 +43,19 @@ namespace GameEngine.Source.Systems
                         //position where the line should be written.
                         foreach(var item in list)
                         {
+                            if(f != null)
+                            {
+                                if (f.fadeDelay <= 0)
+                                {
+                                    f.fadeDelay = .035;
+
+                                    f.alphaValue += f.fadeIncrement;
+
+                                    if (f.fadeIncrement >= 255 || f.alphaValue <= 0)
+                                        f.fadeIncrement *= -1;
+                                }
+                            }
+                            d.textColor = new Color(255, 255, 255, (byte)MathHelper.Clamp(f.alphaValue,0 , 255));
                             spriteBatch.DrawString(d.font, item.Value, item.Key, d.textColor);
                         }
                         

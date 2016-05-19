@@ -65,9 +65,11 @@ namespace Spel.Source.Gamestates
 
             DrawableTextComponent dtx = new DrawableTextComponent("Flappy Ass, version 1.0 By: PT2", Color.Tomato, Game.Instance.GetContent<SpriteFont>("Fonts/MenuFont"));
             PositionComponent pc = new PositionComponent(new Vector2(20, 100));
+            FadeComponent fc = new FadeComponent(1, 3);
 
             int id = ComponentManager.Instance.CreateID();
 
+            ComponentManager.Instance.AddComponentToEntity(id, fc);
             ComponentManager.Instance.AddComponentToEntity(id, dtx);
             ComponentManager.Instance.AddComponentToEntity(id, pc);
 
