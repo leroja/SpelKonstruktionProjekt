@@ -29,35 +29,82 @@ namespace Spel.Source.Systems
             {
                 foreach (var a in dra)
                 {
-                    PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
-                    PlayerComponent pc = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(a);
-                    VelocityComponent v = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(a);
-                    KeyBoardComponent kbc = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(a);
-                    DirectionComponent dc = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(a);
-                    JumpComponent jump = ComponentManager.Instance.GetEntityComponent<JumpComponent>(a);
-                    p.prevPosition = p.position;
-                    if (dc != null && v != null)
+                    if (ComponentManager.Instance.CheckIfEntityHasComponent<KeyBoardComponent>(a))
                     {
-                        v.velocity.X = sideMovement * (int)dc.directio;
+                        KeyBoardMove(a, gameTime);
                     }
-                    if (p != null && v != null && kbc != null && jump != null && dc != null)
+                    else
                     {
-                        if (kbc.state[ActionsEnum.Jump] == ButtonStates.Pressed && !pc.isFalling)
-                        {
-                            if(dc.directio == Direction.Still)
-                            {
-                                dc.directio = dc.preDir;
-                            }
-                            if (v.velocity.Y > -jump.maxJumpHeight)
-                            {
-                                v.velocity.Y -= jump.jumpHeight;
-                                ComponentManager.Instance.AddComponentToEntity(a, new SoundEffectComponent("jump"));
-                            }
-                        }
-                        v.velocity.Y += gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        p.position += v.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        GamePadeMove(a, gameTime);
+                        
                     }
                 }
+            }
+        }
+        private void KeyBoardMove(int Id,GameTime gameTime)
+        {
+            KeyBoardComponent kbc = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(Id);
+            PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(Id);
+            PlayerComponent pc = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(Id);
+            VelocityComponent v = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(Id);
+            DirectionComponent dc = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(Id);
+            JumpComponent jump = ComponentManager.Instance.GetEntityComponent<JumpComponent>(Id);
+            p.prevPosition = p.position;
+            if (dc != null && v != null)
+            {
+                v.velocity.X = sideMovement * (int)dc.directio;
+            }
+            if (p != null && v != null && kbc != null && jump != null && dc != null)
+            {
+                if (kbc.state[ActionsEnum.Jump] == ButtonStates.Pressed && !pc.isFalling)
+                {
+                    if (dc.directio == Direction.Still)
+                    {
+                        dc.directio = dc.preDir;
+                    }
+                    if (v.velocity.Y > -jump.maxJumpHeight)
+                    {
+                        v.velocity.Y -= jump.jumpHeight;
+                        ComponentManager.Instance.AddComponentToEntity(Id, new SoundEffectComponent("jump"));
+                    }
+                }
+                v.velocity.Y += gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                p.position += v.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+        }
+
+        private void GamePadeMove(int Id, GameTime gameTime)
+        {
+            GamePadComponent kbc = ComponentManager.Instance.GetEntityComponent<GamePadComponent>(Id);
+            PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(Id);
+            PlayerComponent pc = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(Id);
+            VelocityComponent v = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(Id);
+            DirectionComponent dc = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(Id);
+            JumpComponent jump = ComponentManager.Instance.GetEntityComponent<JumpComponent>(Id);
+            p.prevPosition = p.position;
+            
+            if (dc != null && v != null)
+            {
+                v.velocity.X = sideMovement * (int)dc.directio;
+            }
+            if (p != null && v != null && kbc != null && jump != null && dc != null)
+            {
+               // Console.WriteLine(kbc.gamepadStates[ActionsEnum.Jump]);
+                if (kbc.gamepadStates[ActionsEnum.Jump] == ButtonStates.Pressed && !pc.isFalling)
+                {
+                    //Console.WriteLine(kbc.gamepadStates[ActionsEnum.Jump]);
+                    if (dc.directio == Direction.Still)
+                    {
+                        dc.directio = dc.preDir;
+                    }
+                    if (v.velocity.Y > -jump.maxJumpHeight)
+                    {
+                        v.velocity.Y -= jump.jumpHeight;
+                        ComponentManager.Instance.AddComponentToEntity(Id, new SoundEffectComponent("jump"));
+                    }
+                }
+                v.velocity.Y += gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                p.position += v.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
         }
     }

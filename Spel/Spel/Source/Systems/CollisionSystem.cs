@@ -385,6 +385,7 @@ namespace Spel.Source.Systems
             {
                 DirectionComponent dir = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(Player);
                 changeDir(dir);
+ 
 
                 change.isTaken = true;
             }

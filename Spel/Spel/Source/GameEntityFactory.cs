@@ -36,24 +36,41 @@ namespace Spel.Source
                 return instance;
             }
         }
-
         /// <summary>
-        /// A method for creating a test player entity
+        /// Creates an new Player whit Controlls
         /// </summary>
-        /// <param name="pixlePer"></param>
-        /// <param name="Jump"></param>
-        /// <param name="position"></param>
-        /// <param name="name"></param>
-        /// <param name="dir"></param>
+        /// <param name="pixlePer"></param> True if pixelPerfect
+        /// <param name="GamePade"></param> True if GamePad else False
+        /// <param name="PadJump"></param> Key binding to gamePad
+        /// <param name="Jump"></param> key binding to keybord
+        /// <param name="position"></param> Player Position
+        /// <param name="name"></param> Name on Player
+        /// <param name="dir"></param> direction
+        /// <param name="index"></param> Playerindex For GamePad
         /// <returns></returns>
-       public int CreateTestKanin(bool pixlePer, Keys Jump, Vector2 position, string name, Direction dir)
+        public int CreatePlayer(bool pixlePer, bool GamePade,Buttons PadJump, Keys Jump, Vector2 position, string name,Direction dir, PlayerIndex index)
         {
+            GamePadComponent gam;
+            KeyBoardComponent kcb;
+            int id = ComponentManager.Instance.CreateID();
+
+            if (GamePade == true)
+            {
+                gam = new GamePadComponent(index);
+                gam.gamepadActions.Add(ActionsEnum.Jump, PadJump);
+                ComponentManager.Instance.AddComponentToEntity(id, gam);
+            }
+            else
+            {
+                kcb = new KeyBoardComponent();
+                kcb.keyBoardActions.Add(ActionsEnum.Jump, Jump);
+                ComponentManager.Instance.AddComponentToEntity(id, kcb);
+            }
             DirectionComponent dc = new DirectionComponent(dir);
             DrawableComponent comp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/Helmutani"));
             PositionComponent pos = new PositionComponent(position);
             VelocityComponent vel = new VelocityComponent(new Vector2(200F, 0), 50F);
             JumpComponent jump = new JumpComponent(300F, 200F);
-            KeyBoardComponent kbc = new KeyBoardComponent();
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.position.X, (int)pos.position.Y, comp.texture.Width, comp.texture.Height));
             CollisionComponent CC = new CollisionComponent(pixlePer);
             PlayerComponent pc = new PlayerComponent(name);
@@ -62,13 +79,11 @@ namespace Spel.Source
             HUDComponent hudc2 = new HUDComponent(Game.Instance.GetContent<Texture2D>("Pic/PowerUp"), Vector2.One);
             HealthComponent hc = new HealthComponent(3);
             AnimationComponent ani = new AnimationComponent(100, 114, comp.texture.Width, comp.texture.Height, 0.2);
-            kbc.keyBoardActions.Add(ActionsEnum.Jump, Jump);
 
-            int id = ComponentManager.Instance.CreateID();
+            
             ComponentManager.Instance.AddComponentToEntity(id, vel);
             ComponentManager.Instance.AddComponentToEntity(id, comp);
             ComponentManager.Instance.AddComponentToEntity(id, pos);
-            ComponentManager.Instance.AddComponentToEntity(id, kbc);
             ComponentManager.Instance.AddComponentToEntity(id, CRC);
             ComponentManager.Instance.AddComponentToEntity(id, CC);
             ComponentManager.Instance.AddComponentToEntity(id, pc);
@@ -80,7 +95,6 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, jump);
             return id;
         }
-
 
         /// <summary>
         /// Creates a border rectangle
@@ -113,7 +127,7 @@ namespace Spel.Source
         {
             Random rand = new Random();
             PositionComponent Pc = new PositionComponent(position);
-            PowerUppComponent power = new PowerUppComponent(rand.Next(2,3));
+            PowerUppComponent power = new PowerUppComponent(rand.Next(1,3));
             DrawableComponent powerupp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/Powerupbox"));
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)position.X, (int)position.Y, powerupp.texture.Width, powerupp.texture.Height));
             CollisionComponent CC = new CollisionComponent(true);
