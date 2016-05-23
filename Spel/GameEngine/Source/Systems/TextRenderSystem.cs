@@ -77,7 +77,7 @@ namespace GameEngine.Source.Systems
                                 fc.alphaValue += f.fadeIncrement;
 
                                 if (fc.fadeIncrement >= 255 || fc.alphaValue <= 0)
-                                    fc.fadeIncrement *= -1;
+                                    fc.fadeIncrement *= 0;
                             }
                             d.textColor = new Color(255, 0, 255, (byte)MathHelper.Clamp(fc.alphaValue, 0, 255));
                         }
