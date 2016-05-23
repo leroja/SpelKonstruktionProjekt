@@ -64,8 +64,8 @@ namespace Spel
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height, Wall.RightWall);
             GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one");
 
-            //StartUpScreenScene stateOne = new StartUpScreenScene(1000);
-            //SceneSystem.Instance.setCurrentScene(stateOne);
+            StartUpScreenScene stateOne = new StartUpScreenScene(10000);
+            SceneSystem.Instance.setCurrentScene(stateOne);
 
 
 
