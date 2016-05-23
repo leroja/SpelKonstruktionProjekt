@@ -14,6 +14,6 @@ namespace GameEngine.Source.Enumerator
     /// </summary>
     public enum ActionsEnum
     {
-        Jump
+        Jump, Up, Down, Left, Right, Enter
     }
 }

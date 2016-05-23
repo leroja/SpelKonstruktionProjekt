@@ -81,7 +81,6 @@
     <Compile Include="Source\Enumerator\ButtonStates.cs" />
     <Compile Include="Source\Managers\AudioManager.cs" />
     <Compile Include="Source\Managers\ComponentManager.cs" />
-    <Compile Include="Source\Managers\PhysicsManager.cs" />
     <Compile Include="Source\Managers\RenderManager.cs" />
     <Compile Include="Source\Managers\SceneSystem.cs" />
     <Compile Include="Source\Managers\SystemManager.cs" />

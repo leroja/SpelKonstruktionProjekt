@@ -27,7 +27,6 @@ namespace GameEngine.Source.Systems
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<DrawableComponent>();
             if (dra != null)
             {
-                //spriteBatch.Begin();
                 foreach (var a in dra)
                 {
                     PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
@@ -39,14 +38,14 @@ namespace GameEngine.Source.Systems
                         if (anim != null)
                         {
                             d.drawRectangle = new Rectangle((int)p.position.X, (int)p.position.Y, anim.sourceRectangle.Width, anim.sourceRectangle.Height);
-                            spriteBatch.Draw(d.texture, d.drawRectangle, anim.sourceRectangle, Color.White);
+                            //spriteBatch.Draw(d.texture, d.drawRectangle, anim.sourceRectangle, Color.White);
+                            spriteBatch.Draw(d.texture, p.position,anim.sourceRectangle, d.colour, 0, Vector2.Zero, 1, d.flip, 1);
                         }
                         else
-                            spriteBatch.Draw(d.texture, p.position, Color.White);
-                        
+                            //spriteBatch.Draw(d.texture, p.position, d.colour);
+                            spriteBatch.Draw(d.texture, p.position,null, Color.White,0,Vector2.Zero,1,d.flip,1);
                     }
                 }
-                //spriteBatch.End();
             }
         }
     }

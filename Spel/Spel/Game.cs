@@ -56,13 +56,13 @@ namespace Spel
             int ids = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(ids, fps);
 
-            GameEntityFactory.Instance.CreatePlayer(true,false, Buttons.A,Keys.W, new Vector2(GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1", Direction.Left,PlayerIndex.One);
-            GameEntityFactory.Instance.CreatePlayer(true,false, Buttons.B,Keys.Up, Vector2.One, "Kanin 2", Direction.Right,PlayerIndex.Two);
+            GameEntityFactory.Instance.CreatePlayer(true,false, Buttons.A,Keys.Up, new Vector2(GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1", Direction.Left,PlayerIndex.One, Color.Green);
+            GameEntityFactory.Instance.CreatePlayer(true,false, Buttons.B,Keys.W, Vector2.One, "Kanin 2", Direction.Right,PlayerIndex.Two, Color.White);
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, GraphicsDevice.Viewport.Height, Wall.LeftWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height, Wall.RightWall);
-            GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one");
+            GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one", Color.Red);
 
             //StartUpScreenScene stateOne = new StartUpScreenScene(1000);
             //SceneSystem.Instance.setCurrentScene(stateOne);

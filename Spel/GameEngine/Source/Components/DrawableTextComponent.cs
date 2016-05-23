@@ -21,6 +21,9 @@ namespace GameEngine.Source.Components
         public SpriteFont font { get; set; }
         public bool visable { get; set; }
         private Dictionary<Vector2,String> menu;
+
+
+        // @Todo why this here, use a keyboard component instead
         KeyboardState prevState;
         KeyboardState currentState;
 

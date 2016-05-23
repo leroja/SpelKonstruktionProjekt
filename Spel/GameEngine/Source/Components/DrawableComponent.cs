@@ -16,14 +16,18 @@ namespace GameEngine.Source.Components
         public SpriteEffects sprite { get; set; }
         public Rectangle drawRectangle { get; set; }
         public bool visable { get; set; }
+        public SpriteEffects flip { get; set; }
+        public Color colour { get; set; }
 
         // Constructor for DrawableComponent 
-        public DrawableComponent(Texture2D startingTexture)
+        public DrawableComponent(Texture2D startingTexture, SpriteEffects flip)
         {
             texture = startingTexture;
             sprite = SpriteEffects.None;
             drawRectangle = new Rectangle(0, 0, startingTexture.Width, startingTexture.Height);
             visable = true;
+            this.flip = flip;
+            colour = Color.White;
         }
 
     }

@@ -37,22 +37,32 @@ namespace Spel.Source
             }
         }
         /// <summary>
-        /// Creates an new Player whit Controlls
+        /// Creates an new Player with Controlls
         /// </summary>
-        /// <param name="pixlePer"></param> True if pixelPerfect
-        /// <param name="GamePade"></param> True if GamePad else False
-        /// <param name="PadJump"></param> Key binding to gamePad
-        /// <param name="Jump"></param> key binding to keybord
-        /// <param name="position"></param> Player Position
-        /// <param name="name"></param> Name on Player
-        /// <param name="dir"></param> direction
-        /// <param name="index"></param> Playerindex For GamePad
+        /// <param name="pixlePer"> True if pixelPerfect shall be used </param>
+        /// <param name="GamePade"> True if GamePad the player uses a gamepad </param>
+        /// <param name="PadJump"> Key binding to gamePad </param>
+        /// <param name="Jump"> key binding to keybord </param>
+        /// <param name="position"> Player start Position </param>
+        /// <param name="name"> The name off the player</param>
+        /// <param name="dir"> The players starting direction</param>
+        /// <param name="index">  Playerindex For GamePad </param>
         /// <returns></returns>
-        public int CreatePlayer(bool pixlePer, bool GamePade,Buttons PadJump, Keys Jump, Vector2 position, string name,Direction dir, PlayerIndex index)
+        public int CreatePlayer(bool pixlePer, bool GamePade,Buttons PadJump, Keys Jump, Vector2 position, string name,Direction dir, PlayerIndex index, Color colour)
         {
+            SpriteEffects flip;
             GamePadComponent gam;
             KeyBoardComponent kcb;
             int id = ComponentManager.Instance.CreateID();
+
+            if (dir == Direction.Left)
+            {
+                flip = SpriteEffects.FlipHorizontally;
+            }
+            else
+            {
+                flip = SpriteEffects.None;
+            }
 
             if (GamePade == true)
             {
@@ -67,7 +77,7 @@ namespace Spel.Source
                 ComponentManager.Instance.AddComponentToEntity(id, kcb);
             }
             DirectionComponent dc = new DirectionComponent(dir);
-            DrawableComponent comp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/Helmutani"));
+            DrawableComponent comp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/Helmutani"), flip);
             PositionComponent pos = new PositionComponent(position);
             VelocityComponent vel = new VelocityComponent(new Vector2(200F, 0), 50F);
             JumpComponent jump = new JumpComponent(300F, 200F);
@@ -80,6 +90,7 @@ namespace Spel.Source
             HealthComponent hc = new HealthComponent(3);
             AnimationComponent ani = new AnimationComponent(100, 114, comp.texture.Width, comp.texture.Height, 0.2);
 
+            comp.colour = colour;
             
             ComponentManager.Instance.AddComponentToEntity(id, vel);
             ComponentManager.Instance.AddComponentToEntity(id, comp);
@@ -128,7 +139,7 @@ namespace Spel.Source
             Random rand = new Random();
             PositionComponent Pc = new PositionComponent(position);
             PowerUppComponent power = new PowerUppComponent(rand.Next(1,3));
-            DrawableComponent powerupp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/Powerupbox"));
+            DrawableComponent powerupp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/Powerupbox"),SpriteEffects.None);
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)position.X, (int)position.Y, powerupp.texture.Width, powerupp.texture.Height));
             CollisionComponent CC = new CollisionComponent(true);
             int id = ComponentManager.Instance.CreateID();
@@ -147,11 +158,11 @@ namespace Spel.Source
         /// <param name="texture"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        /// <returns> the id of the platform identity </returns>
+        /// <returns> the id of the created platform identity </returns>
         public int CreatePlatform(Vector2 pos, string texture, int width, int height)
         {
             PositionComponent Pc = new PositionComponent(pos);
-            DrawableComponent DC = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/"+texture));
+            DrawableComponent DC = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/"+texture),SpriteEffects.None);
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.X, (int)pos.Y, width, height));
             CollisionComponent CC = new CollisionComponent(false);
             PlatformComponent Plc = new PlatformComponent(pos, width, height);
@@ -175,7 +186,7 @@ namespace Spel.Source
             PositionComponent pos = new PositionComponent(position);
             CollisionComponent col = new CollisionComponent(false);
             CollisionRectangleComponent colRec = new CollisionRectangleComponent(new Rectangle((int)position.X, (int)position.Y, width, height));
-            DrawableComponent draw = new DrawableComponent(Game.Instance.GetContent<Texture2D>(texture));
+            DrawableComponent draw = new DrawableComponent(Game.Instance.GetContent<Texture2D>(texture),SpriteEffects.None);
 
             ComponentManager.Instance.AddComponentToEntity(id, cdc);
             ComponentManager.Instance.AddComponentToEntity(id, pos);
@@ -186,11 +197,29 @@ namespace Spel.Source
             return id;
         }
 
-
-        public int CreateAIPlayer(Direction dir, Vector2 position, bool pixlePer, string name)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <param name="position"></param>
+        /// <param name="pixlePer"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public int CreateAIPlayer(Direction dir, Vector2 position, bool pixlePer, string name, Color colour)
         {
+            SpriteEffects flip;
+
+            if (dir == Direction.Left)
+            {
+                flip = SpriteEffects.FlipHorizontally;
+            }
+            else
+            {
+                flip = SpriteEffects.None;
+            }
+
             DirectionComponent dc = new DirectionComponent(dir);
-            DrawableComponent comp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/Helmutani"));
+            DrawableComponent comp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/Helmutani"),flip);
             PositionComponent pos = new PositionComponent(position);
             VelocityComponent vel = new VelocityComponent(new Vector2(200F, 0), 50F);
             JumpComponent jump = new JumpComponent(300F, 50F);
@@ -203,6 +232,8 @@ namespace Spel.Source
             AnimationComponent ani = new AnimationComponent(100, 114, comp.texture.Width, comp.texture.Height, 0.2);
             AIComponent ai = new AIComponent();
             PlayerComponent play = new PlayerComponent(name);
+
+            comp.colour = colour;
 
             int id = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(id, vel);
@@ -220,6 +251,5 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, ai);
             return id;
         }
-
     }
 }

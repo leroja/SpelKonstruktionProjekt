@@ -22,7 +22,6 @@ namespace Spel.Source.Systems
             List<int> entitys = ComponentManager.Instance.GetAllEntitiesWithComponentType<HUDComponent>();
             if (entitys != null)
             {
-                //spriteBatch.Begin();
                 foreach (var entity in entitys)
                 {
                     PositionComponent pc = ComponentManager.Instance.GetEntityComponent<PositionComponent>(entity);
@@ -44,7 +43,6 @@ namespace Spel.Source.Systems
                         } 
                     }
                 }
-                //spriteBatch.End();
             }
         }
 

@@ -11,6 +11,7 @@ using GameEngine.Source.Systems.Interfaces;
 using GameEngine.Source.Enumerator;
 using Spel.Source.Components;
 using Spel.Source.Enum;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Spel.Source.Systems
 {
@@ -51,8 +52,8 @@ namespace Spel.Source.Systems
                     else
                     {
                         GamePadeMove(a, gameTime);
-                        
                     }
+                    flip(a);
                 }
             }
         }
@@ -120,6 +121,24 @@ namespace Spel.Source.Systems
                 }
                 v.velocity.Y += gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 p.position += v.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ID"> </param>
+        private void flip(int ID)
+        {
+            DirectionComponent dir = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(ID);
+            DrawableComponent draw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(ID);
+
+            if(dir.directio == Direction.Right)
+            {
+                draw.flip = SpriteEffects.None;
+            }else if(dir.directio == Direction.Left)
+            {
+                draw.flip = SpriteEffects.FlipHorizontally;
             }
         }
     }

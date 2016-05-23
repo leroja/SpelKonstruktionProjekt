@@ -83,6 +83,9 @@ namespace Spel.Source.Systems
                     }
                     else // both are on the same "level" 
                     {
+
+                        // @Todo implement spike ball check, if a player is a spiku ballu he/she shall not fall or loose a life
+
                         if (!pcp2.isFalling && !pcp1.isFalling)
                         {
                             if (dcp1.directio != Direction.Still)
@@ -368,17 +371,28 @@ namespace Spel.Source.Systems
         {
             PositionComponent pos1 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(player1);
             PositionComponent pos2 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(player2);
+            DirectionComponent dc1 = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(player1);
+            DirectionComponent dc2 = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(player2);
             float push = 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (pos1.position.X > pos2.position.X)
             {
                 pos1.position.X += push;
                 pos2.position.X -= push;
+
+                if (dc1.directio == Direction.Left)
+                    changeDir(dc1);
+                if (dc2.directio == Direction.Right)
+                    changeDir(dc2);
             }
             else
             {
                 pos1.position.X -= push;
                 pos2.position.X += push;
+                if (dc2.directio == Direction.Left)
+                    changeDir(dc2);
+                if (dc1.directio == Direction.Right)
+                    changeDir(dc1);
             }
         }
 

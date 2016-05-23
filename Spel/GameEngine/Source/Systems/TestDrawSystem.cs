@@ -38,8 +38,6 @@ namespace GameEngine.Source.Systems
             List<int> ents = ComponentManager.Instance.GetAllEntitiesWithComponentType<CollisionRectangleComponent>();
 
             
-            //spriteBatch.Begin();
-            
 
             if(ents != null)
             {
@@ -58,8 +56,6 @@ namespace GameEngine.Source.Systems
                     }
                 }
             }
-
-            //spriteBatch.End();
         }
 
         /// <summary>

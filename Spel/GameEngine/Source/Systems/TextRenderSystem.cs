@@ -26,7 +26,6 @@ namespace GameEngine.Source.Systems
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<DrawableTextComponent>();
             if (dra != null)
             {
-                //spriteBatch.Begin();
                 foreach (var a in dra)
                 {
                     
@@ -58,7 +57,6 @@ namespace GameEngine.Source.Systems
                             d.textColor = new Color(255, 255, 255, (byte)MathHelper.Clamp(f.alphaValue,0 , 255));
                             spriteBatch.DrawString(d.font, item.Value, item.Key, d.textColor);
                         }
-                        
                     }
                     //There is just one line of text, then just draw it to the screen.
                     else
@@ -69,9 +67,7 @@ namespace GameEngine.Source.Systems
                             spriteBatch.DrawString(d.font, d.text, p.position, d.textColor);
                         }
                     }
-                    
                 }
-                //spriteBatch.End();
             }
         }
     }

@@ -38,8 +38,8 @@ namespace Spel.Source.Gamestates
         /// </summary>
         public void onSceneCreated()
         {
-            GameEntityFactory.Instance.CreatePlayer(true,true, Buttons.A,Keys.M, Vector2.One, "Alexander", Direction.Left,PlayerIndex.One);
-            GameEntityFactory.Instance.CreatePlayer(true,true, Buttons.B,Keys.M, new Vector2(300, 400), "Helmut", Direction.Right,PlayerIndex.Two);
+            GameEntityFactory.Instance.CreatePlayer(true,true, Buttons.A,Keys.W, Vector2.One, "Alexander", Direction.Left,PlayerIndex.One, Color.White);
+            GameEntityFactory.Instance.CreatePlayer(true,true, Buttons.B,Keys.Up, new Vector2(300, 400), "Helmut", Direction.Right,PlayerIndex.Two, Color.White);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Spel.Source.Gamestates
             {
 
                 Texture2D text = Game.Instance.GetContent<Texture2D>("Pic/professor");
-                DrawableComponent comp2 = new DrawableComponent(text);
+                DrawableComponent comp2 = new DrawableComponent(text, SpriteEffects.None);
                 PositionComponent pos2 = new PositionComponent(new Vector2(1, 1));
                 AnimationComponent ani = new AnimationComponent(64, 64, text.Width, text.Height, 0.1);
                 int id2 = ComponentManager.Instance.CreateID();

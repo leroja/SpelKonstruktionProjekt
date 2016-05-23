@@ -82,7 +82,7 @@ namespace Spel.Menus
             entitiesInState.Add(id);
 
             Texture2D arrowPix = Game.Instance.GetContent<Texture2D>("pic/arrow");
-            DrawableComponent arrow = new DrawableComponent(arrowPix);
+            DrawableComponent arrow = new DrawableComponent(arrowPix, SpriteEffects.None);
             PositionComponent arrowPos = new PositionComponent(new Vector2(this.x - 35, this.y));
             MovementComponent arrowMovement = new MovementComponent(new Vector2(x, y));
             int arrowId = ComponentManager.Instance.CreateID();
