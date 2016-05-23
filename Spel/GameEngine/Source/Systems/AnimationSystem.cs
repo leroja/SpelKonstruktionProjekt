@@ -38,9 +38,13 @@ namespace GameEngine.Source.Systems
                         anim.timeElapsedSinceLastFrame = 0;
                         anim.currentFrame++;
 
-                        if(anim.currentFrame > anim.getAnimationLength())
+                        if(anim.currentFrame > anim.getAnimationLength() && anim.oneTime == false)
                         {
                             anim.currentFrame = 0;
+                        }
+                        else if (anim.currentFrame > anim.getAnimationLength() && anim.oneTime == true)
+                        {
+                            anim.currentFrame = anim.getAnimationLength();
                         }
                         anim.setNewPosRectangle(anim.currentFrame);
                     }

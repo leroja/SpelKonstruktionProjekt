@@ -19,6 +19,7 @@ namespace GameEngine.Source.Components
         /// we need to tell our spritesheet how many frames to wait before transitioning.
         public double timePerFrame { get; set; }
         public int currentFrame { get; set; }
+        public bool oneTime { get; set; }
 
         /// the elapsed time since the last frame increment, and other options.
         public double timeElapsedSinceLastFrame { get; set; }

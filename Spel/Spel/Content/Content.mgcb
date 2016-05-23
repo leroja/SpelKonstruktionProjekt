@@ -25,12 +25,6 @@
 /processorParam:TextureFormat=Color
 /build:Pic/Kanin.png
 
-#begin Sound/Amon Amarth Cry Of The Black Birds.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Sound/Amon Amarth Cry Of The Black Birds.mp3
-
 #begin Sound/Bouncy_Bounce-Bugs_Bunny-1735935456.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -114,18 +108,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sound/Jump.wav
-
-#begin Sound/helmut2.gif
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sound/helmut2.gif
 
 #begin Pic/helmut.png
 /importer:TextureImporter
@@ -234,4 +216,64 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Pic/changedirani.png
+
+#begin Pic/helmutsh.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Pic/helmutsh.png
+
+#begin Sound/hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/hit.wav
+
+#begin Sound/powerup.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/powerup.wav
+
+#begin Sound/grunt.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/grunt.wav
+
+#begin Sound/pfhit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/pfhit.wav
+
+#begin Sound/splat.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/splat.wav
+
+#begin Sound/sidehit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/sidehit.wav
+
+#begin Sound/signhit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/signhit.wav
+
+#begin Sound\MetalBirds.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound\MetalBirds.mp3
 

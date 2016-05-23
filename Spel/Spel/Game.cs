@@ -12,6 +12,7 @@ using Spel.Source.Enum;
 using Spel.Source.Gamestates;
 using GameEngine.Source.Systems;
 using GameEngine.Source.Systems.Interfaces;
+using Microsoft.Xna.Framework.Media;
 
 namespace Spel
 {
@@ -64,10 +65,13 @@ namespace Spel
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height, Wall.RightWall);
             GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one", Color.Red);
 
-            StartUpScreenScene stateOne = new StartUpScreenScene(10000);
-            SceneSystem.Instance.setCurrentScene(stateOne);
+            //StartUpScreenScene stateOne = new StartUpScreenScene(10000);
+            //SceneSystem.Instance.setCurrentScene(stateOne);
 
-
+            AudioManager.Instance.AddSong("metal", Content.Load<Song>("Sound/MetalBirds"));
+            AudioManager.Instance.PlaySong("metal");
+            AudioManager.Instance.ChangeRepeat(true);
+            AudioManager.Instance.ChangeSongVolume(0.4f);
 
             //GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(100,400));
 
@@ -86,6 +90,14 @@ namespace Spel
         {
             AudioManager.Instance.AddSoundEffect("bouncy", Content.Load<SoundEffect>("Sound/Bouncy_Bounce-Bugs_Bunny-1735935456"));
             AudioManager.Instance.AddSoundEffect("jump", Content.Load<SoundEffect>("Sound/Jump"));
+            AudioManager.Instance.AddSoundEffect("hit", Content.Load<SoundEffect>("Sound/Hit"));
+            AudioManager.Instance.AddSoundEffect("sidehit", Content.Load<SoundEffect>("Sound/sidehit"));
+            AudioManager.Instance.AddSoundEffect("powerup", Content.Load<SoundEffect>("Sound/powerup"));
+            AudioManager.Instance.AddSoundEffect("pfhit", Content.Load<SoundEffect>("Sound/pfhit"));
+            AudioManager.Instance.AddSoundEffect("grunt", Content.Load<SoundEffect>("Sound/grunt"));
+            AudioManager.Instance.AddSoundEffect("splat", Content.Load<SoundEffect>("Sound/splat"));
+            AudioManager.Instance.AddSoundEffect("signhit", Content.Load<SoundEffect>("Sound/signhit"));
+
             base.LoadContent();
         }
 

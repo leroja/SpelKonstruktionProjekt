@@ -77,7 +77,7 @@ namespace Spel.Source
                 ComponentManager.Instance.AddComponentToEntity(id, kcb);
             }
             DirectionComponent dc = new DirectionComponent(dir);
-            DrawableComponent comp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/Helmutani"), flip);
+            DrawableComponent comp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/kanin1"), flip);
             PositionComponent pos = new PositionComponent(position);
             VelocityComponent vel = new VelocityComponent(new Vector2(200F, 0), 50F);
             JumpComponent jump = new JumpComponent(300F, 200F);
@@ -88,7 +88,7 @@ namespace Spel.Source
             HUDComponent hudc = new HUDComponent(Game.Instance.GetContent<Texture2D>("Pic/PowerUp"), new Vector2(pos.position.X, pos.position.Y));
             HUDComponent hudc2 = new HUDComponent(Game.Instance.GetContent<Texture2D>("Pic/PowerUp"), Vector2.One);
             HealthComponent hc = new HealthComponent(3);
-            AnimationComponent ani = new AnimationComponent(100, 114, comp.texture.Width, comp.texture.Height, 0.2);
+            //AnimationComponent ani = new AnimationComponent(100, 114, comp.texture.Width, comp.texture.Height, 0.2);
 
             comp.colour = colour;
             
@@ -101,7 +101,7 @@ namespace Spel.Source
             ComponentManager.Instance.AddComponentToEntity(id, dtc);
             ComponentManager.Instance.AddComponentToEntity(id, hudc);
             ComponentManager.Instance.AddComponentToEntity(id, hc);
-            ComponentManager.Instance.AddComponentToEntity(id, ani);
+            //ComponentManager.Instance.AddComponentToEntity(id, ani);
             ComponentManager.Instance.AddComponentToEntity(id, dc);
             ComponentManager.Instance.AddComponentToEntity(id, jump);
             return id;
@@ -187,12 +187,15 @@ namespace Spel.Source
             CollisionComponent col = new CollisionComponent(false);
             CollisionRectangleComponent colRec = new CollisionRectangleComponent(new Rectangle((int)position.X, (int)position.Y, width, height));
             DrawableComponent draw = new DrawableComponent(Game.Instance.GetContent<Texture2D>(texture),SpriteEffects.None);
+            AnimationComponent ani = new AnimationComponent(50, 50, draw.texture.Width, draw.texture.Height, 0.08f);
+            ani.oneTime = true;
 
             ComponentManager.Instance.AddComponentToEntity(id, cdc);
             ComponentManager.Instance.AddComponentToEntity(id, pos);
             ComponentManager.Instance.AddComponentToEntity(id, col);
             ComponentManager.Instance.AddComponentToEntity(id, colRec);
             ComponentManager.Instance.AddComponentToEntity(id, draw);
+            ComponentManager.Instance.AddComponentToEntity(id, ani);
 
             return id;
         }
