@@ -37,8 +37,11 @@ namespace Spel.Source.Systems
                 AnimationComponent anima = test.GetEntityComponent<AnimationComponent>(id);
                 ball.prevTexture = newDraw.texture;
                 newDraw.texture = ball.SpikeTexture;
-                ball.anime = anima;
-                ComponentManager.Instance.RemoveComponentFromEntity(id, anima);
+                if (anima != null)
+                {
+                    ball.anime = anima;
+                    ComponentManager.Instance.RemoveComponentFromEntity(id, anima);
+                }
                 test.AddComponentToEntity(id, ball);
 
 
@@ -81,7 +84,10 @@ namespace Spel.Source.Systems
                         DrawableComponent newDraw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(ball);
                         BallOfSpikesPowerUpComponent pow = ComponentManager.Instance.GetEntityComponent<BallOfSpikesPowerUpComponent>(ball);
                         newDraw.texture = b.prevTexture;
-                        ComponentManager.Instance.AddComponentToEntity(ball, b.anime);
+                        if (b.anime != null)
+                        {
+                            ComponentManager.Instance.AddComponentToEntity(ball, b.anime);
+                        }
                         ComponentManager.Instance.RemoveComponentFromEntity(ball, b);
                        
                     }
