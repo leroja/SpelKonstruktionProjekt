@@ -20,6 +20,7 @@ namespace Spel.Source.Components
         {
             SpikeTexture = Game.Instance.GetContent<Texture2D>("pic/Giant_spike_ball");
             this.lifeTime = time;
+            anime = null;
         }
     }
 }

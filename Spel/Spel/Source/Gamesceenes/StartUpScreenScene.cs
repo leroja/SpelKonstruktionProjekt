@@ -26,6 +26,7 @@ namespace Spel.Source.Gamestates
         }
         public Timer timer;
         public bool timeOut;
+        private FadeComponent fc;
 
         /// <summary>
         /// StartUpScene constructor, is responsible for setting the scene for the startup state of the gameplay
@@ -65,7 +66,7 @@ namespace Spel.Source.Gamestates
 
             DrawableTextComponent dtx = new DrawableTextComponent("Flappy Ass, version 1.0 By: PT2", Color.Tomato, Game.Instance.GetContent<SpriteFont>("Fonts/MenuFont"));
             PositionComponent pc = new PositionComponent(new Vector2(20, 100));
-            FadeComponent fc = new FadeComponent(1, 3);
+            fc = new FadeComponent(254, -3);
 
             int id = ComponentManager.Instance.CreateID();
 
@@ -82,7 +83,7 @@ namespace Spel.Source.Gamestates
         /// </summary>
         public void onSceneUpdate()
         {
-            if(timeOut == true)
+            if(fc.alphaValue <= 0)
             {
                 List<IComponent> complist;
                 //This is used for changin the currentState 

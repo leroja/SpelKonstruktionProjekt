@@ -53,14 +53,34 @@ namespace GameEngine.Source.Systems
                                     if (f.fadeIncrement >= 255 || f.alphaValue <= 0)
                                         f.fadeIncrement *= -1;
                                 }
+                                d.textColor = new Color(255, 255, 255, (byte)MathHelper.Clamp(f.alphaValue, 0, 255));
                             }
-                            d.textColor = new Color(255, 255, 255, (byte)MathHelper.Clamp(f.alphaValue,0 , 255));
+                            
                             spriteBatch.DrawString(d.font, item.Value, item.Key, d.textColor);
                         }
                     }
                     //There is just one line of text, then just draw it to the screen.
                     else
                     {
+                        FadeComponent fc = ComponentManager.Instance.GetEntityComponent<FadeComponent>(a);
+                        if (f != null)
+                            f.fadeDelay -= gameTime.ElapsedGameTime.TotalSeconds;
+
+                        if (fc != null)
+                        {
+                            if (fc.fadeDelay <= 0)
+                            {
+                                fc.fadeDelay = .035;
+
+                                fc.alphaValue += f.fadeIncrement;
+
+                                if (fc.fadeIncrement >= 255 || fc.alphaValue <= 0)
+                                    fc.fadeIncrement *= 0;
+                            }
+                            d.textColor = new Color(255, 0, 255, (byte)MathHelper.Clamp(fc.alphaValue, 0, 255));
+                        }
+
+
                         PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
                         if (p != null && d != null && d.visable == true)
                         {
