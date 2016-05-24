@@ -41,17 +41,17 @@ namespace Spel
             CollisionDetectionSystem det = new CollisionDetectionSystem();
             CollisionSystem col = new CollisionSystem();
             det.Subscribe(col);
-
-            
-            //SystemManager.Instance.AddSystem(new ChangeCubesSystem());
+    
+            SystemManager.Instance.AddSystem(new ChangeCubesSystem(3));
             SystemManager.Instance.AddSystem(col);
             SystemManager.Instance.AddSystem(new HUDSystem());
             SystemManager.Instance.AddSystem(new HealthSystem());
             SystemManager.Instance.AddSystem(det);
             SystemManager.Instance.AddSystem(new MovementSystem());
             SystemManager.Instance.AddSystem(new BallOfSpikesSystem());
-            //SystemManager.Instance.AddSystem(new SpawnPowerUpSystem(10));
+            SystemManager.Instance.AddSystem(new SpawnPowerUpSystem(10));
             SystemManager.Instance.AddSystem(new AISystem());
+            SystemManager.Instance.AddSystem(new DrawTTLSystem("Fonts/TestFont"));
 
             FPSCounterComponent fps = new FPSCounterComponent();
             int ids = ComponentManager.Instance.CreateID();
@@ -68,10 +68,10 @@ namespace Spel
             StartUpScreenScene stateOne = new StartUpScreenScene(10000);
             SceneSystem.Instance.setCurrentScene(stateOne);
 
-            AudioManager.Instance.AddSong("metal", Content.Load<Song>("Sound/MetalBirds"));
-            AudioManager.Instance.PlaySong("metal");
-            AudioManager.Instance.ChangeRepeat(true);
-            AudioManager.Instance.ChangeSongVolume(0.4f);
+            //AudioManager.Instance.AddSong("metal", Content.Load<Song>("Sound/MetalBirds"));
+            //AudioManager.Instance.PlaySong("metal");
+            //AudioManager.Instance.ChangeRepeat(true);
+            //AudioManager.Instance.ChangeSongVolume(0.4f);
 
             //GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(100,400));
 
@@ -88,6 +88,7 @@ namespace Spel
         /// </summary>
         protected override void LoadContent()
         {
+            AudioManager.Instance.AddSong("metal", Content.Load<Song>("Sound/MetalBirds"));
             AudioManager.Instance.AddSoundEffect("bouncy", Content.Load<SoundEffect>("Sound/Bouncy_Bounce-Bugs_Bunny-1735935456"));
             AudioManager.Instance.AddSoundEffect("jump", Content.Load<SoundEffect>("Sound/Jump"));
             AudioManager.Instance.AddSoundEffect("hit", Content.Load<SoundEffect>("Sound/Hit"));

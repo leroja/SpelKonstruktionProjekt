@@ -48,13 +48,15 @@ namespace GameEngine
             SystemManager.Instance.AddSystem(new SoundEffectSystem());
             SystemManager.Instance.AddSystem(new AnimationSystem());
             SystemManager.Instance.AddSystem(SceneSystem.Instance);
+            SystemManager.Instance.AddSystem(new TimeToLiveSystem());
+            
 
             // @TODO make this system better
             SystemManager.Instance.AddSystem(new WindowTitleFPSSystem(this));
 
 
             // Test
-            //SystemManager.Instance.AddSystem(new TestDrawSystem(graphics));
+            SystemManager.Instance.AddSystem(new TestDrawSystem(graphics));
 
             base.Initialize();
         }

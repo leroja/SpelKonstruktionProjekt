@@ -84,7 +84,7 @@ namespace Spel.Source
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.position.X, (int)pos.position.Y, comp.texture.Width, comp.texture.Height));
             CollisionComponent CC = new CollisionComponent(pixlePer);
             PlayerComponent pc = new PlayerComponent(name);
-            DrawableTextComponent dtc = new DrawableTextComponent(name, Color.BurlyWood, Game.Instance.GetContent<SpriteFont>("Fonts/TestFont"));
+            DrawableTextComponent dtc = new DrawableTextComponent(name, Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/TestFont"));
             HUDComponent hudc = new HUDComponent(Game.Instance.GetContent<Texture2D>("Pic/PowerUp"), new Vector2(pos.position.X, pos.position.Y));
             HUDComponent hudc2 = new HUDComponent(Game.Instance.GetContent<Texture2D>("Pic/PowerUp"), Vector2.One);
             HealthComponent hc = new HealthComponent(3);
@@ -200,6 +200,17 @@ namespace Spel.Source
             return id;
         }
 
+        public int CreateBackground(Vector2 position, string texture, int width, int height)
+        {
+            int id = ComponentManager.Instance.CreateID();
+            PositionComponent pos = new PositionComponent(position);
+            DrawableComponent draw = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Background/" + texture), SpriteEffects.None);
+            ComponentManager.Instance.AddComponentToEntity(id, pos);
+            ComponentManager.Instance.AddComponentToEntity(id, draw);
+
+            return id;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -228,7 +239,7 @@ namespace Spel.Source
             JumpComponent jump = new JumpComponent(300F, 50F);
             CollisionRectangleComponent CRC = new CollisionRectangleComponent(new Rectangle((int)pos.position.X, (int)pos.position.Y, comp.texture.Width, comp.texture.Height));
             CollisionComponent CC = new CollisionComponent(pixlePer);
-            DrawableTextComponent dtc = new DrawableTextComponent(name, Color.BurlyWood, Game.Instance.GetContent<SpriteFont>("Fonts/TestFont"));
+            DrawableTextComponent dtc = new DrawableTextComponent(name, Color.Yellow, Game.Instance.GetContent<SpriteFont>("Fonts/NewTestFont"));
             HUDComponent hudc = new HUDComponent(Game.Instance.GetContent<Texture2D>("Pic/PowerUp"), new Vector2(pos.position.X, pos.position.Y));
             HUDComponent hudc2 = new HUDComponent(Game.Instance.GetContent<Texture2D>("Pic/PowerUp"), Vector2.One);
             HealthComponent hc = new HealthComponent(3);
