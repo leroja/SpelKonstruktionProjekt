@@ -1,17 +1,19 @@
-﻿using GameEngine.Source.Components;
-using GameEngine.Source.Managers;
-using GameEngine.Source.Systems.Interfaces;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Spel.Source.Enum;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Timers;
-
+using GameEngine;
+using Microsoft.Xna.Framework.Input;
+using GameEngine.Source.Enumerator;
+using Spel.Menus;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using GameEngine.Source.Systems.Interfaces;
+using GameEngine.Source.Components;
+using GameEngine.Source.Managers;
+using Spel.Source.Gamestates;
+using Spel.Source.Gamesceenes;
 namespace Spel.Source.Gamestates
 {
     /// <summary>
@@ -20,8 +22,9 @@ namespace Spel.Source.Gamestates
     class SetUpPlayerScene : IGamescene
     {
         public List<int> entitiesInState { get; set; }
-        private bool professor;
-        
+        private int textId;
+
+
         /// <summary>
         /// SetUpPlayerState constructor, which is responsible for adding enteties to the scene in the gameplay where the players choose their caracters and
         /// controlls etc.
@@ -29,7 +32,7 @@ namespace Spel.Source.Gamestates
         public SetUpPlayerScene()
         {
             entitiesInState = new List<int>();
-            professor = false;
+            
         }
 
         /// <summary>
@@ -38,8 +41,15 @@ namespace Spel.Source.Gamestates
         /// </summary>
         public void onSceneCreated()
         {
-            GameEntityFactory.Instance.CreatePlayer(true,true, Buttons.A,Keys.W, Vector2.One, "Alexander", Direction.Left,PlayerIndex.One, Color.White);
-            GameEntityFactory.Instance.CreatePlayer(true,true, Buttons.B,Keys.Up, new Vector2(300, 400), "Helmut", Direction.Right,PlayerIndex.Two, Color.White);
+            DrawableTextComponent text = new DrawableTextComponent("Press Enter To Start", Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/Menufont"));
+            PositionComponent pos = new PositionComponent(new Vector2(300, 0));
+            KeyBoardComponent kbc = new KeyBoardComponent();
+            kbc.keyBoardActions.Add(ActionsEnum.Enter, Keys.Enter);
+            textId = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(textId, kbc);
+            ComponentManager.Instance.AddComponentToEntity(textId, text);
+            ComponentManager.Instance.AddComponentToEntity(textId, pos);
+            entitiesInState.Add(textId);
         }
 
         /// <summary>
@@ -48,19 +58,12 @@ namespace Spel.Source.Gamestates
         /// </summary>
         public void onSceneUpdate()
         {
-            if(professor == false)
+            Game game = Game.Instance;
+            KeyBoardComponent temp = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(textId);
+            if (temp.state[ActionsEnum.Enter] == ButtonStates.Pressed)
             {
-
-                Texture2D text = Game.Instance.GetContent<Texture2D>("Pic/professor");
-                DrawableComponent comp2 = new DrawableComponent(text, SpriteEffects.None);
-                PositionComponent pos2 = new PositionComponent(new Vector2(1, 1));
-                AnimationComponent ani = new AnimationComponent(64, 64, text.Width, text.Height, 0.1);
-                int id2 = ComponentManager.Instance.CreateID();
-                ComponentManager.Instance.AddComponentToEntity(id2, comp2);
-                ComponentManager.Instance.AddComponentToEntity(id2, pos2);
-                ComponentManager.Instance.AddComponentToEntity(id2, ani);
-
-                professor = true;
+                SceneSystem.Instance.clearScene(entitiesInState);
+                SceneSystem.Instance.setCurrentScene(new PlayingScene());
             }
         }
     }
