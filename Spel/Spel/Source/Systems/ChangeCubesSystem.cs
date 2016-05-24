@@ -20,7 +20,7 @@ namespace Spel.Source.Systems
         private Random rand;
         private int width;
         private int height;
-        private int nCubes { get; set; }
+        public int nCubes { get; set; }
 
         public ChangeCubesSystem(int nCubes)
         {
@@ -29,7 +29,10 @@ namespace Spel.Source.Systems
             rand = new Random();
             width = Game.Instance.GraphicsDevice.Viewport.Width;
             height = Game.Instance.GraphicsDevice.Viewport.Height;
+        }
 
+        public void Initialize()
+        {
             for (int i = 0; i < nCubes; i++)
             {
                 int x = rand.Next(0, width);
@@ -39,6 +42,7 @@ namespace Spel.Source.Systems
                 GameEntityFactory.Instance.CreateChangeCube(pos, "pic/changedirani", 30, 30);
             }
         }
+
         /// <summary>
         /// Uppdates the position of the Change direction Cubes if they have been taken 
         /// or if their timer has run out

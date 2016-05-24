@@ -41,9 +41,8 @@ namespace Spel
             CollisionDetectionSystem det = new CollisionDetectionSystem();
             CollisionSystem col = new CollisionSystem();
             det.Subscribe(col);
-
-
-            SystemManager.Instance.AddSystem(new ChangeCubesSystem(0));
+    
+            SystemManager.Instance.AddSystem(new ChangeCubesSystem(3));
             SystemManager.Instance.AddSystem(col);
             SystemManager.Instance.AddSystem(new HUDSystem());
             SystemManager.Instance.AddSystem(new HealthSystem());

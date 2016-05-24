@@ -97,10 +97,33 @@ namespace GameEngine.Source.Managers
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T RetrieveSystem<T>() where T : ISystem
+        public T RetrieveSystem<T>(string system) where T : ISystem
         {
-            throw new NotImplementedException();
+            Type type = typeof(T);
+            T sys;
+            if (type.Equals(typeof(IDraw)))
+            {
+                sys = (T)renderSystems.Find(x => x.ToString().Contains(system));
+                return (sys);
+            }
+            if (type.Equals(typeof(IUpdate)))
+            {
 
+                sys = (T)updateSystems.Find(x => x.ToString().Contains(system));
+
+                return (sys);
+            }
+            if (type.Equals(typeof(IInput)))
+            {
+                sys = (T)inputSystems.Find(x => x.ToString().Contains(system));
+                return (sys);
+            }
+            if (type.Equals(typeof(IObserving)))
+            {
+                sys = (T)observingSystems.Find(x => x.ToString().Contains(system));
+                return (sys);
+            }
+            return default(T);
         }
 
         /// <summary>

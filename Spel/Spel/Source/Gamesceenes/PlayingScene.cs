@@ -26,6 +26,10 @@ namespace Spel.Source.Gamestates
             AudioManager.Instance.PlaySong("metal");
             AudioManager.Instance.ChangeRepeat(true);
             AudioManager.Instance.ChangeSongVolume(0.4f);
+            ChangeCubesSystem ccs = (ChangeCubesSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("ChangeCubesSystem");
+            ccs.Initialize();
+            SpawnPowerUpSystem sps = (SpawnPowerUpSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("SpawnPowerUpSystem");
+            sps.Initialize();
             //The enteties which is special for the playing state of the gameplay could be created and added here.
             GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.A, Keys.Up, new Vector2(Game.Instance.GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1", Direction.Left, PlayerIndex.One, Color.Green);
             GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.B, Keys.W, Vector2.One, "Kanin 2", Direction.Right, PlayerIndex.Two, Color.White);
