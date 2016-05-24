@@ -55,6 +55,13 @@ namespace Spel.Source.Systems
             }
         }
 
+
+
+
+
+
+
+
         private void AI(GameTime gameTime, int AIid)
         {
             PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(AIid);

@@ -125,9 +125,9 @@ namespace Spel.Source.Systems
         }
 
         /// <summary>
-        /// 
+        /// flips the sprite depending on the direction of the player
         /// </summary>
-        /// <param name="ID"> </param>
+        /// <param name="ID"> Id of the player </param>
         private void flip(int ID)
         {
             DirectionComponent dir = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(ID);

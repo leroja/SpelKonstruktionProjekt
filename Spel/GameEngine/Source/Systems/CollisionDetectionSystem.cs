@@ -146,6 +146,8 @@ namespace GameEngine.Source.Systems
                 return false;
         }
     
+
+
         
         /// <summary>
         /// Checks if two entities has collided with each other
@@ -157,8 +159,55 @@ namespace GameEngine.Source.Systems
         /// True if pixel perfect collision occurred
         /// and false if no collision or physics is not enabled
         /// </returns>
-        private bool PixelPerfectCollision(int entity1, int entity2)
+        //private bool PixelPerfectCollision(int entity1, int entity2)
+        //{
+        //    CollisionRectangleComponent recA = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity1);
+        //    CollisionRectangleComponent recB = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity2);
+
+        //    Rectangle rectangleA = recA.CollisionRec;
+        //    Rectangle rectangleB = recB.CollisionRec;
+
+        //    if (!rectangleA.Intersects(rectangleB))
+        //        return false;
+
+        //    DrawableComponent ent1 = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(entity1);
+        //    DrawableComponent ent2 = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(entity2);
+
+        //    Color[] dataA = new Color[ent1.texture.Width * ent1.texture.Height];
+        //    ent1.texture.GetData(dataA);
+        //    Color[] dataB = new Color[ent2.texture.Width * ent2.texture.Height];
+        //    ent2.texture.GetData(dataB);
+
+        //    Rectangle its = Rectangle.Intersect(rectangleA, rectangleB);
+
+        //    // Check every point within the intersection bounds
+        //    for (int y = its.Top; y < its.Bottom; y++)
+        //    {
+        //        for (int x = its.Left; x < its.Right; x++)
+        //        {
+        //            // Get the color of both pixels at this point
+        //            Color colorA = dataA[(x - rectangleA.Left) + (y - rectangleA.Top) * rectangleA.Width];
+        //            Color colorB = dataB[(x - rectangleB.Left) + (y - rectangleB.Top) * rectangleB.Width];
+
+        //            // If both pixels are not completely transparent,
+        //            if (colorA.A != 0 && colorB.A != 0)
+        //            {
+        //                // then an intersection has been found
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //    return false;
+        //}
+
+        private bool PixelPerfectCollision(int entity2, int entity1)
         {
+            Rectangle Source1;
+            Rectangle Source2;
+
+
+
+
             CollisionRectangleComponent recA = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity1);
             CollisionRectangleComponent recB = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity2);
 
@@ -171,21 +220,63 @@ namespace GameEngine.Source.Systems
             DrawableComponent ent1 = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(entity1);
             DrawableComponent ent2 = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(entity2);
 
+
+            if (ComponentManager.Instance.CheckIfEntityHasComponent<AnimationComponent>(entity1))
+            {
+                AnimationComponent ani = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(entity1);
+                Source1 = ani.sourceRectangle;
+            }
+            else
+            {
+                Source1 = ent1.texture.Bounds;
+            }
+
+            if (ComponentManager.Instance.CheckIfEntityHasComponent<AnimationComponent>(entity2))
+            {
+                AnimationComponent ani = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(entity2);
+                Source2 = ani.sourceRectangle;
+            }
+            else
+            {
+                Source2 = ent2.texture.Bounds;
+            }
+
             Color[] dataA = new Color[ent1.texture.Width * ent1.texture.Height];
             ent1.texture.GetData(dataA);
             Color[] dataB = new Color[ent2.texture.Width * ent2.texture.Height];
             ent2.texture.GetData(dataB);
 
+
+            Color[] realDataA = GetImageData(dataA, ent1.texture.Width, Source1);
+            Color[] realDataB = GetImageData(dataB, ent2.texture.Width, Source2);
+
+
             Rectangle its = Rectangle.Intersect(rectangleA, rectangleB);
 
-            // Check every point within the intersection bounds
+            //// Check every point within the intersection bounds
+            //for (int y = its.Top; y < its.Bottom; y++)
+            //{
+            //    for (int x = its.Left; x < its.Right; x++)
+            //    {
+            //        // Get the color of both pixels at this point
+            //        Color colorA = realDataA[(x - Source1.Left) + (y - Source1.Top) * Source1.Width];
+            //        Color colorB = realDataB[(x - Source2.Left) + (y - Source2.Top) * Source2.Width];
+
+            //        // If both pixels are not completely transparent,
+            //        if (colorA.A != 0 && colorB.A != 0)
+            //        {
+            //            // then an intersection has been found
+            //            return true;
+            //        }
+            //    }
+            //}
             for (int y = its.Top; y < its.Bottom; y++)
             {
                 for (int x = its.Left; x < its.Right; x++)
                 {
                     // Get the color of both pixels at this point
-                    Color colorA = dataA[(x - rectangleA.Left) + (y - rectangleA.Top) * rectangleA.Width];
-                    Color colorB = dataB[(x - rectangleB.Left) + (y - rectangleB.Top) * rectangleB.Width];
+                    Color colorA = realDataA[(x - rectangleA.Left) + (y - rectangleA.Top) * rectangleA.Width];
+                    Color colorB = realDataB[(x - rectangleB.Left) + (y - rectangleB.Top) * rectangleB.Width];
 
                     // If both pixels are not completely transparent,
                     if (colorA.A != 0 && colorB.A != 0)
@@ -197,5 +288,22 @@ namespace GameEngine.Source.Systems
             }
             return false;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="colorData"></param>
+        /// <param name="width"> width of the texture </param>
+        /// <param name="rectangle"></param>
+        /// <returns></returns>
+        Color[] GetImageData(Color[] colorData, int width, Rectangle rectangle)
+        {
+            Color[] color = new Color[rectangle.Width * rectangle.Height];
+            for (int x = 0; x < rectangle.Width; x++)
+                for (int y = 0; y < rectangle.Height; y++)
+                    color[x + y * rectangle.Width] = colorData[x + rectangle.X + (y + rectangle.Y) * width];
+            return color;
+        }
+
     }
 }
