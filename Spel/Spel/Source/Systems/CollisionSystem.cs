@@ -13,7 +13,6 @@ using GameEngine.Source.RandomStuff;
 
 namespace Spel.Source.Systems
 {
-    // @todo add soundeffects when a collision has occurred
     /// <summary>
     /// A system for handling collisions when they have occurred
     /// </summary>
@@ -56,12 +55,14 @@ namespace Spel.Source.Systems
                                 dcp2.directio = Direction.Still;
                             }
                             vcp2.velocity.Y = 0;
-
+                            vcp1.velocity.Y = -200f;
+                            ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("hit"));
+                            ComponentManager.Instance.AddComponentToEntity(ent1, new SoundEffectComponent("grunt"));
                             HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
                             hc.health -= 1;
 
                             pcp2.isFalling = true;
-                        }
+                            }
                     }
                     else if (pos2.position.Y + crc2.CollisionRec.Height * 0.5f < pos1.position.Y)
                     {   // entity 2 is above entity 1
@@ -74,8 +75,10 @@ namespace Spel.Source.Systems
                                 dcp1.directio = Direction.Still;
                             }
                             vcp1.velocity.Y = 0;
+                            vcp2.velocity.Y = -200f;
 
-
+                            ComponentManager.Instance.AddComponentToEntity(ent1, new SoundEffectComponent("hit"));
+                            ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("grunt"));
                             HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
                             hc.health -= 1;
                             pcp1.isFalling = true;
@@ -103,6 +106,7 @@ namespace Spel.Source.Systems
                             }
                             vcp2.velocity.Y = 0;
 
+                            ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("sidehit"));
                             HealthComponent hc1 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
                             HealthComponent hc2 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
                             hc1.health -= 1;
@@ -155,6 +159,7 @@ namespace Spel.Source.Systems
                     if (!playerComp.isFalling)
                     {
                         PowerUppComponent tes = ComponentManager.Instance.GetEntityComponent<PowerUppComponent>(power);
+                        ComponentManager.Instance.AddComponentToEntity(player, new SoundEffectComponent("powerup"));
                         switch (tes.type)
                         {
                             case 1:
@@ -255,6 +260,8 @@ namespace Spel.Source.Systems
                 pvc.velocity.Y = 0;
                 pvc.velocity.Y -= 500F * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+
+                //ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("splat"));
                 HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
                 hc.health -= 1;
             }
@@ -301,6 +308,7 @@ namespace Spel.Source.Systems
                     pvc.velocity.Y += 500 * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     playComp.isFalling = true;
 
+                    ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("pfhit"));
                     HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
                     hc.health -= 1;
                 }
@@ -407,6 +415,7 @@ namespace Spel.Source.Systems
             ChangeCubeComponent change = ComponentManager.Instance.GetEntityComponent<ChangeCubeComponent>(Cube);
             if (!plaCom.isFalling && change.time > 0.5F)
             {
+                ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("signhit"));
                 DirectionComponent dir = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(Player);
                 changeDir(dir);
  

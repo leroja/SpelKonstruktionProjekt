@@ -35,7 +35,7 @@ namespace Spel.Source.Systems
                 int y = rand.Next(0, height);
                 Vector2 pos = new Vector2(x, y);
 
-                GameEntityFactory.Instance.CreateChangeCube(pos, "pic/changedir", 30, 30);
+                GameEntityFactory.Instance.CreateChangeCube(pos, "pic/changedirani", 30, 30);
             }
         }
         /// <summary>
@@ -59,6 +59,8 @@ namespace Spel.Source.Systems
 
                     if (change.isTaken || change.time > 5)
                     {
+                        AnimationComponent ani = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(item.Key);
+                        ani.currentFrame = 0;
                         PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(item.Key);
                         pos.position.X = rand.Next(0, width);
                         pos.position.Y = rand.Next(0, height);

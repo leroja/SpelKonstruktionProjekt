@@ -81,7 +81,15 @@ namespace GameEngine.Source.Managers
             Type type = component.GetType();
             if (compDic.ContainsKey(type))
             {
-                compDic[type].Add(entityID, component);
+                try
+                {
+                    compDic[type].Add(entityID, component);
+                }
+                catch (Exception)
+                {
+
+                }
+                
             }
             else
             {
