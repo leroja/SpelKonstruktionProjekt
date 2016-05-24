@@ -63,5 +63,13 @@ namespace GameEngine.Source.Managers
                 activeScene.onSceneUpdate();
             }        
         }
+        public void clearScene(List<int> temp)
+        {
+            foreach(var a in temp)
+            {
+                ComponentManager.Instance.RemoveEntity(a);
+                ComponentManager.Instance.RecycleID(a);
+            }
+        }
     }
 }

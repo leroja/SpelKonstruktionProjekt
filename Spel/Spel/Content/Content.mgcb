@@ -277,6 +277,30 @@
 /processorParam:Quality=Best
 /build:Sound\MetalBirds.mp3
 
+#begin Background/whiteboard.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Background/whiteboard.png
+
+#begin Background/whiteboardtest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Background/whiteboardtest.png
+
 #begin Fonts/NewTestFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

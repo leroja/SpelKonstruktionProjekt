@@ -91,7 +91,7 @@ namespace Spel.Source.Gamestates
 
                 //SceneSystem.Instance.setCurrentScene(stateTwo);
 
-                string[] menuItems = { "Start Game", "Options", "End Game" };
+                string[] menuItems = { "Start Game", "Options","About", "End Game" };
 
                 MenuScene menu = new MenuScene(menuItems);
                 SceneSystem.Instance.setCurrentScene(menu);

@@ -200,6 +200,17 @@ namespace Spel.Source
             return id;
         }
 
+        public int CreateBackground(Vector2 position, string texture, int width, int height)
+        {
+            int id = ComponentManager.Instance.CreateID();
+            PositionComponent pos = new PositionComponent(position);
+            DrawableComponent draw = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Background/" + texture), SpriteEffects.None);
+            ComponentManager.Instance.AddComponentToEntity(id, pos);
+            ComponentManager.Instance.AddComponentToEntity(id, draw);
+
+            return id;
+        }
+
         /// <summary>
         /// 
         /// </summary>

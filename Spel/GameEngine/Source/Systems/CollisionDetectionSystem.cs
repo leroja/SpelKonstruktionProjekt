@@ -55,31 +55,34 @@ namespace GameEngine.Source.Systems
 
             List<int> dra = ComponentManager.Instance.GetAllEntitiesWithComponentType<CollisionComponent>();
             List<int> done = new List<int>();
-            foreach (var item in dra)
+            if (dra != null)
             {
-                CollisionComponent comp = ComponentManager.Instance.GetEntityComponent<CollisionComponent>(item);
-                foreach (var jitem in dra)
+                foreach (var item in dra)
                 {
-                    CollisionComponent comp2 = ComponentManager.Instance.GetEntityComponent<CollisionComponent>(jitem);
-                    if (item != jitem)
+                    CollisionComponent comp = ComponentManager.Instance.GetEntityComponent<CollisionComponent>(item);
+                    foreach (var jitem in dra)
                     {
-                        if (RectangleCollision(item, jitem) && !done.Contains(jitem))
+                        CollisionComponent comp2 = ComponentManager.Instance.GetEntityComponent<CollisionComponent>(jitem);
+                        if (item != jitem)
                         {
-                            if (comp.isPixelPerfectCompat && comp2.isPixelPerfectCompat)
+                            if (RectangleCollision(item, jitem) && !done.Contains(jitem))
                             {
-                                if (PixelPerfectCollision(item, jitem))
+                                if (comp.isPixelPerfectCompat && comp2.isPixelPerfectCompat)
+                                {
+                                    if (PixelPerfectCollision(item, jitem))
+                                    {
+                                        Notify(new CollisionEvent(item, jitem, gameTime));
+                                    }
+                                }
+                                else
                                 {
                                     Notify(new CollisionEvent(item, jitem, gameTime));
                                 }
                             }
-                            else
-                            {
-                                Notify(new CollisionEvent(item, jitem, gameTime));
-                            }
                         }
                     }
+                    done.Add(item);
                 }
-                done.Add(item);
             }
         }
 
@@ -90,27 +93,30 @@ namespace GameEngine.Source.Systems
         private void updatecolRec()
         {
             List<int> CollisionComp = ComponentManager.Instance.GetAllEntitiesWithComponentType<CollisionComponent>();
-            foreach (var item in CollisionComp)
+            if (CollisionComp != null)
             {
-                CollisionRectangleComponent rec = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(item);
-                PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(item);
-                DrawableComponent draw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(item);
-                AnimationComponent ani = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(item);
-                if (ani != null && draw != null)
+                foreach (var item in CollisionComp)
                 {
-                    rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, ani.sourceRectangle.Width, ani.sourceRectangle.Height);
-                }
-                if (draw != null && ani == null)
-                {
-                    rec.CollisionRec.X = (int)pos.position.X;
-                    rec.CollisionRec.Y = (int)pos.position.Y;
-                    rec.CollisionRec.Width = draw.texture.Width;
-                    rec.CollisionRec.Height = draw.texture.Height;
-                }
-                else
-                {
-                    rec.CollisionRec.X = (int)pos.position.X;
-                    rec.CollisionRec.Y = (int)pos.position.Y;
+                    CollisionRectangleComponent rec = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(item);
+                    PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(item);
+                    DrawableComponent draw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(item);
+                    AnimationComponent ani = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(item);
+                    if (ani != null && draw != null)
+                    {
+                        rec.CollisionRec = new Rectangle((int)pos.position.X, (int)pos.position.Y, ani.sourceRectangle.Width, ani.sourceRectangle.Height);
+                    }
+                    if (draw != null && ani == null)
+                    {
+                        rec.CollisionRec.X = (int)pos.position.X;
+                        rec.CollisionRec.Y = (int)pos.position.Y;
+                        rec.CollisionRec.Width = draw.texture.Width;
+                        rec.CollisionRec.Height = draw.texture.Height;
+                    }
+                    else
+                    {
+                        rec.CollisionRec.X = (int)pos.position.X;
+                        rec.CollisionRec.Y = (int)pos.position.Y;
+                    }
                 }
             }
         }

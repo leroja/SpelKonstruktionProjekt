@@ -1,5 +1,11 @@
-﻿using GameEngine.Source.Systems.Interfaces;
+﻿using GameEngine.Source.Managers;
+using GameEngine.Source.Systems.Interfaces;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Spel.Source.Enum;
+using Spel.Source.Systems;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +23,24 @@ namespace Spel.Source.Gamestates
         /// </summary>
         public PlayingScene()
         {
+            AudioManager.Instance.PlaySong("metal");
+            AudioManager.Instance.ChangeRepeat(true);
+            AudioManager.Instance.ChangeSongVolume(0.4f);
+            ChangeCubesSystem ccs = (ChangeCubesSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("ChangeCubesSystem");
+            ccs.Initialize();
+            SpawnPowerUpSystem sps = (SpawnPowerUpSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("SpawnPowerUpSystem");
+            sps.Initialize();
             //The enteties which is special for the playing state of the gameplay could be created and added here.
+            GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.A, Keys.Up, new Vector2(Game.Instance.GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1", Direction.Left, PlayerIndex.One, Color.Green);
+            GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.B, Keys.W, Vector2.One, "Kanin 2", Direction.Right, PlayerIndex.Two, Color.White);
+            GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
+            GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.LeftWall);
+            GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, Game.Instance.GraphicsDevice.Viewport.Height), Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
+            GameEntityFactory.Instance.CreateBorderRecs(new Vector2(Game.Instance.GraphicsDevice.Viewport.Width, 0), 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.RightWall);
+            GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one", Color.Red);
+            GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 250), "suddis", 150, 20);
+            GameEntityFactory.Instance.CreatePlatform(new Vector2(800, 500), "suddis", 150, 20);
+
 
         }
         //Not sure if the functios blow is needed, because of the more general methods in the scenemanager.
