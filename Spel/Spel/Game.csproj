@@ -40,6 +40,8 @@
   <ItemGroup>
     <Compile Include="Game.cs" />
     <Compile Include="Source\Components\ChangeCubeComponent.cs" />
+    <Compile Include="Source\Enum\DirectionSigns.cs" />
+    <Compile Include="Source\Enum\Map.cs" />
     <Compile Include="Source\Gamesceenes\MenuScene.cs" />
     <Compile Include="Menus\MenuComponent.cs" />
     <Compile Include="Program.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="Source\Gamesceenes\StartUpScreenScene.cs" />
     <Compile Include="Source\Systems\ChangeCubesSystem.cs" />
     <Compile Include="Source\Systems\CollisionSystem.cs" />
+    <Compile Include="Source\Systems\DrawTTLSystem.cs" />
     <Compile Include="Source\Systems\HealthSystem.cs" />
     <Compile Include="Source\Systems\HUDSystem.cs" />
     <Compile Include="Source\Systems\IPowerupSystem.cs" />

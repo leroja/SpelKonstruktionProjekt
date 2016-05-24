@@ -16,7 +16,6 @@ namespace GameEngine.Source.Components
     public class DrawableTextComponent : IComponent
     {
         public string text { get; set; }
-        private string []menuItems { get; set; }
         public Color textColor { get; set; }
         public SpriteFont font { get; set; }
         public bool visable { get; set; }

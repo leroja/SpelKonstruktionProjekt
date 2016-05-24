@@ -301,3 +301,9 @@
 /processorParam:TextureFormat=Color
 /build:Background/whiteboardtest.png
 
+#begin Fonts/NewTestFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts/NewTestFont.spritefont
+

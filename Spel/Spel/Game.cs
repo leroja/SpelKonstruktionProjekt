@@ -51,6 +51,7 @@ namespace Spel
             SystemManager.Instance.AddSystem(new BallOfSpikesSystem());
             SystemManager.Instance.AddSystem(new SpawnPowerUpSystem(10));
             SystemManager.Instance.AddSystem(new AISystem());
+            SystemManager.Instance.AddSystem(new DrawTTLSystem("Fonts/TestFont"));
 
             FPSCounterComponent fps = new FPSCounterComponent();
             int ids = ComponentManager.Instance.CreateID();
