@@ -52,6 +52,7 @@ namespace Spel
             SystemManager.Instance.AddSystem(new BallOfSpikesSystem());
             SystemManager.Instance.AddSystem(new SpawnPowerUpSystem(10));
             SystemManager.Instance.AddSystem(new AISystem());
+            SystemManager.Instance.AddSystem(new DrawTTLSystem("Fonts/TestFont"));
 
             FPSCounterComponent fps = new FPSCounterComponent();
             int ids = ComponentManager.Instance.CreateID();
@@ -76,7 +77,7 @@ namespace Spel
             //GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(100,400));
 
             GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 250), "suddis", 150, 20);
-            GameEntityFactory.Instance.CreatePlatform(new Vector2(800, 500), "suddis", 150, 20);
+            GameEntityFactory.Instance.CreatePlatform(new Vector2(800, 450), "suddis", 150, 20);
 
 
             base.Initialize();

@@ -16,6 +16,9 @@ namespace Spel.Source.Systems
     {
         private const float gravity = 500F;
         private const float sideMovement = 200F;
+        private int nearestPlayer = 0, nearestPlatform = 0, nearestPowerUp = 0;
+
+
         public void update(GameTime gameTime)
         {
             Dictionary<int, IComponent> dic = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<AIComponent>();
@@ -33,9 +36,8 @@ namespace Spel.Source.Systems
                     PlayerComponent pc = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(id);
                     DirectionComponent dc = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(id);
 
-                    //AI(gameTime, id);
-
-                    if(pos.position.Y + 30 > Game.Instance.GraphicsDevice.Viewport.Height/2 && !pc.isFalling)
+                    
+                    if (AI(gameTime, id))
                     {
                         if (dc.directio == Direction.Still)
                         {
@@ -47,11 +49,9 @@ namespace Spel.Source.Systems
                             ComponentManager.Instance.AddComponentToEntity(id, new SoundEffectComponent("jump"));
                         }
                     }
-
                     vel.velocity.Y += gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     pos.position += vel.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
-
             }
         }
 
@@ -61,10 +61,16 @@ namespace Spel.Source.Systems
 
 
 
-
-        private void AI(GameTime gameTime, int AIid)
+        /// <summary>
+        /// a method that determines
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="AIid"> Id of AI Player </param>
+        /// <returns></returns>
+        private bool AI(GameTime gameTime, int AIid)
         {
             PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(AIid);
+            DrawableComponent drawComp = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(AIid);
             VelocityComponent vel = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(AIid);
             DirectionComponent dir = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(AIid);
             JumpComponent jump = ComponentManager.Instance.GetEntityComponent<JumpComponent>(AIid);
@@ -72,11 +78,16 @@ namespace Spel.Source.Systems
             DirectionComponent dc = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(AIid);
 
 
+            if (pc.isFalling)
+            {
+                return false;
+            }
+
             Dictionary<int, IComponent> platforms = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<PlatformComponent>();
             Dictionary<int, IComponent> players = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<PlayerComponent>();
             Dictionary<int, IComponent> powerUps = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<PowerUppComponent>();
 
-            float nearestPlayer = 0, nearestPlatform = 0, dist = float.MaxValue, nearestPowerUp = 0;
+            float dist = float.MaxValue;
             
             foreach (var item in platforms)
             {
@@ -125,7 +136,38 @@ namespace Spel.Source.Systems
             float distToBottom = Game.Instance.GraphicsDevice.Viewport.Height - pos.position.Y;
             float distToTop = pos.position.Y;
 
+            if(nearestPlatform != 0)
+            {
+                PositionComponent platPos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(nearestPlatform);
+                DrawableComponent draw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(nearestPlatform);
+                int width;
 
+                if (ComponentManager.Instance.CheckIfEntityHasComponent<AnimationComponent>(AIid))
+                {
+                    AnimationComponent ani = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(AIid);
+                    width = ani.sourceRectangle.Width;
+                }
+                else
+                {
+                    width = drawComp.texture.Width;
+                }
+
+
+                //float dis = Vector2.Distance(pos.position, platPos.position);
+                //Vector2 d = pos.position - platPos.position;
+                //Vector2 d = platPos.position - pos.position;
+
+
+                
+                
+            }
+
+            if(pos.position.Y + 30 > Game.Instance.GraphicsDevice.Viewport.Height / 2)
+            {
+                return true;
+            }
+
+            return false;
 
         }
     }

@@ -107,6 +107,7 @@ namespace Spel.Source.Systems
                             vcp2.velocity.Y = 0;
 
                             ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("sidehit"));
+                            ComponentManager.Instance.AddComponentToEntity(ent1, new SoundEffectComponent("sidehit"));
                             HealthComponent hc1 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
                             HealthComponent hc2 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
                             hc1.health -= 1;
@@ -280,12 +281,28 @@ namespace Spel.Source.Systems
             PositionComponent ppc = ComponentManager.Instance.GetEntityComponent<PositionComponent>(Player);
             CollisionRectangleComponent pcrc = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(Player);
             PlatformComponent pc = ComponentManager.Instance.GetEntityComponent<PlatformComponent>(Platform);
+            HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
 
             if (!playComp.isFalling)
             {
                 if (pcrc.CollisionRec.Intersects(pc.TopRec)) // @TODO tänk om gällande pixlePerfect, kanske
                 {
-                    //@todo maybe add some timer so that players can't stay on the platform forever
+                    //@todo hur fan ska man ta bort n om spelarn hoppar ifrån eller blir nerputtad 
+                    if (!ComponentManager.Instance.CheckIfEntityHasComponent<TTLComponent>(Player))
+                    {
+                        TTLComponent ttl = new TTLComponent(5f);
+                        ComponentManager.Instance.AddComponentToEntity(Player, ttl);
+                    }
+                    else
+                    {
+                        TTLComponent ttl = ComponentManager.Instance.GetEntityComponent<TTLComponent>(Player);
+                        if(ttl.curTime >= ttl.maxTime)
+                        {
+                            playComp.isFalling = true;
+                            hc.health -= 1;
+                            ComponentManager.Instance.RemoveComponentFromEntity(Player, ttl);
+                        }
+                    }
 
                     changeDir(dc);
                     if (dc.directio != Direction.Still)
@@ -309,7 +326,6 @@ namespace Spel.Source.Systems
                     playComp.isFalling = true;
 
                     ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("pfhit"));
-                    HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
                     hc.health -= 1;
                 }
             }
