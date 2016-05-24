@@ -34,7 +34,7 @@ namespace GameEngine.Source.Systems
                     if(f != null)
                         f.fadeDelay -= gameTime.ElapsedGameTime.TotalSeconds;
 
-                    Dictionary<Vector2, string> list = d.getMenuList();
+                    Dictionary<Vector2, string> list = d.GetStringDictiornary();
                     //If there is a menulist then there's multiple lines of text that should be written to the screen. 
                     if(list != null)
                     {

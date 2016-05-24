@@ -26,10 +26,15 @@ namespace Spel.Menus
         {
             get; set;
         }
+        private int index;
         private float x;
         private float y;
         private string [] menuItems;
         private DrawableTextComponent textcomp;
+        private KeyBoardComponent kbcArrow;
+        private int arrowId;
+
+
         /// <summary>
         /// MenuScene constructor is responsible for creating the entities for the menu. The default position
         /// for the entities in the menu will be somewhere in the middle of the screen.
@@ -73,29 +78,33 @@ namespace Spel.Menus
             foreach (string a in menuItems)
             {
                 menuList.Add(new Vector2(this.x, yvar), menuItems[i]);
-                yvar += 30;
+                yvar += 50;
                 i++;
             }
             textcomp = new DrawableTextComponent(menuList, Game.Instance.GetContent<SpriteFont>("Fonts/MenuFont"), Color.Black);
-            int id = ComponentManager.Instance.CreateID();
-            ComponentManager.Instance.AddComponentToEntity(id, textcomp);
-            entitiesInState.Add(id);
+            index = 0;
+            int Id = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(Id, textcomp);
+            entitiesInState.Add(Id);
 
             Texture2D arrowPix = Game.Instance.GetContent<Texture2D>("pic/arrow");
             DrawableComponent arrow = new DrawableComponent(arrowPix, SpriteEffects.None);
             PositionComponent arrowPos = new PositionComponent(new Vector2(this.x - 35, this.y));
             MovementComponent arrowMovement = new MovementComponent(new Vector2(x, y));
-            int arrowId = ComponentManager.Instance.CreateID();
+            arrowId = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(arrowId, arrow);
             ComponentManager.Instance.AddComponentToEntity(arrowId, arrowPos);
             ComponentManager.Instance.AddComponentToEntity(arrowId, arrowMovement);
-            KeyBoardComponent kbcArrow = new KeyBoardComponent();
-            
+            kbcArrow = new KeyBoardComponent();
+            kbcArrow.keyBoardActions.Add(ActionsEnum.Down, Keys.Down);
+            kbcArrow.keyBoardActions.Add(ActionsEnum.Up, Keys.Up);
+            kbcArrow.keyBoardActions.Add(ActionsEnum.Enter, Keys.Enter);
+
 
             ComponentManager.Instance.AddComponentToEntity(arrowId, kbcArrow);
-
+            
         
-            entitiesInState.Add(id);
+            entitiesInState.Add(arrowId);
         }
 
         /// <summary>
@@ -105,19 +114,44 @@ namespace Spel.Menus
         public void onSceneUpdate()
         {
             Game game = Game.Instance;
+            PositionComponent temp = ComponentManager.Instance.GetEntityComponent<PositionComponent>(arrowId);
+            temp.position = temp.prevPosition;
 
-            if (textcomp.controlKeys(Keys.Down))
-                textcomp.selectedIndex--;
-            else if (textcomp.controlKeys(Keys.Up))
-                textcomp.selectedIndex++;
+            if (kbcArrow.state[ActionsEnum.Down] == ButtonStates.Pressed)
+            {
+                if (index <= 2)
+                {
+                    index = index + 1;
+                    temp.prevPosition = temp.position;
+                    temp.position.Y += 50;
+                  
+                    return;
+                }
+            }
+            else if (kbcArrow.state[ActionsEnum.Up] == ButtonStates.Pressed)
+            {
+                if (index > 0)
+                {
+                    index = index - 1;
+                    temp.prevPosition = temp.position;
+                    temp.position.Y -= 50;
+                    return;
 
-            if (textcomp.selectedIndex == 0 && textcomp.controlKeys(Keys.Enter))
-                game.state = new PlayingScene();
-            else if (textcomp.selectedIndex == 1 && textcomp.controlKeys(Keys.Enter))
-                game.state = new OptionsScene();
-            else if (textcomp.selectedIndex == 2 && textcomp.controlKeys(Keys.Enter))
+                }
+            }
+
+            if (index == 0 && kbcArrow.state[ActionsEnum.Enter] == ButtonStates.Pressed)
+            {
+                SceneSystem.Instance.clearScene(entitiesInState);
+                SceneSystem.Instance.setCurrentScene(new SetUpPlayerScene());
+            }
+            if (index == 1 && kbcArrow.state[ActionsEnum.Enter] == ButtonStates.Pressed)
+                //game.state = new OptionsScene();
+                Console.WriteLine(index);
+            if (index == 2 && kbcArrow.state[ActionsEnum.Enter] == ButtonStates.Pressed)
+                Console.WriteLine(index);
+            if (index == 3 && kbcArrow.state[ActionsEnum.Enter] == ButtonStates.Pressed)
                 game.Exit();
-            return;
         }
     }
 }

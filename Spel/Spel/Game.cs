@@ -43,30 +43,30 @@ namespace Spel
             det.Subscribe(col);
 
             
-            SystemManager.Instance.AddSystem(new ChangeCubesSystem());
+            //SystemManager.Instance.AddSystem(new ChangeCubesSystem());
             SystemManager.Instance.AddSystem(col);
             SystemManager.Instance.AddSystem(new HUDSystem());
             SystemManager.Instance.AddSystem(new HealthSystem());
             SystemManager.Instance.AddSystem(det);
             SystemManager.Instance.AddSystem(new MovementSystem());
             SystemManager.Instance.AddSystem(new BallOfSpikesSystem());
-            SystemManager.Instance.AddSystem(new SpawnPowerUpSystem(10));
+            //SystemManager.Instance.AddSystem(new SpawnPowerUpSystem(10));
             SystemManager.Instance.AddSystem(new AISystem());
 
             FPSCounterComponent fps = new FPSCounterComponent();
             int ids = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(ids, fps);
 
-            GameEntityFactory.Instance.CreatePlayer(true,false, Buttons.A,Keys.Up, new Vector2(GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1", Direction.Left,PlayerIndex.One, Color.Green);
-            GameEntityFactory.Instance.CreatePlayer(true,false, Buttons.B,Keys.W, Vector2.One, "Kanin 2", Direction.Right,PlayerIndex.Two, Color.White);
-            GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
-            GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, GraphicsDevice.Viewport.Height, Wall.LeftWall);
-            GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
-            GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height, Wall.RightWall);
-            GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one", Color.Red);
+            //GameEntityFactory.Instance.CreatePlayer(true,false, Buttons.A,Keys.Up, new Vector2(GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1", Direction.Left,PlayerIndex.One, Color.Green);
+            //GameEntityFactory.Instance.CreatePlayer(true,false, Buttons.B,Keys.W, Vector2.One, "Kanin 2", Direction.Right,PlayerIndex.Two, Color.White);
+            //GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
+            //GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, GraphicsDevice.Viewport.Height, Wall.LeftWall);
+            //GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, GraphicsDevice.Viewport.Height), GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
+            //GameEntityFactory.Instance.CreateBorderRecs(new Vector2(GraphicsDevice.Viewport.Width, 0), 0, GraphicsDevice.Viewport.Height, Wall.RightWall);
+            //GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one", Color.Red);
 
-            //StartUpScreenScene stateOne = new StartUpScreenScene(10000);
-            //SceneSystem.Instance.setCurrentScene(stateOne);
+            StartUpScreenScene stateOne = new StartUpScreenScene(10000);
+            SceneSystem.Instance.setCurrentScene(stateOne);
 
             AudioManager.Instance.AddSong("metal", Content.Load<Song>("Sound/MetalBirds"));
             AudioManager.Instance.PlaySong("metal");
@@ -75,8 +75,8 @@ namespace Spel
 
             //GameEntityFactory.Instance.CreateTestPowerUp(new Vector2(100,400));
 
-            GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 250), "suddis", 150, 20);
-            GameEntityFactory.Instance.CreatePlatform(new Vector2(800, 500), "suddis", 150, 20);
+            //GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 250), "suddis", 150, 20);
+            //GameEntityFactory.Instance.CreatePlatform(new Vector2(800, 500), "suddis", 150, 20);
 
 
             base.Initialize();
