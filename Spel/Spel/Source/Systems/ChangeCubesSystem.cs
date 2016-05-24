@@ -20,16 +20,17 @@ namespace Spel.Source.Systems
         private Random rand;
         private int width;
         private int height;
+        private int nCubes { get; set; }
 
-        public ChangeCubesSystem()
+        public ChangeCubesSystem(int nCubes)
         {
             entities = new List<int>();
-
+            this.nCubes = nCubes;
             rand = new Random();
             width = Game.Instance.GraphicsDevice.Viewport.Width;
             height = Game.Instance.GraphicsDevice.Viewport.Height;
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < nCubes; i++)
             {
                 int x = rand.Next(0, width);
                 int y = rand.Next(0, height);

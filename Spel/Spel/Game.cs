@@ -42,15 +42,15 @@ namespace Spel
             CollisionSystem col = new CollisionSystem();
             det.Subscribe(col);
 
-            
-            //SystemManager.Instance.AddSystem(new ChangeCubesSystem());
+
+            SystemManager.Instance.AddSystem(new ChangeCubesSystem(0));
             SystemManager.Instance.AddSystem(col);
             SystemManager.Instance.AddSystem(new HUDSystem());
             SystemManager.Instance.AddSystem(new HealthSystem());
             SystemManager.Instance.AddSystem(det);
             SystemManager.Instance.AddSystem(new MovementSystem());
             SystemManager.Instance.AddSystem(new BallOfSpikesSystem());
-            //SystemManager.Instance.AddSystem(new SpawnPowerUpSystem(10));
+            SystemManager.Instance.AddSystem(new SpawnPowerUpSystem(10));
             SystemManager.Instance.AddSystem(new AISystem());
 
             FPSCounterComponent fps = new FPSCounterComponent();

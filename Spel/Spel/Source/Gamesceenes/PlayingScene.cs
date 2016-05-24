@@ -23,8 +23,6 @@ namespace Spel.Source.Gamestates
         /// </summary>
         public PlayingScene()
         {
-            SystemManager.Instance.AddSystem(new ChangeCubesSystem());
-            SystemManager.Instance.AddSystem(new SpawnPowerUpSystem(10));
             AudioManager.Instance.PlaySong("metal");
             AudioManager.Instance.ChangeRepeat(true);
             AudioManager.Instance.ChangeSongVolume(0.4f);
