@@ -151,8 +151,6 @@ namespace GameEngine.Source.Systems
             else
                 return false;
         }
-    
-
 
         
         /// <summary>
@@ -165,47 +163,7 @@ namespace GameEngine.Source.Systems
         /// True if pixel perfect collision occurred
         /// and false if no collision or physics is not enabled
         /// </returns>
-        //private bool PixelPerfectCollision(int entity1, int entity2)
-        //{
-        //    CollisionRectangleComponent recA = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity1);
-        //    CollisionRectangleComponent recB = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(entity2);
-
-        //    Rectangle rectangleA = recA.CollisionRec;
-        //    Rectangle rectangleB = recB.CollisionRec;
-
-        //    if (!rectangleA.Intersects(rectangleB))
-        //        return false;
-
-        //    DrawableComponent ent1 = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(entity1);
-        //    DrawableComponent ent2 = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(entity2);
-
-        //    Color[] dataA = new Color[ent1.texture.Width * ent1.texture.Height];
-        //    ent1.texture.GetData(dataA);
-        //    Color[] dataB = new Color[ent2.texture.Width * ent2.texture.Height];
-        //    ent2.texture.GetData(dataB);
-
-        //    Rectangle its = Rectangle.Intersect(rectangleA, rectangleB);
-
-        //    // Check every point within the intersection bounds
-        //    for (int y = its.Top; y < its.Bottom; y++)
-        //    {
-        //        for (int x = its.Left; x < its.Right; x++)
-        //        {
-        //            // Get the color of both pixels at this point
-        //            Color colorA = dataA[(x - rectangleA.Left) + (y - rectangleA.Top) * rectangleA.Width];
-        //            Color colorB = dataB[(x - rectangleB.Left) + (y - rectangleB.Top) * rectangleB.Width];
-
-        //            // If both pixels are not completely transparent,
-        //            if (colorA.A != 0 && colorB.A != 0)
-        //            {
-        //                // then an intersection has been found
-        //                return true;
-        //            }
-        //        }
-        //    }
-        //    return false;
-        //}
-
+        
         private bool PixelPerfectCollision(int entity2, int entity1)
         {
             Rectangle Source1;
@@ -258,24 +216,6 @@ namespace GameEngine.Source.Systems
 
 
             Rectangle its = Rectangle.Intersect(rectangleA, rectangleB);
-
-            //// Check every point within the intersection bounds
-            //for (int y = its.Top; y < its.Bottom; y++)
-            //{
-            //    for (int x = its.Left; x < its.Right; x++)
-            //    {
-            //        // Get the color of both pixels at this point
-            //        Color colorA = realDataA[(x - Source1.Left) + (y - Source1.Top) * Source1.Width];
-            //        Color colorB = realDataB[(x - Source2.Left) + (y - Source2.Top) * Source2.Width];
-
-            //        // If both pixels are not completely transparent,
-            //        if (colorA.A != 0 && colorB.A != 0)
-            //        {
-            //            // then an intersection has been found
-            //            return true;
-            //        }
-            //    }
-            //}
             for (int y = its.Top; y < its.Bottom; y++)
             {
                 for (int x = its.Left; x < its.Right; x++)
@@ -296,11 +236,11 @@ namespace GameEngine.Source.Systems
         }
 
         /// <summary>
-        /// 
+        /// gets the colour data of a specific area of a texture
         /// </summary>
-        /// <param name="colorData"></param>
+        /// <param name="colorData"> the color data of the whole texture </param>
         /// <param name="width"> width of the texture </param>
-        /// <param name="rectangle"></param>
+        /// <param name="rectangle"> the specific area of the texture </param>
         /// <returns></returns>
         Color[] GetImageData(Color[] colorData, int width, Rectangle rectangle)
         {
@@ -310,6 +250,5 @@ namespace GameEngine.Source.Systems
                     color[x + y * rectangle.Width] = colorData[x + rectangle.X + (y + rectangle.Y) * width];
             return color;
         }
-
     }
 }

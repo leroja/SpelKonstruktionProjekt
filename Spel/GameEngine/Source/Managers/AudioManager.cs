@@ -10,15 +10,9 @@ namespace GameEngine.Source.Managers
 {
     public class AudioManager
     {
-
-        // @TODO
-        // Ska den vara kvar eller ska funktionaliten ligga i något system
-
         private static AudioManager instance;
         private float prevVol = 1.0f;
-        //private float MasterVolume = 1.0f;
         Dictionary<string, Song> songDic = new Dictionary<string, Song>();
-        Dictionary<string, SoundEffect> soundEffectDic = new Dictionary<string, SoundEffect>(); // vet inte om denna behövs @todo
         Dictionary<string, SoundEffectInstance> soundEffInstDic = new Dictionary<string, SoundEffectInstance>();
 
 
@@ -75,10 +69,6 @@ namespace GameEngine.Source.Managers
         {
             if (effect != null)
             {
-                if (!soundEffectDic.ContainsKey(effectName))
-                {
-                    soundEffectDic.Add(effectName, effect);
-                }
                 SoundEffectInstance inst = effect.CreateInstance();
 
                 if (!soundEffInstDic.ContainsKey(effectName))
@@ -97,11 +87,6 @@ namespace GameEngine.Source.Managers
         /// </param>
         public void RemoveSoundEffect(string effectName)
         {
-            if (soundEffectDic.ContainsKey(effectName))
-            {
-                soundEffectDic.Remove(effectName);
-            }
-
             if (soundEffInstDic.ContainsKey(effectName))
             {
                 soundEffInstDic.Remove(effectName);
@@ -116,20 +101,12 @@ namespace GameEngine.Source.Managers
         /// </param>
         public void PlaySoundEffect(string SoundEffect, float pan, float pitch)
         {
-            //if (soundEffectDic.ContainsKey(SoundEffect))
-            //{
-            //    soundEffectDic[SoundEffect].Play();
-            //}
-            //@todo i don't know if the pan is working
-
             if (soundEffInstDic.ContainsKey(SoundEffect))
             {
                 if (soundEffInstDic[SoundEffect].State != SoundState.Playing)
                 {
-                    Console.WriteLine(pan);
                     soundEffInstDic[SoundEffect].Pan = pan;
                     soundEffInstDic[SoundEffect].Pitch = pitch;
-                    
                     soundEffInstDic[SoundEffect].Play();
                 }
             }

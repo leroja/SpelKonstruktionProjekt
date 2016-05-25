@@ -16,8 +16,6 @@ namespace Spel.Source.Systems
     {
         private const float gravity = 500F;
         private const float sideMovement = 200F;
-        private int nearestPlayer = 0, nearestPlatform = 0, nearestPowerUp = 0;
-
 
         public void update(GameTime gameTime)
         {
@@ -36,7 +34,8 @@ namespace Spel.Source.Systems
                     PlayerComponent pc = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(id);
                     DirectionComponent dc = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(id);
 
-                    try
+                    
+                    if (vel != null)
                     {
                         if (AI(gameTime, id))
                         {
@@ -52,11 +51,6 @@ namespace Spel.Source.Systems
                         }
                         vel.velocity.Y += gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
                         pos.position += vel.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    }
-                    catch (Exception)
-                    {
-
-                        
                     }
                 }
             }
@@ -90,6 +84,9 @@ namespace Spel.Source.Systems
                 return false;
             }
 
+
+
+            int nearestPlayer = 0, nearestPlatform = 0, nearestPowerUp = 0;
             Dictionary<int, IComponent> platforms = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<PlatformComponent>();
             Dictionary<int, IComponent> players = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<PlayerComponent>();
             Dictionary<int, IComponent> powerUps = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<PowerUppComponent>();
@@ -166,12 +163,34 @@ namespace Spel.Source.Systems
                 //Vector2 d = pos.position - platPos.position;
                 //Vector2 d = platPos.position - pos.position;
 
-                
+
+                if (pos.position.X - width < platPos.position.X && pos.position.X + 100 > platPos.position.X + draw.texture.Width)
+                {
+                    //if (d.Y < 0 && d.Y > -jump.jumpHeight)
+                    //{
+                    //    return false;
+                    //}
+                    //if (d.Y > 0 && d.Y < jump.jumpHeight)
+                    //{
+                    //    return true;
+                    //}
+
+                    //if (pos.position.Y < platPos.position.Y + draw.texture.Height * 0.5 && pos.position.Y > platPos.position.Y - height * 2)
+                    //{
+                    //    return true;
+                    //}
+
+                    //if (pos.position.Y > platPos.position.Y + draw.texture.Height * 0.5 && pos.position.Y + height < platPos.position.Y + draw.texture.Height)
+                    //{
+                    //    return false;
+                    //}
+                }
+
 
 
             }
 
-            if(pos.position.Y + 30 > Game.Instance.GraphicsDevice.Viewport.Height / 2)
+            if (pos.position.Y + 30 > Game.Instance.GraphicsDevice.Viewport.Height / 2)
             {
                 return true;
             }

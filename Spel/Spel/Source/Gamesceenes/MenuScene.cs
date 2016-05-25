@@ -147,9 +147,7 @@ namespace Spel.Menus
             }
             if (index == 1 && kbcArrow.state[ActionsEnum.Enter] == ButtonStates.Pressed)
                 //game.state = new OptionsScene();
-                Console.WriteLine(index);
             if (index == 2 && kbcArrow.state[ActionsEnum.Enter] == ButtonStates.Pressed)
-                Console.WriteLine(index);
             if (index == 3 && kbcArrow.state[ActionsEnum.Enter] == ButtonStates.Pressed)
                 game.Exit();
         }

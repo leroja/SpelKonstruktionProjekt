@@ -11,6 +11,9 @@ using GameEngine.Source.Managers;
 
 namespace Spel.Source.Systems
 {
+    /// <summary>
+    /// A system for drawing the time left of the ttl components
+    /// </summary>
     public class DrawTTLSystem : IDraw
     {
         private SpriteFont font;

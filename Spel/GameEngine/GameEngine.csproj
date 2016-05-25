@@ -68,14 +68,11 @@
     <Compile Include="Source\Components\DrawableTextComponent.cs" />
     <Compile Include="Source\Components\FPSCounterComponent.cs" />
     <Compile Include="Source\Components\GamePadComponent.cs" />
-    <Compile Include="Source\Components\GravitationComponent.cs" />
     <Compile Include="Source\Components\Interfaces\IComponent.cs" />
     <Compile Include="Source\Components\KeyBoardComponent.cs" />
-    <Compile Include="Source\Components\MassComponent.cs" />
     <Compile Include="Source\Components\MovementComponent.cs" />
     <Compile Include="Source\Components\PositionComponent.cs" />
     <Compile Include="Source\Components\SoundEffectComponent.cs" />
-    <Compile Include="Source\Components\TimerComponent.cs" />
     <Compile Include="Source\Components\TTLComponent.cs" />
     <Compile Include="Source\Components\VelocityComponent.cs" />
     <Compile Include="Source\Enumerator\ActionsEnum.cs" />

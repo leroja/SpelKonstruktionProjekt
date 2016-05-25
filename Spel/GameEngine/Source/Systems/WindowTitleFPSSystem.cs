@@ -44,7 +44,6 @@ namespace GameEngine.Source.Systems
                     {
                         fps.frameCounter = fps.framecount / timeSinceLastUpdate;
 
-
                         game.Window.Title = "FPS: " + fps.frameCounter;
 
                         fps.framecount = 0;
@@ -56,14 +55,12 @@ namespace GameEngine.Source.Systems
 
 
         /// <summary>
-        /// 
+        /// Constructor
         /// </summary>
-        /// <param name="g"></param>
+        /// <param name="g">  </param>
         public WindowTitleFPSSystem(Game g)
         {
             game = g;
         }
-        
-        
     }
 }
