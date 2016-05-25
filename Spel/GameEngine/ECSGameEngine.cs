@@ -13,7 +13,6 @@ namespace GameEngine
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        // @TODO make it easy to set max fps or turn of of max fps
         /// <summary>
         /// 
         /// </summary>
@@ -56,7 +55,7 @@ namespace GameEngine
 
 
             // Test
-            SystemManager.Instance.AddSystem(new TestDrawSystem(graphics));
+            //SystemManager.Instance.AddSystem(new TestDrawSystem(graphics));
 
             base.Initialize();
         }

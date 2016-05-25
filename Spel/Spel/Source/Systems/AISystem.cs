@@ -36,21 +36,28 @@ namespace Spel.Source.Systems
                     PlayerComponent pc = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(id);
                     DirectionComponent dc = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(id);
 
-                    
-                    if (AI(gameTime, id))
+                    try
                     {
-                        if (dc.directio == Direction.Still)
+                        if (AI(gameTime, id))
                         {
-                            dc.directio = dc.preDir;
+                            if (dc.directio == Direction.Still)
+                            {
+                                dc.directio = dc.preDir;
+                            }
+                            if (vel.velocity.Y > -jump.maxJumpHeight)
+                            {
+                                vel.velocity.Y -= jump.jumpHeight;
+                                ComponentManager.Instance.AddComponentToEntity(id, new SoundEffectComponent("jump"));
+                            }
                         }
-                        if (vel.velocity.Y > -jump.maxJumpHeight)
-                        {
-                            vel.velocity.Y -= jump.jumpHeight;
-                            ComponentManager.Instance.AddComponentToEntity(id, new SoundEffectComponent("jump"));
-                        }
+                        vel.velocity.Y += gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        pos.position += vel.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     }
-                    vel.velocity.Y += gravity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    pos.position += vel.velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    catch (Exception)
+                    {
+
+                        
+                    }
                 }
             }
         }

@@ -87,7 +87,7 @@ namespace Spel.Source
             DrawableTextComponent dtc = new DrawableTextComponent(name, Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/TestFont"));
             HUDComponent hudc = new HUDComponent(Game.Instance.GetContent<Texture2D>("Pic/PowerUp"), new Vector2(pos.position.X, pos.position.Y));
             HUDComponent hudc2 = new HUDComponent(Game.Instance.GetContent<Texture2D>("Pic/PowerUp"), Vector2.One);
-            HealthComponent hc = new HealthComponent(3);
+            HealthComponent hc = new HealthComponent(3, false);
             //AnimationComponent ani = new AnimationComponent(100, 114, comp.texture.Width, comp.texture.Height, 0.2);
 
             comp.colour = colour;
@@ -233,7 +233,7 @@ namespace Spel.Source
             }
 
             DirectionComponent dc = new DirectionComponent(dir);
-            DrawableComponent comp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/Helmutani"),flip);
+            DrawableComponent comp = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/Helmutsh"),flip);
             PositionComponent pos = new PositionComponent(position);
             VelocityComponent vel = new VelocityComponent(new Vector2(200F, 0), 50F);
             JumpComponent jump = new JumpComponent(300F, 50F);
@@ -242,8 +242,8 @@ namespace Spel.Source
             DrawableTextComponent dtc = new DrawableTextComponent(name, Color.Yellow, Game.Instance.GetContent<SpriteFont>("Fonts/NewTestFont"));
             HUDComponent hudc = new HUDComponent(Game.Instance.GetContent<Texture2D>("Pic/PowerUp"), new Vector2(pos.position.X, pos.position.Y));
             HUDComponent hudc2 = new HUDComponent(Game.Instance.GetContent<Texture2D>("Pic/PowerUp"), Vector2.One);
-            HealthComponent hc = new HealthComponent(3);
-            AnimationComponent ani = new AnimationComponent(100, 114, comp.texture.Width, comp.texture.Height, 0.2);
+            HealthComponent hc = new HealthComponent(3, false);
+            AnimationComponent ani = new AnimationComponent(75, 75, comp.texture.Width, comp.texture.Height, 0.2);
             AIComponent ai = new AIComponent();
             PlayerComponent play = new PlayerComponent(name);
 

@@ -307,3 +307,9 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/NewTestFont.spritefont
 
+#begin Sound/winner.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/winner.wav
+

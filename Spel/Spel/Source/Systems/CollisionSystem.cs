@@ -88,7 +88,7 @@ namespace Spel.Source.Systems
                     {
 
                         // @Todo implement spike ball check, if a player is a spiku ballu he/she shall not fall or loose a life
-
+                        
                         if (!pcp2.isFalling && !pcp1.isFalling)
                         {
                             if (dcp1.directio != Direction.Still)
