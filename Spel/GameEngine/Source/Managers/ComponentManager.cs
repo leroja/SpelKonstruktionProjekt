@@ -41,6 +41,15 @@ namespace GameEngine.Source.Managers
             }
         }
 
+        public void Clear()
+        {
+            foreach (var a in entityIDs)
+            {
+                RemoveEntity(a);
+                RecycleID(a);
+            }
+        }
+
 
         /// <summary>
         /// 
