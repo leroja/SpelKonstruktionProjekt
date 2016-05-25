@@ -130,7 +130,7 @@ namespace Spel.Source.Gamestates
         public void onSceneCreated()
         {
             ChangeCubesSystem ccs = (ChangeCubesSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("ChangeCubesSystem");
-            ccs.Initialize();
+            ccs.Respawn(3);
             SpawnPowerUpSystem sps = (SpawnPowerUpSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("SpawnPowerUpSystem");
             sps.Initialize();
             List<int> maps = ComponentManager.Instance.GetAllEntitiesWithComponentType<DrawableTextComponent>();
@@ -187,8 +187,7 @@ namespace Spel.Source.Gamestates
                     sps.Initialize();
                     sps.run = false;
                     ChangeCubesSystem ccs = (ChangeCubesSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("ChangeCubesSystem");
-                    ccs.nCubes = 0;
-                    ccs.Initialize();
+                    ccs.Respawn(0);
                     AudioManager.Instance.StopSong();
                     int id = dt.First();
                     entitiesInState.Remove(id);

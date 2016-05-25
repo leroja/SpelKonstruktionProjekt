@@ -92,10 +92,11 @@ namespace GameEngine.Source.Managers
         }
 
         /// <summary>
-        /// 
+        /// A method for retrieving a specific system
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T"> The type of the system, eg IUpdate </typeparam>
+        /// <param name="system"> The name of the system </param>
+        /// <returns> The requested system if it is in the manager, else null</returns>
         public T RetrieveSystem<T>(string system) where T : ISystem
         {
             Type type = typeof(T);

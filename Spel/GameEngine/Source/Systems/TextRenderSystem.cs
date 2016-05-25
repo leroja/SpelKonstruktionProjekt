@@ -35,7 +35,7 @@ namespace GameEngine.Source.Systems
                         f.fadeDelay -= gameTime.ElapsedGameTime.TotalSeconds;
 
                     Dictionary<Vector2, string> list = d.GetStringDictiornary();
-                    //If there is a menulist then there's multiple lines of text that should be written to the screen. 
+                    //If there is a StringList then there's multiple lines of text that should be written to the screen. 
                     if(list != null)
                     {
                         //For each of the strings in the list write them to the screen, the value key in the dictionary is the

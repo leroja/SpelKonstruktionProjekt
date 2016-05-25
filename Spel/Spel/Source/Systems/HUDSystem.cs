@@ -56,7 +56,5 @@ namespace Spel.Source.Systems
                 }
             }
         }
-
-
     }
 }

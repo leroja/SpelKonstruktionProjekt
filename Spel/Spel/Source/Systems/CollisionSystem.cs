@@ -33,90 +33,7 @@ namespace Spel.Source.Systems
 
                 if (collType == CollisionTypes.PlayerVsPlayer)
                 {
-                    PlayerComponent pcp1 = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(ent1);
-                    PlayerComponent pcp2 = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(ent2);
-                    PositionComponent pos1 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent1);
-                    PositionComponent pos2 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent2);
-                    CollisionRectangleComponent crc1 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent1);
-                    CollisionRectangleComponent crc2 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent2);
-                    DirectionComponent dcp1 = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(ent1);
-                    DirectionComponent dcp2 = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(ent2);
-                    VelocityComponent vcp1 = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(ent1);
-                    VelocityComponent vcp2 = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(ent2);
-
-                    if (pos1.position.Y + crc1.CollisionRec.Height * 0.5f < pos2.position.Y)
-                    { // entity 1 is above entity 2
-                        if (!pcp1.isFalling && !pcp2.isFalling)
-                        {
-                            if (dcp2.directio != Direction.Still)
-                            {
-                                changeDir(dcp2);
-                                dcp2.preDir = dcp2.directio;
-                                dcp2.directio = Direction.Still;
-                            }
-                            vcp2.velocity.Y = 0;
-                            vcp1.velocity.Y = -200f;
-                            ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("hit"));
-                            ComponentManager.Instance.AddComponentToEntity(ent1, new SoundEffectComponent("grunt"));
-                            HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
-                            hc.health -= 1;
-
-                            pcp2.isFalling = true;
-                            }
-                    }
-                    else if (pos2.position.Y + crc2.CollisionRec.Height * 0.5f < pos1.position.Y)
-                    {   // entity 2 is above entity 1
-                        if (!pcp1.isFalling && !pcp2.isFalling)
-                        {
-                            if (dcp1.directio != Direction.Still)
-                            {
-                                changeDir(dcp1);
-                                dcp1.preDir = dcp1.directio;
-                                dcp1.directio = Direction.Still;
-                            }
-                            vcp1.velocity.Y = 0;
-                            vcp2.velocity.Y = -200f;
-
-                            ComponentManager.Instance.AddComponentToEntity(ent1, new SoundEffectComponent("hit"));
-                            ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("grunt"));
-                            HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
-                            hc.health -= 1;
-                            pcp1.isFalling = true;
-                        }
-                    }
-                    else // both are on the same "level" 
-                    {
-
-                        // @Todo implement spike ball check, if a player is a spiku ballu he/she shall not fall or loose a life
-                        
-                        if (!pcp2.isFalling && !pcp1.isFalling)
-                        {
-                            if (dcp1.directio != Direction.Still)
-                            {
-                                changeDir(dcp1);
-                                dcp1.preDir = dcp1.directio;
-                                dcp1.directio = Direction.Still;
-                            }
-                            vcp1.velocity.Y = 0;
-                            if (dcp2.directio != Direction.Still)
-                            {
-                                changeDir(dcp2);
-                                dcp2.preDir = dcp2.directio;
-                                dcp2.directio = Direction.Still;
-                            }
-                            vcp2.velocity.Y = 0;
-
-                            ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("sidehit"));
-                            ComponentManager.Instance.AddComponentToEntity(ent1, new SoundEffectComponent("sidehit"));
-                            HealthComponent hc1 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
-                            HealthComponent hc2 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
-                            hc1.health -= 1;
-                            hc2.health -= 1;
-                            pcp1.isFalling = true;
-                            pcp2.isFalling = true;
-                            pushAway(ent1, ent2, gt);
-                        }
-                    }
+                    PlayerVsPlayerCollision(ent1, ent2, gt);
                 }
                 else if (collType == CollisionTypes.PlayerVsWall)
                 {
@@ -142,40 +59,7 @@ namespace Spel.Source.Systems
                 }
                 else if (collType == CollisionTypes.PlayerVsPowerup)
                 {
-                    int player;
-                    int power;
-                    List<IComponent> list1 = ComponentManager.Instance.GetAllEntityComponents(ent1);
-                    List<IComponent> list2 = ComponentManager.Instance.GetAllEntityComponents(ent2);
-                    if (list1.OfType<PlayerComponent>().Any())
-                    {
-                        player = ent1;
-                        power = ent2;
-                    }
-                    else
-                    {
-                        player = ent2;
-                        power = ent1;
-                    }
-                    PlayerComponent playerComp = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(player);
-                    if (!playerComp.isFalling)
-                    {
-                        PowerUppComponent tes = ComponentManager.Instance.GetEntityComponent<PowerUppComponent>(power);
-                        ComponentManager.Instance.AddComponentToEntity(player, new SoundEffectComponent("powerup"));
-                        switch (tes.type)
-                        {
-                            case 1:
-                                BallOfSpikesSystem temp = new BallOfSpikesSystem();
-                                temp.OnPowerUpPicup(player);
-                                break;
-                            case 2:
-                                HealthComponent hp = ComponentManager.Instance.GetEntityComponent<HealthComponent>(player);
-                                hp.health = hp.maxhealth;
-                                break;
-                            default:
-                                break;
-                        }
-                        rec(ent1, ent2);
-                    }
+                    PlayerVSPowerup(ent1, ent2);
                 }
                 else if (collType == CollisionTypes.PlayerVsPlatform)
                 {
@@ -188,7 +72,6 @@ namespace Spel.Source.Systems
                         PlayerVsPlatformColl(ent1, ent2, gt);
                     }
                 }
-
                 else if (collType == CollisionTypes.NotDefined)
                 {
                     //@Todo maybe do something here or throw some kind of exception
@@ -439,6 +322,145 @@ namespace Spel.Source.Systems
                 change.isTaken = true;
             }
         }
+
+
+        /// <summary>
+        /// A method for handling player versus player collision
+        /// </summary>
+        /// <param name="ent1"> ID of entity 1 </param>
+        /// <param name="ent2"> ID of entity 2 </param>
+        /// <param name="gt"></param>
+        private void PlayerVsPlayerCollision(int ent1, int ent2, GameTime gt)
+        {
+            PlayerComponent pcp1 = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(ent1);
+            PlayerComponent pcp2 = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(ent2);
+            PositionComponent pos1 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent1);
+            PositionComponent pos2 = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent2);
+            CollisionRectangleComponent crc1 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent1);
+            CollisionRectangleComponent crc2 = ComponentManager.Instance.GetEntityComponent<CollisionRectangleComponent>(ent2);
+            DirectionComponent dcp1 = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(ent1);
+            DirectionComponent dcp2 = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(ent2);
+            VelocityComponent vcp1 = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(ent1);
+            VelocityComponent vcp2 = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(ent2);
+
+            if (pos1.position.Y + crc1.CollisionRec.Height * 0.5f < pos2.position.Y)
+            { // entity 1 is above entity 2
+                if (!pcp1.isFalling && !pcp2.isFalling)
+                {
+                    if (dcp2.directio != Direction.Still)
+                    {
+                        changeDir(dcp2);
+                        dcp2.preDir = dcp2.directio;
+                        dcp2.directio = Direction.Still;
+                    }
+                    vcp2.velocity.Y = 0;
+                    vcp1.velocity.Y = -200f;
+                    ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("hit"));
+                    ComponentManager.Instance.AddComponentToEntity(ent1, new SoundEffectComponent("grunt"));
+                    HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
+                    hc.health -= 1;
+
+                    pcp2.isFalling = true;
+                }
+            }
+            else if (pos2.position.Y + crc2.CollisionRec.Height * 0.5f < pos1.position.Y)
+            {   // entity 2 is above entity 1
+                if (!pcp1.isFalling && !pcp2.isFalling)
+                {
+                    if (dcp1.directio != Direction.Still)
+                    {
+                        changeDir(dcp1);
+                        dcp1.preDir = dcp1.directio;
+                        dcp1.directio = Direction.Still;
+                    }
+                    vcp1.velocity.Y = 0;
+                    vcp2.velocity.Y = -200f;
+
+                    ComponentManager.Instance.AddComponentToEntity(ent1, new SoundEffectComponent("hit"));
+                    ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("grunt"));
+                    HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
+                    hc.health -= 1;
+                    pcp1.isFalling = true;
+                }
+            }
+            else // both are on the same "level" 
+            {
+
+                // @Todo implement spike ball check, if a player is a spiku ballu he/she shall not fall or loose a life
+
+                if (!pcp2.isFalling && !pcp1.isFalling)
+                {
+                    if (dcp1.directio != Direction.Still)
+                    {
+                        changeDir(dcp1);
+                        dcp1.preDir = dcp1.directio;
+                        dcp1.directio = Direction.Still;
+                    }
+                    vcp1.velocity.Y = 0;
+                    if (dcp2.directio != Direction.Still)
+                    {
+                        changeDir(dcp2);
+                        dcp2.preDir = dcp2.directio;
+                        dcp2.directio = Direction.Still;
+                    }
+                    vcp2.velocity.Y = 0;
+
+                    ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("sidehit"));
+                    ComponentManager.Instance.AddComponentToEntity(ent1, new SoundEffectComponent("sidehit"));
+                    HealthComponent hc1 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
+                    HealthComponent hc2 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
+                    hc1.health -= 1;
+                    hc2.health -= 1;
+                    pcp1.isFalling = true;
+                    pcp2.isFalling = true;
+                    pushAway(ent1, ent2, gt);
+                }
+            }
+        }
+
+        /// <summary>
+        /// A method for handling Player versus PowerUp collision
+        /// </summary>
+        /// <param name="ent1"> ID of entity 1 </param>
+        /// <param name="ent2"> ID of entity 2 </param>
+        private void PlayerVSPowerup(int ent1, int ent2)
+        {
+            int player;
+            int power;
+            List<IComponent> list1 = ComponentManager.Instance.GetAllEntityComponents(ent1);
+            List<IComponent> list2 = ComponentManager.Instance.GetAllEntityComponents(ent2);
+            if (list1.OfType<PlayerComponent>().Any())
+            {
+                player = ent1;
+                power = ent2;
+            }
+            else
+            {
+                player = ent2;
+                power = ent1;
+            }
+            PlayerComponent playerComp = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(player);
+            if (!playerComp.isFalling)
+            {
+                PowerUppComponent tes = ComponentManager.Instance.GetEntityComponent<PowerUppComponent>(power);
+                ComponentManager.Instance.AddComponentToEntity(player, new SoundEffectComponent("powerup"));
+                switch (tes.type)
+                {
+                    case 1:
+                        BallOfSpikesSystem temp = new BallOfSpikesSystem();
+                        temp.OnPowerUpPicup(player);
+                        break;
+                    case 2:
+                        HealthComponent hp = ComponentManager.Instance.GetEntityComponent<HealthComponent>(player);
+                        hp.health = hp.maxhealth;
+                        break;
+                    default:
+                        break;
+                }
+                rec(ent1, ent2);
+            }
+        }
+
 
         /// <summary>
         /// Removes Powerup from component manager

@@ -11,7 +11,9 @@ using GameEngine.Source.Components;
 namespace GameEngine.Source.Systems
 {
     /// <summary>
-    /// 
+    /// A system that checks if there is any soundEffect components
+    /// and then calculates the pan and picth based on the SE's entity position
+    /// and then it plays the SoundEffect
     /// </summary>
     class SoundEffectSystem : IUpdate
     {

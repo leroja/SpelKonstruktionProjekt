@@ -57,6 +57,13 @@ namespace Spel.Source.Systems
                 }
             }
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="gameTime"></param>
         private void KeyBoardMove(int Id,GameTime gameTime)
         {
             KeyBoardComponent kbc = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(Id);
@@ -89,6 +96,12 @@ namespace Spel.Source.Systems
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="gameTime"></param>
         private void GamePadeMove(int Id, GameTime gameTime)
         {
             GamePadComponent kbc = ComponentManager.Instance.GetEntityComponent<GamePadComponent>(Id);
@@ -105,10 +118,8 @@ namespace Spel.Source.Systems
             }
             if (p != null && v != null && kbc != null && jump != null && dc != null)
             {
-               // Console.WriteLine(kbc.gamepadStates[ActionsEnum.Jump]);
                 if (kbc.gamepadStates[ActionsEnum.Jump] == ButtonStates.Pressed && !pc.isFalling)
                 {
-                    //Console.WriteLine(kbc.gamepadStates[ActionsEnum.Jump]);
                     if (dc.directio == Direction.Still)
                     {
                         dc.directio = dc.preDir;

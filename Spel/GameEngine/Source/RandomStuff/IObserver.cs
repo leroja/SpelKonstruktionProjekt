@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Source.RandomStuff
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IObserver
     {
         void update(IEvent t);

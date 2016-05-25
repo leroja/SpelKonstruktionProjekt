@@ -12,7 +12,7 @@ using Spel.Source.Components;
 namespace Spel.Source.Systems
 {
     /// <summary>
-    /// a system that handles the spawning of Change direction cubes and their positioning
+    /// A system that handles the spawning of Change direction cubes and their positioning
     /// </summary>
     public class ChangeCubesSystem : IUpdate
     {
@@ -20,21 +20,24 @@ namespace Spel.Source.Systems
         private Random rand;
         private int width;
         private int height;
-        public int nCubes { get; set; }
 
-        public ChangeCubesSystem(int nCubes)
+        public ChangeCubesSystem()
         {
             entities = new List<int>();
-            this.nCubes = nCubes;
             rand = new Random();
             width = Game.Instance.GraphicsDevice.Viewport.Width;
             height = Game.Instance.GraphicsDevice.Viewport.Height;
         }
 
-        public void Initialize()
+        /// <summary>
+        /// A method for spawning/respawning the cubes
+        /// </summary>
+        /// <param name="numberOfCubes"> The number of change direction cubes </param>
+        public void Respawn(int numberOfCubes)
         {
             SceneSystem.Instance.clearScene(entities);
-            for (int i = 0; i < nCubes; i++)
+            entities.Clear();
+            for (int i = 0; i < numberOfCubes; i++)
             {
                 int x = rand.Next(0, width);
                 int y = rand.Next(0, height);
@@ -53,21 +56,20 @@ namespace Spel.Source.Systems
         {
             width = Game.Instance.GraphicsDevice.Viewport.Width;
             height = Game.Instance.GraphicsDevice.Viewport.Height;
-            Dictionary<int, IComponent> dic = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<ChangeCubeComponent>();
 
-            if(dic != null)
+            if(entities.Count > 0)
             {
-                foreach (var item in dic)
+                foreach (var item in entities)
                 {
-                    ChangeCubeComponent change = (ChangeCubeComponent)item.Value;
+                    ChangeCubeComponent change = ComponentManager.Instance.GetEntityComponent<ChangeCubeComponent>(item);
                     
                     change.time += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                     if (change.isTaken || change.time > 5)
                     {
-                        AnimationComponent ani = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(item.Key);
+                        AnimationComponent ani = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(item);
                         ani.currentFrame = 0;
-                        PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(item.Key);
+                        PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(item);
                         pos.position.X = rand.Next(0, width);
                         pos.position.Y = rand.Next(0, height);
                         change.isTaken = false;

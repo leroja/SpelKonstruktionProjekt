@@ -42,7 +42,7 @@ namespace Spel
             CollisionSystem col = new CollisionSystem();
             det.Subscribe(col);
     
-            SystemManager.Instance.AddSystem(new ChangeCubesSystem(3));
+            SystemManager.Instance.AddSystem(new ChangeCubesSystem());
             SystemManager.Instance.AddSystem(col);
             SystemManager.Instance.AddSystem(new HUDSystem());
             SystemManager.Instance.AddSystem(new HealthSystem());

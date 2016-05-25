@@ -10,6 +10,9 @@ using GameEngine.Source.Managers;
 
 namespace GameEngine.Source.Systems
 {
+    /// <summary>
+    /// A system that updates the time of all TTL components
+    /// </summary>
     public class TimeToLiveSystem : IUpdate
     {
         public void update(GameTime gameTime)
