@@ -69,11 +69,11 @@ namespace Spel.Source.Systems
 
 
         /// <summary>
-        /// a method that determines
+        /// a method that determines if the AI shall jump
         /// </summary>
         /// <param name="gameTime"></param>
         /// <param name="AIid"> Id of AI Player </param>
-        /// <returns></returns>
+        /// <returns> True if the AI shall jump, false if not </returns>
         private bool AI(GameTime gameTime, int AIid)
         {
             PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(AIid);
@@ -147,16 +147,18 @@ namespace Spel.Source.Systems
             {
                 PositionComponent platPos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(nearestPlatform);
                 DrawableComponent draw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(nearestPlatform);
-                int width;
+                int width, height;
 
                 if (ComponentManager.Instance.CheckIfEntityHasComponent<AnimationComponent>(AIid))
                 {
                     AnimationComponent ani = ComponentManager.Instance.GetEntityComponent<AnimationComponent>(AIid);
                     width = ani.sourceRectangle.Width;
+                    height = ani.sourceRectangle.Height;
                 }
                 else
                 {
                     width = drawComp.texture.Width;
+                    height = drawComp.texture.Height;
                 }
 
 
@@ -164,9 +166,9 @@ namespace Spel.Source.Systems
                 //Vector2 d = pos.position - platPos.position;
                 //Vector2 d = platPos.position - pos.position;
 
+                
 
-                
-                
+
             }
 
             if(pos.position.Y + 30 > Game.Instance.GraphicsDevice.Viewport.Height / 2)

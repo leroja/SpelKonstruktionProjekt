@@ -307,6 +307,12 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/NewTestFont.spritefont
 
+#begin Sound\Skimrande.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound\Skimrande.mp3
+
 #begin Sound/winner.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

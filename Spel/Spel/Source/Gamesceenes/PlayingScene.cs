@@ -1,11 +1,14 @@
 ﻿using GameEngine.Source.Managers;
 using GameEngine.Source.Systems.Interfaces;
+using GameEngine.Source.Components;
+using GameEngine.Source.Enumerator;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Spel.Source.Enum;
 using Spel.Source.Systems;
+using Spel.Source.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +20,7 @@ namespace Spel.Source.Gamestates
     class PlayingScene : IGamescene
     {
         public List<int> entitiesInState { get; set; }
+        private List<int> recycle;
 
         /// <summary>
         /// PlayingScene constructor, is responsible for containg the enteties which is in the playing state of the gameplay.
@@ -24,7 +28,94 @@ namespace Spel.Source.Gamestates
         public PlayingScene()
         {
             entitiesInState = new List<int>();
+            recycle = new List<int>();
+            ChangeCubesSystem ccs = (ChangeCubesSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("ChangeCubesSystem");
+            ccs.Initialize();
+            SpawnPowerUpSystem sps = (SpawnPowerUpSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("SpawnPowerUpSystem");
+            sps.Initialize();
+            List<int> maps = ComponentManager.Instance.GetAllEntitiesWithComponentType<DrawableTextComponent>();
+            if (maps.Count == 1)
+            {
+                int temp = maps.First();
+                DrawableTextComponent draw = ComponentManager.Instance.GetEntityComponent<DrawableTextComponent>(temp);
+                switch (draw.text)
+                {
+                    case "Whiteboard":
+                        WhiteboardMap();
+                        break;
+                    case "Temp":
+                        tempMap();
+                        break;
+                    case "Random":
+                        randomMap();
+                        break;      
+                }
+            }
+            List<int> Players = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
+            int i = 1;
+            foreach (var play in Players)
+            {
+                DrawableComponent tempDraw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(play);
+                KeyBoardComponent tempkey = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(play);
+                PositionComponent temppos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(play);
+                Keys key;
+                tempkey.keyBoardActions.TryGetValue(ActionsEnum.Up, out key);
+                GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.A, key, temppos.position, "Player " + i, Direction.Right, PlayerIndex.One, tempDraw.colour);
+                i++;
+                recycle.Add(play);
+            }
+            GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one", Color.Red);
+            SceneSystem.Instance.clearScene(recycle);
+            
+
+           
+            //The enteties which is special for the playing state of the gameplay could be created and added here.
+            //GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.A, Keys.Up, new Vector2(Game.Instance.GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1", Direction.Left, PlayerIndex.One, Color.Green);
+            //GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.B, Keys.W, Vector2.One, "Kanin 2", Direction.Right, PlayerIndex.Two, Color.White);
+           
+
+
         }
+
+        private void randomMap()
+        {
+            Random rand = new Random();
+            GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
+            GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.LeftWall);
+            GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, Game.Instance.GraphicsDevice.Viewport.Height), Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
+            GameEntityFactory.Instance.CreateBorderRecs(new Vector2(Game.Instance.GraphicsDevice.Viewport.Width, 0), 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.RightWall);
+            float temp = rand.Next(0,Game.Instance.GraphicsDevice.Viewport.Width) * 0.75f;
+            float temp2 = rand.Next(0,Game.Instance.GraphicsDevice.Viewport.Width) * 0.75f;
+            float temp3 = rand.Next(0,Game.Instance.GraphicsDevice.Viewport.Height) * 0.75f;
+            float temp4 = rand.Next(0,Game.Instance.GraphicsDevice.Viewport.Height) * 0.75f;
+            GameEntityFactory.Instance.CreatePlatform(new Vector2(temp, temp3), "suddis", 150, 20);
+            GameEntityFactory.Instance.CreatePlatform(new Vector2(temp2, temp4), "suddis", 150, 20);
+
+        }
+
+        private void tempMap()
+        {
+            GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
+            GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.LeftWall);
+            GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, Game.Instance.GraphicsDevice.Viewport.Height), Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
+            GameEntityFactory.Instance.CreateBorderRecs(new Vector2(Game.Instance.GraphicsDevice.Viewport.Width, 0), 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.RightWall);
+            GameEntityFactory.Instance.CreatePlatform(new Vector2(800, 250), "suddis", 150, 20);
+            GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 500), "suddis", 150, 20);
+        }
+
+        private void WhiteboardMap()
+        {
+            AudioManager.Instance.PlaySong("metal");
+            AudioManager.Instance.ChangeRepeat(true);
+            AudioManager.Instance.ChangeSongVolume(0.4f);
+            GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
+            GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.LeftWall);
+            GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, Game.Instance.GraphicsDevice.Viewport.Height), Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
+            GameEntityFactory.Instance.CreateBorderRecs(new Vector2(Game.Instance.GraphicsDevice.Viewport.Width, 0), 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.RightWall);
+            GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 250), "suddis", 150, 20);
+            GameEntityFactory.Instance.CreatePlatform(new Vector2(800, 500), "suddis", 150, 20);
+        }
+
         //Not sure if the functios blow is needed, because of the more general methods in the scenemanager.
         /// <summary>
         /// addEntity function is used for adding a entity to a the gameplay which cannot be added by the PlayingState class. For example the players
@@ -60,24 +151,24 @@ namespace Spel.Source.Gamestates
         /// </summary>
         public void onSceneCreated()
         {
-            
-            AudioManager.Instance.PlaySong("metal");
-            AudioManager.Instance.ChangeRepeat(true);
-            AudioManager.Instance.ChangeSongVolume(0.3f);
-            ChangeCubesSystem ccs = (ChangeCubesSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("ChangeCubesSystem");
-            ccs.Initialize();
-            SpawnPowerUpSystem sps = (SpawnPowerUpSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("SpawnPowerUpSystem");
-            sps.Initialize();
+
+            //AudioManager.Instance.PlaySong("metal");
+            //AudioManager.Instance.ChangeRepeat(true);
+            //AudioManager.Instance.ChangeSongVolume(0.3f);
+            //ChangeCubesSystem ccs = (ChangeCubesSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("ChangeCubesSystem");
+            //ccs.Initialize();
+            //SpawnPowerUpSystem sps = (SpawnPowerUpSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("SpawnPowerUpSystem");
+            //sps.Initialize();
             //The enteties which is special for the playing state of the gameplay could be created and added here.
-            entitiesInState.Add(GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.A, Keys.Up, new Vector2(Game.Instance.GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1", Direction.Left, PlayerIndex.One, Color.Green));
-            entitiesInState.Add(GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.B, Keys.W, Vector2.One, "Kanin 2", Direction.Right, PlayerIndex.Two, Color.White));
-            entitiesInState.Add(GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.TopWall));
-            entitiesInState.Add(GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.LeftWall));
-            entitiesInState.Add(GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, Game.Instance.GraphicsDevice.Viewport.Height), Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.BottomWall));
-            entitiesInState.Add(GameEntityFactory.Instance.CreateBorderRecs(new Vector2(Game.Instance.GraphicsDevice.Viewport.Width, 0), 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.RightWall));
-            entitiesInState.Add(GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one", Color.White));
-            entitiesInState.Add(GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 250), "suddis", 150, 20));
-            entitiesInState.Add(GameEntityFactory.Instance.CreatePlatform(new Vector2(800, 500), "suddis", 150, 20));
+            //entitiesInState.Add(GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.A, Keys.Up, new Vector2(Game.Instance.GraphicsDevice.Viewport.Width / 2, 10), "Kanin 1", Direction.Left, PlayerIndex.One, Color.Green));
+            //entitiesInState.Add(GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.B, Keys.W, Vector2.One, "Kanin 2", Direction.Right, PlayerIndex.Two, Color.White));
+            //entitiesInState.Add(GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.TopWall));
+            //entitiesInState.Add(GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.LeftWall));
+            //entitiesInState.Add(GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, Game.Instance.GraphicsDevice.Viewport.Height), Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.BottomWall));
+            //entitiesInState.Add(GameEntityFactory.Instance.CreateBorderRecs(new Vector2(Game.Instance.GraphicsDevice.Viewport.Width, 0), 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.RightWall));
+            //entitiesInState.Add(GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one", Color.White));
+            //entitiesInState.Add(GameEntityFactory.Instance.CreatePlatform(new Vector2(200, 250), "suddis", 150, 20));
+            //entitiesInState.Add(GameEntityFactory.Instance.CreatePlatform(new Vector2(800, 500), "suddis", 150, 20));
         }
 
         /// <summary>

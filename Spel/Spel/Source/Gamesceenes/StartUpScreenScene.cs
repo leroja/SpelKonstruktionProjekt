@@ -85,6 +85,7 @@ namespace Spel.Source.Gamestates
         {
             if(fc.alphaValue <= 0)
             {
+
                 List<IComponent> complist;
                 //This is used for changin the currentState 
                 //SetUpPlayerScene stateTwo = new SetUpPlayerScene();
@@ -110,7 +111,7 @@ namespace Spel.Source.Gamestates
                         if(a.GetType() == typeof(DrawableTextComponent))
                         {
                             DrawableTextComponent hej = (DrawableTextComponent)a;
-                            hej.visable = false;
+                            SceneSystem.Instance.clearScene(entitiesInState);
 
                         }
                     }
