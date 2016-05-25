@@ -60,7 +60,7 @@ namespace Spel.Source.Gamestates
                 PositionComponent temppos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(play);
                 Keys key;
                 tempkey.keyBoardActions.TryGetValue(ActionsEnum.Up, out key);
-                GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.A, key, temppos.position, "Player " + i, Direction.Right, PlayerIndex.One, tempDraw.colour);
+                entitiesInState.Add(GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.A, key, temppos.position, "Player " + i, Direction.Right, PlayerIndex.One, tempDraw.colour));
                 i++;
                 recycle.Add(play);
             }
@@ -79,7 +79,27 @@ namespace Spel.Source.Gamestates
 
         private void randomMap()
         {
+
             Random rand = new Random();
+            int sound = rand.Next(0, 2);
+            switch (sound)
+            {
+                case 0:
+                    AudioManager.Instance.PlaySong("ljus");
+                    AudioManager.Instance.ChangeRepeat(true);
+                    AudioManager.Instance.ChangeSongVolume(0.4f);
+                    break;
+                case 1:
+                    AudioManager.Instance.PlaySong("metal");
+                    AudioManager.Instance.ChangeRepeat(true);
+                    AudioManager.Instance.ChangeSongVolume(0.4f);
+                    break;
+                case 2:
+                    AudioManager.Instance.PlaySong("sax");
+                    AudioManager.Instance.ChangeRepeat(true);
+                    AudioManager.Instance.ChangeSongVolume(0.4f);
+                    break;
+            }
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.LeftWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, Game.Instance.GraphicsDevice.Viewport.Height), Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
@@ -95,6 +115,9 @@ namespace Spel.Source.Gamestates
 
         private void tempMap()
         {
+            AudioManager.Instance.PlaySong("ljus");
+            AudioManager.Instance.ChangeRepeat(true);
+            AudioManager.Instance.ChangeSongVolume(0.4f);
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.LeftWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, Game.Instance.GraphicsDevice.Viewport.Height), Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
