@@ -81,7 +81,8 @@ namespace Spel.Source.Gamestates
         {
 
             Random rand = new Random();
-            int sound = rand.Next(0, 2);
+            int sound = rand.Next(0, 3);
+            sound = 2;
             switch (sound)
             {
                 case 0:
