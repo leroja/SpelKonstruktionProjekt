@@ -70,6 +70,7 @@ namespace Spel
         /// </summary>
         protected override void LoadContent()
         {
+            AudioManager.Instance.AddSong("ljus", Content.Load<Song>("Sound/Skimrande"));
             AudioManager.Instance.AddSong("metal", Content.Load<Song>("Sound/MetalBirds"));
             AudioManager.Instance.AddSoundEffect("winner", Content.Load<SoundEffect>("Sound/winner"));
             AudioManager.Instance.AddSoundEffect("bouncy", Content.Load<SoundEffect>("Sound/Bouncy_Bounce-Bugs_Bunny-1735935456"));
