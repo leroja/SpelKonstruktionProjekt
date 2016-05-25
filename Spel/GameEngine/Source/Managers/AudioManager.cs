@@ -114,17 +114,22 @@ namespace GameEngine.Source.Managers
         /// <param name="SoundEffect">
         /// the name of the soundEffect
         /// </param>
-        public void PlaySoundEffect(string SoundEffect)
+        public void PlaySoundEffect(string SoundEffect, float pan, float pitch)
         {
             //if (soundEffectDic.ContainsKey(SoundEffect))
             //{
             //    soundEffectDic[SoundEffect].Play();
             //}
+            //@todo i don't know if the pan is working
 
             if (soundEffInstDic.ContainsKey(SoundEffect))
             {
                 if (soundEffInstDic[SoundEffect].State != SoundState.Playing)
                 {
+                    Console.WriteLine(pan);
+                    soundEffInstDic[SoundEffect].Pan = pan;
+                    soundEffInstDic[SoundEffect].Pitch = pitch;
+                    
                     soundEffInstDic[SoundEffect].Play();
                 }
             }
