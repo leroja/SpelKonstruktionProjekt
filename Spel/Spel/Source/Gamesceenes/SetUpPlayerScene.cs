@@ -119,6 +119,7 @@ namespace Spel.Source.Gamestates
                 {
                     DrawableTextComponent temp54 = ComponentManager.Instance.GetEntityComponent<DrawableTextComponent>(newId);
                     temp54.visable = false;
+                    Players.Clear();
                     SceneSystem.Instance.clearScene(entitiesInState);
                     SceneSystem.Instance.setCurrentScene(new PlayingScene());
                 }
