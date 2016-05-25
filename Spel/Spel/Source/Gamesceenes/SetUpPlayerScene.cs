@@ -115,10 +115,13 @@ namespace Spel.Source.Gamestates
             }
             if (temp.state[ActionsEnum.Enter] == ButtonStates.Pressed)
             {
-                DrawableTextComponent temp54 = ComponentManager.Instance.GetEntityComponent<DrawableTextComponent>(newId);
-                temp54.visable = false;
-                SceneSystem.Instance.clearScene(entitiesInState);
-                SceneSystem.Instance.setCurrentScene(new PlayingScene());
+                if (Players.Count != 0)
+                {
+                    DrawableTextComponent temp54 = ComponentManager.Instance.GetEntityComponent<DrawableTextComponent>(newId);
+                    temp54.visable = false;
+                    SceneSystem.Instance.clearScene(entitiesInState);
+                    SceneSystem.Instance.setCurrentScene(new PlayingScene());
+                }
             }
             
 

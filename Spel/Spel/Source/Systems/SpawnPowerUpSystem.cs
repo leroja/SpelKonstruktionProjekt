@@ -18,16 +18,30 @@ namespace Spel.Source.Systems
     {
         private double time;
         private double start;
-        private bool run = false;
+        public bool run {get; set;}
         public SpawnPowerUpSystem(int times)
         {
             time = times;
             start = times;
+            run = false;
         }
 
         public void Initialize()
         {
             run = true;
+            List<int> list1 = ComponentManager.Instance.GetAllEntitiesWithComponentType<PowerUppComponent>();
+            if (list1 != null)
+            {
+                foreach (var id in list1)
+                {
+                    IList<IComponent> temp2 = ComponentManager.Instance.GetAllEntityComponents(id);
+                    if (temp2.OfType<PowerUppComponent>().Any() && !temp2.OfType<PlayerComponent>().Any())
+                    {
+                        ComponentManager.Instance.RemoveEntity(id);
+                        ComponentManager.Instance.RecycleID(id);
+                    }
+                }
+            }
         }
 
         /// <summary>
