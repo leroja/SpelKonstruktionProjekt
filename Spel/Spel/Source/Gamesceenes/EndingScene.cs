@@ -62,9 +62,12 @@ namespace Spel.Source.Gamestates
             hs.deathList.Clear();
             AIComponent ai = new AIComponent();
             ComponentManager.Instance.AddComponentToEntity(id, ai);
-            ComponentManager.Instance.AddComponentToEntity(id, new SoundEffectComponent("winner"));
             PlayerComponent comp = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(id);
             entitiesInState.Add(id);
+
+            int se = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(se, new SoundEffectComponent("winner"));
+            entitiesInState.Add(se);
         }
         /// <summary>
         /// onSceneUpdate this function handles the logic for the state which should be run durring the update partion of the game.

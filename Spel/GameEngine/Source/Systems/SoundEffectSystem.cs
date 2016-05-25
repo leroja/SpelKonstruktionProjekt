@@ -24,24 +24,27 @@ namespace GameEngine.Source.Systems
             {
                 foreach (var ent in ents)
                 {
-                    float pan, pitch;
+                    float pan = 0, pitch = 0;
                     int width = 1190; //@todo find a better way of getting the width of the gamescreen
                     PositionComponent pos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(ent);
-                    if(pos.position.X > width * 0.66f)
+                    if (pos != null)
                     {
-                        pan = 1;
-                        pitch = 1;
-                    }else if(pos.position.X < width * 0.33f)
-                    {
-                        pan = -1;
-                        pitch = -1;
+                        if (pos.position.X > width * 0.66f)
+                        {
+                            pan = 1;
+                            pitch = 1;
+                        }
+                        else if (pos.position.X < width * 0.33f)
+                        {
+                            pan = -1;
+                            pitch = -1;
+                        }
+                        else
+                        {
+                            pitch = 0;
+                            pan = 0;
+                        }
                     }
-                    else
-                    {
-                        pitch = 0;
-                        pan = 0;
-                    }
-
                     SoundEffectComponent sec = ComponentManager.Instance.GetEntityComponent<SoundEffectComponent>(ent);
                     AudioManager.Instance.PlaySoundEffect(sec.soundEffectName, pan, pitch);
                     ComponentManager.Instance.RemoveComponentFromEntity(ent, sec);

@@ -18,7 +18,7 @@ namespace GameEngine.Source.Components
         public string text { get; set; }
         public Color textColor { get; set; }
         public SpriteFont font { get; set; }
-        public bool visable { get; set; }
+        public bool visible { get; set; }
         private Dictionary<Vector2, String> StringDictionary;
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace GameEngine.Source.Components
             this.text = text;
             this.textColor = color;
             this.font = font;
-            visable = true;
+            visible = true;
         }
         /// <summary>
         /// Secondary constructor that takes several text strings as an argument.
@@ -49,9 +49,8 @@ namespace GameEngine.Source.Components
         public DrawableTextComponent(Dictionary<Vector2,string> StringList, SpriteFont font, Color color)
         {
             textColor = color;
-            //menuItems = items;
             this.font = font;
-            visable = true;
+            visible = true;
             StringDictionary = StringList;
         }
         /// <summary>

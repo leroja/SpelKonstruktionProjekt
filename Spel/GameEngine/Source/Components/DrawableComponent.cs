@@ -15,7 +15,7 @@ namespace GameEngine.Source.Components
         public Texture2D texture { get; set; }
         public SpriteEffects sprite { get; set; }
         public Rectangle drawRectangle { get; set; }
-        public bool visable { get; set; }
+        public bool visible { get; set; }
         public SpriteEffects flip { get; set; }
         public Color colour { get; set; }
 
@@ -25,7 +25,7 @@ namespace GameEngine.Source.Components
             texture = startingTexture;
             sprite = SpriteEffects.None;
             drawRectangle = new Rectangle(0, 0, startingTexture.Width, startingTexture.Height);
-            visable = true;
+            visible = true;
             this.flip = flip;
             colour = Color.White;
         }

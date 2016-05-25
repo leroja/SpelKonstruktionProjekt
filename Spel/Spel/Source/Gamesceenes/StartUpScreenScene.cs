@@ -105,7 +105,7 @@ namespace Spel.Source.Gamestates
                         if(a.GetType() == typeof(DrawableComponent))
                         {
                             DrawableComponent hej = (DrawableComponent)a;
-                            hej.visable = false;
+                            hej.visible = false;
 
                         }
                         if(a.GetType() == typeof(DrawableTextComponent))

@@ -82,7 +82,7 @@ namespace GameEngine.Source.Systems
 
 
                         PositionComponent p = ComponentManager.Instance.GetEntityComponent<PositionComponent>(a);
-                        if (p != null && d != null && d.visable == true)
+                        if (p != null && d != null && d.visible == true)
                         {
                             spriteBatch.DrawString(d.font, d.text, p.position, d.textColor);
                         }
