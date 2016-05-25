@@ -313,3 +313,9 @@
 /processorParam:Quality=Best
 /build:Sound/Epic sax Guy.mp3
 
+#begin Sound\Skimrande.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound\Skimrande.mp3
+

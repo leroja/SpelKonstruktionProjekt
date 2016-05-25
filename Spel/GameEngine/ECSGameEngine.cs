@@ -56,7 +56,7 @@ namespace GameEngine
 
 
             // Test
-            SystemManager.Instance.AddSystem(new TestDrawSystem(graphics));
+            //SystemManager.Instance.AddSystem(new TestDrawSystem(graphics));
 
             base.Initialize();
         }

@@ -132,13 +132,16 @@ namespace Spel.Source.Systems
         {
             DirectionComponent dir = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(ID);
             DrawableComponent draw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(ID);
-
-            if(dir.directio == Direction.Right)
+            if (dir != null)
             {
-                draw.flip = SpriteEffects.None;
-            }else if(dir.directio == Direction.Left)
-            {
-                draw.flip = SpriteEffects.FlipHorizontally;
+                if (dir.directio == Direction.Right)
+                {
+                    draw.flip = SpriteEffects.None;
+                }
+                else if (dir.directio == Direction.Left)
+                {
+                    draw.flip = SpriteEffects.FlipHorizontally;
+                }
             }
         }
     }

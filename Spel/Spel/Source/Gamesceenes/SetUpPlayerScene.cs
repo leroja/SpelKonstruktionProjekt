@@ -15,6 +15,7 @@ using GameEngine.Source.Managers;
 using Spel.Source.Gamestates;
 using Spel.Source.Gamesceenes;
 using Spel.Source.Enum;
+using Spel.Source.Components;
 namespace Spel.Source.Gamestates
 {
     /// <summary>
@@ -69,7 +70,6 @@ namespace Spel.Source.Gamestates
             ComponentManager.Instance.AddComponentToEntity(newId, draw);
             ComponentManager.Instance.AddComponentToEntity(newId, pos2);
             ComponentManager.Instance.AddComponentToEntity(newId, kbc1);
-            entitiesInState.Add(newId);
 
 
             DrawableTextComponent text = new DrawableTextComponent("Press Enter To Start", Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/Menufont"));
@@ -101,7 +101,6 @@ namespace Spel.Source.Gamestates
                 switch (map)
                 {
                     case Map.Whiteboard:
-
                         draw.text = "Whiteboard";
                         break;
                     case Map.Temp:
@@ -116,6 +115,8 @@ namespace Spel.Source.Gamestates
             }
             if (temp.state[ActionsEnum.Enter] == ButtonStates.Pressed)
             {
+                DrawableTextComponent temp54 = ComponentManager.Instance.GetEntityComponent<DrawableTextComponent>(newId);
+                temp54.visable = false;
                 SceneSystem.Instance.clearScene(entitiesInState);
                 SceneSystem.Instance.setCurrentScene(new PlayingScene());
             }
@@ -139,10 +140,17 @@ namespace Spel.Source.Gamestates
                     DrawableComponent tempDraw = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/kanin1"), SpriteEffects.None);
                     PositionComponent temppos = new PositionComponent(new Vector2((Game.Instance.GraphicsDevice.Viewport.Width * 0.25f+ 20f) * count, Game.Instance.GraphicsDevice.Viewport.Height * 0.5f));
                     KeyBoardComponent tempkey = new KeyBoardComponent();
+                    PlayerComponent tempplay = new PlayerComponent();
+                    tempkey.keyBoardActions.Add(ActionsEnum.Up, temo);
                     ComponentManager.Instance.AddComponentToEntity(tempId, tempDraw);
                     ComponentManager.Instance.AddComponentToEntity(tempId, temppos);
                     ComponentManager.Instance.AddComponentToEntity(tempId, tempkey);
-                    tempkey.keyBoardActions.Add(ActionsEnum.Up, temo);
+                    ComponentManager.Instance.AddComponentToEntity(tempId, tempplay);
+                    
+                
+                    //Keys temp0;
+                    //tempkey.keyBoardActions.TryGetValue(ActionsEnum.Up, out temp0);
+                    //Console.WriteLine(temp0.ToString());
                     
 
                     int textId = ComponentManager.Instance.CreateID();
@@ -153,28 +161,27 @@ namespace Spel.Source.Gamestates
                     entitiesInState.Add(textId);
                     UnAvailableKeys.Add(temo);
                 }
-                else
+                else if (UnAvailableKeys.Contains(key[0]) && key[0] != Keys.Enter)
                 {
                     foreach (var a in Players)
                     {
                         KeyBoardComponent tempa = ComponentManager.Instance.GetEntityComponent<KeyBoardComponent>(a);
-                        if (tempa.state[ActionsEnum.Up] == ButtonStates.Pressed)
+                        Keys key2;
+                        tempa.keyBoardActions.TryGetValue(ActionsEnum.Up, out key2);
+                        if (tempa != null && key2 != Keys.Enter)
                         {
-                            DrawableComponent tempura = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(a);
-                            Random rand = new Random();
-                            tempura.colour = Color.BlueViolet;
+                            if (tempa.state[ActionsEnum.Up] == ButtonStates.Pressed)
+                            {
+                                DrawableComponent tempura = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(a);
+                                Random rand = new Random();
+                                tempura.colour = new Color(rand.Next(0, 256), rand.Next(0, 256), rand.Next(0, 256));
 
+                            }
                         }
                     }
                 }
 
             }
-
-            //rand.Next(0, 256), rand.Next(0, 256), rand.Next(0, 256))
-
-
-
-
         }
     }
 }
