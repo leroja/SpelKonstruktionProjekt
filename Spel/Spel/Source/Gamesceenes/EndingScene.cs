@@ -32,7 +32,7 @@ namespace Spel.Source.Gamestates
         public EndingScene()
         {
             /// some background, text and some presentation of the winner of the game.
-            entitiesInState = new List<int>();  
+            entitiesInState = new List<int>();
         }
         /// <summary>
         /// onSceneCreated this function is called whenever the current gamestate is changed. This function should contain logic that 
@@ -40,8 +40,8 @@ namespace Spel.Source.Gamestates
         /// </summary>
         public void onSceneCreated()
         {
-            DrawableTextComponent winner = new DrawableTextComponent("Winner",Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/Menufont"));
-            PositionComponent pos = new PositionComponent(new Vector2(Game.Instance.GraphicsDevice.Viewport.Width * 0.5f - 100,0));
+            DrawableTextComponent winner = new DrawableTextComponent("Winner", Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/Menufont"));
+            PositionComponent pos = new PositionComponent(new Vector2(Game.Instance.GraphicsDevice.Viewport.Width * 0.5f - 100, 0));
             kbc = new KeyBoardComponent();
             int WinnerId = ComponentManager.Instance.CreateID();
             kbc.keyBoardActions.Add(ActionsEnum.Up, Keys.Enter);
@@ -51,7 +51,7 @@ namespace Spel.Source.Gamestates
             entitiesInState.Add(WinnerId);
 
             DrawableTextComponent text = new DrawableTextComponent("Press enter to return to Main menu", Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/Menufont"));
-            PositionComponent poss = new PositionComponent(new Vector2(Game.Instance.GraphicsDevice.Viewport.Width * 0.5f - 100, Game.Instance.GraphicsDevice.Viewport.Height));         
+            PositionComponent poss = new PositionComponent(new Vector2(0, Game.Instance.GraphicsDevice.Viewport.Height - 100));
             int textId = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(textId, text);
             ComponentManager.Instance.AddComponentToEntity(textId, poss);
@@ -75,12 +75,16 @@ namespace Spel.Source.Gamestates
         /// </summary>
         public void onSceneUpdate()
         {
-                    if (kbc.state[ActionsEnum.Up] == ButtonStates.Pressed)
-                    {
-                        string[] menuItems = { "Start Game", "Options", "About", "End Game" };
-                        SceneSystem.Instance.clearScene(entitiesInState);
-                        SceneSystem.Instance.setCurrentScene(new MenuScene(menuItems));
-                    }
-                }
+            if (kbc.state[ActionsEnum.Up] == ButtonStates.Pressed)
+            {
+                List<int> tempura = ComponentManager.Instance.GetAllEntitiesWithComponentType<AIComponent>();
+                SceneSystem.Instance.clearScene(tempura);
+                List<int> players = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
+                string[] menuItems = { "Start Game", "Options", "About", "End Game" };
+                SceneSystem.Instance.clearScene(entitiesInState);
+                ComponentManager.Instance.Clear();
+                SceneSystem.Instance.setCurrentScene(new MenuScene(menuItems));
             }
         }
+    }
+}

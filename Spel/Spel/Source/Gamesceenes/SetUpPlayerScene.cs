@@ -58,15 +58,19 @@ namespace Spel.Source.Gamestates
             DrawableTextComponent text1 = new DrawableTextComponent("Map:", Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/Menufont"));
             PositionComponent pos1 = new PositionComponent(new Vector2(0, Game.Instance.GraphicsDevice.Viewport.Height - 80));
             int id1 = ComponentManager.Instance.CreateID();
+            FadeComponent fc2 = new FadeComponent(1, 3);
             ComponentManager.Instance.AddComponentToEntity(id1, text1);
             ComponentManager.Instance.AddComponentToEntity(id1, pos1);
+            ComponentManager.Instance.AddComponentToEntity(id1, fc2);
             entitiesInState.Add(id1);
 
             draw = new DrawableTextComponent("Whiteboard", Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/Menufont"));
             PositionComponent pos2 = new PositionComponent(new Vector2(105, Game.Instance.GraphicsDevice.Viewport.Height - 80));
             kbc1 = new KeyBoardComponent();
+            FadeComponent fc = new FadeComponent(1, 3);
             kbc1.keyBoardActions.Add(ActionsEnum.Left, Keys.Right);
             newId = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(newId, fc);
             ComponentManager.Instance.AddComponentToEntity(newId, draw);
             ComponentManager.Instance.AddComponentToEntity(newId, pos2);
             ComponentManager.Instance.AddComponentToEntity(newId, kbc1);
@@ -75,12 +79,32 @@ namespace Spel.Source.Gamestates
             DrawableTextComponent text = new DrawableTextComponent("Press Enter To Start", Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/Menufont"));
             PositionComponent pos = new PositionComponent(new Vector2(300, 0));
             KeyBoardComponent kbc = new KeyBoardComponent();
+            FadeComponent fc3 = new FadeComponent(1, 3);
             kbc.keyBoardActions.Add(ActionsEnum.Enter, Keys.Enter);
             textId = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(textId, kbc);
             ComponentManager.Instance.AddComponentToEntity(textId, text);
             ComponentManager.Instance.AddComponentToEntity(textId, pos);
+            ComponentManager.Instance.AddComponentToEntity(textId, fc3);
             entitiesInState.Add(textId);
+
+            DrawableTextComponent text2 = new DrawableTextComponent("Press Right-Arrow key To Change Map", Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/Menufont"));
+            PositionComponent pos3 = new PositionComponent(new Vector2(180, 50));
+            int textId2 = ComponentManager.Instance.CreateID();
+            FadeComponent fc4 = new FadeComponent(1, 3);
+            ComponentManager.Instance.AddComponentToEntity(textId2, text2);
+            ComponentManager.Instance.AddComponentToEntity(textId2, pos3);
+            ComponentManager.Instance.AddComponentToEntity(textId2, fc4);
+            entitiesInState.Add(textId2);
+
+            DrawableTextComponent text3 = new DrawableTextComponent("Register Character By pressing a Key", Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/Menufont"));
+            PositionComponent pos4 = new PositionComponent(new Vector2(150, 100));
+            FadeComponent fc5 = new FadeComponent(1, 3);
+            int textId3 = ComponentManager.Instance.CreateID();
+            ComponentManager.Instance.AddComponentToEntity(textId3, text3);
+            ComponentManager.Instance.AddComponentToEntity(textId3, pos4);
+            ComponentManager.Instance.AddComponentToEntity(textId3, fc5);
+            entitiesInState.Add(textId3);
         }
 
         /// <summary>

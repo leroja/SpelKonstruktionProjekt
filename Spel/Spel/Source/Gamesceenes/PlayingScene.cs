@@ -138,6 +138,7 @@ namespace Spel.Source.Gamestates
             {
                 int temp = maps.First();
                 DrawableTextComponent draw = ComponentManager.Instance.GetEntityComponent<DrawableTextComponent>(temp);
+                entitiesInState.Add(temp);
                 switch (draw.text)
                 {
                     case "Whiteboard":
@@ -151,8 +152,11 @@ namespace Spel.Source.Gamestates
                         break;
                 }
             }
+            SceneSystem.Instance.clearScene(maps);
+           
             List<int> Players = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
             int i = 1;
+
             foreach (var play in Players)
             {
                 DrawableComponent tempDraw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(play);
@@ -162,10 +166,11 @@ namespace Spel.Source.Gamestates
                 tempkey.keyBoardActions.TryGetValue(ActionsEnum.Up, out key);
                 entitiesInState.Add(GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.A, key, temppos.position, "Player " + i, Direction.Right, PlayerIndex.One, tempDraw.colour));
                 i++;
-                recycle.Add(play);
+                ComponentManager.Instance.RemoveEntity(play);
+                //ComponentManager.Instance.RecycleID(play);
             }
             entitiesInState.Add(GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one", Color.Red));
-            SceneSystem.Instance.clearScene(recycle);
+            
 
         }
 
@@ -190,7 +195,7 @@ namespace Spel.Source.Gamestates
                     ccs.Respawn(0);
                     AudioManager.Instance.StopSong();
                     int id = dt.First();
-                    entitiesInState.Remove(id);
+                    entitiesInState.Add(id);
                     SceneSystem.Instance.clearScene(entitiesInState);
                     SceneSystem.Instance.setCurrentScene(new EndingScene());
                 }
