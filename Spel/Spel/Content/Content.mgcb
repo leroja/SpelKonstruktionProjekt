@@ -307,3 +307,9 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/NewTestFont.spritefont
 
+#begin Sound/Epic sax Guy.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sound/Epic sax Guy.mp3
+
