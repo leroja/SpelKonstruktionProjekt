@@ -41,6 +41,17 @@ namespace GameEngine.Source.Managers
             }
         }
 
+        public int CopyEnitity(List<IComponent> list)
+        {
+            int id = CreateID();
+
+            foreach (var item in list)
+            {
+                AddComponentToEntity(id, item);
+            }
+            return id;
+        }
+
         public void Clear()
         {
             foreach (var a in entityIDs)

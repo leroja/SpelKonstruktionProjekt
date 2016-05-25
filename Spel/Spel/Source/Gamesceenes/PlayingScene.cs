@@ -28,6 +28,7 @@ namespace Spel.Source.Gamestates
         public PlayingScene()
         {
             entitiesInState = new List<int>();
+            
             recycle = new List<int>();
         }
 
@@ -59,10 +60,10 @@ namespace Spel.Source.Gamestates
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.LeftWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(0, Game.Instance.GraphicsDevice.Viewport.Height), Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.BottomWall);
             GameEntityFactory.Instance.CreateBorderRecs(new Vector2(Game.Instance.GraphicsDevice.Viewport.Width, 0), 0, Game.Instance.GraphicsDevice.Viewport.Height, Wall.RightWall);
-            float temp = rand.Next(0,Game.Instance.GraphicsDevice.Viewport.Width) * 0.75f;
-            float temp2 = rand.Next(0,Game.Instance.GraphicsDevice.Viewport.Width) * 0.75f;
-            float temp3 = rand.Next(0,Game.Instance.GraphicsDevice.Viewport.Height) * 0.75f;
-            float temp4 = rand.Next(0,Game.Instance.GraphicsDevice.Viewport.Height) * 0.75f;
+            float temp = rand.Next(0, Game.Instance.GraphicsDevice.Viewport.Width) * 0.75f;
+            float temp2 = rand.Next(0, Game.Instance.GraphicsDevice.Viewport.Width) * 0.75f;
+            float temp3 = rand.Next(0, Game.Instance.GraphicsDevice.Viewport.Height) * 0.75f;
+            float temp4 = rand.Next(0, Game.Instance.GraphicsDevice.Viewport.Height) * 0.75f;
             entitiesInState.Add(GameEntityFactory.Instance.CreatePlatform(new Vector2(temp, temp3), "suddis", 150, 20));
             entitiesInState.Add(GameEntityFactory.Instance.CreatePlatform(new Vector2(temp2, temp4), "suddis", 150, 20));
 
@@ -138,7 +139,6 @@ namespace Spel.Source.Gamestates
             {
                 int temp = maps.First();
                 DrawableTextComponent draw = ComponentManager.Instance.GetEntityComponent<DrawableTextComponent>(temp);
-                entitiesInState.Add(temp);
                 switch (draw.text)
                 {
                     case "Whiteboard":
@@ -153,7 +153,7 @@ namespace Spel.Source.Gamestates
                 }
             }
             SceneSystem.Instance.clearScene(maps);
-           
+
             List<int> Players = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
             int i = 1;
 
@@ -170,7 +170,7 @@ namespace Spel.Source.Gamestates
                 //ComponentManager.Instance.RecycleID(play);
             }
             entitiesInState.Add(GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one", Color.Red));
-            
+
 
         }
 
@@ -180,8 +180,8 @@ namespace Spel.Source.Gamestates
         /// </summary>
         public void onSceneUpdate()
         {
+
             HealthSystem hs = (HealthSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("HealthSystem");
-            
 
             if (hs != null)
             {
@@ -195,12 +195,11 @@ namespace Spel.Source.Gamestates
                     ccs.Respawn(0);
                     AudioManager.Instance.StopSong();
                     int id = dt.First();
-                    entitiesInState.Add(id);
+                    entitiesInState.Remove(id);
                     SceneSystem.Instance.clearScene(entitiesInState);
                     SceneSystem.Instance.setCurrentScene(new EndingScene());
                 }
             }
-
         }
     }
 }

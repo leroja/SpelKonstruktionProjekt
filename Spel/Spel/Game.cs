@@ -45,7 +45,9 @@ namespace Spel
             SystemManager.Instance.AddSystem(new ChangeCubesSystem());
             SystemManager.Instance.AddSystem(col);
             SystemManager.Instance.AddSystem(new HUDSystem());
-            SystemManager.Instance.AddSystem(new HealthSystem());
+            HealthSystem healtSystem = new HealthSystem();
+            healtSystem.initialize();
+            SystemManager.Instance.AddSystem(healtSystem);
             SystemManager.Instance.AddSystem(det);
             SystemManager.Instance.AddSystem(new MovementSystem());
             SystemManager.Instance.AddSystem(new BallOfSpikesSystem());

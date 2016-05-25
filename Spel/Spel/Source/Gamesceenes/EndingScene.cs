@@ -83,6 +83,8 @@ namespace Spel.Source.Gamestates
                 string[] menuItems = { "Start Game", "Options", "About", "End Game" };
                 SceneSystem.Instance.clearScene(entitiesInState);
                 ComponentManager.Instance.Clear();
+                HealthSystem hs = (HealthSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("HealthSystem");
+                hs.initialize();
                 SceneSystem.Instance.setCurrentScene(new MenuScene(menuItems));
             }
         }
