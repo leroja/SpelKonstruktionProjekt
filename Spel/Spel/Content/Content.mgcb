@@ -319,3 +319,9 @@
 /processorParam:Quality=Best
 /build:Sound\Skimrande.mp3
 
+#begin Sound/winner.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/winner.wav
+

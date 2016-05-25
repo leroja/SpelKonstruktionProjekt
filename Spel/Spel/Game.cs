@@ -73,6 +73,7 @@ namespace Spel
             AudioManager.Instance.AddSong("sax", Content.Load<Song>("Sound/Epic sax Guy"));
             AudioManager.Instance.AddSong("ljus", Content.Load<Song>("Sound/Skimrande"));
             AudioManager.Instance.AddSong("metal", Content.Load<Song>("Sound/MetalBirds"));
+            AudioManager.Instance.AddSoundEffect("winner", Content.Load<SoundEffect>("Sound/winner"));
             AudioManager.Instance.AddSoundEffect("bouncy", Content.Load<SoundEffect>("Sound/Bouncy_Bounce-Bugs_Bunny-1735935456"));
             AudioManager.Instance.AddSoundEffect("jump", Content.Load<SoundEffect>("Sound/Jump"));
             AudioManager.Instance.AddSoundEffect("hit", Content.Load<SoundEffect>("Sound/Hit"));

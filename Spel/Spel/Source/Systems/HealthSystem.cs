@@ -16,54 +16,43 @@ namespace Spel.Source.Systems
     /// </summary>
     public class HealthSystem : IUpdate
     {
+        public List<int> deathList = new List<int>();
         public void update(GameTime gameTime)
         {
-            Dictionary<int, IComponent> dic = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<HealthComponent>();
-
-            if (dic != null)
+            List<int> entitys = ComponentManager.Instance.GetAllEntitiesWithComponentType<HealthComponent>();
+            
+            if (entitys != null)
             {
-                foreach (var item in dic)
+                if (deathList.Count == 0)
                 {
-                    HealthComponent hc = (HealthComponent)item.Value;
+                    foreach (var en in entitys)
+                    {
+                        deathList.Add(en);
+                    }
+                }
 
-                    if (hc.health > hc.maxhealth)
-                    {
-                        hc.health = hc.maxhealth;
-                    }
+                foreach (var entity in entitys)
+                {
+                    HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(entity);
 
-                    if (hc.health <= 0)
+                    if (hc.health <= 0 && !hc.isDead)
                     {
-                        //Console.WriteLine("death");
-                        // death?
-                    }
-                    else if (hc.health == 1)
-                    {
-                        // update hud
-                        // update sprite?
+                        CollisionComponent cc = ComponentManager.Instance.GetEntityComponent<CollisionComponent>(entity);
+                        ComponentManager.Instance.RemoveComponentFromEntity(entity, cc);
+                        VelocityComponent vc = ComponentManager.Instance.GetEntityComponent<VelocityComponent>(entity);
+                        ComponentManager.Instance.RemoveComponentFromEntity(entity, vc);
+                        hc.isDead = true;
+                        if (deathList.Count != 1)
+                            deathList.Remove(entity);       
 
-                    }
-                    else if (hc.health == 2)
-                    {
-                        // update hud
-                        // update sprite?
-                    }
-                    else if (hc.health == 3)
-                    {
-                        // update hud
-                        // update sprite?
-                    }
-                    else if (hc.health == 4)
-                    {
-                        // update hud
-                        // update sprite?
-                    }
-                    else
-                    {
-                        // update hud
-                        // update sprite?
                     }
                 }
             }
         }
+        public List<int> getLivingPlayers()
+        {
+            return deathList;
+        }
     }
+    
 }

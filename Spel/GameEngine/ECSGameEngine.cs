@@ -13,7 +13,6 @@ namespace GameEngine
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        // @TODO make it easy to set max fps or turn of of max fps
         /// <summary>
         /// 
         /// </summary>
