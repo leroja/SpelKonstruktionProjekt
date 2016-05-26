@@ -153,6 +153,8 @@ namespace Spel.Source.Gamestates
             List<int> Players = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
             int i = 1;
 
+            Random rand = new Random();
+
             foreach (var play in Players)
             {
                 DrawableComponent tempDraw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(play);
@@ -165,7 +167,7 @@ namespace Spel.Source.Gamestates
                 ComponentManager.Instance.RemoveEntity(play);
                 //ComponentManager.Instance.RecycleID(play);
             }
-            entitiesInState.Add(GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(200, 500), true, "AI one", Color.Red));
+            entitiesInState.Add(GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(rand.Next((int)(Game.Instance.GraphicsDevice.Viewport.Width * 0.8)), (int)(Game.Instance.GraphicsDevice.Viewport.Height * 0.8)), true, "AI one", Color.Red));
 
 
         }
