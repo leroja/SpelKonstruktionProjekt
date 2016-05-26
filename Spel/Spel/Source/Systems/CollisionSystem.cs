@@ -126,6 +126,7 @@ namespace Spel.Source.Systems
                 // only loose life when the player jump on the floor, not when the player falls to the ground
                 // and have some kind of timer unti you can jump away
 
+                OnFloorComponent fc = ComponentManager.Instance.GetEntityComponent<OnFloorComponent>(Player);
 
                 playerComp.isFalling = false;
 
@@ -145,9 +146,19 @@ namespace Spel.Source.Systems
                 pvc.velocity.Y -= 500F * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
 
-                //ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("splat"));
-                //HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
-                //hc.health -= 1;
+                ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("splat"));
+                HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
+
+
+
+
+                if (fc == null)
+                {
+                    fc = new OnFloorComponent();
+                    ComponentManager.Instance.AddComponentToEntity(Player, fc);
+                    hc.health -= 1;
+                }
+                
             }
         }
 
@@ -360,13 +371,15 @@ namespace Spel.Source.Systems
                     ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("hit"));
                     ComponentManager.Instance.AddComponentToEntity(ent1, new SoundEffectComponent("grunt"));
 
+                    //if enitity 2 dosent have ballofspikePUPcomponent loose life
                     if (bspc2 == null)
                     {
                         HealthComponent hc2 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
                         hc2.health -= 1;
                         pcp2.isFalling = true;
                     }
-                    else
+                    //else if enitity 1 dosent have ballofspikePUPcomponent loose life
+                    else if (bspc1 == null)
                     {
                         HealthComponent hc1 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
                         hc1.health -= 1;
@@ -389,13 +402,16 @@ namespace Spel.Source.Systems
 
                     ComponentManager.Instance.AddComponentToEntity(ent1, new SoundEffectComponent("hit"));
                     ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("grunt"));
+                    
+                    //if enitity 1 dosent have ballofspikePUPcomponent loose life
                     if (bspc1 == null)
                     {
                         HealthComponent hc1 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
                         hc1.health -= 1;
                         pcp1.isFalling = true;
                     }
-                    else
+                    //else if enitity 2 dosent have ballofspikePUPcomponent loose life
+                    else if (bspc2 == null)
                     {
                         HealthComponent hc2 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
                         hc2.health -= 1;
@@ -422,15 +438,17 @@ namespace Spel.Source.Systems
                     }
                     vcp2.velocity.Y = 0;
 
-                    ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("sidehit"));
-                    ComponentManager.Instance.AddComponentToEntity(ent1, new SoundEffectComponent("sidehit"));
-                   
+                   ComponentManager.Instance.AddComponentToEntity(ent2, new SoundEffectComponent("sidehit"));
+                   ComponentManager.Instance.AddComponentToEntity(ent1, new SoundEffectComponent("sidehit"));
+
+                    //If enitity 1 dosent have ballofspikePUPcomponent loose life
                     if (bspc1 == null)
                     {
                         HealthComponent hc1 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
                         hc1.health -= 1;
                         pcp1.isFalling = true;
                     }
+                    //If enitity 2 dosent have ballofspikePUPcomponent loose life
                     if (bspc2 == null)
                     {
                         HealthComponent hc2 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);

@@ -28,7 +28,7 @@ namespace Spel.Source.Gamestates
         public PlayingScene()
         {
             entitiesInState = new List<int>();
-            
+
             recycle = new List<int>();
         }
 
@@ -181,21 +181,33 @@ namespace Spel.Source.Gamestates
 
             HealthSystem hs = (HealthSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("HealthSystem");
 
-            if (hs != null)
+            List<int> players = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
+            foreach (int p in players)
             {
-                List<int> dt = hs.getLivingPlayers();
-                if (dt != null && dt.Count == 1)
+                PositionComponent pc = ComponentManager.Instance.GetEntityComponent<PositionComponent>(p);
+
+                if (ComponentManager.Instance.CheckIfEntityHasComponent<OnFloorComponent>(p) && pc.position.Y < 700)
                 {
-                    SpawnPowerUpSystem sps = (SpawnPowerUpSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("SpawnPowerUpSystem");
-                    sps.Initialize();
-                    sps.run = false;
-                    ChangeCubesSystem ccs = (ChangeCubesSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("ChangeCubesSystem");
-                    ccs.Respawn(0);
-                    AudioManager.Instance.StopSong();
-                    int id = dt.First();
-                    entitiesInState.Remove(id);
-                    SceneSystem.Instance.clearScene(entitiesInState);
-                    SceneSystem.Instance.setCurrentScene(new EndingScene());
+                    OnFloorComponent fc = ComponentManager.Instance.GetEntityComponent<OnFloorComponent>(p);
+                    ComponentManager.Instance.RemoveComponentFromEntity(p, fc);
+                }
+
+                if (hs != null)
+                {
+                    List<int> dt = hs.getLivingPlayers();
+                    if (dt != null && dt.Count == 1)
+                    {
+                        SpawnPowerUpSystem sps = (SpawnPowerUpSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("SpawnPowerUpSystem");
+                        sps.Initialize();
+                        sps.run = false;
+                        ChangeCubesSystem ccs = (ChangeCubesSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("ChangeCubesSystem");
+                        ccs.Respawn(0);
+                        AudioManager.Instance.StopSong();
+                        int id = dt.First();
+                        entitiesInState.Remove(id);
+                        SceneSystem.Instance.clearScene(entitiesInState);
+                        SceneSystem.Instance.setCurrentScene(new EndingScene());
+                    }
                 }
             }
         }

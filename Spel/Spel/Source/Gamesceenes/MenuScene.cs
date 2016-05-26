@@ -14,6 +14,7 @@ using GameEngine.Source.Components;
 using GameEngine.Source.Managers;
 using Spel.Source.Gamestates;
 using Spel.Source.Gamesceenes;
+using Spel.Source.Systems;
 
 namespace Spel.Menus
 {
@@ -71,13 +72,15 @@ namespace Spel.Menus
         /// </summary>
         public void onSceneCreated()
         {
+            ScrollingBackgroundSystem temp =(ScrollingBackgroundSystem)SystemManager.Instance.RetrieveSystem<IDraw>("ScrollingBackgroundSystem");
+            temp.active = true;
             Dictionary<Vector2, String> menuList = new Dictionary<Vector2, string>();
             
             int i = 0;
             float yvar = this.y;
             foreach (string a in menuItems)
             {
-                menuList.Add(new Vector2(this.x, yvar), menuItems[i]);
+                menuList.Add(new Vector2(this.x, yvar-200), menuItems[i]);
                 yvar += 50;
                 i++;
             }
@@ -89,7 +92,7 @@ namespace Spel.Menus
 
             Texture2D arrowPix = Game.Instance.GetContent<Texture2D>("pic/arrow");
             DrawableComponent arrow = new DrawableComponent(arrowPix, SpriteEffects.None);
-            PositionComponent arrowPos = new PositionComponent(new Vector2(this.x - 35, this.y));
+            PositionComponent arrowPos = new PositionComponent(new Vector2(this.x - 35, this.y-200));
             MovementComponent arrowMovement = new MovementComponent(new Vector2(x, y));
             arrowId = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(arrowId, arrow);
@@ -113,6 +116,7 @@ namespace Spel.Menus
         /// </summary>
         public void onSceneUpdate()
         {
+
             Game game = Game.Instance;
             PositionComponent temp = ComponentManager.Instance.GetEntityComponent<PositionComponent>(arrowId);
             temp.position = temp.prevPosition;
@@ -142,6 +146,8 @@ namespace Spel.Menus
 
             if (index == 0 && kbcArrow.state[ActionsEnum.Enter] == ButtonStates.Pressed)
             {
+                ScrollingBackgroundSystem back = (ScrollingBackgroundSystem)SystemManager.Instance.RetrieveSystem<IDraw>("ScrollingBackgroundSystem");
+                back.active = false;
                 SceneSystem.Instance.clearScene(entitiesInState);
                 SceneSystem.Instance.setCurrentScene(new SetUpPlayerScene());
             }
