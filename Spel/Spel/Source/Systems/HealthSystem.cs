@@ -16,7 +16,12 @@ namespace Spel.Source.Systems
     /// </summary>
     public class HealthSystem : IUpdate
     {
-        public List<int> deathList = new List<int>();
+        public List<int> deathList;
+
+        public void initialize()
+        {
+            deathList = new List<int>();
+        }
         public void update(GameTime gameTime)
         {
             List<int> entitys = ComponentManager.Instance.GetAllEntitiesWithComponentType<HealthComponent>();
@@ -34,7 +39,6 @@ namespace Spel.Source.Systems
                 foreach (var entity in entitys)
                 {
                     HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(entity);
-
                     if (hc.health <= 0 && !hc.isDead)
                     {
                         CollisionComponent cc = ComponentManager.Instance.GetEntityComponent<CollisionComponent>(entity);
