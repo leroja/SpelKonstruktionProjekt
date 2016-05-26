@@ -32,7 +32,7 @@ namespace Spel.Source.Systems
             if (temp == null)
             {
                 ComponentManager test = ComponentManager.Instance;
-                BallOfSpikesPowerUpComponent ball = new BallOfSpikesPowerUpComponent(10);
+                BallOfSpikesPowerUpComponent ball = new BallOfSpikesPowerUpComponent(5);
                 DrawableComponent newDraw = test.GetEntityComponent<DrawableComponent>(id);
                 AnimationComponent anima = test.GetEntityComponent<AnimationComponent>(id);
                 ball.prevTexture = newDraw.texture;

@@ -162,12 +162,12 @@ namespace Spel.Source.Gamestates
                 PositionComponent temppos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(play);
                 Keys key;
                 tempkey.keyBoardActions.TryGetValue(ActionsEnum.Up, out key);
-                entitiesInState.Add(GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.A, key, new Vector2(rand.Next((int)(Game.Instance.GraphicsDevice.Viewport.Width * 0.8)), (int)(Game.Instance.GraphicsDevice.Viewport.Height * 0.8)), "Player " + i, Direction.Right, PlayerIndex.One, tempDraw.colour));
+                entitiesInState.Add(GameEntityFactory.Instance.CreatePlayer(true, false, Buttons.A, key, new Vector2(rand.Next((int)(Game.Instance.GraphicsDevice.Viewport.Width)), rand.Next((int)(Game.Instance.GraphicsDevice.Viewport.Height * 0.6))), "Player " + i, Direction.Right, PlayerIndex.One, tempDraw.colour));
                 i++;
                 ComponentManager.Instance.RemoveEntity(play);
                 //ComponentManager.Instance.RecycleID(play);
             }
-            entitiesInState.Add(GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(rand.Next((int)(Game.Instance.GraphicsDevice.Viewport.Width * 0.8)), (int)(Game.Instance.GraphicsDevice.Viewport.Height * 0.8)), true, "AI one", Color.Red));
+            entitiesInState.Add(GameEntityFactory.Instance.CreateAIPlayer(Direction.Right, new Vector2(rand.Next((int)(Game.Instance.GraphicsDevice.Viewport.Width)), rand.Next((int)(Game.Instance.GraphicsDevice.Viewport.Height * 0.8))), true, "AI one", Color.Red));
 
 
         }
