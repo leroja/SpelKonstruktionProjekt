@@ -105,37 +105,39 @@ namespace Spel.Source.Systems
                     dist = distance;
                 }
             }
-            dist = float.MaxValue;
-            foreach (var item in players)
-            {
-                int id = item.Key;
 
-                PositionComponent playPos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(id);
 
-                var distance = Vector2.DistanceSquared(pos.position, playPos.position);
-                if (nearestPlayer == 0 || distance < dist)
-                {
-                    nearestPlayer = id;
-                    dist = distance;
-                }
-            }
+            //dist = float.MaxValue;
+            //foreach (var item in players)
+            //{
+            //    int id = item.Key;
 
-            dist = float.MaxValue;
-            if(powerUps != null) {
-                foreach (var item in powerUps)
-                {
-                    int id = item.Key;
+            //    PositionComponent playPos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(id);
 
-                    PositionComponent powerPos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(id);
+            //    var distance = Vector2.DistanceSquared(pos.position, playPos.position);
+            //    if (nearestPlayer == 0 || distance < dist)
+            //    {
+            //        nearestPlayer = id;
+            //        dist = distance;
+            //    }
+            //}
 
-                    var distance = Vector2.DistanceSquared(pos.position, powerPos.position);
-                    if (nearestPowerUp == 0 || distance < dist)
-                    {
-                        nearestPowerUp = id;
-                        dist = distance;
-                    }
-                }
-            }
+            //dist = float.MaxValue;
+            //if(powerUps != null) {
+            //    foreach (var item in powerUps)
+            //    {
+            //        int id = item.Key;
+
+            //        PositionComponent powerPos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(id);
+
+            //        var distance = Vector2.DistanceSquared(pos.position, powerPos.position);
+            //        if (nearestPowerUp == 0 || distance < dist)
+            //        {
+            //            nearestPowerUp = id;
+            //            dist = distance;
+            //        }
+            //    }
+            //}
 
             float distToBottom = Game.Instance.GraphicsDevice.Viewport.Height - pos.position.Y;
             float distToTop = pos.position.Y;
@@ -162,18 +164,28 @@ namespace Spel.Source.Systems
                 //float dis = Vector2.Distance(pos.position, platPos.position);
                 //Vector2 d = pos.position - platPos.position;
                 //Vector2 d = platPos.position - pos.position;
+                //if (d.Y < 0 && d.Y > -jump.jumpHeight)
+                //{
+                //    return false;
+                //}
+                //if (d.Y > 0 && d.Y < jump.jumpHeight)
+                //{
+                //    return true;
+                //}
 
+                float te = pos.position.X - width;
+                float te1 = pos.position.X + 100;
+                float te2 = platPos.position.X + draw.texture.Width;
 
-                if (pos.position.X - width < platPos.position.X && pos.position.X + 100 > platPos.position.X + draw.texture.Width)
+                if (te < platPos.position.X && te1 > te2)
                 {
-                    //if (d.Y < 0 && d.Y > -jump.jumpHeight)
-                    //{
-                    //    return false;
-                    //}
-                    //if (d.Y > 0 && d.Y < jump.jumpHeight)
-                    //{
-                    //    return true;
-                    //}
+                    float test = platPos.position.Y + draw.texture.Height * 0.5f;
+                    float test1 = platPos.position.Y + draw.texture.Height + height;
+                    if (pos.position.Y > test && pos.position.Y < test1)
+                    {
+                        return false;
+                    }
+
 
                     //if (pos.position.Y < platPos.position.Y + draw.texture.Height * 0.5 && pos.position.Y > platPos.position.Y - height * 2)
                     //{
@@ -185,9 +197,16 @@ namespace Spel.Source.Systems
                     //    return false;
                     //}
                 }
+            }
 
+            if(distToTop < jump.maxJumpHeight)
+            {
+                return false;
+            }
 
-
+            if(distToBottom < jump.maxJumpHeight)
+            {
+                return true;
             }
 
             if (pos.position.Y + 30 > Game.Instance.GraphicsDevice.Viewport.Height / 2)

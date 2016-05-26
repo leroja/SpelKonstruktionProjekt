@@ -146,10 +146,17 @@ namespace Spel.Menus
                 SceneSystem.Instance.setCurrentScene(new SetUpPlayerScene());
             }
             if (index == 1 && kbcArrow.state[ActionsEnum.Enter] == ButtonStates.Pressed)
+            {
                 //game.state = new OptionsScene();
+            }
             if (index == 2 && kbcArrow.state[ActionsEnum.Enter] == ButtonStates.Pressed)
+            {
+
+            }
             if (index == 3 && kbcArrow.state[ActionsEnum.Enter] == ButtonStates.Pressed)
+            {
                 game.Exit();
+            }
         }
     }
 }

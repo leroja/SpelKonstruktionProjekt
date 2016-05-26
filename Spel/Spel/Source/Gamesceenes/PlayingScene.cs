@@ -38,22 +38,18 @@ namespace Spel.Source.Gamestates
             Random rand = new Random();
             int sound = rand.Next(0, 3);
             sound = 2;
+            AudioManager.Instance.ChangeRepeat(true);
+            AudioManager.Instance.ChangeSongVolume(0.25f);
             switch (sound)
             {
                 case 0:
                     AudioManager.Instance.PlaySong("ljus");
-                    AudioManager.Instance.ChangeRepeat(true);
-                    AudioManager.Instance.ChangeSongVolume(0.4f);
                     break;
                 case 1:
                     AudioManager.Instance.PlaySong("metal");
-                    AudioManager.Instance.ChangeRepeat(true);
-                    AudioManager.Instance.ChangeSongVolume(0.4f);
                     break;
                 case 2:
                     AudioManager.Instance.PlaySong("sax");
-                    AudioManager.Instance.ChangeRepeat(true);
-                    AudioManager.Instance.ChangeSongVolume(0.4f);
                     break;
             }
             GameEntityFactory.Instance.CreateBorderRecs(Vector2.Zero, Game.Instance.GraphicsDevice.Viewport.Width, 0, Wall.TopWall);
