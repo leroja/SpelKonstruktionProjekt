@@ -73,6 +73,7 @@
     <Compile Include="Source\Systems\HUDSystem.cs" />
     <Compile Include="Source\Systems\IPowerupSystem.cs" />
     <Compile Include="Source\Systems\MovementSystem.cs" />
+    <Compile Include="Source\Systems\ScrollingBackgroundSystem.cs" />
     <Compile Include="Source\Systems\SpawnPowerUpSystem.cs" />
   </ItemGroup>
   <ItemGroup>

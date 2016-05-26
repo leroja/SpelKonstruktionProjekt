@@ -41,7 +41,7 @@ namespace Spel
             CollisionDetectionSystem det = new CollisionDetectionSystem();
             CollisionSystem col = new CollisionSystem();
             det.Subscribe(col);
-    
+            SystemManager.Instance.AddSystem(new ScrollingBackgroundSystem(instance.GraphicsDevice,instance.GetContent<Texture2D>("Pic/gamebackground")));
             SystemManager.Instance.AddSystem(new ChangeCubesSystem());
             SystemManager.Instance.AddSystem(col);
             SystemManager.Instance.AddSystem(new HUDSystem());
@@ -72,6 +72,7 @@ namespace Spel
         /// </summary>
         protected override void LoadContent()
         {
+            
             AudioManager.Instance.AddSong("sax", Content.Load<Song>("Sound/Epic sax Guy"));
             AudioManager.Instance.AddSong("ljus", Content.Load<Song>("Sound/Skimrande"));
             AudioManager.Instance.AddSong("metal", Content.Load<Song>("Sound/MetalBirds"));
