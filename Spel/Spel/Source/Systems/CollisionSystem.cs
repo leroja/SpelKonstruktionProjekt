@@ -118,7 +118,7 @@ namespace Spel.Source.Systems
                 playerComp.isFalling = true;
 
                 HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
-                hc.health -= 1;
+                //hc.health -= 1;
             }
             else if (wall.wall == Wall.BottomWall)
             {
@@ -145,18 +145,14 @@ namespace Spel.Source.Systems
                 pvc.velocity.Y = 0;
                 pvc.velocity.Y -= 500F * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-
-                ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("splat"));
                 HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
-
-
-
 
                 if (fc == null)
                 {
                     fc = new OnFloorComponent();
                     ComponentManager.Instance.AddComponentToEntity(Player, fc);
                     hc.health -= 1;
+                    ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("splat"));
                 }
                 
             }
@@ -193,7 +189,7 @@ namespace Spel.Source.Systems
                         if(ttl.curTime >= ttl.maxTime)
                         {
                             playComp.isFalling = true;
-                            hc.health -= 1;
+                            //hc.health -= 1;
                             ComponentManager.Instance.RemoveComponentFromEntity(Player, ttl);
                         }
                     }
@@ -220,7 +216,7 @@ namespace Spel.Source.Systems
                     playComp.isFalling = true;
 
                     ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("pfhit"));
-                    hc.health -= 1;
+                    //hc.health -= 1;
                 }
             }
         }
@@ -375,14 +371,14 @@ namespace Spel.Source.Systems
                     if (bspc2 == null)
                     {
                         HealthComponent hc2 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
-                        hc2.health -= 1;
+                        //hc2.health -= 1;
                         pcp2.isFalling = true;
                     }
                     //else if enitity 1 dosent have ballofspikePUPcomponent loose life
                     else if (bspc1 == null)
                     {
                         HealthComponent hc1 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
-                        hc1.health -= 1;
+                        //hc1.health -= 1;
                         pcp1.isFalling = true;
                     }
                 }
@@ -407,14 +403,14 @@ namespace Spel.Source.Systems
                     if (bspc1 == null)
                     {
                         HealthComponent hc1 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
-                        hc1.health -= 1;
+                        //hc1.health -= 1;
                         pcp1.isFalling = true;
                     }
                     //else if enitity 2 dosent have ballofspikePUPcomponent loose life
                     else if (bspc2 == null)
                     {
                         HealthComponent hc2 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
-                        hc2.health -= 1;
+                        //hc2.health -= 1;
                         pcp2.isFalling = true;
                     }
                 }
@@ -445,14 +441,14 @@ namespace Spel.Source.Systems
                     if (bspc1 == null)
                     {
                         HealthComponent hc1 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent1);
-                        hc1.health -= 1;
+                        //hc1.health -= 1;
                         pcp1.isFalling = true;
                     }
                     //If enitity 2 dosent have ballofspikePUPcomponent loose life
                     if (bspc2 == null)
                     {
                         HealthComponent hc2 = ComponentManager.Instance.GetEntityComponent<HealthComponent>(ent2);
-                        hc2.health -= 1;
+                        //hc2.health -= 1;
                         pcp2.isFalling = true;
                     }
                     pushAway(ent1, ent2, gt);
