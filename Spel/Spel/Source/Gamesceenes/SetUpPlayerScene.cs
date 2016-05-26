@@ -156,38 +156,40 @@ namespace Spel.Source.Gamestates
             if (key.Count != 0)
             {
 
-
-                if (UnAvailableKeys != null && !UnAvailableKeys.Contains(key[0]))
+                if (Players.Count < 4)
                 {
-                    Keys temo = key[0];
-                    key.Clear();
-                    Dictionary<int, Keys> Dir = new Dictionary<int, Keys>();
-                    int tempId = ComponentManager.Instance.CreateID();
-                    int count = Players.Count;
-                    Players.Add(tempId);
-                    DrawableComponent tempDraw = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/kanin1"), SpriteEffects.None);
-                    PositionComponent temppos = new PositionComponent(new Vector2((Game.Instance.GraphicsDevice.Viewport.Width * 0.25f+ 20f) * count, Game.Instance.GraphicsDevice.Viewport.Height * 0.5f));
-                    KeyBoardComponent tempkey = new KeyBoardComponent();
-                    PlayerComponent tempplay = new PlayerComponent();
-                    tempkey.keyBoardActions.Add(ActionsEnum.Up, temo);
-                    ComponentManager.Instance.AddComponentToEntity(tempId, tempDraw);
-                    ComponentManager.Instance.AddComponentToEntity(tempId, temppos);
-                    ComponentManager.Instance.AddComponentToEntity(tempId, tempkey);
-                    ComponentManager.Instance.AddComponentToEntity(tempId, tempplay);
-                    
-                
-                    //Keys temp0;
-                    //tempkey.keyBoardActions.TryGetValue(ActionsEnum.Up, out temp0);
-                    //Console.WriteLine(temp0.ToString());
-                    
+                    if (UnAvailableKeys != null && !UnAvailableKeys.Contains(key[0]))
+                    {
+                        Keys temo = key[0];
+                        key.Clear();
+                        Dictionary<int, Keys> Dir = new Dictionary<int, Keys>();
+                        int tempId = ComponentManager.Instance.CreateID();
+                        int count = Players.Count;
+                        Players.Add(tempId);
+                        DrawableComponent tempDraw = new DrawableComponent(Game.Instance.GetContent<Texture2D>("Pic/kanin1"), SpriteEffects.None);
+                        PositionComponent temppos = new PositionComponent(new Vector2((Game.Instance.GraphicsDevice.Viewport.Width * 0.25f + 20f) * count, Game.Instance.GraphicsDevice.Viewport.Height * 0.5f));
+                        KeyBoardComponent tempkey = new KeyBoardComponent();
+                        PlayerComponent tempplay = new PlayerComponent();
+                        tempkey.keyBoardActions.Add(ActionsEnum.Up, temo);
+                        ComponentManager.Instance.AddComponentToEntity(tempId, tempDraw);
+                        ComponentManager.Instance.AddComponentToEntity(tempId, temppos);
+                        ComponentManager.Instance.AddComponentToEntity(tempId, tempkey);
+                        ComponentManager.Instance.AddComponentToEntity(tempId, tempplay);
 
-                    int textId = ComponentManager.Instance.CreateID();
-                    DrawableTextComponent tempDrawtext = new DrawableTextComponent(temo.ToString(), Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/MenuFont"));
-                    PositionComponent temptextPos = new PositionComponent(new Vector2((Game.Instance.GraphicsDevice.Viewport.Width * 0.25f+20f) * count, Game.Instance.GraphicsDevice.Viewport.Height * 0.5f + 80f));
-                    ComponentManager.Instance.AddComponentToEntity(textId, tempDrawtext);
-                    ComponentManager.Instance.AddComponentToEntity(textId, temptextPos);
-                    entitiesInState.Add(textId);
-                    UnAvailableKeys.Add(temo);
+
+                        //Keys temp0;
+                        //tempkey.keyBoardActions.TryGetValue(ActionsEnum.Up, out temp0);
+                        //Console.WriteLine(temp0.ToString());
+
+
+                        int textId = ComponentManager.Instance.CreateID();
+                        DrawableTextComponent tempDrawtext = new DrawableTextComponent(temo.ToString(), Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/MenuFont"));
+                        PositionComponent temptextPos = new PositionComponent(new Vector2((Game.Instance.GraphicsDevice.Viewport.Width * 0.25f + 20f) * count, Game.Instance.GraphicsDevice.Viewport.Height * 0.5f + 80f));
+                        ComponentManager.Instance.AddComponentToEntity(textId, tempDrawtext);
+                        ComponentManager.Instance.AddComponentToEntity(textId, temptextPos);
+                        entitiesInState.Add(textId);
+                        UnAvailableKeys.Add(temo);
+                    }
                 }
                 else if (UnAvailableKeys.Contains(key[0]) && key[0] != Keys.Enter)
                 {
