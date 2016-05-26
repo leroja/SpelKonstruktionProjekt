@@ -179,6 +179,19 @@ namespace Spel.Source.Gamestates
 
             HealthSystem hs = (HealthSystem)SystemManager.Instance.RetrieveSystem<IUpdate>("HealthSystem");
 
+            List<int> players = ComponentManager.Instance.GetAllEntitiesWithComponentType<PlayerComponent>();
+            foreach(int p in players)
+            {
+                PositionComponent pc = ComponentManager.Instance.GetEntityComponent<PositionComponent>(p);
+                OnFloorComponent fc = ComponentManager.Instance.GetEntityComponent<OnFloorComponent>(p);
+                if (fc != null)
+                {
+                    if (fc.active == true && pc.position.Y < 700f)
+                        ComponentManager.Instance.RemoveComponentFromEntity(p, fc);
+                }
+            }
+            
+
             if (hs != null)
             {
                 List<int> dt = hs.getLivingPlayers();

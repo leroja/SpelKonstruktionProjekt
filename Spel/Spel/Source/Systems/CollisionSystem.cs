@@ -126,6 +126,7 @@ namespace Spel.Source.Systems
                 // only loose life when the player jump on the floor, not when the player falls to the ground
                 // and have some kind of timer unti you can jump away
 
+                OnFloorComponent fc = ComponentManager.Instance.GetEntityComponent<OnFloorComponent>(Player);
 
                 playerComp.isFalling = false;
 
@@ -145,9 +146,20 @@ namespace Spel.Source.Systems
                 pvc.velocity.Y -= 500F * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
 
-                //ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("splat"));
-                //HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
-                //hc.health -= 1;
+                ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("splat"));
+                HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
+
+                if(fc == null)
+                   fc = new OnFloorComponent();
+
+                ComponentManager.Instance.AddComponentToEntity(Player, fc);
+
+                if (fc.active == false)
+                {
+                    fc.active = true;
+                    hc.health -= 1;
+                }
+                
             }
         }
 
