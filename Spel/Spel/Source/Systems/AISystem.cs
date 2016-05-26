@@ -21,7 +21,7 @@ namespace Spel.Source.Systems
         {
             Dictionary<int, IComponent> dic = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<AIComponent>();
 
-            if(dic != null)
+            if (dic != null)
             {
                 foreach (var item in dic)
                 {
@@ -34,7 +34,7 @@ namespace Spel.Source.Systems
                     PlayerComponent pc = ComponentManager.Instance.GetEntityComponent<PlayerComponent>(id);
                     DirectionComponent dc = ComponentManager.Instance.GetEntityComponent<DirectionComponent>(id);
 
-                    
+
                     if (vel != null)
                     {
                         if (AI(gameTime, id))
@@ -92,7 +92,7 @@ namespace Spel.Source.Systems
             Dictionary<int, IComponent> powerUps = ComponentManager.Instance.GetAllEntitiesAndComponentsWithComponentType<PowerUppComponent>();
 
             float dist = float.MaxValue;
-            
+
             foreach (var item in platforms)
             {
                 int id = item.Key;
@@ -142,7 +142,17 @@ namespace Spel.Source.Systems
             float distToBottom = Game.Instance.GraphicsDevice.Viewport.Height - pos.position.Y;
             float distToTop = pos.position.Y;
 
-            if(nearestPlatform != 0)
+            if (distToTop < jump.maxJumpHeight)
+            {
+                return false;
+            }
+
+            if (distToBottom < jump.maxJumpHeight)
+            {
+                return true;
+            }
+
+            if (nearestPlatform != 0)
             {
                 PositionComponent platPos = ComponentManager.Instance.GetEntityComponent<PositionComponent>(nearestPlatform);
                 DrawableComponent draw = ComponentManager.Instance.GetEntityComponent<DrawableComponent>(nearestPlatform);
@@ -159,15 +169,10 @@ namespace Spel.Source.Systems
                     width = drawComp.texture.Width;
                     height = drawComp.texture.Height;
                 }
-
-
-                float dis = Vector2.Distance(pos.position, platPos.position);
-                
-                
-                    float te = pos.position.X;
-                    float te1 = platPos.position.X - width * 1.5f;
-                    float te2 = pos.position.X;
-                    float te3 = platPos.position.X + draw.texture.Width + 100;
+                float te = pos.position.X;
+                float te1 = platPos.position.X - width * 1.5f;
+                float te2 = pos.position.X;
+                float te3 = platPos.position.X + draw.texture.Width + 100;
 
                 if (te > te1 && te2 < te3)
                 {
@@ -186,20 +191,12 @@ namespace Spel.Source.Systems
                         return true;
                     }
                 }
-                
+
             }
 
-            if (distToTop < 100)
-            {
-                return false;
-            }
 
-            if (distToBottom < 100)
-            {
-                return true;
-            }
 
-            if (pos.position.Y> Game.Instance.GraphicsDevice.Viewport.Height / 2)
+            if (pos.position.Y > Game.Instance.GraphicsDevice.Viewport.Height / 2)
             {
                 return true;
             }
