@@ -149,14 +149,13 @@ namespace Spel.Source.Systems
                 ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("splat"));
                 HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
 
-                if(fc == null)
-                   fc = new OnFloorComponent();
 
-                ComponentManager.Instance.AddComponentToEntity(Player, fc);
 
-                if (fc.active == false)
+
+                if (fc == null)
                 {
-                    fc.active = true;
+                    fc = new OnFloorComponent();
+                    ComponentManager.Instance.AddComponentToEntity(Player, fc);
                     hc.health -= 1;
                 }
                 

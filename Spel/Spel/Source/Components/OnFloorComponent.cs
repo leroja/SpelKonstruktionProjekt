@@ -8,12 +8,6 @@ using System.Threading.Tasks;
 namespace Spel.Source.Components
 {
     class OnFloorComponent : IComponent
-    {
-        public bool active { get; set; }
-
-        public OnFloorComponent()
-        {
-            active = false;
-        }
+    { 
     }
 }
