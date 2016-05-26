@@ -145,18 +145,14 @@ namespace Spel.Source.Systems
                 pvc.velocity.Y = 0;
                 pvc.velocity.Y -= 500F * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-
-                ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("splat"));
                 HealthComponent hc = ComponentManager.Instance.GetEntityComponent<HealthComponent>(Player);
-
-
-
 
                 if (fc == null)
                 {
                     fc = new OnFloorComponent();
                     ComponentManager.Instance.AddComponentToEntity(Player, fc);
                     hc.health -= 1;
+                    ComponentManager.Instance.AddComponentToEntity(Player, new SoundEffectComponent("splat"));
                 }
                 
             }
