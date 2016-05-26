@@ -148,7 +148,7 @@ namespace Spel.Source.Gamestates
                     SceneSystem.Instance.setCurrentScene(new PlayingScene());
                 }
             }
-            
+
 
             KeyboardState tetet = Keyboard.GetState();
             List<Keys> key = tetet.GetPressedKeys().ToList<Keys>();
@@ -156,9 +156,10 @@ namespace Spel.Source.Gamestates
             if (key.Count != 0)
             {
 
-                if (Players.Count < 4)
+
+                if (UnAvailableKeys != null && !UnAvailableKeys.Contains(key[0]))
                 {
-                    if (UnAvailableKeys != null && !UnAvailableKeys.Contains(key[0]))
+                    if (Players.Count < 4)
                     {
                         Keys temo = key[0];
                         key.Clear();
