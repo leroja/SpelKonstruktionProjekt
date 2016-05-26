@@ -66,8 +66,9 @@ namespace Spel.Source.Gamestates
             ComponentManager.Instance.AddComponentToEntity(textId2, pos2);
             entitiesInState.Add(textId2);
 
-            DrawableTextComponent text = new DrawableTextComponent("Press enter to return to Main menu", Color.Black, Game.Instance.GetContent<SpriteFont>("Fonts/Menufont"));
-            PositionComponent poss = new PositionComponent(new Vector2(0, Game.Instance.GraphicsDevice.Viewport.Height - 100));
+            SpriteFont font3 = Game.Instance.GetContent<SpriteFont>("Fonts/Menufont");
+            DrawableTextComponent text = new DrawableTextComponent("Press enter to return to Main menu", Color.Black, font3);
+            PositionComponent poss = new PositionComponent(new Vector2(Game.Instance.GraphicsDevice.Viewport.Width * 0.5f - ((float)font3.MeasureString("Press enter to return to Main menu").X * 0.5f), Game.Instance.GraphicsDevice.Viewport.Height - 100));
             int textId = ComponentManager.Instance.CreateID();
             ComponentManager.Instance.AddComponentToEntity(textId, text);
             ComponentManager.Instance.AddComponentToEntity(textId, poss);
