@@ -147,7 +147,7 @@ namespace Spel.Source.Systems
                 return false;
             }
 
-            if (distToBottom < jump.maxJumpHeight)
+            if (distToBottom < 100)
             {
                 return true;
             }
