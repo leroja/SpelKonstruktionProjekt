@@ -161,55 +161,45 @@ namespace Spel.Source.Systems
                 }
 
 
-                //float dis = Vector2.Distance(pos.position, platPos.position);
-                //Vector2 d = pos.position - platPos.position;
-                //Vector2 d = platPos.position - pos.position;
-                //if (d.Y < 0 && d.Y > -jump.jumpHeight)
-                //{
-                //    return false;
-                //}
-                //if (d.Y > 0 && d.Y < jump.jumpHeight)
-                //{
-                //    return true;
-                //}
+                float dis = Vector2.Distance(pos.position, platPos.position);
+                
+                
+                    float te = pos.position.X;
+                    float te1 = platPos.position.X - width * 1.5f;
+                    float te2 = pos.position.X;
+                    float te3 = platPos.position.X + draw.texture.Width + 100;
 
-                float te = pos.position.X - width;
-                float te1 = pos.position.X + 100;
-                float te2 = platPos.position.X + draw.texture.Width;
-
-                if (te < platPos.position.X && te1 > te2)
+                if (te > te1 && te2 < te3)
                 {
                     float test = platPos.position.Y + draw.texture.Height * 0.5f;
-                    float test1 = platPos.position.Y + draw.texture.Height + height;
+                    float test1 = platPos.position.Y + draw.texture.Height + height * 2f;
                     if (pos.position.Y > test && pos.position.Y < test1)
                     {
                         return false;
                     }
 
 
-                    //if (pos.position.Y < platPos.position.Y + draw.texture.Height * 0.5 && pos.position.Y > platPos.position.Y - height * 2)
-                    //{
-                    //    return true;
-                    //}
-
-                    //if (pos.position.Y > platPos.position.Y + draw.texture.Height * 0.5 && pos.position.Y + height < platPos.position.Y + draw.texture.Height)
-                    //{
-                    //    return false;
-                    //}
+                    float tem = platPos.position.Y + draw.texture.Height * 0.5f;
+                    float tem3 = platPos.position.Y - height * 2;
+                    if (pos.position.Y < tem && pos.position.Y > tem3)
+                    {
+                        return true;
+                    }
                 }
+                
             }
 
-            if(distToTop < jump.maxJumpHeight)
+            if (distToTop < 100)
             {
                 return false;
             }
 
-            if(distToBottom < jump.maxJumpHeight)
+            if (distToBottom < 100)
             {
                 return true;
             }
 
-            if (pos.position.Y + 30 > Game.Instance.GraphicsDevice.Viewport.Height / 2)
+            if (pos.position.Y> Game.Instance.GraphicsDevice.Viewport.Height / 2)
             {
                 return true;
             }
