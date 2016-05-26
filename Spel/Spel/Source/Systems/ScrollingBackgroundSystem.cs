@@ -16,7 +16,7 @@ namespace Spel.Source.Systems
         private int height;
         private int width;
         public Rectangle rec1, rec2;
-        private double time = 12;
+        private double time = 32;
 
         public ScrollingBackgroundSystem(GraphicsDevice device, Texture2D newTexture)
         {
@@ -50,7 +50,7 @@ namespace Spel.Source.Systems
                         rec2.X = rec1.X + texture.Width;
                     rec1.X -= 5;
                     rec2.X -= 5;
-                    time = 12;
+                    time = 32;
                 }
             }
         }
