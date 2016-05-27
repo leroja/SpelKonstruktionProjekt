@@ -25,9 +25,9 @@ namespace GameEngine
 
 
             //Do not synch our Draw method with the Vertical Retrace of our monitor
-            graphics.SynchronizeWithVerticalRetrace = false;
+     //       graphics.SynchronizeWithVerticalRetrace = false;
             //Do not Call our Update method at the default rate of 1/60 of a second.
-            IsFixedTimeStep = false;
+     //       IsFixedTimeStep = false;
         }
 
         /// <summary>
@@ -53,10 +53,6 @@ namespace GameEngine
 
             // @TODO make this system better
             SystemManager.Instance.AddSystem(new WindowTitleFPSSystem(this));
-
-
-            // Test
-            //SystemManager.Instance.AddSystem(new TestDrawSystem(graphics));
 
             base.Initialize();
         }

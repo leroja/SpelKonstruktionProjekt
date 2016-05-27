@@ -99,7 +99,6 @@
     <Compile Include="Source\Systems\KeyBoardSystem.cs" />
     <Compile Include="Source\Systems\SoundEffectSystem.cs" />
     <Compile Include="Source\Systems\MouseSystem.cs" />
-    <Compile Include="Source\Systems\TestDrawSystem.cs" />
     <Compile Include="Source\Systems\TextRenderSystem.cs" />
     <Compile Include="Source\Systems\TimeToLiveSystem.cs" />
     <Compile Include="Source\Systems\WindowTitleFPSSystem.cs" />

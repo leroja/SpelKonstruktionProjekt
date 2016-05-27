@@ -147,7 +147,7 @@ namespace Spel.Source.Systems
                 return false;
             }
 
-            if (distToBottom < 100)
+            if (distToBottom < drawComp.texture.Height * 1.5f)
             {
                 return true;
             }
@@ -193,8 +193,7 @@ namespace Spel.Source.Systems
                 }
 
             }
-
-
+            
 
             if (pos.position.Y > Game.Instance.GraphicsDevice.Viewport.Height / 2)
             {

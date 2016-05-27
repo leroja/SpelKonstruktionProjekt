@@ -157,7 +157,7 @@ namespace Spel.Menus
             }
             if (index == 2 && kbcArrow.state[ActionsEnum.Enter] == ButtonStates.Pressed)
             {
-
+                //game.state = new AboutScene();
             }
             if (index == 3 && kbcArrow.state[ActionsEnum.Enter] == ButtonStates.Pressed)
             {

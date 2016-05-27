@@ -41,10 +41,8 @@
     <Compile Include="Game.cs" />
     <Compile Include="Source\Components\ChangeCubeComponent.cs" />
     <Compile Include="Source\Components\OnFloorComponent.cs" />
-    <Compile Include="Source\Enum\DirectionSigns.cs" />
     <Compile Include="Source\Enum\Map.cs" />
     <Compile Include="Source\Gamesceenes\MenuScene.cs" />
-    <Compile Include="Menus\MenuComponent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Components\DirectionComponent.cs" />

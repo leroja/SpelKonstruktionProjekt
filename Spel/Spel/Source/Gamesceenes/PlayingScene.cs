@@ -36,8 +36,8 @@ namespace Spel.Source.Gamestates
         {
 
             Random rand = new Random();
-            int sound = rand.Next(0, 3);
-            sound = 2;
+            int sound = rand.Next(0, 4);
+            //sound = 2;
             AudioManager.Instance.ChangeRepeat(true);
             AudioManager.Instance.ChangeSongVolume(0.25f);
             switch (sound)
@@ -48,6 +48,7 @@ namespace Spel.Source.Gamestates
                 case 1:
                     AudioManager.Instance.PlaySong("metal");
                     break;
+                case 3:
                 case 2:
                     AudioManager.Instance.PlaySong("sax");
                     break;
